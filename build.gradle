@@ -4,6 +4,15 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '7.1.2'
     id 'application'
     id 'jacoco'
+    id 'org.openjfx.javafxplugin' version '0.1.0' // JavaFX plugin
+}
+
+javafx {
+    version = '17'
+    modules = ['javafx.controls', 'javafx.fxml']
+    platform = 'win'
+    platform = 'mac'
+    platform = 'linux'
 }
 
 mainClassName = 'seedu.address.Main'
@@ -63,6 +72,13 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+    // TestFX dependencies
+    testCompileOnly 'org.junit.jupiter:junit-jupiter-api:5.5.1'
+    testCompileOnly 'org.testfx:testfx-junit5:4.0.18'
+    testCompileOnly 'org.testfx:testfx-core:4.0.18'
+
+    testCompileOnly group: 'org.assertj', name: 'assertj-core', version: '3.13.2'
 }
 
 shadowJar {
