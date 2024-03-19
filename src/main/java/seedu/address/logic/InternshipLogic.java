@@ -34,6 +34,20 @@ public interface InternshipLogic {
     ObservableList<Internship> getFilteredInternshipList();
 
     /**
+     * Returns the model's selected internship.
+     *
+     * @see seedu.address.model.InternshipModel#getSelectedInternship()
+     */
+    ObservableList<Internship> getSelectedInternship();
+
+    /**
+     * Sets the selected internship in the model.
+     *
+     * @see seedu.address.model.InternshipModel#setSelectedInternship(Internship)
+     */
+    void setSelectedInternship(Internship internship);
+
+    /**
      * Returns the user prefs' internship data file path.
      */
     Path getInternshipDataFilePath();
