@@ -19,9 +19,14 @@ import seedu.address.model.internship.Role;
  * A UI component that displays information of a {@code Internship}.
  */
 public class InternshipCard extends UiPart<Region> {
-
+    protected static final String STYLE_WITH_FONT_COLOUR_RED = "-fx-text-fill: #ff0000;";
+    protected static final String STYLE_WITH_FONT_COLOUR_GREEN = "-fx-text-fill: #00ff00;";
+    protected static final String STYLE_WITH_FONT_COLOUR_YELLOW = "-fx-text-fill: #ffff00;";
+    protected static final String STYLE_WITH_FONT_COLOUR_CYAN = "-fx-text-fill: #00ffff;";
+    protected static final String STYLE_WITH_FONT_COLOUR_LIGHTSEAGREEN = "-fx-text-fill: #20b2aa;";
     private static final String FXML = "InternshipCard.fxml";
 
+    public final Internship internship;
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -29,14 +34,6 @@ public class InternshipCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-    private static final String STYLE_WITH_FONT_COLOUR_RED = "-fx-text-fill: #ff0000;";
-    private static final String STYLE_WITH_FONT_COLOUR_GREEN = "-fx-text-fill: #00ff00;";
-    private static final String STYLE_WITH_FONT_COLOUR_YELLOW = "-fx-text-fill: #ffff00;";
-    private static final String STYLE_WITH_FONT_COLOUR_CYAN = "-fx-text-fill: #00ffff;";
-    private static final String STYLE_WITH_FONT_COLOUR_LIGHTSEAGREEN = "-fx-text-fill: #20b2aa;";
-
-    public final Internship internship;
-
     @FXML
     private HBox cardPane;
     @FXML
