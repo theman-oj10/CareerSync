@@ -110,7 +110,7 @@ public class DetailedInternshipCard extends UiPart<Region> {
 
     /**
      * Sets the contact name label to the given contact name.
-     * 
+     *
      * @param contactName name of the contact person under the Internship entry
      */
     private void setContactNameLabel(ContactName contactName) {
@@ -119,7 +119,7 @@ public class DetailedInternshipCard extends UiPart<Region> {
 
     /**
      * Sets the contact email label to the given contact email.
-     * 
+     *
      * @param contactEmail email of the contact person under the Internship entry
      */
     private void setContactEmailLabel(ContactEmail contactEmail) {
@@ -128,7 +128,7 @@ public class DetailedInternshipCard extends UiPart<Region> {
 
     /**
      * Sets the contact number label to the given contact number.
-     * 
+     *
      * @param contactNumber phone number of the contact person under the Internship entry
      */
     private void setContactNumberLabel(ContactNumber contactNumber) {
