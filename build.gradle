@@ -80,6 +80,8 @@ dependencies {
 
     testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.13.2'
     testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.1'
+
+    testImplementation 'org.testfx:openjfx-monocle:17.0.10' // For OpenJFX 17, adds headless testing mode support
 }
 
 shadowJar {
