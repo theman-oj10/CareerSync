@@ -12,7 +12,7 @@ import seedu.address.testutil.InternshipBuilder;
 import seedu.address.testutil.TypicalInternships;
 
 @ExtendWith(ApplicationExtension.class)
-class InternshipCardTest {
+class InternshipCardTest extends UiTestBase {
     private InternshipCard internshipCard;
     private Internship testInternship = TypicalInternships.AMY;
 
@@ -46,6 +46,10 @@ class InternshipCardTest {
                 .hasText("POC: " + testInternship.getContactName().toString() + " | "
                         + testInternship.getContactEmail().toString() + " | "
                         + testInternship.getContactNumber().toString());
+
+        // Test the remark label
+        assertThat(this.internshipCard.getRemarkLabel())
+                .hasText(testInternship.getRemark().toString());
     }
 
     @Test
