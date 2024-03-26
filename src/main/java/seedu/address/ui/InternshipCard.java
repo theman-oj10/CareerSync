@@ -122,6 +122,15 @@ public class InternshipCard extends UiPart<Region> {
     }
 
     /**
+     * Sets the remark label to the given remark.
+     *
+     * @param remark remark of the internship
+     */
+    private void setRemarkLabel(Remark remark) {
+        this.remark.setText("Remark: " + remark.toString());
+    }
+
+    /**
      * Sets the colour of the status label based on the status of the application.
      *
      * @param statusEnum status of the application under the Internship entry
@@ -149,15 +158,6 @@ public class InternshipCard extends UiPart<Region> {
         }
     }
 
-    /**
-     * Sets the remark label to the given remark.
-     *
-     * @param remark remark of the internship
-     */
-    private void setRemarkLabel(Remark remark) {
-        this.remark.setText(remark.toString());
-    }
-
     protected Label getIdLabel() {
         return id;
     }
@@ -180,5 +180,9 @@ public class InternshipCard extends UiPart<Region> {
 
     protected Label getPocLabel() {
         return poc;
+    }
+
+    protected Label getRemarkLabel() {
+        return remark;
     }
 }
