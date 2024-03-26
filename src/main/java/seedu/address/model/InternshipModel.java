@@ -86,5 +86,5 @@ public interface InternshipModel {
      */
     void updateFilteredInternshipList(Predicate<Internship> predicate);
 
-    void sortFilteredPersonList(Comparator<Internship> comparator);
+    void sortFilteredInternshipList(Comparator<Internship> comparator);
 }

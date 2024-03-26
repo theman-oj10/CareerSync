@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import java.util.Comparator;
+import java.util.Map;
+
+import seedu.address.model.internship.ApplicationStatus.StatusEnum;
 
 import seedu.address.model.internship.Internship;
 
@@ -8,6 +11,27 @@ import seedu.address.model.internship.Internship;
  * Contains utility methods for sorting internships.
  */
 public class InternshipComparators {
+    private static final Map<StatusEnum, Integer> statusOrder = Map.of(
+            StatusEnum.TO_APPLY, 0,
+            StatusEnum.ONGOING, 1,
+            StatusEnum.PENDING, 2,
+            StatusEnum.ACCEPTED, 3,
+            StatusEnum.REJECTED, 4
+    );
+
+    /**
+     * Returns a comparator that compares two internships based on the application status.
+     * @param ascending Whether to sort in ascending order.
+     * @return A comparator that compares two internships based on the application status.
+     */
+    public static Comparator<Internship> byApplicationStatus(boolean ascending) {
+        Comparator<Internship> comparator = Comparator.comparing(internship ->
+                statusOrder.getOrDefault(internship.getApplicationStatus().getStatus(), Integer.MAX_VALUE));
+        if (!ascending) {
+            comparator = comparator.reversed();
+        }
+        return comparator;
+    }
     /**
      * Returns a comparator that compares two internships based on the company name.
      * @param ascending Whether to sort in ascending order.
@@ -86,20 +110,6 @@ public class InternshipComparators {
     public static Comparator<Internship> byPhone(boolean ascending) {
         Comparator<Internship> comparator = Comparator.comparing(internship -> internship.getContactNumber().toString(),
                 String.CASE_INSENSITIVE_ORDER);
-        if (!ascending) {
-            comparator = comparator.reversed();
-        }
-        return comparator;
-    }
-
-    /**
-     * Returns a comparator that compares two internships based on the application status.
-     * @param ascending Whether to sort in ascending order.
-     * @return A comparator that compares two internships based on the application status.
-     */
-    public static Comparator<Internship> byApplicationStatus(boolean ascending) {
-        Comparator<Internship> comparator = Comparator.comparing(internship ->
-                        internship.getApplicationStatus().toString(), String.CASE_INSENSITIVE_ORDER);
         if (!ascending) {
             comparator = comparator.reversed();
         }

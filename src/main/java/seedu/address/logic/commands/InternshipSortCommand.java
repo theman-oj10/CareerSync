@@ -28,6 +28,8 @@ public class InternshipSortCommand extends InternshipCommand {
      */
     public InternshipSortCommand(InternshipSortCommandParser.FieldEnum field,
                                  InternshipSortCommandParser.OrderEnum order) {
+        requireNonNull(field);
+        requireNonNull(order);
         this.field = field;
         this.order = order;
     }
@@ -35,11 +37,14 @@ public class InternshipSortCommand extends InternshipCommand {
     @Override
     public CommandResult execute(InternshipModel model) {
         requireNonNull(model);
-        Comparator<Internship> comparator = Internship.getComparator(field, true);
+        Comparator<Internship> comparator;
+
         if (order == InternshipSortCommandParser.OrderEnum.DESCENDING) {
             comparator = Internship.getComparator(field, false);
+        } else {
+            comparator = Internship.getComparator(field, true);
         }
-        model.sortFilteredPersonList(comparator);
+        model.sortFilteredInternshipList(comparator);
         return new CommandResult(
                 String.format(InternshipMessages.MESSAGE_INTERNSHIPS_LISTED_OVERVIEW,
                         model.getFilteredInternshipList().size()));
@@ -51,13 +56,12 @@ public class InternshipSortCommand extends InternshipCommand {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof InternshipSortCommand)) {
             return false;
         }
 
-        InternshipSortCommand otherFindCommand = (InternshipSortCommand) other;
-        return field.equals(otherFindCommand.field);
+        InternshipSortCommand otherCommand = (InternshipSortCommand) other;
+        return this.field.equals(otherCommand.getField()) && this.order.equals(otherCommand.getOrder());
     }
 
     @Override
@@ -65,6 +69,14 @@ public class InternshipSortCommand extends InternshipCommand {
         return new ToStringBuilder(this)
                 .add("field", field)
                 .toString();
+    }
+
+    public InternshipSortCommandParser.FieldEnum getField() {
+        return field;
+    }
+
+    public InternshipSortCommandParser.OrderEnum getOrder() {
+        return order;
     }
 }
 

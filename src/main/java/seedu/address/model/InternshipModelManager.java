@@ -129,7 +129,7 @@ public class InternshipModelManager implements InternshipModel {
      * Returns an unmodifiable view of the list of {@code Internship} backed by the internal list of
      * {@code InternshipData}
      */
-    public void sortFilteredPersonList(Comparator<Internship> comparator) {
+    public void sortFilteredInternshipList(Comparator<Internship> comparator) {
         requireNonNull(comparator);
         sortedInternships.setComparator(comparator);
     }
