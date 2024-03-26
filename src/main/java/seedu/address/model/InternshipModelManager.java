@@ -14,7 +14,6 @@ import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.internship.Internship;
-import seedu.address.model.person.Person;
 
 /**
  * Represents the in-memory model of the Internship data.
@@ -133,13 +132,11 @@ public class InternshipModelManager implements InternshipModel {
     public void sortFilteredPersonList(Comparator<Internship> comparator) {
         requireNonNull(comparator);
         sortedInternships.setComparator(comparator);
-        //filteredInternships = new FilteredList<>(sortedInternships);
     }
     @Override
     public void updateFilteredInternshipList(Predicate<Internship> predicate) {
         requireNonNull(predicate);
         filteredInternships.setPredicate(predicate);
-        //sortedInternships = new SortedList<>(filteredInternships);
     }
 
     @Override

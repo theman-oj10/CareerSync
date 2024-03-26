@@ -1,12 +1,10 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.internship.Internship;
 import seedu.address.model.person.Person;
 
 /**
@@ -80,9 +78,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
-        /**
-         * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-         * @throws NullPointerException if {@code predicate} is null.
-         */
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
     void updateFilteredPersonList(Predicate<Person> predicate);
 }

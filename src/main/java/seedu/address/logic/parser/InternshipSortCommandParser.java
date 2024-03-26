@@ -7,55 +7,66 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new InternshipSortCommand object
  */
 public class InternshipSortCommandParser implements InternshipParser<InternshipSortCommand> {
-    public enum field {
+
+    /** Enum of fields to sort by */
+    public enum FieldEnum {
         COMPANY, CONTACT_NAME, CONTACT_NUMBER, CONTACT_EMAIL, DESCRIPTION, STATUS, LOCATION, ROLE, REMARK
     }
-    public enum order {
+
+    /** Enum of order to sort by */
+    public enum OrderEnum {
         ASCENDING, DESCENDING
     }
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the InternshipSortCommand
+     * and returns an InternshipSortCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public InternshipSortCommand parse(String args) throws ParseException {
         String[] argsSplit = args.trim().split(" ");
         if (argsSplit.length != 2) {
             throw new ParseException("Invalid sort command format, enter both field and order.");
         }
         String inputField = argsSplit[0].toLowerCase().trim();
-        field parsedField = field.COMPANY; // default sort by company_name
+        FieldEnum parsedField = FieldEnum.COMPANY; // default sort by company_name
         String inputOrder = argsSplit[1].toLowerCase().trim();
-        order parsedOrder = order.ASCENDING; // default sort in ascending order
+        OrderEnum parsedOrder = OrderEnum.ASCENDING; // default sort in ascending order
         switch (inputField) {
         case "com":
-            parsedField = field.COMPANY;
+            parsedField = FieldEnum.COMPANY;
             break;
         case "poc":
-            parsedField = field.CONTACT_NAME;
+            parsedField = FieldEnum.CONTACT_NAME;
             break;
         case "phone":
-            parsedField = field.CONTACT_NUMBER;
+            parsedField = FieldEnum.CONTACT_NUMBER;
             break;
         case "email":
-            parsedField = field.CONTACT_EMAIL;
+            parsedField = FieldEnum.CONTACT_EMAIL;
             break;
         case "status":
-            parsedField = field.STATUS;
+            parsedField = FieldEnum.STATUS;
             break;
         case "loc":
-            parsedField = field.LOCATION;
+            parsedField = FieldEnum.LOCATION;
             break;
         case "role":
-            parsedField = field.ROLE;
+            parsedField = FieldEnum.ROLE;
             break;
         case "remark":
-            parsedField = field.REMARK;
+            parsedField = FieldEnum.REMARK;
             break;
         case "desc":
-            parsedField = field.DESCRIPTION;
+            parsedField = FieldEnum.DESCRIPTION;
             break;
+        default:
+            throw new ParseException("Invalid sort command format");
         }
         if (inputOrder.equals("asc")) {
-            parsedOrder = order.ASCENDING;
+            parsedOrder = OrderEnum.ASCENDING;
         } else if (inputOrder.equals("desc")) {
-            parsedOrder = order.DESCENDING;
+            parsedOrder = OrderEnum.DESCENDING;
         } else {
             throw new ParseException("Invalid sort command format");
         }

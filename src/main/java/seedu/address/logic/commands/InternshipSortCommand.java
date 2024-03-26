@@ -1,14 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.Comparator;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.InternshipMessages;
 import seedu.address.logic.parser.InternshipSortCommandParser;
 import seedu.address.model.InternshipModel;
 import seedu.address.model.internship.Internship;
 
-import java.util.Comparator;
-
-import static java.util.Objects.requireNonNull;
 /**
  * Sorts all internships in the Internship Data based on specified field and displays them as a list with index numbers.
  */
@@ -19,10 +20,14 @@ public class InternshipSortCommand extends InternshipCommand {
             + " (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: FIELD\n"
             + "Example: " + COMMAND_WORD + " name\n";
-    private final InternshipSortCommandParser.field field;
-    private final InternshipSortCommandParser.order order;
+    private final InternshipSortCommandParser.FieldEnum field;
+    private final InternshipSortCommandParser.OrderEnum order;
 
-    public InternshipSortCommand(InternshipSortCommandParser.field field, InternshipSortCommandParser.order order) {
+    /**
+     * Creates an InternshipSortCommand to sort internships based on the specified field and order.
+     */
+    public InternshipSortCommand(InternshipSortCommandParser.FieldEnum field,
+                                 InternshipSortCommandParser.OrderEnum order) {
         this.field = field;
         this.order = order;
     }
@@ -31,12 +36,13 @@ public class InternshipSortCommand extends InternshipCommand {
     public CommandResult execute(InternshipModel model) {
         requireNonNull(model);
         Comparator<Internship> comparator = Internship.getComparator(field, true);
-        if (order == InternshipSortCommandParser.order.DESCENDING) {
+        if (order == InternshipSortCommandParser.OrderEnum.DESCENDING) {
             comparator = Internship.getComparator(field, false);
         }
         model.sortFilteredPersonList(comparator);
         return new CommandResult(
-                String.format(InternshipMessages.MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, model.getFilteredInternshipList().size()));
+                String.format(InternshipMessages.MESSAGE_INTERNSHIPS_LISTED_OVERVIEW,
+                        model.getFilteredInternshipList().size()));
     }
 
     @Override

@@ -98,7 +98,7 @@ public class Internship {
                 && description.equals(otherInternship.description);
     }
 
-    public static Comparator<Internship> getComparator(InternshipSortCommandParser.field field, boolean ascending) {
+    public static Comparator<Internship> getComparator(InternshipSortCommandParser.FieldEnum field, boolean ascending) {
         switch (field) {
         case COMPANY:
             return InternshipComparators.byCompanyName(ascending);
@@ -120,7 +120,7 @@ public class Internship {
             return InternshipComparators.byDescription(ascending);
         default:
             throw new IllegalArgumentException("Invalid field for sorting: " + field);
-    }
+        }
     }
 
     /**
