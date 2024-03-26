@@ -24,7 +24,7 @@ public class InternshipModelManager implements InternshipModel {
 
     private final InternshipData internshipData;
     private final InternshipUserPrefs userPrefs;
-    private final FilteredList<Internship> filteredInternships;
+    private FilteredList<Internship> filteredInternships;
     private SortedList<Internship> sortedInternships;
 
     /**
@@ -38,6 +38,7 @@ public class InternshipModelManager implements InternshipModel {
         this.internshipData = new InternshipData(internshipData);
         this.userPrefs = new InternshipUserPrefs(userPrefs);
         filteredInternships = new FilteredList<>(this.internshipData.getInternshipList());
+        sortedInternships = new SortedList<>(filteredInternships);
     }
 
     public InternshipModelManager() {
@@ -132,11 +133,13 @@ public class InternshipModelManager implements InternshipModel {
     public void sortFilteredPersonList(Comparator<Internship> comparator) {
         requireNonNull(comparator);
         sortedInternships.setComparator(comparator);
+        //filteredInternships = new FilteredList<>(sortedInternships);
     }
     @Override
     public void updateFilteredInternshipList(Predicate<Internship> predicate) {
         requireNonNull(predicate);
         filteredInternships.setPredicate(predicate);
+        //sortedInternships = new SortedList<>(filteredInternships);
     }
 
     @Override

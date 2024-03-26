@@ -100,25 +100,27 @@ public class Internship {
 
     public static Comparator<Internship> getComparator(InternshipSortCommandParser.field field, boolean ascending) {
         switch (field) {
-            case COMPANY:
-                return InternshipComparators.byCompanyName(ascending);
-            case CONTACT_NAME:
-                return InternshipComparators.byContactName(ascending);
-            case CONTACT_NUMBER:
-                return InternshipComparators.byPhone(ascending);
-            case CONTACT_EMAIL:
-                return InternshipComparators.byContactEmail(ascending);
-            case STATUS:
-                return InternshipComparators.byApplicationStatus(ascending);
-            case LOCATION:
-                return InternshipComparators.byLocation(ascending);
-            case ROLE:
-                return InternshipComparators.byRole(ascending);
-            case REMARK:
-                return InternshipComparators.byRemark(ascending);
-            default:
-                throw new IllegalArgumentException("Invalid field for sorting: " + field);
-        }
+        case COMPANY:
+            return InternshipComparators.byCompanyName(ascending);
+        case CONTACT_NAME:
+            return InternshipComparators.byContactName(ascending);
+        case CONTACT_NUMBER:
+            return InternshipComparators.byPhone(ascending);
+        case CONTACT_EMAIL:
+            return InternshipComparators.byContactEmail(ascending);
+        case STATUS:
+            return InternshipComparators.byApplicationStatus(ascending);
+        case LOCATION:
+            return InternshipComparators.byLocation(ascending);
+        case ROLE:
+            return InternshipComparators.byRole(ascending);
+        case REMARK:
+            return InternshipComparators.byRemark(ascending);
+        case DESCRIPTION:
+            return InternshipComparators.byDescription(ascending);
+        default:
+            throw new IllegalArgumentException("Invalid field for sorting: " + field);
+    }
     }
 
     /**

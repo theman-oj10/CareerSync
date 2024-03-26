@@ -8,7 +8,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class InternshipSortCommandParser implements InternshipParser<InternshipSortCommand> {
     public enum field {
-        COMPANY, CONTACT_NAME, CONTACT_NUMBER, CONTACT_EMAIL, STATUS, LOCATION, ROLE, REMARK
+        COMPANY, CONTACT_NAME, CONTACT_NUMBER, CONTACT_EMAIL, DESCRIPTION, STATUS, LOCATION, ROLE, REMARK
     }
     public enum order {
         ASCENDING, DESCENDING
@@ -47,6 +47,9 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
             break;
         case "remark":
             parsedField = field.REMARK;
+            break;
+        case "desc":
+            parsedField = field.DESCRIPTION;
             break;
         }
         if (inputOrder.equals("asc")) {
