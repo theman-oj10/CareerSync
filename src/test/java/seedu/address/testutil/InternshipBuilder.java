@@ -24,6 +24,7 @@ public class InternshipBuilder {
     public static final String DEFAULT_APPLICATION_STATUS = "pending";
     public static final String DEFAULT_DESCRIPTION = "Develop new microsoft web applications";
     public static final String DEFAULT_ROLE = "Application Engineer";
+    public static final String DEFAULT_REMARK = "There are 3 stages of interviews, all are online.";
 
     private CompanyName companyName;
     private ContactName contactName;
@@ -47,6 +48,7 @@ public class InternshipBuilder {
         applicationStatus = new ApplicationStatus(DEFAULT_APPLICATION_STATUS);
         description = new Description(DEFAULT_DESCRIPTION);
         role = new Role(DEFAULT_ROLE);
+        remark = new Remark(DEFAULT_REMARK);
     }
 
     /**
@@ -61,6 +63,7 @@ public class InternshipBuilder {
         applicationStatus = internshipToCopy.getApplicationStatus();
         description = internshipToCopy.getDescription();
         role = internshipToCopy.getRole();
+        remark = internshipToCopy.getRemark();
     }
 
     /**
