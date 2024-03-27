@@ -68,6 +68,7 @@ public class InternshipSortCommand extends InternshipCommand {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("field", field)
+                .add("order", order)
                 .toString();
     }
 

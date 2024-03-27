@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalInternships.HOON_APPLE;
 import static seedu.address.testutil.TypicalInternships.getTypicalInternshipData;
 
 import java.util.Comparator;
@@ -41,6 +42,7 @@ public class InternshipSortCommandTest {
         model = new InternshipModelManager(getTypicalInternshipData(), new InternshipUserPrefs());
         internshipBuilder = new InternshipBuilder();
     }
+
     @Test
     public void constructor_nullField_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new InternshipSortCommand(null, ascending));
@@ -60,6 +62,7 @@ public class InternshipSortCommandTest {
         assertSame(fieldLocation, sortLocationCommand.getField());
         assertSame(descending, sortLocationCommand.getOrder());
     }
+
     @Test
     public void equals() {
         InternshipSortCommand sortCompanyNameCommand = new InternshipSortCommand(fieldCompany, ascending);
@@ -114,5 +117,12 @@ public class InternshipSortCommandTest {
         model.sortFilteredInternshipList(comparator);
         expectedModel.sortFilteredInternshipList(comparator);
         assertEquals("TO_APPLY", model.getFilteredInternshipList().get(0).getApplicationStatus().toString());
+    }
+
+    @Test
+    public void toString_validFieldAndOrder_success() {
+        InternshipSortCommand sortNameCommand = new InternshipSortCommand(fieldCompany, ascending);
+        String expected = InternshipSortCommand.class.getCanonicalName() + "{field=" + fieldCompany.toString() + ", order=" + ascending.toString() + "}";
+        assertEquals(expected, sortNameCommand.toString());
     }
 }
