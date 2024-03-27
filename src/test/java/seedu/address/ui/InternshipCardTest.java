@@ -17,7 +17,7 @@ class InternshipCardTest extends UiTestBase {
     private Internship testInternship = TypicalInternships.AMY;
 
     @BeforeEach
-    private void initInternshipCard() {
+    public void initInternshipCard() {
         internshipCard = new InternshipCard(testInternship, 1);
     }
     @Test
@@ -49,7 +49,7 @@ class InternshipCardTest extends UiTestBase {
 
         // Test the remark label
         assertThat(this.internshipCard.getRemarkLabel())
-                .hasText(testInternship.getRemark().toString());
+                .hasText("Remark: " + testInternship.getRemark().toString());
     }
 
     @Test

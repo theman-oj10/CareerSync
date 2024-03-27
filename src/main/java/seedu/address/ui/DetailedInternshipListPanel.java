@@ -31,6 +31,9 @@ public class DetailedInternshipListPanel extends UiPart<Region> {
         internshipListView.setCellFactory(listView -> new InternshipListViewCell());
     }
 
+    protected ListView<Internship> getInternshipListView() {
+        return internshipListView;
+    }
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Internship} using a {@code InternshipCard}.
      */
@@ -47,5 +50,4 @@ public class DetailedInternshipListPanel extends UiPart<Region> {
             }
         }
     }
-
 }
