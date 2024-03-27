@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalInternships.HOON_APPLE;
 import static seedu.address.testutil.TypicalInternships.getTypicalInternshipData;
 
 import java.util.Comparator;
@@ -122,7 +121,8 @@ public class InternshipSortCommandTest {
     @Test
     public void toString_validFieldAndOrder_success() {
         InternshipSortCommand sortNameCommand = new InternshipSortCommand(fieldCompany, ascending);
-        String expected = InternshipSortCommand.class.getCanonicalName() + "{field=" + fieldCompany.toString() + ", order=" + ascending.toString() + "}";
+        String expected = InternshipSortCommand.class.getCanonicalName() + "{field="
+                + fieldCompany.toString() + ", order=" + ascending.toString() + "}";
         assertEquals(expected, sortNameCommand.toString());
     }
 }

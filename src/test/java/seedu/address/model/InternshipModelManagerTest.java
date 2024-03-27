@@ -201,9 +201,11 @@ public class InternshipModelManagerTest {
         InternshipBuilder internshipBuilder = new InternshipBuilder();
         Internship internship1 = internshipBuilder.withCompanyName("AAA").build();
         Internship internship2 = internshipBuilder.withCompanyName("BBB").build();
-        Comparator<Internship> testComparator = Internship.getComparator(InternshipSortCommandParser.FieldEnum.COMPANY, true);
+        Comparator<Internship> testComparator = Internship.getComparator(
+                InternshipSortCommandParser.FieldEnum.COMPANY, true);
         Comparator<Internship> expectedComparator = InternshipComparators.byCompanyName(true);
-        assertEquals(testComparator.compare(internship1, internship2), expectedComparator.compare(internship1, internship2));
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
     }
 
     @Test
@@ -211,9 +213,11 @@ public class InternshipModelManagerTest {
         InternshipBuilder internshipBuilder = new InternshipBuilder();
         Internship internship1 = internshipBuilder.withDescription("aaa").build();
         Internship internship2 = internshipBuilder.withDescription("bbb").build();
-        Comparator<Internship> testComparator = Internship.getComparator(InternshipSortCommandParser.FieldEnum.DESCRIPTION, true);
+        Comparator<Internship> testComparator = Internship.getComparator(
+                InternshipSortCommandParser.FieldEnum.DESCRIPTION, true);
         Comparator<Internship> expectedComparator = InternshipComparators.byDescription(true);
-        assertEquals(testComparator.compare(internship1, internship2), expectedComparator.compare(internship1, internship2));
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
     }
 
     @Test
@@ -221,9 +225,11 @@ public class InternshipModelManagerTest {
         InternshipBuilder internshipBuilder = new InternshipBuilder();
         Internship internship1 = internshipBuilder.withRole("aaa").build();
         Internship internship2 = internshipBuilder.withRole("bbb").build();
-        Comparator<Internship> testComparator = Internship.getComparator(InternshipSortCommandParser.FieldEnum.ROLE, true);
+        Comparator<Internship> testComparator = Internship.getComparator(
+                InternshipSortCommandParser.FieldEnum.ROLE, true);
         Comparator<Internship> expectedComparator = InternshipComparators.byRole(true);
-        assertEquals(testComparator.compare(internship1, internship2), expectedComparator.compare(internship1, internship2));
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
     }
 
     @Test
@@ -231,9 +237,11 @@ public class InternshipModelManagerTest {
         InternshipBuilder internshipBuilder = new InternshipBuilder();
         Internship internship1 = internshipBuilder.withContactName("aaa").build();
         Internship internship2 = internshipBuilder.withContactName("bbb").build();
-        Comparator<Internship> testComparator = Internship.getComparator(InternshipSortCommandParser.FieldEnum.CONTACT_NAME, true);
+        Comparator<Internship> testComparator = Internship.getComparator(
+                InternshipSortCommandParser.FieldEnum.CONTACT_NAME, true);
         Comparator<Internship> expectedComparator = InternshipComparators.byContactName(true);
-        assertEquals(testComparator.compare(internship1, internship2), expectedComparator.compare(internship1, internship2));
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
     }
 
     @Test
@@ -241,9 +249,11 @@ public class InternshipModelManagerTest {
         InternshipBuilder internshipBuilder = new InternshipBuilder();
         Internship internship1 = internshipBuilder.withContactNumber("12345678").build();
         Internship internship2 = internshipBuilder.withContactNumber("23456789").build();
-        Comparator<Internship> testComparator = Internship.getComparator(InternshipSortCommandParser.FieldEnum.CONTACT_NUMBER, true);
+        Comparator<Internship> testComparator = Internship.getComparator(
+                InternshipSortCommandParser.FieldEnum.CONTACT_NUMBER, true);
         Comparator<Internship> expectedComparator = InternshipComparators.byPhone(true);
-        assertEquals(testComparator.compare(internship1, internship2), expectedComparator.compare(internship1, internship2));
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
     }
 
     @Test
@@ -251,9 +261,11 @@ public class InternshipModelManagerTest {
         InternshipBuilder internshipBuilder = new InternshipBuilder();
         Internship internship1 = internshipBuilder.withLocation("remote").build();
         Internship internship2 = internshipBuilder.withLocation("overseas").build();
-        Comparator<Internship> testComparator = Internship.getComparator(InternshipSortCommandParser.FieldEnum.LOCATION, true);
+        Comparator<Internship> testComparator = Internship.getComparator(
+                InternshipSortCommandParser.FieldEnum.LOCATION, true);
         Comparator<Internship> expectedComparator = InternshipComparators.byLocation(true);
-        assertEquals(testComparator.compare(internship1, internship2), expectedComparator.compare(internship1, internship2));
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
     }
 
     @Test
@@ -261,9 +273,11 @@ public class InternshipModelManagerTest {
         InternshipBuilder internshipBuilder = new InternshipBuilder();
         Internship internship1 = internshipBuilder.withRemark("aaa").build();
         Internship internship2 = internshipBuilder.withRemark("bbb").build();
-        Comparator<Internship> testComparator = Internship.getComparator(InternshipSortCommandParser.FieldEnum.REMARK, true);
+        Comparator<Internship> testComparator = Internship.getComparator(
+                InternshipSortCommandParser.FieldEnum.REMARK, true);
         Comparator<Internship> expectedComparator = InternshipComparators.byRemark(true);
-        assertEquals(testComparator.compare(internship1, internship2), expectedComparator.compare(internship1, internship2));
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
     }
 
     @Test
@@ -271,9 +285,11 @@ public class InternshipModelManagerTest {
         InternshipBuilder internshipBuilder = new InternshipBuilder();
         Internship internship1 = internshipBuilder.withApplicationStatus("to_apply").build();
         Internship internship2 = internshipBuilder.withApplicationStatus("rejected").build();
-        Comparator<Internship> testComparator = Internship.getComparator(InternshipSortCommandParser.FieldEnum.STATUS, true);
+        Comparator<Internship> testComparator = Internship.getComparator(
+                InternshipSortCommandParser.FieldEnum.STATUS, true);
         Comparator<Internship> expectedComparator = InternshipComparators.byApplicationStatus(true);
-        assertEquals(testComparator.compare(internship1, internship2), expectedComparator.compare(internship1, internship2));
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
     }
 
     @Test
@@ -281,13 +297,16 @@ public class InternshipModelManagerTest {
         InternshipBuilder internshipBuilder = new InternshipBuilder();
         Internship internship1 = internshipBuilder.withContactEmail("email1@gmail.com").build();
         Internship internship2 = internshipBuilder.withContactEmail("email2@gmail.com").build();
-        Comparator<Internship> testComparator = Internship.getComparator(InternshipSortCommandParser.FieldEnum.CONTACT_EMAIL, true);
+        Comparator<Internship> testComparator = Internship.getComparator(
+                InternshipSortCommandParser.FieldEnum.CONTACT_EMAIL, true);
         Comparator<Internship> expectedComparator = InternshipComparators.byContactEmail(true);
-        assertEquals(testComparator.compare(internship1, internship2), expectedComparator.compare(internship1, internship2));
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
     }
 
     @Test
     public void getFilteredInternshipList() {
-        assertEquals(internshipModelManager.getFilteredInternshipList(), internshipModelManager.getFilteredInternshipList());
+        assertEquals(internshipModelManager.getFilteredInternshipList(),
+                internshipModelManager.getFilteredInternshipList());
     }
 }
