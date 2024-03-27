@@ -107,12 +107,12 @@ public class InternshipSortCommandTest {
     @Test
     public void execute_sortStatus_success() {
         InternshipModel expectedModel = new InternshipModelManager();
-        Internship internship1 = internshipBuilder.withApplicationStatus("APPLIED").build();
+        Internship internship1 = internshipBuilder.withApplicationStatus("to_apply").build();
         model.addInternship(internship1);
         Comparator<Internship> comparator = Internship.getComparator(
                 InternshipSortCommandParser.FieldEnum.STATUS, true);
         model.sortFilteredInternshipList(comparator);
         expectedModel.sortFilteredInternshipList(comparator);
-        assertEquals("APPLIED", model.getFilteredInternshipList().get(0).getApplicationStatus().toString());
+        assertEquals("TO_APPLY", model.getFilteredInternshipList().get(0).getApplicationStatus().toString());
     }
 }
