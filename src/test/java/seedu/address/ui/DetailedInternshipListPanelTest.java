@@ -2,14 +2,11 @@ package seedu.address.ui;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.TypicalInternships.getTypicalInternshipData;
 
-import javafx.collections.ObservableList;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.robot.Robot;
 import org.junit.jupiter.api.BeforeEach;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.framework.junit5.ApplicationExtension;
+
 import seedu.address.logic.InternshipLogic;
 import seedu.address.logic.InternshipLogicManager;
 import seedu.address.model.InternshipModel;
