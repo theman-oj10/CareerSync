@@ -2,23 +2,22 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalInternships.getTypicalInternshipData;
 
+import java.util.Comparator;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.address.logic.InternshipMessages;
+
 import seedu.address.logic.parser.InternshipSortCommandParser;
 import seedu.address.model.InternshipModel;
 import seedu.address.model.InternshipModelManager;
 import seedu.address.model.InternshipUserPrefs;
 import seedu.address.model.internship.Internship;
 import seedu.address.testutil.InternshipBuilder;
-
-import java.util.Comparator;
 
 public class InternshipSortCommandTest {
     private InternshipModel model;
@@ -110,7 +109,8 @@ public class InternshipSortCommandTest {
         InternshipModel expectedModel = new InternshipModelManager();
         Internship internship1 = internshipBuilder.withApplicationStatus("APPLIED").build();
         model.addInternship(internship1);
-        Comparator<Internship> comparator = Internship.getComparator(InternshipSortCommandParser.FieldEnum.STATUS, true);
+        Comparator<Internship> comparator = Internship.getComparator(
+                InternshipSortCommandParser.FieldEnum.STATUS, true);
         model.sortFilteredInternshipList(comparator);
         expectedModel.sortFilteredInternshipList(comparator);
         assertEquals("APPLIED", model.getFilteredInternshipList().get(0).getApplicationStatus().toString());

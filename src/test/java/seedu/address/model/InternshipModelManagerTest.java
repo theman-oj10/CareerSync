@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.parser.InternshipSortCommandParser;
 import seedu.address.model.internship.ApplicationStatus;
 import seedu.address.model.internship.CompanyName;
 import seedu.address.model.internship.ContactEmail;
@@ -72,6 +73,18 @@ public class InternshipModelManagerTest {
         assertThrows(NullPointerException.class, () -> internshipModelManager.updateFilteredInternshipList(null));
     }
 
+    @Test
+    public void sortInternshipList_nullComparator_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> internshipModelManager.sortFilteredInternshipList(null));
+    }
+
+    @Test
+    public void sortInternshipList_validComparator_success() {
+        internshipModelManager.addInternship(internship);
+        internshipModelManager.sortFilteredInternshipList(Internship.getComparator(
+                InternshipSortCommandParser.FieldEnum.COMPANY, true));
+        assertEquals(internship, internshipModelManager.getFilteredInternshipList().get(0));
+    }
     @Test
     public void equals() {
         InternshipData internshipData = new InternshipData();
