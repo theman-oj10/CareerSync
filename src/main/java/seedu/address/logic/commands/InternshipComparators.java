@@ -4,7 +4,6 @@ import java.util.Comparator;
 import java.util.Map;
 
 import seedu.address.model.internship.ApplicationStatus.StatusEnum;
-
 import seedu.address.model.internship.Internship;
 
 /**
