@@ -1,26 +1,32 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.InternshipFindCommand;
-import seedu.address.logic.commands.InternshipSortCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.InternshipSortCommand.ORDER_ASCENDING;
+import static seedu.address.logic.commands.InternshipSortCommand.ORDER_DESCENDING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.stream.Stream;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.InternshipFindCommand.MODE_WITHALL;
-import static seedu.address.logic.commands.InternshipFindCommand.MODE_WITHANY;
-import static seedu.address.logic.commands.InternshipSortCommand.ORDER_ASCENDING;
-import static seedu.address.logic.commands.InternshipSortCommand.ORDER_DESCENDING;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import seedu.address.logic.commands.InternshipSortCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new InternshipSortCommand object
  */
 public class InternshipSortCommandParser implements InternshipParser<InternshipSortCommand> {
-    private static final Prefix[] supportedPrefixes = {PREFIX_COMPANY, PREFIX_CONTACT_NAME, PREFIX_LOCATION,
-            PREFIX_STATUS, PREFIX_DESCRIPTION, PREFIX_ROLE, PREFIX_REMARK};
+    private static final Prefix[] supportedPrefixes = {
+        PREFIX_COMPANY, PREFIX_CONTACT_NAME, PREFIX_LOCATION, PREFIX_STATUS, PREFIX_DESCRIPTION,
+        PREFIX_ROLE, PREFIX_REMARK
+    };
     /** Enum of fields to sort by */
     public enum FieldEnum {
         COMPANY, CONTACT_NAME, CONTACT_NUMBER, CONTACT_EMAIL, DESCRIPTION, STATUS, LOCATION, ROLE, REMARK
@@ -31,9 +37,6 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
         ASCENDING(ORDER_ASCENDING), DESCENDING(ORDER_DESCENDING);
         private final String value;
 
-        public static final String MESSAGE_INVALID_ORDER = "Invalid order specified. Please specify either " + ORDER_ASCENDING
-                + " or " + ORDER_DESCENDING + ".";;
-
         OrderEnum(String order) {
             this.value = order;
         }
@@ -41,7 +44,28 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
         public String getValue() {
             return value;
         }
+
+        /**
+         * Returns the {@code OrderEnum} based on the given order.
+         * @param order order to sort by
+         * @return the {@code OrderEnum} based on the given order
+         */
+        public static OrderEnum getOrderEnum(String order) {
+            requireNonNull(order);
+            if (order.equals(ORDER_ASCENDING)) {
+                return ASCENDING;
+            } else {
+                return DESCENDING;
+            }
+        }
+
+        /**
+         * Returns true if the given order is valid.
+         * @param trimmedOrder order to sort by
+         * @return true if the given order is valid
+         */
         public static boolean isValidOrder(String trimmedOrder) {
+            requireNonNull(trimmedOrder);
             return trimmedOrder.equals(ORDER_ASCENDING) || trimmedOrder.equals(ORDER_DESCENDING);
         }
     }
@@ -52,6 +76,7 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
      * @throws ParseException if the user input does not conform the expected format
      */
     public InternshipSortCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
@@ -65,7 +90,6 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
         }
 
         String order = trimmedArgs.split(" ")[1].trim();
-        System.out.println(order);
         OrderEnum parsedOrder = InternshipParserUtil.parseOrder(order);
         FieldEnum field = assignField(argMultimap);
         return new InternshipSortCommand(field, parsedOrder);

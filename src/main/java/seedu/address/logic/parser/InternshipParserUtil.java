@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.InternshipSortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.internship.ApplicationStatus;
 import seedu.address.model.internship.CompanyName;
@@ -178,9 +179,10 @@ public class InternshipParserUtil {
         requireNonNull(order);
         String trimmedOrder = order.trim();
         if (!InternshipSortCommandParser.OrderEnum.isValidOrder(trimmedOrder)) {
-            throw new ParseException(InternshipSortCommandParser.OrderEnum.MESSAGE_INVALID_ORDER);
+            throw new ParseException(InternshipSortCommand.MESSAGE_INVALID_ORDER);
         }
-        InternshipSortCommandParser.OrderEnum orderEnum = new InternshipSortCommandParser.OrderEnum(trimmedOrder);
+        InternshipSortCommandParser.OrderEnum orderEnum = InternshipSortCommandParser
+                .OrderEnum.getOrderEnum(trimmedOrder);
         return orderEnum;
     }
 }

@@ -1,7 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.Comparator;
 
@@ -23,27 +31,29 @@ public class InternshipSortCommand extends InternshipCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all internships based on specified field"
             + " (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: FIELD (One of " + PREFIX_COMPANY + " COMPANY_NAME_KEYWORD\n"
-            + PREFIX_CONTACT_NAME + "CONTACT_NAME_KEYWORD\n"
+            + PREFIX_CONTACT_NAME + " CONTACT_NAME_KEYWORD\n"
+            + PREFIX_CONTACT_NUMBER + " CONTACT_NUMBER_KEYWORD\n"
+            + PREFIX_CONTACT_EMAIL + " CONTACT_EMAIL_KEYWORD\n"
             + PREFIX_LOCATION + " LOCATION_KEYWORD\n"
             + PREFIX_STATUS + " STATUS_KEYWORD\n"
             + PREFIX_DESCRIPTION + " DESCRIPTION_KEYWORD\n"
             + PREFIX_ROLE + " ROLE_KEYWORD\n"
             + PREFIX_REMARK + " REMARK_KEYWORD\n"
-            + "ORDER(" + ORDER_ASCENDING + "or " + ORDER_DESCENDING +", to specify ascending or descending order)\n"
+            + "ORDER(" + ORDER_ASCENDING + " or " + ORDER_DESCENDING + ", to specify ascending or descending order)\n"
             + "Example: " + COMMAND_WORD + " /com " + ORDER_ASCENDING + "\n";
-
-    public static final String MESSAGE_SORT_SUCCESS = "Internships sorted by %1$s in %2$s order";
-    public static final String MESSAGE_INVALID_ARGUMENTS = "Invalid sort command format, enter both field and order.";
-    public static final String MESSAGE_INVALID_FIELD = "Invalid field specified. Please specify one of the following: "
-            + PREFIX_COMPANY + " COMPANY_NAME_KEYWORD\n"
-            + PREFIX_CONTACT_NAME + "CONTACT_NAME_KEYWORD\n"
-            + PREFIX_LOCATION + " LOCATION_KEYWORD\n"
-            + PREFIX_STATUS + " STATUS_KEYWORD\n"
-            + PREFIX_DESCRIPTION + " DESCRIPTION_KEYWORD\n"
-            + PREFIX_ROLE + " ROLE_KEYWORD\n"
-            + PREFIX_REMARK + " REMARK_KEYWORD\n";
-    public static final String MESSAGE_INVALID_ORDER = "Invalid order specified. Please specify either " + ORDER_ASCENDING
-    + " or " + ORDER_DESCENDING + ".";
+    public static final String MESSAGE_INVALID_FIELD = "Invalid field specified. Please specify one of the following:\n"
+            + PREFIX_COMPANY + ": Company Name\n"
+            + PREFIX_CONTACT_NAME + ": Contact Name\n"
+            + PREFIX_CONTACT_NUMBER + ": Contact Number\n"
+            + PREFIX_CONTACT_EMAIL + ": Contact Email\n"
+            + PREFIX_LOCATION + ": Location\n"
+            + PREFIX_STATUS + ": Status\n"
+            + PREFIX_DESCRIPTION + ": Description\n"
+            + PREFIX_ROLE + ": Role\n"
+            + PREFIX_REMARK + ": Remark\n";
+    public static final String MESSAGE_INVALID_ORDER = "Invalid order specified. Please specify either "
+            + ORDER_ASCENDING + " to sort in ascending order or " + ORDER_DESCENDING
+            + " to sort in descending order.";
     private final InternshipSortCommandParser.FieldEnum field;
     private final InternshipSortCommandParser.OrderEnum order;
 
