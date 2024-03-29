@@ -167,4 +167,20 @@ public class InternshipParserUtil {
         String trimmedRemark = remark.trim();
         return new Remark(trimmedRemark);
     }
+
+    /**
+     * Parses a {@code String order} into a {@code InternshipSortCommandParser.OrderEnum}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code order} is invalid.
+     */
+    public static InternshipSortCommandParser.OrderEnum parseOrder(String order) throws ParseException {
+        requireNonNull(order);
+        String trimmedOrder = order.trim();
+        if (!InternshipSortCommandParser.OrderEnum.isValidOrder(trimmedOrder)) {
+            throw new ParseException(InternshipSortCommandParser.OrderEnum.MESSAGE_INVALID_ORDER);
+        }
+        InternshipSortCommandParser.OrderEnum orderEnum = new InternshipSortCommandParser.OrderEnum(trimmedOrder);
+        return orderEnum;
+    }
 }
