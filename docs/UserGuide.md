@@ -1,89 +1,280 @@
 ---
 layout: page
 title: User Guide
+pageNav: 3
 ---
+Welcome to <span style="color: #f66a0a;">CareerSync</span>'s  User Guide! <span style="color: #f66a0a;">CareerSync</span> 
+is an **internship application manager designed to simplify the management of internship applications**. It is designed to help you **keep track of all your
+internship applications in one place**, so that you can focus on preparing for your interviews and securing your dream internship.
 
-<span style="color: #f66a0a;">CareerSync</span> is a **desktop app for managing internships, optimized for use via a Command Line Interface** (CLI).
+CareerSync features a sleek and user-friendly interface primarily driven by command inputs through **Command Line Interface (CLI)**. 
+For those who are **proficient typists**, CareerSync facilitates quicker completion of internship applications 
+compared to conventional GUI-based applications. If you are a NUS Computer Science student who is looking to apply for
+many internships, CareerSync is practically made just for you!
 
-<span style="color: #f66a0a;">CareerSync</span> is an **internship application tracker** that helps you keep track of all your internship applications in one place.
-<br>Record all the relevant information, such as contact details, application status, and tasks to-do for **all your internships** in one place.
+In this user guide, we will guide you through all the functionalities of CareerSync, so that you can make the most out of this app. 
+From a Year 1 rookie who just started applying for internships, to a Year 4 veteran who has been through multiple
+internship applications, our guide will ensure that you can use CareerSync to its full potential.
 
-If you are:
-1. someone who is applying for many internships
-2. someone who is looking for a way to keep track of all your internship applications
-3. a Computer Science student
-4. a fast typist
+### What do I need to know for this User Guide?
+This user guide is designed to be approachable for beginners, requiring no previous familiarity with administrative tools
+or command interfaces, and is self-sufficient. Our [Quick Start](#quick-start) section will guide you through the installation
+of all the necessary tools, even if you have never used a CLI before.
 
-Then <span style="color: #f66a0a;">CareerSync</span> is perfect just for you!
+### How to use this User Guide?
+This user guide is split into these primary sections: [Quick Start](#quick-start), [Interface Overview](#interface-overview), [Tutorial](#tutorial), 
+[Commands](#commands), [FAQ](#faq), [Known Issues](#known-issues), [Command Summary](#command-summary), [Field Summary](#field-summary) and [Glossary](#glossary). 
+We recommend that you navigate our User Guide in this order:
+1. Go through the [Quick Start](#quick-start) section to get started with the installation of CareerSync.
+2. Take a look at [Interface Overview](#interface-overview) to understand the elements of our GUI.
+3. Follow the instructions in [Tutorial](#tutorial) to understand the basic commands and how to use them.
+4. Read through the [Commands](#commands) section to understand all the commands and how to use them.
+5. Read through the [Field Summary](#field-summary) section to understand all the fields and their restrictions.
 
+[FAQ](#faq), [Known Issues](#known-issues) and [Glossary](#glossary) sections provide additional information that you may find useful.
+[Command Summary](#command-summary) provides a quick reference to all the commands available and their formats in CareerSync.
 
-It lets you effortlessly manage, search, and sift through your various internship applications!
+After that, you would be ready to use CareerSync to manage your internship applications!
 
-Primary features include:
-- Add your internship applications in this app to keep track of them easily!
-- See all the important details of your internship applications at a glance!
-- Edit your application details to keep them up-to-date!
-- Search for your internship applications by keywords easily!
-- Keep track of your status for each individual internship application!
-- Add remarks to your internship applications to remember important details!
-- Add tasks to your internship applications to keep track of your progress! (to be added in v1.3)
+## Introduction
 
-![Ui](images/Ui.png)
+Applying for multiple internships can be a daunting task, especially when you have to keep track of all the different
+application statuses, contact details, and tasks to-do for each internship. Having to manage all these details can be
+overwhelming, and it is easy to lose track of important information. Especially when you are applying for multiple internships,
+it can be hard to remember which internship you have applied to, which ones you have received a response from, and which ones
+you have yet to apply to.
 
-If you are interested in using CareerSync, head over to the [Quick Start](#quick-start) section to get started!
+If you are someone who applies for multiple internships, CareerSync aspires to eliminate your worries by providing a
+comprehensive solution to manage all your internship applications in one place. As an internship application manager, CareerSync
+does so via the following features:
+1. **Information Management**: Store relevant information about your internship applications, such as contact, status and tasks-to do amongst others in one place. 
+   a. For more information on what information you can store, refer to the [Fields Summary](#fields-summary) section.
+2. **Search and Filter**: Search and filter your internship applications by keywords, making it easy to find the information you need.
+3. **Task Management**: Add tasks to your individual internship applications and keep track of their individual deadlines.
 
 ### Table Of Contents
 
-| Section                             | When Should I Use This?                                                 |
-|-------------------------------------|-------------------------------------------------------------------------|
-| [Quick Start](#quick-start)         | If you are using the application for the first time or need a refresher |
-| [Features](#features)               | If you would like to know the capabilities of the application           |
-| [FAQ](#faq)                         | If you have any questions about the application                         |
-| [Known Issues](#known-issues)       | If you have a technical problem. We may have the solution!              |
-| [Command Summary](#command-summary) | If you would like to find more information about a specific command     |
+| Section                                 | When Should I Use This?                                                                 |
+|-----------------------------------------|-----------------------------------------------------------------------------------------|
+| [Quick Start](#quick-start)             | If you are using the application for the first time or need a refresher                 |
+| [Interface Overview](#interface-overview) | If you would like to know more about the interface of the application                   |
+| [Tutorial](#tutorial)                   | If you would like to learn how to use the application                                   |
+| [Commands](#commands)                   | If you would like to know the capabilities of the application                           |
+| [FAQ](#faq)                             | If you have any questions about the application                                         |
+| [Known Issues](#known-issues)           | If you have a technical problem. We may have the solution!                              |
+| [Command Summary](#command-summary)     | If you would like to find more information about a specific command                     |
+| [Field Summary](#field-summary)         | If you would like to know more about the fields and its restrictions in the application |
+| [Glossary](#glossary)                   | If you would like to know more about the terms used in the application                  |
+
 
 --------------------------------------------------------------------------------------------------------------------
 ## Quick Start
 
-Start keeping track of your internships easily with <span style="color: #f66a0a;">CareerSync!</span>
-
 ### Installation
 
-1. Ensure that you have [Java 11 or above](https://www.java.com/en/download/) installed on your computer.
-    - If you are a MacOS, follow the instructions [here](https://nus-cs2103-ay2324s2.github.io/website/admin/programmingLanguages.html) instead.
+1. Ensure that you have [Java 11 or above](https://www.java.com/en/download/) installed on your computer if you are using Windows.
+    - If you are using MacOS, follow the instructions [here](https://nus-cs2103-ay2324s2.github.io/website/admin/programmingLanguages.html) instead.
 2. Download the latest `CareerSync.jar` file [here](https://github.com/AY2324S2-CS2103T-W11-1/tp/releases/tag/v1.2).
-3. Make sure your jar file is located in an empty folder.
+3. Make sure your [jar](#glossary) file is located in an empty folder.
 4. Start <span style="color: #f66a0a;">CareerSync</span>.
-    - For MacOS:
-        - Open up your Terminal by typing <kbd>Command</kbd> + <kbd>Space</kbd>, then type <kbd>Enter</kbd>.<br>
+    - For **MacOS**:
+        - Open up your Terminal by typing <kbd>Command</kbd> + <kbd>Space</kbd>, then type `Terminal` and <kbd>Enter</kbd>.<br>
         - Navigate to the folder containing your jar file using `cd`. If you are not sure how to use `cd`, refer to [this link](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)!<br>
         - Enter `java -jar CareerSync.jar` and type <kbd>Enter</kbd>.
-   - For Windows:
+   - For **Windows**:
        - Open the folder containing `CareerSync.jar`.
        - Double-click on `CareerSync.jar` to start up our application!
+   - For **Linux**:
+       - Open up your Terminal by typing <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd>, then <kbd>Enter</kbd>.<br>
+       - Navigate to the folder containing your jar file using `cd`.
+       - Enter `java -jar CareerSync.jar` and type <kbd>Enter</kbd>.
 5. The **Graphical User Interace** similar to the image below should pop up on your screen.
 
-   ![Ui](images/Ui.png)
+![Ui](images/Ui.png)
 
-6. Try typing some of the following commands, then typing <kbd>Enter</kbd> to execute them.
-   Some example commands you can try:
-
-    * `list` : Lists all contacts.
-
-   * `add /com Tiktok /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com
-      /phone 90890301 /loc remote /role Software Intern` : Adds this internship entry to the CareerSync application.
-
-   * `delete 2` : Deletes the 2nd internship entry shown in the current displayed list.
-
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
-
-7. Refer to the [Features](#features) below for more details, and have fun using <span style="color:
-#f66a0a;">CareerSync!</span>
+For more information on the interface, please refer to the [Interface Overview](#interface-overview) section.
 
 --------------------------------------------------------------------------------------------------------------------
+## Interface Overview
 
+When you first start CareerSync, you will see this window. This is the main window of CareerSync, where you can view all your internship applications.
+
+![Ui](images/Ui.png)
+
+   * `add /com Tiktok /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com
+      /phone 90890301 /loc remote /role Software Intern` : Adds this internship entry to the <span style="color:
+     #f66a0a;">CareerSync</span> application.
+### Areas
+The main window of CareerSync is divided into four main areas: the **Tab Area**, the **CLI**, the **Message Box** and the **Internship List Display**.
+
+
+![Areas Annotation](images/introduction/AreasAnnotation.png)
+
+1. **Tab Area**: The Tab Area contains File and Help, which allows you to navigate its respective functions.
+2. **CLI**: The Command Line Interface (CLI) is where you can input commands to interact with CareerSync.
+3. **Message Box**: The Message Box displays messages to provide feedback to you.
+4. **Internship List Display**: The Internship List Display displays the details of all your internship applications.
+
+### Internship Fields
+The names of the fields for each internship application is as stated below. When you edit these fields, you will see the changes reflected in the display.
+For the restrictions on what is accepted for each field, kindly refer to [Fields Summary](#fields-summary).
+
+![Fields Annotation](images/introduction/FieldsAnnotation.png)
+
+1. `INDEX` - The index of the internship application in the filtered list.
+2. `COMPANY_NAME` - The name of the company you are applying to.
+3. `ROLE` - The role you are applying for.
+4. `STATUS` - The status of your application.
+5. `DESCRIPTION` - A brief description of the internship.
+6. `LOCATION` - The location of the internship.
+7. `CONTACT_NAME` - The name of the contact person.
+8. `CONTACT_EMAIL` - The email of the contact person.
+9. `CONTACT_NUMBER` - The phone number of the contact person.
+
+--------------------------------------------------------------------------------------------------------------------
+## Tutorial
+This section would guide you through the basic commands of CareerSync, and how to use them.
+
+
+### Clearing sample internship entries: `clear`
+
+To begin using CareerSync, you should clear the sample internship entries that are present when you first start the 
+application.
+
+Key in the command `clear` in the CLI and press `Enter` to clear the sample internship entries.
+
+<div markdown="span" class="alert alert-success">
+
+💡 **Try It Out:**<br>
+
+1. Input:<br>
+   `clear`<br>
+   ![Before clearing](./images/clear/clear-before.png)<br><br>
+
+2. Successful Output after clearing entries:<br>
+   ![After successfully clearing](./images/clear/clear-after.png)
+   There are no more internships in the list.
+</div>
+
+### Adding an internship entry: `add`
+
+Next, let us try to add an internship entry. 
+
+<div markdown="span" class="alert alert-success">
+
+💡 **Try It Out:**<br>
+
+Key in the following command in the CLI: `add /com Tiktok /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com
+/phone 90890301 /loc remote /role Software Intern`
+
+Successful output after adding the entry:<br>
+   ![After successfully adding](./images/tutorial/add.png)
+   You can now see your new internship with the details you entered in the **Internship List Display!**
+</div>
+
+### Editing an internship entry: `edit`
+
+Oh no! You made a mistake in the email address of the contact person. Let's edit the email address.
+
+<div markdown="span" class="alert alert-success">
+
+💡 **Try It Out:**<br>
+Key in the following command in the CLI: `edit 1 /email janeyeo@gmail.com`
+
+Successful output after editing the entry:<br>
+![After successfully editing](./images/tutorial/edit.png)
+Your internship now has the updated email that you keyed in.
+</div>
+
+### Find internship entries: `find`
+
+Before you continue, add a few more internship entries using these commands:
+1. `add /com Google /desc create new search engine /status to_apply /poc john tan /email johntan@gmail.com /phone 98765432 /loc local /role Software Intern`
+2. `add /com Facebook /desc create new social media platform /status to_apply /poc jane tan /email facebookhr@gmail.com /phone 87654321 /loc remote /role Software Intern`
+
+Successful output after adding the entries:<br>
+![After successfully adding more](./images/tutorial/addmore.png)
+
+Let's say you want to find all internships that you want to apply for, that give you a software intern role.
+`find` is the command you need!
+
+<div markdown="span" class="alert alert-success">
+
+💡 **Try It Out:**<br>
+
+Key in the following command in the CLI: `find withall /status to_apply /role Software Intern`
+
+Successful output after finding all entries that satisfy the conditions:<br>
+![After successfully finding](./images/tutorial/find.png)
+Your **Internship List Display** now only has all the internships satisfying both conditions.
+</div>
+
+### Deleting an internship entry: `delete`
+You decide that to no longer pursue the internship at Facebook. Let's delete that entry.
+
+<div markdown="span" class="alert alert-success">
+
+💡 **Try It Out:**<br>
+
+Key in the following command in the CLI: `delete 2`
+
+Successful output after deleting the entry:<br>
+![After successfully deleting](./images/tutorial/delete.png)
+The Facebook internship entry has been removed, and is no longer present in your database.
+</div>
+
+### Listing all internships: `list`
+You used find to filter the internships. How do you see all the internships again?
+
+<div markdown="span" class="alert alert-success">
+
+💡 **Try It Out:**<br>
+
+Key in the following command in the CLI: `list`
+
+Successful output after listing:<br>
+![After successfully listing](./images/tutorial/list.png)
+You now see all your internships. Your Tiktok internship, previously hidden, is now back in view.
+</div>
+
+
+### Exiting the program: `exit`
+You decide that you are done for the day. How do you exit the application and save the file?
+
+<div markdown="span" class="alert alert-success">
+
+💡 **Try It Out:**<br>
+
+Key in the following command in the CLI: `exit`
+
+Upon reopening the app:<br>
+![After successfully reopening](./images/tutorial/reopen.png)
+You now see all your internships that you have when you exited. Your data was saved!
+</div>
+
+### Wrapping up the tutorial
+
+This wraps up our tutorial! Hope you now have a better understanding of how to use CareerSync to manage your internship 
+applications now.
+
+Only **simple and common use cases** are covered in this tutorial. Please refer to the [Commands](#commands) section so that
+you fully understand each command and their usage.
+
+____________________________________________________________________________________________________________________
+## Command Summary
+
+| Action                                        | Description                              | Format |
+|-----------------------------------------------|------------------------------------------|------------------------------------------|
+| [add](#adding-an-entry-add)                   | Adds an Internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER /loc LOCATION_ENUM /role ROLE` |
+| [delete](#deleting-an-internship-delete)      | Removes a Internship.                    | `delete INDEX` |
+| [list](#listing-all-internships-list)         | Removes a Internship.                    | `list` |
+| [edit](#editing-an-internship-edit)           | Modifies an existing Internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE` |
+| [addremark](#adding-a-remark-addremark)       | Adds a remark to an existing Internship. | `addremark INDEX [/remark REMARK]` |
+| [clear](#clearing-all-internships-clear)      | Removes all Internships from the deck.   | `clear` |
+| [find](#finding-internships-by-keywords-find) | Finds an Internship by keywords.         |`find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS]`|
+| [exit](#exiting-the-program-exit)             | Exits and closes the application.        | `exit` |
+
+--------------------------------------------------------------------------------------------------------------------
 ## Commands
 
 <div markdown="block" class="alert alert-info">
@@ -114,15 +305,36 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Adding an entry: `add`
+### Adding an internship: `add`
 
 Adds an internship entry and all the relevant fields
 
 Format: `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER /loc LOCATION_ENUM /role ROLE ​`
 
-Examples:
-* `add /com Tiktok /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com
+* The fields `COMPANY_NAME`, `DESCRIPTION`, `CONTACT_NAME` and `ROLE` allow the use of any text, number and/or spaces
+* The field `STATUS` accepts only the following inputs: `to_apply`, `ongoing`, `rejected`, `accepted`
+* The field `CONTACT_EMAIL` accepts only the format of `<email> @ domain.com`
+* The field `CONTACT_NUMBER` accepts only positive integers and it must be minimally 3 **positive integers** and above
+  * A **positive integer** refers to 1, 2, 3, …​
+* The field `LOCATION_ENUM` accepts only the following inputs: `remote`, `local`, `overseas`
+
+Now, let us try to add an internship entry.
+
+<div markdown="span" class="alert alert-success">
+
+💡 **Try It Out:**<br>
+
+Key in the following command in the CLI: `add /com Tiktok /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com
 /phone 90890301 /loc remote /role Software Intern`
+
+Successful output after adding the entry:<br>
+![After successfully adding](./images/tutorial/add.png)
+You can now see your new internship with the details you entered in the **Internship List Display!**
+</div>
+
+**Common errors:**
+1. If no field prefixes are specified or if there are errors, the command will be rejected with error message:<br>
+   `Invalid Command Prefix!` followed by the format to use and an example for you to refer to or try out
 
 ### Deleting an internship: `delete`
 
@@ -134,9 +346,16 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed list of internship entries at point of deletion.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-* `list` followed by `delete 7` deletes the 7th entry in the internship entries list.
-* `find withall /com Google` followed by `delete 1` deletes the 1st entry in the results of the `find` command.
+<div markdown="span" class="alert alert-success">
+
+💡 **Try It Out:**<br>
+
+Key in the following command in the CLI: `delete 2`
+
+Successful output after deleting the entry:<br>
+![After successfully deleting](./images/tutorial/delete.png)
+The Facebook internship entry has been removed, and is no longer present in your database.
+</div>
 
 ### Listing all internships: `list`
 
@@ -170,33 +389,55 @@ Click the back button to return to the previous view of internship entries.
 
 Shows the full details of an internship entry. This replaces the current view of internship entries.
 
-CLI input will be implemented in a future release.
+[CLI](#glossary) input will be implemented in a future release.
 
 ### Editing an internship: `edit`
 
 Edits an existing internship entry in the application.
 
-Format: `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE] …​`
+**Format** : `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE] …​`
 
 * Edits the internship at the specified `INDEX`. The index refers to the index number shown in the displayed internship list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided. Multiple fields can be edited at once.
 * Existing values will be updated to the input values.
 * When editing status, only the valid statuses will be accepted. Not-valid statuses will cause the command to be rejected.
 
-Examples:
-*  `edit 1  /email nussu@u.nus.edu /number 9666 1666` Edits the email and phone number of the 1st internship to be `nussu@u.nus.edu` and `9666 1666` respectively.
+<div markdown="span" class="alert alert-success">
+
+💡 **Try It Out:**<br>
+
+1. Input:<br>
+   `edit 1 /email tiktok@gmail.com`<br>
+   ![Before editing](./images/edit/edit-before.png)<br><br>
+
+2. Successful Output after clearing entries:<br>
+   ![After successfully editing](./images/edit/edit-after.png)
+   The email field of the first internship is successfully updated to `tiktok@gmail.com`.
+</div>
 
 ### Adding a remark: `addremark`
 
-Adds a remark to an existing internship in the application.
+Adds a remark or modifies the existing one, of an existing internship at the specified `INDEX`.
 
-Format: `addremark INDEX [/remark REMARK]`
+<span style="color: #f66a0a;">Format:</span> `addremark INDEX /remark REMARK`
 
-* Adds a remark or modifies the existing one, of an existing internship at the specified `INDEX`. The index refers to the index number shown in the displayed internship list. The index **must be a positive integer** 1, 2, 3, …​
-* Existing remarks will be updated to the input values.
+* The index refers to the index number shown in the displayed internship list. The index **must be a positive integer** 1, 2, 3, …
+* To delete an existing remark, simply input an empty string as the remark like so: <br>`addremark INDEX /remark `.
+ 
+<span style="color: #f66a0a;">Examples:</span>
+*  `addremark 1 /remark This internship has a behavioural interview!` <br> Adds or modifies the remark of the internship at index 1 to be `This internship has a behavioural interview!`.
+ 
+<div markdown="span" class="alert alert-success">
 
-Examples:
-*  `addremark 1 /remark This internship has a behavioural interview!` Adds or modifies the remark of the internship at index 1 to be `This internship has a behavioural interview!`.
+💡 **Try It Out:**<br>
+
+1. Input:<br>
+   `addremark 1 /remark This internship has a behavioural interview!`<br>
+   ![Before adding a remark](./images/add-remark/addremark-before.png)<br><br>
+
+2. Successful Output after adding a remark:<br>
+   ![After successfully adding a remark](./images/add-remark/addremark-after.png)
+</div>
 
 ### Finding internships by keywords: `find`
 
@@ -272,7 +513,7 @@ Users are **NOT** recommended to modify their data file directly, since wrong fo
 Only do so if you are an experienced user! <br>
 </div>
 
-CareerSync data is saved in the hard disk, as a JSON file at the path `[JAR file location]/data/internship.json`.
+CareerSync data is saved in the hard disk, as a [JSON](#glossary) file at the path `[JAR file location]/data/internship.json`.
 After every command that changes the data, CareerSync performs a save automatically. There is no need to save manually.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -280,7 +521,7 @@ After every command that changes the data, CareerSync performs a save automatica
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CareerSync home folder.
+**A**: Do the following steps: <br> 1. Navigate to the folder where CareerSync.jar is stored. <br> 2. Copy your data file from data/internshipdata.json. <br> 3. Install the app in the other computer and overwrite the empty data file (data/internshipdata.json) it creates with the file that contains the data (JSON file) of your previous CareerSync home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -291,15 +532,25 @@ After every command that changes the data, CareerSync performs a save automatica
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Field Summary
 
-| Action                                        | Description                              |
-|-----------------------------------------------|------------------------------------------|
-| [add](#adding-an-entry-add)                   | Adds an Internship.                      |
-| [delete](#deleting-an-internship-delete)      | Removes a Internship.                    |
-| [list](#listing-all-internships-list)         | Removes a Internship.                    |
-| [edit](#editing-an-internship-edit)           | Modifies an existing Internship.         |
-| [addremark](#adding-a-remark-addremark)       | Adds a remark to an existing Internship. |
-| [clear](#clearing-all-internships-clear)      | Removes all Internships from the deck.   |
-| [find](#finding-internships-by-keywords-find) | Finds an Internship by keywords.         |
-| [exit](#exiting-the-program-exit)             | Exits and closes the application.        |
+| Prefix  | Description                        | Valid Inputs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+|---------|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| /com    | Company Name                       | Any Text, Numbers or Spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| /desc   | Description of Internship          | Any Text, Numbers or Spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| /status | Status of Application              | to_apply, ongoing, rejected, accepted                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| /poc    | Name of Person of Contact          | Any Text, Numbers or Spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| /email  | Email of Person of Contact         | Valid-Format: local-part@domain <br> Domain has: <br> 1. The local-part should only contain alphanumeric characters and these special characters: "!#$%&'*+-/=?^_`{ \|}~". It may start or end with any special characters. <br> 2. The domain name is made up of domain labels separated by periods. The domain name must: <br> - end with a domain label at least 2 characters long <br> - have each domain label start and end with alphanumeric characters <br> - have each domain label consist of alphanumeric characters, separated only by hyphens, if any. |
+| /phone  | Contact Number of Person of Contact| At least 3 numbers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| /loc    | Location of Internship             | remote, local, overseas                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| /role   | Role for the Internship            | Any Text, Numbers or Spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+
+## Glossary
+
+| Term      | Meaning                                                                                                                   |
+|-----------|---------------------------------------------------------------------------------------------------------------------------|
+| CLI       | [Command Line Interface](#https://en.wikipedia.org/wiki/Command-line_interface)                                           |
+| GUI       | [Graphical User Interface](#https://en.wikipedia.org/wiki/Graphical_user_interface)                                       |
+| JSON      | [JavaScript Object Notation](#https://www.json.org/json-en.html)                                                          |
+| JAR       | [Java Archive: A file format to store and distribute Java Applications](#https://en.wikipedia.org/wiki/JAR_(file_format)) |
+| File Path | [The location of a file in the computer's file system](#https://www.w3schools.com/html/html_filepaths.asp)                |
