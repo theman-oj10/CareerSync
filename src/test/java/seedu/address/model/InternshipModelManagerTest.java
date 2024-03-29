@@ -1,5 +1,10 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
@@ -19,10 +24,8 @@ import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Location;
 import seedu.address.model.internship.Remark;
 import seedu.address.model.internship.Role;
-import seedu.address.testutil.InternshipBuilder;
 import seedu.address.model.internship.TaskList;
-
-import static org.junit.jupiter.api.Assertions.*;
+import seedu.address.testutil.InternshipBuilder;
 
 public class InternshipModelManagerTest {
 
