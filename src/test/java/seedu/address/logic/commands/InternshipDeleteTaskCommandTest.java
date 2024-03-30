@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalInternships.getTypicalInternshipData
 import static seedu.address.testutil.TypicalInternships.getTypicalInternships;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.InternshipMessages;
 import seedu.address.model.InternshipData;
