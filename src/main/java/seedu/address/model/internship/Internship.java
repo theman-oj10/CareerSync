@@ -93,6 +93,10 @@ public class Internship {
         taskList.addTask(task);
     }
 
+    public void deleteTask(int index) {
+        taskList.deleteTask(index);
+    }
+
     /**
      * Returns true if both internships have the same company name, location, role and description.
      * This defines the same notion of equality between two internships. (Identity fields)

@@ -22,7 +22,7 @@ import seedu.address.model.internship.Task;
  */
 public class InternshipParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index has to be a positive number! (1,2,3...).";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
