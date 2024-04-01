@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -11,7 +9,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.InternshipLogic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -23,9 +20,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 public class DetailedInternshipWindow extends UiPart<Stage> {
 
     private static final String FXML = "DetailedInternshipWindow.fxml";
-
-    private final Logger logger = LogsCenter.getLogger(getClass());
-
     private Stage primaryStage;
     private InternshipLogic logic;
     private DetailedInternshipListPanel selectedInternshipListPanel;
@@ -34,16 +28,8 @@ public class DetailedInternshipWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
 
     private ResultDisplay resultDisplay;
-
-    @FXML
-    private StackPane commandBoxPlaceholder;
-
     @FXML
     private StackPane selectedInternshipListPanelPlaceholder;
-
-    @FXML
-    private StackPane resultDisplayPlaceholder;
-
     @FXML
     private StackPane statusbarPlaceholder;
 
@@ -102,14 +88,8 @@ public class DetailedInternshipWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window except for the internship list panel.
      */
     void fillInnerParts() {
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getInternshipDataFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        CommandBox commandBox = new CommandBox(this::executeCommand);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
     /**

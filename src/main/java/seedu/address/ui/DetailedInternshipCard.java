@@ -71,7 +71,6 @@ public class DetailedInternshipCard extends UiPart<Region> {
         setContactNumberLabel(internship.getContactNumber());
         setRemarkLabel(internship.getRemark());
         setTasksLabel(internship.getTaskList());
-        InternshipCard.
     }
 
     /**
@@ -154,7 +153,7 @@ public class DetailedInternshipCard extends UiPart<Region> {
      * @param tasks tasks of the internship
      */
     private void setTasksLabel(TaskList tasks) {
-        this.tasks.setText("Tasks:\n" + tasks.toString());
+        this.tasks.setText("\nTasks:\n" + tasks.toString());
     }
 
     /**
