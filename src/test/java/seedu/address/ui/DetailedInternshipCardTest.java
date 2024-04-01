@@ -11,7 +11,7 @@ import seedu.address.model.internship.Internship;
 import seedu.address.testutil.TypicalInternships;
 
 @ExtendWith(ApplicationExtension.class)
-public class DetailedInternshipCardTest {
+public class DetailedInternshipCardTest extends UiTestBase {
 
     private DetailedInternshipCard detailedInternshipCard;
     private Internship testInternship = TypicalInternships.AMY;
