@@ -13,7 +13,9 @@ import seedu.address.model.internship.ContactNumber;
 import seedu.address.model.internship.Description;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Location;
+import seedu.address.model.internship.Remark;
 import seedu.address.model.internship.Role;
+import seedu.address.model.internship.TaskList;
 
 /**
  * A UI component that displays information of a {@code Internship}.
@@ -49,14 +51,17 @@ public class DetailedInternshipCard extends UiPart<Region> {
     @FXML
     private Label cNum;
     @FXML
-    private Label detailed;
+    private Label remark;
+    @FXML
+    private Label tasks;
 
     /**
      * Creates a {@code InternshipCard} with the given {@code Internship}.
      */
     public DetailedInternshipCard(Internship internship) {
         super(FXML);
-        setStyles(true, companyNameAndRole, status, description, loc, cName, cEmail, cNum, detailed);
+        setStyles(true, companyNameAndRole, status, description, loc,
+                cName, cEmail, cNum, remark, tasks);
         setCompanyNameAndRoleLabel(internship.getCompanyName(), internship.getRole());
         setStatusLabel(internship.getApplicationStatus());
         setDescriptionLabel(internship.getDescription());
@@ -64,9 +69,9 @@ public class DetailedInternshipCard extends UiPart<Region> {
         setContactNameLabel(internship.getContactName());
         setContactEmailLabel(internship.getContactEmail());
         setContactNumberLabel(internship.getContactNumber());
-        detailed.setText("DETAILED VIEW.\n Currently, the original view of the internship includes all fields"
-                + "already. This is a placeholder for future implementation where detailed view will contain more"
-                + "information than the original view.");
+        setRemarkLabel(internship.getRemark());
+        setTasksLabel(internship.getTaskList());
+        InternshipCard.
     }
 
     /**
@@ -133,6 +138,23 @@ public class DetailedInternshipCard extends UiPart<Region> {
      */
     private void setContactNumberLabel(ContactNumber contactNumber) {
         cNum.setText("Contact number:\t" + contactNumber.toString());
+    }
+
+    /**
+     * Sets the remark label to the given remark.
+     *
+     * @param remark remark of the internship
+     */
+    private void setRemarkLabel(Remark remark) {
+        this.remark.setText("Remark:\t\t\t" + remark.toString());
+    }
+    /**
+     * Sets the tasks label to the given tasks.
+     *
+     * @param tasks tasks of the internship
+     */
+    private void setTasksLabel(TaskList tasks) {
+        this.tasks.setText("Tasks:\n" + tasks.toString());
     }
 
     /**

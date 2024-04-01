@@ -26,7 +26,8 @@
       <Label fx:id="cName" styleClass="cell_small_label" text="\$contactName" />
       <Label fx:id="cEmail" styleClass="cell_small_label" text="\$contactEmail" />
       <Label fx:id="cNum" styleClass="cell_small_label" text="\$contactNumber" />
-      <Label fx:id="detailed" styleClass="cell_small_label" text="\$detailed" />
+      <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
+      <Label fx:id="tasks" styleClass="cell_small_label" text="\$tasks" />
     </VBox>
   </GridPane>
 </HBox>
