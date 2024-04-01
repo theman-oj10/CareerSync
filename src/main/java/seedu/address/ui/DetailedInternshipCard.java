@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
 import seedu.address.model.internship.ApplicationStatus;
 import seedu.address.model.internship.CompanyName;
 import seedu.address.model.internship.ContactEmail;
@@ -35,25 +34,25 @@ public class DetailedInternshipCard extends UiPart<Region> {
      */
 
     @FXML
-    private HBox cardPane;
+    protected HBox cardPane;
     @FXML
-    private Label companyNameAndRole;
+    protected Label companyNameAndRole;
     @FXML
-    private Label status;
+    protected Label status;
     @FXML
-    private Label description;
+    protected Label description;
     @FXML
-    private Label loc;
+    protected Label loc;
     @FXML
-    private Label cName;
+    protected Label cName;
     @FXML
-    private Label cEmail;
+    protected Label cEmail;
     @FXML
-    private Label cNum;
+    protected Label cNum;
     @FXML
-    private Label remark;
+    protected Label remark;
     @FXML
-    private Label tasks;
+    protected Label tasks;
 
     /**
      * Creates a {@code InternshipCard} with the given {@code Internship}.
@@ -91,7 +90,6 @@ public class DetailedInternshipCard extends UiPart<Region> {
      */
     private void setStatusLabel(ApplicationStatus applicationStatus) {
         status.setText(" * " + applicationStatus.toString());
-        setStatusLabelColour(applicationStatus.getStatus());
     }
 
     /**
@@ -154,34 +152,6 @@ public class DetailedInternshipCard extends UiPart<Region> {
      */
     private void setTasksLabel(TaskList tasks) {
         this.tasks.setText("\nTasks:\n" + tasks.toString());
-    }
-
-    /**
-     * Sets the colour of the status label based on the status of the application.
-     *
-     * @param statusEnum status of the application under the Internship entry
-     */
-    private void setStatusLabelColour(ApplicationStatus.StatusEnum statusEnum) {
-        switch (statusEnum) {
-        case TO_APPLY:
-            status.setTextFill(Color.GREEN);
-            break;
-        case PENDING:
-            status.setTextFill(Color.YELLOW);
-            break;
-        case REJECTED:
-            status.setTextFill(Color.RED);
-            break;
-        case ACCEPTED:
-            status.setTextFill(Color.CYAN);
-            break;
-        case ONGOING:
-            status.setTextFill(Color.LIGHTSEAGREEN);
-            break;
-        default:
-            throw new IllegalArgumentException("Unexpected application status: "
-                    + statusEnum);
-        }
     }
 
     /**
