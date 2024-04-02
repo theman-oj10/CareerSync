@@ -48,6 +48,10 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
             throw new ParseException(InternshipFindCommand.NO_SEARCH_KEY_SPECIFIED);
         }
 
+        if (!prefixesPresentAreNotEmpty(argMultimap, InternshipFindCommandParser.supportedPrefixes)) {
+            throw new ParseException(InternshipFindCommand.NO_KEYWORD_SPECIFIED);
+        }
+
         return new InternshipFindCommand(createPredicate(mode, argMultimap));
     }
 
@@ -70,12 +74,21 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
     }
 
     /**
-     * Returns true if any of the prefixes contains non-empty {@code Optional} values in the given
+     * Returns true if any of the prefixes contains {@code Optional} values, which are possibly empty, in the given
      * {@code ArgumentMultimap}.
      */
-    private static boolean anyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent() && !argumentMultimap
-                .getValue(prefix).get().isEmpty());
+    private static boolean anyPrefixesPresent(ArgumentMultimap argMulMap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argMulMap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if all prefixes present in the {@code ArgumentMultimap} are non-empty.
+     * Vacuously true if no prefixes are present.
+     */
+    private static boolean prefixesPresentAreNotEmpty(ArgumentMultimap argMulMap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix ->
+                argMulMap.getValue(prefix).isEmpty()
+                        || (argMulMap.getValue(prefix).isPresent() && !argMulMap.getValue(prefix).get().isEmpty()));
     }
 
 }

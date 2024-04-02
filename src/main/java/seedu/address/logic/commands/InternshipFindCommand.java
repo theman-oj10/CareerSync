@@ -41,6 +41,7 @@ public class InternshipFindCommand extends InternshipCommand {
             + "must be specified to be searched.";
     public static final String INVALID_MODE_SPECIFIED = "Invalid mode specified. "
             + "Please specify either 'withall' or 'withany'.";
+    public static final String NO_KEYWORD_SPECIFIED = "At least one keyword must be specified for each field prefix.";
 
     private final InternshipContainsKeywordsPredicate predicate;
 
