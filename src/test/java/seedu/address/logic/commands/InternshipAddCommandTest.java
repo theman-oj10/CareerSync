@@ -158,6 +158,16 @@ public class InternshipAddCommandTest {
         public void updateFilteredInternshipList(Predicate<Internship> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setSelectedInternship(Internship internship) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Internship> getSelectedInternship() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

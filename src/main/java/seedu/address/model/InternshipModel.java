@@ -84,4 +84,16 @@ public interface InternshipModel {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredInternshipList(Predicate<Internship> predicate);
+
+    /**
+     * Sets the selected {@code internship} in the model selected internship.
+     * This represents the internship that the user is currently viewing in the detailed internship window.
+     */
+    void setSelectedInternship(Internship internship);
+
+    /**
+     * Gets the model's selected internship, which represents the internship that the user is currently viewing in the
+     * detailed internship window.
+     */
+    ObservableList<Internship> getSelectedInternship();
 }
