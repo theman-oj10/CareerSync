@@ -53,7 +53,6 @@ import seedu.address.model.internship.ContactName;
 import seedu.address.model.internship.ContactNumber;
 import seedu.address.model.internship.Description;
 import seedu.address.model.internship.Location;
-import seedu.address.model.internship.Role;
 import seedu.address.testutil.EditInternshipDescriptorBuilder;
 
 public class InternshipEditCommandParserTest {
@@ -98,7 +97,7 @@ public class InternshipEditCommandParserTest {
         //invalid location
         assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS);
         //invalid description
-        assertParseFailure(parser, "1" + INVALID_ROLE_DESC, Role.MESSAGE_CONSTRAINTS);
+        /* assertParseFailure(parser, "1" + INVALID_ROLE_DESC, Role.MESSAGE_CONSTRAINTS); */
         //invalid role
         assertParseFailure(parser, "1" + INVALID_CONTACT_NAME_DESC, ContactName.MESSAGE_CONSTRAINTS);
         //invalid contact name

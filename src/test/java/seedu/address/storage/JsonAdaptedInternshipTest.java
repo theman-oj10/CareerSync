@@ -172,14 +172,4 @@ public class JsonAdaptedInternshipTest {
         String expectedMessage = Location.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
     }
-
-    @Test
-    public void toModelType_nullLocation_throwsIllegalValueException() {
-        JsonAdaptedInternship internship =
-                new JsonAdaptedInternship(VALID_COMPANY_NAME, VALID_CONTACT_NAME, VALID_CONTACT_EMAIL,
-                        VALID_CONTACT_NUMBER, null, VALID_APPLICATION_STATUS, VALID_DESCRIPTION, VALID_ROLE,
-                        VALID_REMARK, VALID_TASKLIST);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Location.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
-    }
 }

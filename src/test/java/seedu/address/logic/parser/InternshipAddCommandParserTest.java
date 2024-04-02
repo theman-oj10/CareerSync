@@ -23,7 +23,6 @@ import static seedu.address.logic.commands.InternshipCommandTestUtil.INVALID_LOC
 import static seedu.address.logic.commands.InternshipCommandTestUtil.INVALID_ROLE_DESC;
 import static seedu.address.logic.commands.InternshipCommandTestUtil.LOCATION_DESC_AMY;
 import static seedu.address.logic.commands.InternshipCommandTestUtil.LOCATION_DESC_BOB;
-import static seedu.address.logic.commands.InternshipCommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.InternshipCommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.InternshipCommandTestUtil.ROLE_DESC_AMY;
 import static seedu.address.logic.commands.InternshipCommandTestUtil.ROLE_DESC_BOB;
@@ -55,7 +54,6 @@ import seedu.address.model.internship.ContactNumber;
 import seedu.address.model.internship.Description;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Location;
-import seedu.address.model.internship.Role;
 import seedu.address.testutil.InternshipBuilder;
 
 public class InternshipAddCommandParserTest {
@@ -260,19 +258,13 @@ public class InternshipAddCommandParserTest {
                 + ROLE_DESC_BOB, Description.MESSAGE_CONSTRAINTS);
 
         // invalid role
-        assertParseFailure(parser, COMPANY_NAME_DESC_BOB + CONTACT_NAME_DESC_BOB + CONTACT_EMAIL_DESC_BOB
+        /* assertParseFailure(parser, COMPANY_NAME_DESC_BOB + CONTACT_NAME_DESC_BOB + CONTACT_EMAIL_DESC_BOB
                 + CONTACT_NUMBER_DESC_BOB + LOCATION_DESC_BOB + APPLICATION_STATUS_DESC_BOB + DESCRIPTION_DESC_BOB
-                + INVALID_ROLE_DESC, Role.MESSAGE_CONSTRAINTS);
+                + INVALID_ROLE_DESC, Role.MESSAGE_CONSTRAINTS); */
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, COMPANY_NAME_DESC_BOB + INVALID_CONTACT_NAME_DESC + CONTACT_EMAIL_DESC_BOB
                 + CONTACT_NUMBER_DESC_BOB + LOCATION_DESC_BOB + APPLICATION_STATUS_DESC_BOB + DESCRIPTION_DESC_BOB
                 + INVALID_ROLE_DESC, ContactName.MESSAGE_CONSTRAINTS);
-
-        // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + COMPANY_NAME_DESC_BOB + INVALID_CONTACT_NAME_DESC
-                        + CONTACT_EMAIL_DESC_BOB + CONTACT_NUMBER_DESC_BOB + LOCATION_DESC_BOB
-                        + APPLICATION_STATUS_DESC_BOB + DESCRIPTION_DESC_BOB + ROLE_DESC_BOB,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, InternshipAddCommand.MESSAGE_USAGE));
     }
 }

@@ -59,7 +59,7 @@ public class InternshipAddCommandParser implements InternshipParser<InternshipAd
         Description desc = InternshipParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Role role = InternshipParserUtil.parseOptionalRole(argMultimap.getValue(PREFIX_ROLE));
         Remark remark = new Remark(""); // Add Command does not allow adding remarks immediately
-        TaskList taskList = new TaskList(); // Add Command does not allow adding tasks immediately (for now
+        TaskList taskList = new TaskList(); // Add Command does not allow adding tasks immediately (for now)
 
         Internship internship = new Internship(com, poc, email, phon, loc, status, desc, role, remark, taskList);
 

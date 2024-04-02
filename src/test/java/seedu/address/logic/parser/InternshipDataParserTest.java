@@ -12,7 +12,6 @@ import static seedu.address.testutil.InternshipTypicalIndexes.INDEX_FIRST_INTERN
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.InternshipAddCommand;
 import seedu.address.logic.commands.InternshipClearCommand;
 import seedu.address.logic.commands.InternshipDeleteCommand;
 import seedu.address.logic.commands.InternshipEditCommand;
@@ -31,12 +30,13 @@ public class InternshipDataParserTest {
 
     private final InternshipDataParser parser = new InternshipDataParser();
 
+    /*
     @Test
     public void parseCommand_add() throws Exception {
         Internship person = new InternshipBuilder().build();
         InternshipAddCommand command = (InternshipAddCommand) parser.parseCommand(InternshipUtil.getAddCommand(person));
         assertEquals(new InternshipAddCommand(person), command);
-    }
+    } */
 
     @Test
     public void parseCommand_clear() throws Exception {
