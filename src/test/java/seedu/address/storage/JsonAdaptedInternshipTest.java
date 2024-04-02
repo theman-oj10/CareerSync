@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.address.storage.JsonAdaptedInternship.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalInternships.ALICE_MICROSOFT;
@@ -16,6 +17,7 @@ import seedu.address.model.internship.ContactEmail;
 import seedu.address.model.internship.ContactName;
 import seedu.address.model.internship.ContactNumber;
 import seedu.address.model.internship.Description;
+import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Location;
 import seedu.address.model.internship.Task;
 
@@ -171,5 +173,15 @@ public class JsonAdaptedInternshipTest {
                         VALID_ROLE, VALID_REMARK, VALID_TASKLIST);
         String expectedMessage = Location.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullLocation_success() throws Exception {
+        JsonAdaptedInternship internship =
+                new JsonAdaptedInternship(VALID_COMPANY_NAME, VALID_CONTACT_NAME, VALID_CONTACT_EMAIL,
+                        VALID_CONTACT_NUMBER, null, VALID_APPLICATION_STATUS, VALID_DESCRIPTION, VALID_ROLE,
+                        VALID_REMARK, VALID_TASKLIST);
+        Internship modelInternship = internship.toModelType();
+        assertNull(modelInternship.getLocation().orElse(null));
     }
 }
