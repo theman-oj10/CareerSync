@@ -46,7 +46,7 @@ public class InternshipFindCommand extends InternshipCommand {
             + "[" + PREFIX_REMARK + " KEYWORDS]\n"
             + "Example: " + COMMAND_WORD + " withany "
             + PREFIX_COMPANY + " Tiktok Google " + PREFIX_STATUS + " accepted";
-    public static final String NO_SEARCH_KEY_SPECIFIED = "At least one support field prefix and keyword "
+    public static final String NO_SEARCH_KEY_SPECIFIED = "At least one supported field prefix and keyword "
             + "must be specified to be searched.\nSupported prefixes are "
             + Arrays.stream(InternshipFindCommandParser.getSupportedPrefixes())
                     .map(Prefix::toString).collect(Collectors.joining(", "));
