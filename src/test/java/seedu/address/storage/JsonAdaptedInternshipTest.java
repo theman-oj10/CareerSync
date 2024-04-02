@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.address.storage.JsonAdaptedInternship.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalInternships.ALICE_MICROSOFT;
@@ -17,7 +16,6 @@ import seedu.address.model.internship.ContactEmail;
 import seedu.address.model.internship.ContactName;
 import seedu.address.model.internship.ContactNumber;
 import seedu.address.model.internship.Description;
-import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Location;
 import seedu.address.model.internship.Task;
 
