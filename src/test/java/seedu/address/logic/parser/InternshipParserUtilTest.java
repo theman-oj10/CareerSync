@@ -2,14 +2,19 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.internship.Remark;
+
 
 class InternshipParserUtilTest {
 
@@ -29,6 +34,27 @@ class InternshipParserUtilTest {
         // multiple words
         assertEquals(new Remark("This is a remark"), InternshipParserUtil.parseRemark("This is a remark"));
     }
+
+    @Test
+    public void parseOptionalRole_emptyOptional_returnsNull() throws ParseException {
+        assertNull(InternshipParserUtil.parseOptionalRole(Optional.empty()));
+    }
+
+    @Test
+    public void parseOptionalRole_presentOptionalBlank_returnsNull() throws ParseException {
+        assertNull(InternshipParserUtil.parseOptionalRole(Optional.of(" ")));
+    }
+
+    @Test
+    public void parseOptionalLocation_emptyOptional_returnsNull() throws ParseException {
+        assertNull(InternshipParserUtil.parseOptionalLocation(Optional.empty()));
+    }
+
+    @Test
+    public void parseOptionalLocation_presentOptionalBlank_returnsNull() throws ParseException {
+        assertNull(InternshipParserUtil.parseOptionalLocation(Optional.of(" ")));
+    }
+
 
     @Test
     void anyPrefixesPresent_noPrefixesPresent_false() {

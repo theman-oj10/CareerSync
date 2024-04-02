@@ -159,7 +159,7 @@ public class JsonAdaptedInternship {
         final TaskList modelTaskList = new TaskList(taskList);
 
         final Role modelRole;
-        if (role == null) {
+        if (role == null || role.isEmpty()) {
             modelRole = null;
         } else if (!Role.isValidRole(role)) {
             throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
@@ -168,7 +168,7 @@ public class JsonAdaptedInternship {
         }
 
         final Location modelLocation;
-        if (location == null) {
+        if (location == null || location.isEmpty()) {
             modelLocation = null;
         } else if (!Location.isValidLocation(location)) {
             throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);

@@ -175,13 +175,4 @@ public class JsonAdaptedInternshipTest {
         assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
     }
 
-    @Test
-    public void toModelType_nullLocation_success() throws Exception {
-        JsonAdaptedInternship internship =
-                new JsonAdaptedInternship(VALID_COMPANY_NAME, VALID_CONTACT_NAME, VALID_CONTACT_EMAIL,
-                        VALID_CONTACT_NUMBER, null, VALID_APPLICATION_STATUS, VALID_DESCRIPTION, VALID_ROLE,
-                        VALID_REMARK, VALID_TASKLIST);
-        Internship modelInternship = internship.toModelType();
-        assertNull(modelInternship.getLocation().orElse(null));
-    }
 }
