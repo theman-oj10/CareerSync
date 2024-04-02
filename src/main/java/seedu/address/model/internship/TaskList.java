@@ -58,6 +58,13 @@ public class TaskList {
         taskList.add(task);
     }
 
+    /**
+     * Deletes a task from the task list based on the index.
+     */
+    public void deleteTask(int index) {
+        taskList.remove(index);
+    }
+
     public Task getTask(int index) {
         return taskList.get(index);
     }

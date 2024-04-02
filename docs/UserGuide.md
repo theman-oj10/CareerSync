@@ -416,12 +416,12 @@ Edits an existing internship entry in the application.
 
 Adds a remark or modifies the existing one, of an existing internship at the specified `INDEX`.
 
-<span style="color: #f66a0a;">Format:</span> `addremark INDEX /remark REMARK`
+**Format:** `addremark INDEX /remark REMARK`
 
 * The index refers to the index number shown in the displayed internship list. The index **must be a positive integer** 1, 2, 3, …
 * To delete an existing remark, simply input an empty string as the remark like so: <br>`addremark INDEX /remark `.
  
-<span style="color: #f66a0a;">Examples:</span>
+**Examples:**
 *  `addremark 1 /remark This internship has a behavioural interview!` <br> Adds or modifies the remark of the internship at index 1 to be `This internship has a behavioural interview!`.
  
 <div markdown="span" class="alert alert-success">
@@ -511,6 +511,26 @@ This will sort the list of internships by company name in ascending order.
    `At least one field prefix and keyword must be specified to be searched.`
 2. ORDER must be present, and be either `asc` or `desc`. If not, the command will be rejected with error message:<br>
    `Invalid mode specified. Please specify either 'withall' or 'withany'.`
+
+#### Deleting Tasks from an Internship: `deletetask`
+
+Lets you delete a task from an existing internship after it is complete!
+
+**Format:** `deletetask INDEX /selecttask TASK_INDEX`
+
+- `INDEX` and `TASK_INDEX` denote the internship index and task index respectively.
+
+<div markdown="span" class="alert alert-success">
+
+💡 **Try It Out:**<br>
+
+1. Input:<br>
+   `deletetask 1 /selecttask 2`<br>
+   ![Before Deleting Task](./images/deletetask/deletetask-before.png)<br>
+
+2. Successful Output after deleting task:<br>
+   ![After successfully deleting the task](./images/deletetask/deletetask-after.png)<br><br>
+</div>
 
 #### Clearing all internships: `clear`
 

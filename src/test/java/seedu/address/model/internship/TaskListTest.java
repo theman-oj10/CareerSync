@@ -23,6 +23,19 @@ public class TaskListTest {
     }
 
     @Test
+    public void deleteTaskTest() {
+        TaskList taskList = new TaskList();
+        Task task = new Task("Submit Supporting Documents");
+        Task task2 = new Task("Finish Resume");
+        taskList.addTask(task);
+        taskList.addTask(task2);
+        taskList.deleteTask(0);
+        assertEquals(taskList.getTaskListSize(), 1);
+        taskList.deleteTask(0);
+        assertEquals(taskList.getTaskListSize(), 0);
+    }
+
+    @Test
     public void getTaskTest() {
         TaskList taskList = new TaskList();
         taskList.addTask(new Task("Submit Supporting Documents"));
