@@ -4,6 +4,15 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '7.1.2'
     id 'application'
     id 'jacoco'
+    id 'org.openjfx.javafxplugin' version '0.1.0' // JavaFX plugin
+}
+
+javafx {
+    version = '17'
+    modules = ['javafx.controls', 'javafx.fxml']
+    platform = 'win'
+    platform = 'mac'
+    platform = 'linux'
 }
 
 mainClassName = 'seedu.address.Main'
@@ -23,6 +32,7 @@ checkstyle {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+    systemProperty("headless", "true")
 }
 
 task coverage(type: JacocoReport) {
@@ -42,7 +52,7 @@ task coverage(type: JacocoReport) {
 
 dependencies {
     String jUnitVersion = '5.4.0'
-    String javaFxVersion = '17.0.7'
+    String javaFxVersion = '17.0.10'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
@@ -63,6 +73,16 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+    // TestFX dependencies
+    testImplementation 'org.testfx:testfx-junit5:4.0.18'
+    testImplementation 'org.testfx:testfx-core:4.0.18'
+
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.13.2'
+    testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.1'
+
+    testImplementation 'org.testfx:openjfx-monocle:jdk-12.0.1+2' // Adds headless testing mode support. While the jdk
+    // parameter is set to 12.0.1+2, it is compatible with Java 11.
 }
 
 shadowJar {

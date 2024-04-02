@@ -26,6 +26,10 @@ public class InternshipModelManager implements InternshipModel {
     private FilteredList<Internship> filteredInternships;
     private SortedList<Internship> sortedInternships;
 
+    // The internship that is currently selected. Even though it is a list, it should only ever show one internship.
+    // It is set as a FilteredList, so it can work with the existing UI components.
+    private FilteredList<Internship> selectedInternship;
+
     /**
      * Initializes a ModelManager with the given internshipData and userPrefs.
      */
@@ -38,6 +42,7 @@ public class InternshipModelManager implements InternshipModel {
         this.userPrefs = new InternshipUserPrefs(userPrefs);
         filteredInternships = new FilteredList<>(this.internshipData.getInternshipList());
         sortedInternships = new SortedList<>(filteredInternships);
+        selectedInternship = new FilteredList<>(this.internshipData.getInternshipList());
     }
 
     public InternshipModelManager() {
@@ -133,6 +138,16 @@ public class InternshipModelManager implements InternshipModel {
         requireNonNull(comparator);
         sortedInternships.setComparator(comparator);
     }
+    @Override
+    public void setSelectedInternship(Internship internship) {
+        selectedInternship.setPredicate(internship::equals);
+    }
+
+    @Override
+    public ObservableList<Internship> getSelectedInternship() {
+        return selectedInternship;
+    }
+
     @Override
     public void updateFilteredInternshipList(Predicate<Internship> predicate) {
         requireNonNull(predicate);

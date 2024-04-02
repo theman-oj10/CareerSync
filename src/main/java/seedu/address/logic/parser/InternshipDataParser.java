@@ -14,6 +14,7 @@ import seedu.address.logic.commands.InternshipAddTaskCommand;
 import seedu.address.logic.commands.InternshipClearCommand;
 import seedu.address.logic.commands.InternshipCommand;
 import seedu.address.logic.commands.InternshipDeleteCommand;
+import seedu.address.logic.commands.InternshipDeleteTaskCommand;
 import seedu.address.logic.commands.InternshipEditCommand;
 import seedu.address.logic.commands.InternshipExitCommand;
 import seedu.address.logic.commands.InternshipFindCommand;
@@ -93,6 +94,9 @@ public class InternshipDataParser {
 
         case InternshipAddDeadlineCommand.COMMAND_WORD:
             return new InternshipAddDeadlineCommandParser().parse(arguments);
+
+        case InternshipDeleteTaskCommand.COMMAND_WORD:
+            return new InternshipDeleteTaskCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

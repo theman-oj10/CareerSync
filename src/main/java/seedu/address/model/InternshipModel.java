@@ -86,5 +86,20 @@ public interface InternshipModel {
      */
     void updateFilteredInternshipList(Predicate<Internship> predicate);
 
+    /**
+     * Sorts the filtered internship list according to the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
     void sortFilteredInternshipList(Comparator<Internship> comparator);
+    /**
+     * Sets the selected {@code internship} in the model selected internship.
+     * This represents the internship that the user is currently viewing in the detailed internship window.
+     */
+    void setSelectedInternship(Internship internship);
+
+    /**
+     * Gets the model's selected internship, which represents the internship that the user is currently viewing in the
+     * detailed internship window.
+     */
+    ObservableList<Internship> getSelectedInternship();
 }

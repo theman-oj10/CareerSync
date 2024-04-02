@@ -161,7 +161,16 @@ public class InternshipAddCommandTest {
         }
 
         @Override
+<<<<<<< HEAD
         public void sortFilteredInternshipList(Comparator<Internship> comparator) {
+=======
+        public void setSelectedInternship(Internship internship) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Internship> getSelectedInternship() {
+>>>>>>> master
             throw new AssertionError("This method should not be called.");
         }
     }

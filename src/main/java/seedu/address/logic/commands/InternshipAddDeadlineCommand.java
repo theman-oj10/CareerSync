@@ -71,6 +71,9 @@ public class InternshipAddDeadlineCommand extends InternshipCommand {
         }
         internshipToAddDeadline.getTaskList().getTask(taskIndex.getZeroBased()).addDeadline(deadline);
 
+        // This is necessary to trigger the UI to update the displayed deadline
+        model.setInternship(internshipToAddDeadline, internshipToAddDeadline);
+
         model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
 
         return new CommandResult(String.format(MESSAGE_ADD_DEADLINE_SUCCESS,
