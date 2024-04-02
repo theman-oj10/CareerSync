@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.InternshipCommandTestUtil.APPLICATION_STATUS_DESC_AMY;
 import static seedu.address.logic.commands.InternshipCommandTestUtil.COMPANY_NAME_DESC_AMY;
 import static seedu.address.logic.commands.InternshipCommandTestUtil.COMPANY_NAME_DESC_BOB;
@@ -68,7 +69,7 @@ public class InternshipEditCommandParserTest {
         assertParseFailure(parser, VALID_COMPANY_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", InternshipEditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -77,10 +78,10 @@ public class InternshipEditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + COMPANY_NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + COMPANY_NAME_DESC_AMY, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
 
         // zero index
-        assertParseFailure(parser, "0" + COMPANY_NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + COMPANY_NAME_DESC_AMY, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);

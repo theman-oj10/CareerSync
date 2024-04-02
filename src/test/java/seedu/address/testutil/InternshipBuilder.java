@@ -26,7 +26,7 @@ public class InternshipBuilder {
     public static final String DEFAULT_DESCRIPTION = "Develop new microsoft web applications";
     public static final String DEFAULT_ROLE = "Application Engineer";
     public static final String DEFAULT_REMARK = "Has a behavioural interview!";
-    public static final String DEFAULT_TASKLIST = "Submit Documents, Submit Resume";
+    public static final String DEFAULT_TASKLIST = "Submit Documents (11/01/2011); Submit Resume";
 
     private CompanyName companyName;
     private ContactName contactName;

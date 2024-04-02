@@ -32,7 +32,6 @@ public class InternshipAddTaskCommandTest {
     @Test
     public void execute_internshipWithSpecifiedTask_success() {
         Internship internshipWithAddedTask = getTypicalInternships().get(0);
-        internshipWithAddedTask.addTask(DEFAULT_TASK);
         InternshipAddTaskCommand addTaskCommand = new InternshipAddTaskCommand(INDEX_FIRST_INTERNSHIP, DEFAULT_TASK);
 
         String expectedMessage = String.format(InternshipAddTaskCommand.MESSAGE_ADD_TASK_SUCCESS,
