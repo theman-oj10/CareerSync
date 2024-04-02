@@ -485,7 +485,7 @@ Sorts the internships by the specified field in ascending or descending order.
 
 * FIELD is the field to sort by. It is case-sensitive. The list of valid fields can be found [here](#field-summary).
     * `/status` sorts the internships by status in the order of `TO_APPLY` -> `ONGOING` -> `PENDING` -> `ACCEPTED` -> `REJECTED`.
-* ORDER is either 'asc' or 'desc'.
+* ORDER is either `asc` or `desc`.
     * `asc` sorts the internships in ascending order.
     * `desc` sorts the internships in descending order.
 
@@ -495,11 +495,12 @@ Sorts the internships by the specified field in ascending or descending order.
 
 1. Input:<br>
    `sort /com asc`<br>
-   ![Before filtering by all to_apply and remote](./images/find/find-before.png)<br>
-This will sort the list of internships by company name in ascending order.
+   ![Before filtering by all to_apply and remote](./images/sort/sort-before.png)<br>
+This will sort the list of internships by company name in ascending order.<br>
+<br>
 
 2. Successful Output after sorting:<br>
-   ![After successfully filtering by all to_apply and remote](./images/find/findToApplyRemote-after.png)<br><br>
+   ![After successfully filtering by all to_apply and remote](./images/sort/sort-after.png)<br><br>
 
 3. Other examples:<br>
    i.`sort /status desc` returns internships sorted in the following order: `TO_APPLY` -> `ONGOING` -> `PENDING` -> `ACCEPTED` -> `REJECTED`<br>
@@ -507,10 +508,21 @@ This will sort the list of internships by company name in ascending order.
 </div>
 
 **Common errors:** * error messages to be updated
-1. If no field prefixes are specified to sort by, the command will be rejected with error message:<br>
-   `At least one field prefix and keyword must be specified to be searched.`
+1. If an invalid field or no field is specified to sort by, the command will be rejected with error message:<br>
+   `Invalid field specified. Please specify one of the following: `<br>
+   `/com: Company Name `<br>
+   `/poc: Contact Name`<br>
+   `/phone: Contact Number`<br>
+   `/email: Contact Email`<br>
+   `/loc: Location`<br>
+   `/status: Status`<br>
+   `/desc: Description`<br>
+   `/role: Role`<br>
+   `/remark: Remark`<br>
+   `Example: sort /com asc`<br>
+
 2. ORDER must be present, and be either `asc` or `desc`. If not, the command will be rejected with error message:<br>
-   `Invalid mode specified. Please specify either 'withall' or 'withany'.`
+   `Invalid order specified. Please specify either asc to sort in ascending order or desc to sort in descending order. Example: sort /com asc`
 
 #### Deleting Tasks from an Internship: `deletetask`
 
@@ -586,16 +598,17 @@ After every command that changes the data, <span style="color: #f66a0a;">CareerS
 --------------------------------------------------------------------------------------------------------------------
 ### Command Summary
 
-| Action                                         | Description                              | Format                                                                                                                                                                      |
-|------------------------------------------------|------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [add](#adding-an-entry-add)                    | Adds an Internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER /loc LOCATION_ENUM /role ROLE`                         |
-| [delete](#deleting-an-internship-delete)       | Removes a Internship.                    | `delete INDEX`                                                                                                                                                              |
-| [list](#listing-all-internships-list)          | Removes a Internship.                    | `list`                                                                                                                                                                      |
-| [edit](#editing-an-internship-edit)            | Modifies an existing Internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE`   |
-| [addremark](#adding-a-remark-addremark)        | Adds a remark to an existing Internship. | `addremark INDEX [/remark REMARK]`                                                                                                                                          |
-| [clear](#clearing-all-internships-clear)       | Removes all Internships from the deck.   | `clear`                                                                                                                                                                     |
-| [find](#finding-internships-by-keywords-find)  | Finds an Internship by keywords.         | `find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS]` |
-| [exit](#exiting-the-program-exit)              | Exits and closes the application.        | `exit`                                                                                                                                                                      |
+| Action                                        | Description                              | Format                                                                                                                                                                      |
+|-----------------------------------------------|------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [add](#adding-an-entry-add)                   | Adds an Internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER /loc LOCATION_ENUM /role ROLE`                         |
+| [delete](#deleting-an-internship-delete)      | Removes a Internship.                    | `delete INDEX`                                                                                                                                                              |
+| [list](#listing-all-internships-list)         | Removes a Internship.                    | `list`                                                                                                                                                                      |
+| [edit](#editing-an-internship-edit)           | Modifies an existing Internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE`   |
+| [addremark](#adding-a-remark-addremark)       | Adds a remark to an existing Internship. | `addremark INDEX [/remark REMARK]`                                                                                                                                          |
+| [clear](#clearing-all-internships-clear)      | Removes all Internships from the deck.   | `clear`                                                                                                                                                                     |
+| [find](#finding-internships-by-keywords-find) | Finds an Internship by keywords.         | `find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS]` |
+| [sort](#sorting-internships-by-fields-sort)   | Sorts internships by a specific Field    | `sort FIELD ORDER`                                                                                                                                                          |
+| [exit](#exiting-the-program-exit)             | Exits and closes the application.        | `exit`                                                                                                                                                                      |
 
 
 ### Field Summary
