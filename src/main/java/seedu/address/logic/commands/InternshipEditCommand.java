@@ -170,6 +170,8 @@ public class InternshipEditCommand extends InternshipCommand {
         private ApplicationStatus applicationStatus;
         private Remark remark;
 
+        private TaskList taskList;
+
         /**
          * Copy constructor.
          */
@@ -183,6 +185,7 @@ public class InternshipEditCommand extends InternshipCommand {
             setContactNumber(toCopy.contactNumber);
             setApplicationStatus(toCopy.applicationStatus);
             setRemark(toCopy.remark);
+            setTaskList(toCopy.taskList);
         }
 
         public EditInternshipDescriptor() {}
@@ -247,6 +250,12 @@ public class InternshipEditCommand extends InternshipCommand {
         }
         public Optional<Remark> getRemark() {
             return Optional.ofNullable(remark);
+        }
+        public void setTaskList(TaskList taskList) {
+            this.taskList = taskList;
+        }
+        public Optional<TaskList> getTaskList() {
+            return Optional.ofNullable(taskList);
         }
 
         @Override

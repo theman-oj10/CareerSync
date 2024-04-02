@@ -10,6 +10,7 @@ import static seedu.address.testutil.InternshipTypicalIndexes.INDEX_SECOND_INTER
 import static seedu.address.testutil.TypicalInternships.getTypicalInternshipData;
 import static seedu.address.testutil.TypicalInternships.getTypicalInternships;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -20,6 +21,7 @@ import seedu.address.model.InternshipModelManager;
 import seedu.address.model.InternshipUserPrefs;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Task;
+import seedu.address.testutil.InternshipBuilder;
 
 /**
  * Contains integration tests (interaction with the InternshipModel) and unit tests for InternshipAddTaskCommand.
@@ -32,7 +34,6 @@ public class InternshipAddTaskCommandTest {
     @Test
     public void execute_internshipWithSpecifiedTask_success() {
         Internship internshipWithAddedTask = getTypicalInternships().get(0);
-        internshipWithAddedTask.addTask(DEFAULT_TASK);
         InternshipAddTaskCommand addTaskCommand = new InternshipAddTaskCommand(INDEX_FIRST_INTERNSHIP, DEFAULT_TASK);
 
         String expectedMessage = String.format(InternshipAddTaskCommand.MESSAGE_ADD_TASK_SUCCESS,
