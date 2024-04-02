@@ -1,16 +1,18 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX;
+import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.InternshipCommandTestUtil.DEADLINE_DESC_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELECT_TASK;
 import static seedu.address.logic.parser.InternshipCommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.InternshipCommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.InternshipParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.InternshipTypicalIndexes.INDEX_SECOND_INTERNSHIP;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.InternshipMessages;
 import seedu.address.logic.commands.InternshipDeleteTaskCommand;
 
 public class InternshipDeleteTaskCommandParserTest {
@@ -39,7 +41,7 @@ public class InternshipDeleteTaskCommandParserTest {
         assertParseFailure(parser, userInputWithoutPrefixSelectTask, MESSAGE_INVALID_FORMAT);
 
         // no task index specified
-        assertParseFailure(parser, userInputWithoutTaskIndex, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, userInputWithoutTaskIndex, InternshipMessages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
@@ -60,16 +62,16 @@ public class InternshipDeleteTaskCommandParserTest {
                 0);
 
         // negative index
-        assertParseFailure(parser, userInputNegativeInternshipIndex, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, userInputNegativeInternshipIndex, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
 
         // zero index
-        assertParseFailure(parser, userInputZeroInternshipIndex, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, userInputZeroInternshipIndex, MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
 
         // negative index
-        assertParseFailure(parser, userInputNegativeTaskIndex, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, userInputNegativeTaskIndex, MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 
         // zero index
-        assertParseFailure(parser, userInputZeroTaskIndex, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, userInputZeroTaskIndex, MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
