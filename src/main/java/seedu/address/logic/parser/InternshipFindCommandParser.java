@@ -11,9 +11,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.InternshipParserUtil.anyPrefixesPresent;
+import static seedu.address.logic.parser.InternshipParserUtil.prefixesPresentAreNotEmpty;
 
 import java.util.Objects;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.InternshipFindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -72,23 +73,4 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
 
         return predicate;
     }
-
-    /**
-     * Returns true if any of the prefixes contains {@code Optional} values, which are possibly empty, in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean anyPrefixesPresent(ArgumentMultimap argMulMap, Prefix... prefixes) {
-        return Stream.of(prefixes).anyMatch(prefix -> argMulMap.getValue(prefix).isPresent());
-    }
-
-    /**
-     * Returns true if all prefixes present in the {@code ArgumentMultimap} are non-empty.
-     * Vacuously true if no prefixes are present.
-     */
-    private static boolean prefixesPresentAreNotEmpty(ArgumentMultimap argMulMap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix ->
-                argMulMap.getValue(prefix).isEmpty()
-                        || (argMulMap.getValue(prefix).isPresent() && !argMulMap.getValue(prefix).get().isEmpty()));
-    }
-
 }
