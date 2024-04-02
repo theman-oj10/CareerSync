@@ -47,6 +47,8 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
             throw new ParseException(InternshipFindCommand.INVALID_MODE_SPECIFIED);
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(InternshipFindCommandParser.supportedPrefixes);
+
         return new InternshipFindCommand(createPredicate(mode, argMultimap));
     }
 
