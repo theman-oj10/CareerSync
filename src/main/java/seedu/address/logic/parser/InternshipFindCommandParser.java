@@ -53,6 +53,7 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
             throw new ParseException(InternshipFindCommand.NO_KEYWORD_SPECIFIED);
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(InternshipFindCommandParser.supportedPrefixes);
         return new InternshipFindCommand(createPredicate(mode, argMultimap));
     }
 
