@@ -14,8 +14,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
-import java.util.stream.Stream;
+import java.util.Optional;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.InternshipSortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -23,13 +25,46 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new InternshipSortCommand object
  */
 public class InternshipSortCommandParser implements InternshipParser<InternshipSortCommand> {
-    private static final Prefix[] supportedPrefixes = {
-        PREFIX_COMPANY, PREFIX_CONTACT_NAME, PREFIX_LOCATION, PREFIX_STATUS, PREFIX_DESCRIPTION,
-        PREFIX_ROLE, PREFIX_REMARK
+    public static final Prefix[] SUPPORTED_PREFIXES = {
+        PREFIX_COMPANY, PREFIX_CONTACT_NAME, PREFIX_CONTACT_NUMBER, PREFIX_CONTACT_EMAIL,
+        PREFIX_LOCATION, PREFIX_STATUS, PREFIX_DESCRIPTION, PREFIX_ROLE, PREFIX_REMARK
     };
+
+    private static final Logger logger = LogsCenter.getLogger(InternshipSortCommandParser.class);
     /** Enum of fields to sort by */
     public enum FieldEnum {
-        COMPANY, CONTACT_NAME, CONTACT_NUMBER, CONTACT_EMAIL, DESCRIPTION, STATUS, LOCATION, ROLE, REMARK
+        COMPANY(PREFIX_COMPANY.getPrefix()),
+        CONTACT_NAME(PREFIX_CONTACT_NAME.getPrefix()),
+        CONTACT_NUMBER(PREFIX_CONTACT_NUMBER.getPrefix()),
+        CONTACT_EMAIL(PREFIX_CONTACT_EMAIL.getPrefix()),
+        DESCRIPTION(PREFIX_DESCRIPTION.getPrefix()),
+        STATUS(PREFIX_STATUS.getPrefix()),
+        LOCATION(PREFIX_LOCATION.getPrefix()),
+        ROLE(PREFIX_ROLE.getPrefix()),
+        REMARK(PREFIX_REMARK.getPrefix());
+
+        private final String value;
+
+        FieldEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+        /**
+         * Returns the {@code FieldEnum} based on the given prefix string.
+         * @param prefixString prefix string
+         * @return the {@code FieldEnum} based on the given prefix string
+         */
+        public static FieldEnum fromPrefixString(String prefixString) throws ParseException {
+            for (FieldEnum field : FieldEnum.values()) {
+                if (field.getValue().equals(prefixString)) {
+                    return field;
+                }
+            }
+            throw new ParseException(InternshipSortCommand.MESSAGE_NO_FIELD);
+        }
     }
 
     /** Enum of order to sort by */
@@ -50,8 +85,9 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
          * @param order order to sort by
          * @return the {@code OrderEnum} based on the given order
          */
-        public static OrderEnum getOrderEnum(String order) {
+        public static OrderEnum getOrderEnum(String order) throws ParseException {
             requireNonNull(order);
+            isValidOrder(order);
             if (order.equals(ORDER_ASCENDING)) {
                 return ASCENDING;
             } else {
@@ -64,9 +100,13 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
          * @param trimmedOrder order to sort by
          * @return true if the given order is valid
          */
-        public static boolean isValidOrder(String trimmedOrder) {
+        public static boolean isValidOrder(String trimmedOrder) throws ParseException {
             requireNonNull(trimmedOrder);
-            return trimmedOrder.equals(ORDER_ASCENDING) || trimmedOrder.equals(ORDER_DESCENDING);
+            if (trimmedOrder.equals(ORDER_ASCENDING) || trimmedOrder.equals(ORDER_DESCENDING)) {
+                return true;
+            } else {
+                throw new ParseException(InternshipSortCommand.MESSAGE_INVALID_ORDER);
+            }
         }
     }
 
@@ -77,20 +117,21 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
      */
     public InternshipSortCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        logger.info("Parsing internship sort command with args: " + args);
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
+            logger.warning("Internship sort command has no arguments");
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, InternshipSortCommand.MESSAGE_USAGE));
         }
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, supportedPrefixes);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, SUPPORTED_PREFIXES);
+        // is there a way to check which prefix was added into argmultimap?
 
-        if (!anyPrefixesPresent(argMultimap, supportedPrefixes)) {
+        if (!anyPrefixesPresent(argMultimap, SUPPORTED_PREFIXES)) {
+            logger.warning("Internship sort command has no valid prefixes");
             throw new ParseException(InternshipSortCommand.MESSAGE_INVALID_FIELD);
         }
-
-        String order = trimmedArgs.split(" ")[1].trim();
-        OrderEnum parsedOrder = InternshipParserUtil.parseOrder(order);
+        OrderEnum parsedOrder = assignOrder(argMultimap);
         FieldEnum field = assignField(argMultimap);
         return new InternshipSortCommand(field, parsedOrder);
     }
@@ -100,36 +141,44 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
      * @param argMultimap map of prefixes and their search keywords
      * @return the field to sort by
      */
-    protected FieldEnum assignField(ArgumentMultimap argMultimap) {
-        FieldEnum parsedField = FieldEnum.COMPANY; // default sort by company_name
-        if (argMultimap.getValue(PREFIX_COMPANY).isPresent()) {
-            parsedField = FieldEnum.COMPANY;
-        } else if (argMultimap.getValue(PREFIX_CONTACT_NAME).isPresent()) {
-            parsedField = FieldEnum.CONTACT_NAME;
-        } else if (argMultimap.getValue(PREFIX_CONTACT_NUMBER).isPresent()) {
-            parsedField = FieldEnum.CONTACT_NUMBER;
-        } else if (argMultimap.getValue(PREFIX_CONTACT_EMAIL).isPresent()) {
-            parsedField = FieldEnum.CONTACT_EMAIL;
-        } else if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
-            parsedField = FieldEnum.STATUS;
-        } else if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
-            parsedField = FieldEnum.LOCATION;
-        } else if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-            parsedField = FieldEnum.ROLE;
-        } else if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
-            parsedField = FieldEnum.REMARK;
-        } else if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            parsedField = FieldEnum.DESCRIPTION;
+    protected FieldEnum assignField(ArgumentMultimap argMultimap) throws ParseException {
+        for (Prefix prefix : SUPPORTED_PREFIXES) {
+            if (argMultimap.getValue(prefix).isPresent()) {
+                String prefixString = prefix.getPrefix();
+                return FieldEnum.fromPrefixString(prefixString);
+            }
         }
-        return parsedField;
+        logger.warning("Internship sort command has no field entered");
+        throw new ParseException(InternshipSortCommand.MESSAGE_INVALID_FIELD);
+    }
+
+    protected OrderEnum assignOrder(ArgumentMultimap argMultimap) throws ParseException {
+        for (Prefix prefix : SUPPORTED_PREFIXES) {
+            if (argMultimap.getValue(prefix).isPresent()) {
+                String order = argMultimap.getValue(prefix).get();
+                return OrderEnum.getOrderEnum(order);
+            }
+        }
+        logger.warning("Internship sort command has no field entered");
+        throw new ParseException(InternshipSortCommand.MESSAGE_NO_ORDER);
     }
 
     /**
-     * Returns true if any of the prefixes contains non-empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
+     * Returns true if any of the prefixes are present in the {@code ArgumentMultimap}.
+     * @param argumentMultimap map of prefixes and their search keywords
+     * @param prefixes prefixes to check for
+     * @return true if any of the prefixes are present in the {@code ArgumentMultimap}
      */
-    private static boolean anyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent() && !argumentMultimap
-                .getValue(prefix).get().isEmpty());
+    private static boolean anyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes)
+            throws ParseException {
+        for (Prefix prefix : prefixes) {
+            Optional<String> value = argumentMultimap.getValue(prefix);
+            if (value.isPresent()) {
+                if (OrderEnum.isValidOrder(value.get())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

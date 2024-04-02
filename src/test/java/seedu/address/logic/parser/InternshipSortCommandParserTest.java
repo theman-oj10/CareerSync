@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_EMAIL;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -13,27 +15,28 @@ public class InternshipSortCommandParserTest {
 
     @Test
     public void parseValidInput() throws ParseException {
-        // Valid input: "com asc"
         InternshipSortCommand expectedCommand = new InternshipSortCommand(InternshipSortCommandParser.FieldEnum.COMPANY,
                 InternshipSortCommandParser.OrderEnum.ASCENDING);
-        assertEquals(expectedCommand, parser.parse("com asc"));
+        InternshipSortCommand actualCommand = parser.parse(" " + PREFIX_COMPANY.getPrefix() + " asc");
+        assertEquals(expectedCommand, actualCommand);
 
         // Valid input: "email desc"
         expectedCommand = new InternshipSortCommand(InternshipSortCommandParser.FieldEnum.CONTACT_EMAIL,
                 InternshipSortCommandParser.OrderEnum.DESCENDING);
-        assertEquals(expectedCommand, parser.parse("email desc"));
+        actualCommand = parser.parse(" " + PREFIX_CONTACT_EMAIL.getPrefix() + " desc");
+        assertEquals(expectedCommand, actualCommand);
     }
 
     @Test
     public void parseInvalidInput() {
         // Invalid input: missing order
-        assertThrows(ParseException.class, () -> parser.parse("com"));
+        assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_COMPANY.getPrefix()));
 
         // Invalid input: invalid field
         assertThrows(ParseException.class, () -> parser.parse("invalid_field asc"));
 
         // Invalid input: invalid order
-        assertThrows(ParseException.class, () -> parser.parse("com invalid_order"));
+        assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_COMPANY.getPrefix() + " invalid_order"));
     }
 
     @Test
@@ -45,7 +48,7 @@ public class InternshipSortCommandParserTest {
     @Test
     public void parseEmptyOrder() {
         // Invalid input: empty order
-        assertThrows(ParseException.class, () -> parser.parse("com "));
+        assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_COMPANY.getPrefix()));
     }
 
     @Test
@@ -63,7 +66,7 @@ public class InternshipSortCommandParserTest {
     @Test
     public void parseExtraArguments() {
         // Invalid input: extra arguments
-        assertThrows(ParseException.class, () -> parser.parse("com asc extra"));
+        assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_COMPANY.getPrefix() + " asc extra"));
     }
 
 }

@@ -54,6 +54,19 @@ public class InternshipSortCommand extends InternshipCommand {
     public static final String MESSAGE_INVALID_ORDER = "Invalid order specified. Please specify either "
             + ORDER_ASCENDING + " to sort in ascending order or " + ORDER_DESCENDING
             + " to sort in descending order.";
+    public static final String MESSAGE_NO_FIELD = "Please specify one of the following fields to sort by: "
+            + PREFIX_COMPANY + ": Company Name\n"
+            + PREFIX_CONTACT_NAME + ": Contact Name\n"
+            + PREFIX_CONTACT_NUMBER + ": Contact Number\n"
+            + PREFIX_CONTACT_EMAIL + ": Contact Email\n"
+            + PREFIX_LOCATION + ": Location\n"
+            + PREFIX_STATUS + ": Status\n"
+            + PREFIX_DESCRIPTION + ": Description\n"
+            + PREFIX_ROLE + ": Role\n"
+            + PREFIX_REMARK + ": Remark\n";;
+
+    public static final String MESSAGE_NO_ORDER = "Please specify the order to sort by: "
+            + ORDER_ASCENDING + " to sort in ascending order or " + ORDER_DESCENDING + " to sort in descending order.";
     private final InternshipSortCommandParser.FieldEnum field;
     private final InternshipSortCommandParser.OrderEnum order;
 
