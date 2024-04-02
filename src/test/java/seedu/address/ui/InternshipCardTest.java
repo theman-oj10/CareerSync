@@ -39,7 +39,7 @@ class InternshipCardTest extends UiTestBase {
 
         // Test the location label
         assertThat(this.internshipCard.getLocationLabel())
-                .hasText(testInternship.getLocation().toString());
+                .hasText(testInternship.getLocation().get().toString());
 
         // Test the POC label
         assertThat(this.internshipCard.getPocLabel())
