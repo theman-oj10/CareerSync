@@ -25,7 +25,7 @@ public class InternshipAddTaskCommand extends InternshipCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a task to the internship identified "
             + "by the index number used in the displayed internship data.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TASK + " Task\n"
+            + PREFIX_TASK + " TASK\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TASK + " edit resume";
 
