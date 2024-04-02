@@ -614,9 +614,9 @@ This will sort the list of internships by company name in ascending order.<br>
 
 Using this function, you can add a task to an internship so that you won't forget to complete it!
 
-**Format:** `addtask /task Task`
+**Format:** `addtask /task TASK`
 
-- `Task` is the task you want to add to the internship.
+- `TASK` is the task you want to add to the internship.
 
 <div markdown="span" class="alert alert-success">
 
@@ -646,16 +646,16 @@ Refer to the error message displayed for the correct format to use!
 
 Using this function, you can set the deadline to a task under an internship so that you won't miss the deadline!
 
-**Format:** `setdeadline INDEX_INTERNSHIP /selecttask INDEX_TASK /deadline Deadline`
+**Format:** `setdeadline INDEX_INTERNSHIP /selecttask INDEX_TASK /deadline DEADLINE`
 
 - `INDEX_INTERNSHIP` is the index of the internship with the task you want to set the deadline for.
 - `INDEX_TASK` is the index of the task that you want to set the deadline for.
-- `Deadline` is the deadline you want to set for the task. It must be in the format `yyyy-MM-dd`, and a valid date.
+- `DEADLINE` is the deadline you want to set for the task. It must be in the format `DD/MM/YYYY`, and a valid date.
 
 <div markdown="span" class="alert alert-success">
 
 💡 **Try It Out:**<br>
-Before you try this command, you need an internship that has at least 1 task. You can add it by using the `addtask` command. <br>
+Before you try this command, you need an internship that has at least 1 task. You can add it by using the [addtask](#add-a-task-to-an-internship-addtask) command. <br>
 1. Input:<br>
    `setdeadline 1 /selecttask 1 /deadline 24/04/2024`<br>
    ![Before Setting Deadline](./images/setdeadline/setdeadline-before.png)<br>
@@ -665,9 +665,7 @@ Before you try this command, you need an internship that has at least 1 task. Yo
 </div>
 
 <div markdown="span" class="alert alert-info">
-ℹ️ **Tip:** Once you add a deadline to a task, you cannot remove it. You can only update it using this command.<br>
-To have the same task without the deadline, you can add a new task without a deadline using the `addtask` command, then delete the old task. <br>
-You cannot add more than 1 task at a time with 1 command. To add multiple tasks, use multiple commands, one for each task.
+ℹ️ **Tip:** Once you set a deadline to a task, you can't remove it! You can only change the deadline using this command.
 </div>
 
 <div markdown="span" class="alert alert-danger">
