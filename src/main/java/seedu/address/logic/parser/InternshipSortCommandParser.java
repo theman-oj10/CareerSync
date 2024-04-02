@@ -14,12 +14,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.InternshipComparators;
 import seedu.address.logic.commands.InternshipSortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.internship.Internship;
 
 /**
  * Parses input arguments and creates a new InternshipSortCommand object
@@ -125,7 +128,6 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, InternshipSortCommand.MESSAGE_USAGE));
         }
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, SUPPORTED_PREFIXES);
-        // is there a way to check which prefix was added into argmultimap?
 
         if (!anyPrefixesPresent(argMultimap, SUPPORTED_PREFIXES)) {
             logger.warning("Internship sort command has no valid prefixes");
@@ -180,5 +182,31 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
             }
         }
         return false;
+    }
+
+    public static Comparator<Internship> getComparator(InternshipSortCommandParser.FieldEnum field,
+                                                       boolean isAscending) {
+        switch (field) {
+        case COMPANY:
+            return InternshipComparators.byCompanyName(isAscending);
+        case CONTACT_NAME:
+            return InternshipComparators.byContactName(isAscending);
+        case CONTACT_NUMBER:
+            return InternshipComparators.byPhone(isAscending);
+        case CONTACT_EMAIL:
+            return InternshipComparators.byContactEmail(isAscending);
+        case STATUS:
+            return InternshipComparators.byApplicationStatus(isAscending);
+        case LOCATION:
+            return InternshipComparators.byLocation(isAscending);
+        case ROLE:
+            return InternshipComparators.byRole(isAscending);
+        case REMARK:
+            return InternshipComparators.byRemark(isAscending);
+        case DESCRIPTION:
+            return InternshipComparators.byDescription(isAscending);
+        default:
+            throw new IllegalArgumentException("Invalid field for sorting: " + field);
+        }
     }
 }

@@ -90,6 +90,14 @@ public class InternshipComparatorsTest {
     }
 
     @Test
+    public void byLocation_ascComparator_correctOrder() {
+        Comparator<Internship> comparator = InternshipComparators.byLocation(true);
+        Internship internship1 = internshipBuilder.withLocation("remote").build();
+        Internship internship2 = internshipBuilder.withLocation("overseas").build();
+        assertEquals(3, comparator.compare(internship1, internship2));
+    }
+
+    @Test
     public void byRole_ascComparator_correctOrder() {
         Comparator<Internship> comparator = InternshipComparators.byRole(true);
         Internship internship1 = internshipBuilder.withRole("aaa").build();

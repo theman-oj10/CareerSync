@@ -2,12 +2,9 @@ package seedu.address.model.internship;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Comparator;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.InternshipComparators;
-import seedu.address.logic.parser.InternshipSortCommandParser;
 
 /**
  * Represents an Internship in the internship book.
@@ -114,31 +111,6 @@ public class Internship {
                 && location.equals(otherInternship.location)
                 && role.equals(otherInternship.role)
                 && description.equals(otherInternship.description);
-    }
-
-    public static Comparator<Internship> getComparator(InternshipSortCommandParser.FieldEnum field, boolean ascending) {
-        switch (field) {
-        case COMPANY:
-            return InternshipComparators.byCompanyName(ascending);
-        case CONTACT_NAME:
-            return InternshipComparators.byContactName(ascending);
-        case CONTACT_NUMBER:
-            return InternshipComparators.byPhone(ascending);
-        case CONTACT_EMAIL:
-            return InternshipComparators.byContactEmail(ascending);
-        case STATUS:
-            return InternshipComparators.byApplicationStatus(ascending);
-        case LOCATION:
-            return InternshipComparators.byLocation(ascending);
-        case ROLE:
-            return InternshipComparators.byRole(ascending);
-        case REMARK:
-            return InternshipComparators.byRemark(ascending);
-        case DESCRIPTION:
-            return InternshipComparators.byDescription(ascending);
-        default:
-            throw new IllegalArgumentException("Invalid field for sorting: " + field);
-        }
     }
 
     /**

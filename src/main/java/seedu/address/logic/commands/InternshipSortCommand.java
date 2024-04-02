@@ -50,7 +50,8 @@ public class InternshipSortCommand extends InternshipCommand {
             + PREFIX_STATUS + ": Status\n"
             + PREFIX_DESCRIPTION + ": Description\n"
             + PREFIX_ROLE + ": Role\n"
-            + PREFIX_REMARK + ": Remark\n";
+            + PREFIX_REMARK + ": Remark\n"
+            + "Example: " + COMMAND_WORD + " /com " + ORDER_ASCENDING + "\n";
     public static final String MESSAGE_INVALID_ORDER = "Invalid order specified. Please specify either "
             + ORDER_ASCENDING + " to sort in ascending order or " + ORDER_DESCENDING
             + " to sort in descending order.";
@@ -87,9 +88,9 @@ public class InternshipSortCommand extends InternshipCommand {
         Comparator<Internship> comparator;
 
         if (order == InternshipSortCommandParser.OrderEnum.DESCENDING) {
-            comparator = Internship.getComparator(field, false);
+            comparator = InternshipSortCommandParser.getComparator(field, false);
         } else {
-            comparator = Internship.getComparator(field, true);
+            comparator = InternshipSortCommandParser.getComparator(field, true);
         }
         model.sortFilteredInternshipList(comparator);
         return new CommandResult(

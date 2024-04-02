@@ -89,7 +89,7 @@ public class InternshipSortCommandTest {
         InternshipModel expectedModel = new InternshipModelManager();
         Internship internship1 = internshipBuilder.withCompanyName("AAA").build();
         model.addInternship(internship1);
-        Comparator<Internship> comparator = Internship.getComparator(fieldCompany, true);
+        Comparator<Internship> comparator = InternshipSortCommandParser.getComparator(fieldCompany, true);
         model.sortFilteredInternshipList(comparator);
         expectedModel.sortFilteredInternshipList(comparator);
         assertEquals("AAA", model.getFilteredInternshipList().get(0).getCompanyName().toString());
@@ -100,10 +100,22 @@ public class InternshipSortCommandTest {
         InternshipModel expectedModel = new InternshipModelManager();
         Internship internship1 = internshipBuilder.withContactNumber("11111111").build();
         model.addInternship(internship1);
-        Comparator<Internship> comparator = Internship.getComparator(fieldContactNumber, true);
+        Comparator<Internship> comparator = InternshipSortCommandParser.getComparator(fieldContactNumber, true);
         model.sortFilteredInternshipList(comparator);
         expectedModel.sortFilteredInternshipList(comparator);
         assertEquals("11111111", model.getFilteredInternshipList().get(0).getContactNumber().toString());
+    }
+
+    @Test
+    public void execute_sortContactEmail_success() {
+        InternshipModel expectedModel = new InternshipModelManager();
+        Internship internship1 = internshipBuilder.withContactEmail("aaa@gmail.com").build();
+        model.addInternship(internship1);
+        Comparator<Internship> comparator = InternshipSortCommandParser.getComparator(
+                InternshipSortCommandParser.FieldEnum.CONTACT_EMAIL, true);
+        model.sortFilteredInternshipList(comparator);
+        expectedModel.sortFilteredInternshipList(comparator);
+        assertEquals("aaa@gmail.com", model.getFilteredInternshipList().get(0).getContactEmail().toString());
     }
 
     @Test
@@ -111,12 +123,60 @@ public class InternshipSortCommandTest {
         InternshipModel expectedModel = new InternshipModelManager();
         Internship internship1 = internshipBuilder.withApplicationStatus("to_apply").build();
         model.addInternship(internship1);
-        Comparator<Internship> comparator = Internship.getComparator(
+        Comparator<Internship> comparator = InternshipSortCommandParser.getComparator(
                 InternshipSortCommandParser.FieldEnum.STATUS, true);
         model.sortFilteredInternshipList(comparator);
         expectedModel.sortFilteredInternshipList(comparator);
         assertEquals("TO_APPLY", model.getFilteredInternshipList().get(0).getApplicationStatus().toString());
     }
+
+    @Test
+    public void execute_sortLocation_success() {
+        InternshipModel expectedModel = new InternshipModelManager();
+        Internship internship1 = internshipBuilder.withLocation("local").build();
+        model.addInternship(internship1);
+        Comparator<Internship> comparator = InternshipSortCommandParser.getComparator(fieldLocation, true);
+        model.sortFilteredInternshipList(comparator);
+        expectedModel.sortFilteredInternshipList(comparator);
+        assertEquals("LOCAL", model.getFilteredInternshipList().get(0).getLocation().toString());
+    }
+
+    @Test
+    public void execute_sortDescription_success() {
+        InternshipModel expectedModel = new InternshipModelManager();
+        Internship internship1 = internshipBuilder.withDescription("ZZZ").build();
+        model.addInternship(internship1);
+        Comparator<Internship> comparator = InternshipSortCommandParser.getComparator(
+                InternshipSortCommandParser.FieldEnum.DESCRIPTION, false);
+        model.sortFilteredInternshipList(comparator);
+        expectedModel.sortFilteredInternshipList(comparator);
+        assertEquals("ZZZ", model.getFilteredInternshipList().get(0).getDescription().toString());
+    }
+
+    @Test
+    public void execute_sortRemark_success() {
+        InternshipModel expectedModel = new InternshipModelManager();
+        Internship internship1 = internshipBuilder.withRemark("111").build();
+        model.addInternship(internship1);
+        Comparator<Internship> comparator = InternshipSortCommandParser.getComparator(
+                InternshipSortCommandParser.FieldEnum.REMARK, true);
+        model.sortFilteredInternshipList(comparator);
+        expectedModel.sortFilteredInternshipList(comparator);
+        assertEquals("111", model.getFilteredInternshipList().get(0).getRemark().toString());
+    }
+
+    @Test
+    public void execute_sortRole_success() {
+        InternshipModel expectedModel = new InternshipModelManager();
+        Internship internship1 = internshipBuilder.withRole("ZZZ").build();
+        model.addInternship(internship1);
+        Comparator<Internship> comparator = InternshipSortCommandParser.getComparator(
+                InternshipSortCommandParser.FieldEnum.ROLE, false);
+        model.sortFilteredInternshipList(comparator);
+        expectedModel.sortFilteredInternshipList(comparator);
+        assertEquals("ZZZ", model.getFilteredInternshipList().get(0).getRole().toString());
+    }
+
 
     @Test
     public void toString_validFieldAndOrder_success() {
