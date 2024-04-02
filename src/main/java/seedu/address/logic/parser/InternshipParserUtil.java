@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -199,4 +201,32 @@ public class InternshipParserUtil {
         }
         return new Deadline(trimmedDeadline);
     }
+
+
+    /**
+     * Returns true if any of the prefixes contains {@code Optional} values, which are possibly empty, in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean anyPrefixesPresent(ArgumentMultimap argMulMap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argMulMap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if all prefixes present in the {@code ArgumentMultimap} are non-empty.
+     * Vacuously true if no prefixes are present.
+     */
+    public static boolean prefixesPresentAreNotEmpty(ArgumentMultimap argMulMap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix ->
+                argMulMap.getValue(prefix).isEmpty()
+                        || (argMulMap.getValue(prefix).isPresent() && !argMulMap.getValue(prefix).get().isEmpty()));
+    }
+
+    /**
+     * Returns true if all the prefixes contains {@code Optional} values, which could be empty, in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argMulMap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argMulMap.getValue(prefix).isPresent());
+    }
+
 }
