@@ -18,13 +18,15 @@ pageNav: 3
 4. [Commands](#commands)
     - [Command Summary](#command-summary)
     - [Viewing help](#viewing-help-help)
-    - [Adding an internship](#adding-an-entry-add)
+    - [Adding an internship](#adding-an-internship-add)
     - [Deleting an internship](#deleting-an-internship-delete)
     - [Listing all internships](#listing-all-internships-list)
     - [Editing an internship](#editing-an-internship-edit)
     - [Adding a remark](#adding-a-remark-addremark)
     - [Finding internships by keywords](#finding-internships-by-keywords-find)
     - [Sorting internships by fields](#sorting-internships-by-fields-sort)
+    - [Add a Task to an Internship](#add-a-task-to-an-internship-addtask)
+    - [Set Deadline to a Task](#set-deadline-to-a-task-setdeadline)
     - [Deleting Tasks from an Internship](#deleting-tasks-from-an-internship-deletetask)
     - [Clearing all internships](#clearing-all-internships-clear)
     - [Exiting the program](#exiting-the-program-exit)
@@ -76,13 +78,13 @@ you understand the contents of this User Guide.
 
 #### Glossary
 
-| Term      | Meaning                                                                                                                   |
-|-----------|---------------------------------------------------------------------------------------------------------------------------|
-| CLI       | [Command Line Interface](#https://en.wikipedia.org/wiki/Command-line_interface)                                           |
-| GUI       | [Graphical User Interface](#https://en.wikipedia.org/wiki/Graphical_user_interface)                                       |
-| JSON      | [JavaScript Object Notation](#https://www.json.org/json-en.html)                                                          |
-| JAR       | [Java Archive: A file format to store and distribute Java Applications](#https://en.wikipedia.org/wiki/JAR_(file_format)) |
-| File Path | [The location of a file in the computer's file system](#https://www.w3schools.com/html/html_filepaths.asp)                |
+| Term      | Meaning                                                                                                               |
+|-----------|-----------------------------------------------------------------------------------------------------------------------|
+| CLI       | [Command Line Interface](https://en.wikipedia.org/wiki/Command-line_interface)                                        |
+| GUI       | [Graphical User Interface](https://en.wikipedia.org/wiki/Graphical_user_interface)                                    |
+| JSON      | [JavaScript Object Notation](https://www.json.org/json-en.html)                                                       |
+| JAR       | [Java Archive: A file format to store and distribute Java Applications](https://en.wikipedia.org/wiki/JAR_(file_format)) |
+| File Path | [The location of a file in the computer's file system](https://www.w3schools.com/html/html_filepaths.asp)             |
 
 
 #### Legend
@@ -302,17 +304,21 @@ ________________________________________________________________________________
 
 #### Command Summary
 
-| Action                                        | Description                              | Format |
-|-----------------------------------------------|------------------------------------------|------------------------------------------|
-| [add](#adding-an-entry-add)                   | Adds an Internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER /loc LOCATION_ENUM /role ROLE` |
-| [delete](#deleting-an-internship-delete)      | Removes a Internship.                    | `delete INDEX` |
-| [list](#listing-all-internships-list)         | Removes a Internship.                    | `list` |
-| [edit](#editing-an-internship-edit)           | Modifies an existing Internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE` |
-| [addremark](#adding-a-remark-addremark)       | Adds a remark to an existing Internship. | `addremark INDEX [/remark REMARK]` |
-| [clear](#clearing-all-internships-clear)      | Removes all Internships from the deck.   | `clear` |
-| [find](#finding-internships-by-keywords-find) | Finds an Internship by keywords.         |`find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS]`|
-| [sort](#sorting-internships-by-fields-sort)   | Sorts the Internships by fields.         | `sort FIELD ORDER` |
-| [exit](#exiting-the-program-exit)             | Exits and closes the application.        | `exit` |
+| Action                                         | Description                              | Format |
+|------------------------------------------------|------------------------------------------|------------------------------------------|
+| [add](#adding-an-entry-add)                    | Adds an Internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER /loc LOCATION_ENUM /role ROLE` |
+| [delete](#deleting-an-internship-delete)       | Removes a Internship.                    | `delete INDEX` |
+| [list](#listing-all-internships-list)          | Removes a Internship.                    | `list` |
+| [edit](#editing-an-internship-edit)            | Modifies an existing Internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE` |
+| [addremark](#adding-a-remark-addremark)        | Adds a remark to an existing Internship. | `addremark INDEX [/remark REMARK]` |
+| [clear](#clearing-all-internships-clear)       | Removes all Internships from the deck.   | `clear` |
+| [find](#finding-internships-by-keywords-find)  | Finds an Internship by keywords.         |`find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS]`|
+| [sort](#sorting-internships-by-fields-sort)    | Sorts the Internships by fields.         | `sort FIELD ORDER` |
+| [addtask](#add-a-task-to-an-internship-addtask) | Adds a task to an internship.            | `addtask /task Task` |
+| [setdeadline](#set-deadline-to-a-task-setdeadline) | Sets a deadline to a task.            | `setdeadline INDEX_INTERNSHIP /selecttask INDEX_TASK /deadline Deadline` |
+| [deletetask](#deleting-tasks-from-an-internship-deletetask) | Deletes a task from an internship.            | `deletetask INDEX_INTERNSHIP /selecttask INDEX_TASK` |
+| [sort](#sorting-internships-by-fields-sort)    | Sorts the Internships by fields.         | `sort FIELD ORDER` |
+| [exit](#exiting-the-program-exit)              | Exits and closes the application.        | `exit` |
 
 
 <div markdown="block" class="alert alert-info">
@@ -332,7 +338,7 @@ the displayed internship indexes.
   as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-#### Viewing help : `help`
+#### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -604,7 +610,7 @@ This will sort the list of internships by company name in ascending order.<br>
 
 <div style="margin-top: 20px;"></div>
 
-#### Add Tasks to an Internship: `addtask`
+#### Add a Task to an Internship: `addtask`
 
 Using this function, you can add a task to an internship so that you won't forget to complete it!
 
@@ -659,13 +665,14 @@ Before you try this command, you need an internship that has at least 1 task. Yo
 </div>
 
 <div markdown="span" class="alert alert-info">
-ℹ️ **Tip:** You cannot add a task using the `add` command. You must use the `addtask` command to add a task to an internship.
+ℹ️ **Tip:** Once you add a deadline to a task, you cannot remove it. You can only update it using this command.<br>
+To have the same task without the deadline, you can add a new task without a deadline using the `addtask` command, then delete the old task. <br>
+You cannot add more than 1 task at a time with 1 command. To add multiple tasks, use multiple commands, one for each task.
 </div>
 
 <div markdown="span" class="alert alert-danger">
 ⚠️ **Common errors:** <br>
-1. The index must be a positive integer (like 1, 2, 3 …) and one of the displayed internship indexes. If not, the command will be rejected.
-Refer to the error message displayed for the correct format to use!
+1. Don't forget that you need to include both the internship index and the task index!
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
