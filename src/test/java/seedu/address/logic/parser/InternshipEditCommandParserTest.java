@@ -97,8 +97,6 @@ public class InternshipEditCommandParserTest {
         //invalid location
         assertParseFailure(parser, "1" + INVALID_DESCRIPTION_DESC, Description.MESSAGE_CONSTRAINTS);
         //invalid description
-        /* assertParseFailure(parser, "1" + INVALID_ROLE_DESC, Role.MESSAGE_CONSTRAINTS); */
-        //invalid role
         assertParseFailure(parser, "1" + INVALID_CONTACT_NAME_DESC, ContactName.MESSAGE_CONSTRAINTS);
         //invalid contact name
         assertParseFailure(parser, "1" + INVALID_CONTACT_EMAIL_DESC, ContactEmail.MESSAGE_CONSTRAINTS);
