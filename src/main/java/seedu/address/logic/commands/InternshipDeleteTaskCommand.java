@@ -60,7 +60,7 @@ public class InternshipDeleteTaskCommand extends InternshipCommand {
         Task taskToDelete = internshipToDeleteTask.getTaskList().getTask(taskIndex.getZeroBased());
         internshipToDeleteTask.getTaskList().deleteTask(taskIndex.getZeroBased());
 
-        // This is necessary to trigger the UI to update the displayed deadline
+        // This is necessary to trigger the UI to update
         model.setInternship(internshipToDeleteTask, internshipToDeleteTask);
 
         model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
