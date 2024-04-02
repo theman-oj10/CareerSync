@@ -10,7 +10,6 @@ import static seedu.address.testutil.InternshipTypicalIndexes.INDEX_SECOND_INTER
 import static seedu.address.testutil.TypicalInternships.getTypicalInternshipData;
 import static seedu.address.testutil.TypicalInternships.getTypicalInternships;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -21,7 +20,6 @@ import seedu.address.model.InternshipModelManager;
 import seedu.address.model.InternshipUserPrefs;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Task;
-import seedu.address.testutil.InternshipBuilder;
 
 /**
  * Contains integration tests (interaction with the InternshipModel) and unit tests for InternshipAddTaskCommand.
