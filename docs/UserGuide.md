@@ -319,7 +319,8 @@ ________________________________________________________________________________
 
 **Notes about the command format**<br>
 
-* `INDEX` refers to the index of the internship in the list, and is be a positive integer 1, 2, 3 …
+* `INDEX` refers to the index of the internship in the list. It must be a positive integer (like 1, 2, 3 …) and one of 
+the displayed internship indexes.
 
 * Items in square brackets are optional.<br>
   e.g `/com COMPANY_NAME [/poc NAME_OF_CONTACT]` can be used as `/com Alibaba /poc Jack Ma` or as `/com Alibaba`.
@@ -401,7 +402,7 @@ Format: `delete INDEX`
 
 <div markdown="span" class="alert alert-danger">
 ⚠️ **Common errors:** <br>
-1. If a positive integer or an integer not used in the current window/list is entered, the command will be rejected. 
+1. The index must be a positive integer (like 1, 2, 3 …) and one of the displayed internship indexes. If not, the command will be rejected.
 Refer to the error message displayed for the correct format to use!
 </div>
 
@@ -591,6 +592,73 @@ This will sort the list of internships by company name in ascending order.
 
 <div style="margin-top: 20px;"></div>
 
+#### Add Tasks to an Internship: `addtask`
+
+Using this function, you can add a task to an internship so that you won't forget to complete it!
+
+**Format:** `addtask /task Task`
+
+- `Task` is the task you want to add to the internship.
+
+<div markdown="span" class="alert alert-success">
+
+💡 **Try It Out:**<br>
+
+1. Input:<br>
+   `addtask 1 /task Edit Resume`<br>
+   ![Before Adding Task](./images/addtask/addtask-before.png)<br>
+
+2. Successful Output after deleting task:<br>
+   ![After Successfully Adding Task](./images/addtask/addtask-after.png)<br><br>
+</div>
+
+<div markdown="span" class="alert alert-info">
+ℹ️ **Tip:** You cannot add a task using the `add` command. You must use the `addtask` command to add a task to an internship.
+</div>
+
+<div markdown="span" class="alert alert-danger">
+⚠️ **Common errors:** <br>
+1. The index must be a positive integer (like 1, 2, 3 …) and one of the displayed internship indexes. If not, the command will be rejected.
+Refer to the error message displayed for the correct format to use!
+</div>
+
+[Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
+
+#### Set Deadline to a Task: `setdeadline`
+
+Using this function, you can set the deadline to a task under an internship so that you won't miss the deadline!
+
+**Format:** `setdeadline INDEX_INTERNSHIP /selecttask INDEX_TASK /deadline Deadline`
+
+- `INDEX_INTERNSHIP` is the index of the internship with the task you want to set the deadline for.
+- `INDEX_TASK` is the index of the task that you want to set the deadline for.
+- `Deadline` is the deadline you want to set for the task. It must be in the format `yyyy-MM-dd`, and a valid date.
+
+<div markdown="span" class="alert alert-success">
+
+💡 **Try It Out:**<br>
+Before you try this command, you need an internship that has at least 1 task. You can add it by using the `addtask` command. <br>
+1. Input:<br>
+   `setdeadline 1 /selecttask 1 /deadline 24/04/2024`<br>
+   ![Before Setting Deadline](./images/setdeadline/setdeadline-before.png)<br>
+
+2. Successful Output after adding deadline:<br>
+   ![After Setting Deadline](./images/setdeadline/setdeadline-after.png)<br><br>
+</div>
+
+<div markdown="span" class="alert alert-info">
+ℹ️ **Tip:** You cannot add a task using the `add` command. You must use the `addtask` command to add a task to an internship.
+</div>
+
+<div markdown="span" class="alert alert-danger">
+⚠️ **Common errors:** <br>
+1. The index must be a positive integer (like 1, 2, 3 …) and one of the displayed internship indexes. If not, the command will be rejected.
+Refer to the error message displayed for the correct format to use!
+</div>
+
+[Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
+
+
 #### Deleting Tasks from an Internship: `deletetask`
 
 Lets you delete a task from an existing internship after it is complete!
@@ -694,5 +762,8 @@ After every command that changes the data, <span style="color: #f66a0a;">CareerS
 | `/phone`   | Contact Number of Person of Contact | At least 3 numbers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `/loc`     | Location of Internship              | `remote`, `local`, `overseas`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `/role`    | Role for the Internship             | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `/remark`  | Remark for the Internship           | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `/task`    | Task for the Internship             | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `/deadline`| Deadline for the Task               | Valid format: `YYYY-MM-DD`<br>- The date must be a valid date.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
 [Go to Table of Contents](#table-of-contents)
