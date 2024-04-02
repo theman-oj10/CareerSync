@@ -28,9 +28,9 @@ public class EditInternshipDescriptorBuilder {
     public EditInternshipDescriptorBuilder(Internship internship) {
         descriptor = new EditInternshipDescriptor();
         descriptor.setCompanyName(internship.getCompanyName());
-        descriptor.setLocation(internship.getLocation());
+        descriptor.setLocation(internship.getLocation().orElse(null));
         descriptor.setDescription(internship.getDescription());
-        descriptor.setRole(internship.getRole());
+        descriptor.setRole(internship.getRole().orElse(null));
         descriptor.setContactName(internship.getContactName());
         descriptor.setContactEmail(internship.getContactEmail());
         descriptor.setContactNumber(internship.getContactNumber());

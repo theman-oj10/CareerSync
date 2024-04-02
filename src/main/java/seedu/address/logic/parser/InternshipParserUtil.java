@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -53,21 +55,6 @@ public class InternshipParserUtil {
     }
 
     /**
-     * Parses a {@code String location} into a {@code Location}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code location} is invalid.
-     */
-    public static Location parseLocation(String location) throws ParseException {
-        requireNonNull(location);
-        String trimmedLocation = location.trim();
-        if (!Location.isValidLocation(trimmedLocation)) {
-            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
-        }
-        return new Location(trimmedLocation);
-    }
-
-    /**
      * Parses a {@code String description} into a {@code Description}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -81,21 +68,6 @@ public class InternshipParserUtil {
         }
         return new Description(trimmedDescription);
 
-    }
-
-    /**
-     * Parses a {@code String role} into a {@code Role}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code role} is invalid.
-     */
-    public static Role parseRole(String role) throws ParseException {
-        requireNonNull(role);
-        String trimmedRole = role.trim();
-        if (!Role.isValidRole(trimmedRole)) {
-            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
-        }
-        return new Role(trimmedRole);
     }
 
     /**
@@ -159,6 +131,26 @@ public class InternshipParserUtil {
     }
 
     /**
+     * Parses a {@code String role} into a {@code Role}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code role} is invalid.
+     */
+    public static Role parseOptionalRole(Optional<String> role) throws ParseException {
+        if (role.isEmpty()) {
+            return null;
+        }
+        String trimmedRole = role.get().trim();
+        if (trimmedRole.isBlank()) {
+            return null;
+        }
+        if (!Role.isValidRole(trimmedRole)) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+        }
+        return new Role(trimmedRole);
+    }
+
+    /**
      * Parses a {@code String remark} into a {@code Remark}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -198,5 +190,25 @@ public class InternshipParserUtil {
             throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
         }
         return new Deadline(trimmedDeadline);
+    }
+
+    /**
+     * Parses a {@code String location} into a {@code Location}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code location} is invalid.
+     */
+    public static Location parseOptionalLocation(Optional<String> location) throws ParseException {
+        if (location.isEmpty()) {
+            return null;
+        }
+        String trimmedLocation = location.get().trim();
+        if (trimmedLocation.isBlank()) {
+            return null;
+        }
+        if (!Location.isValidLocation(trimmedLocation)) {
+            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
+        }
+        return new Location(trimmedLocation);
     }
 }

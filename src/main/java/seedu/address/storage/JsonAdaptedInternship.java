@@ -73,9 +73,9 @@ public class JsonAdaptedInternship {
         contactEmail = source.getContactEmail().value;
         contactNumber = source.getContactNumber().value;
         applicationStatus = source.getApplicationStatus().toString();
-        location = source.getLocation().toString();
+        location = source.getLocation().isPresent() ? source.getLocation().get().toString() : null;
         description = source.getDescription().description;
-        role = source.getRole().role;
+        role = source.getRole().isPresent() ? source.getRole().get().toString() : null;
         remark = source.getRemark().value;
         taskList = source.getTaskList().getArrayListTaskList();
     }
@@ -131,15 +131,6 @@ public class JsonAdaptedInternship {
         }
         final ApplicationStatus modelApplicationStatus = new ApplicationStatus(applicationStatus);
 
-        if (location == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Location.class.getSimpleName()));
-        }
-        if (!Location.isValidLocation(location)) {
-            throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
-        }
-        final Location modelLocation = new Location(location);
-
         if (description == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Description.class.getSimpleName()));
@@ -167,6 +158,15 @@ public class JsonAdaptedInternship {
                     TaskList.class.getSimpleName()));
         }
         final TaskList modelTaskList = new TaskList(taskList);
+
+        if (location == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Location.class.getSimpleName()));
+        }
+        if (!Location.isValidLocation(location)) {
+            throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
+        }
+        final Location modelLocation = new Location(location);
 
         return new Internship(modelCompanyName, modelContactName, modelContactEmail, modelContactNumber,
                 modelLocation, modelApplicationStatus, modelDescription, modelRole, modelRemark, modelTaskList);

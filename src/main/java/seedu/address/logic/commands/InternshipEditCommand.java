@@ -111,11 +111,11 @@ public class InternshipEditCommand extends InternshipCommand {
         CompanyName updatedCompanyName = editInternshipDescriptor.getCompanyName()
                 .orElse(internshipToEdit.getCompanyName());
         Location updatedLocation = editInternshipDescriptor.getLocation()
-                .orElse(internshipToEdit.getLocation());
+                .orElse(internshipToEdit.getLocation().orElse(null));
         Description updatedDescription = editInternshipDescriptor.getDescription()
                 .orElse(internshipToEdit.getDescription());
         Role updatedRole = editInternshipDescriptor.getRole().orElse(internshipToEdit
-                .getRole());
+                .getRole().orElse(null));
         ContactName updatedContactName = editInternshipDescriptor.getContactName()
                 .orElse(internshipToEdit.getContactName());
         ContactEmail updatedContactEmail = editInternshipDescriptor.getContactEmail()

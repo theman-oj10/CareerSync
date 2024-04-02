@@ -24,7 +24,7 @@ public class DetailedInternshipCardTest extends UiTestBase {
     void getLabels() {
         // Test the company name and role label
         assertThat(this.detailedInternshipCard.companyNameAndRole)
-                .hasText(testInternship.getCompanyName().companyName + " -- " + testInternship.getRole().role);
+                .hasText(testInternship.getCompanyName().companyName + " -- " + testInternship.getRole().get());
 
         // Test the status label
         assertThat(this.detailedInternshipCard.status)

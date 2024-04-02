@@ -35,10 +35,10 @@ public class InternshipUtil {
         sb.append(PREFIX_CONTACT_NAME + " " + internship.getContactName().contactName + " ");
         sb.append(PREFIX_CONTACT_EMAIL + " " + internship.getContactEmail().value + " ");
         sb.append(PREFIX_CONTACT_NUMBER + " " + internship.getContactNumber().value + " ");
-        sb.append(PREFIX_LOCATION + " " + internship.getLocation().toString() + " ");
         sb.append(PREFIX_STATUS + " " + internship.getApplicationStatus().toString() + " ");
         sb.append(PREFIX_DESCRIPTION + " " + internship.getDescription().description + " ");
-        sb.append(PREFIX_ROLE + " " + internship.getRole().role + " ");
+        sb.append(PREFIX_LOCATION + " " + internship.getLocation().toString() + " ");
+        sb.append(PREFIX_ROLE + " " + internship.getRole().get().role + " ");
 
         return sb.toString();
     }

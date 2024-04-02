@@ -57,8 +57,8 @@ public class InternshipRemarkCommand extends InternshipCommand {
         Internship editedInternship = new Internship(
                 internshipToEdit.getCompanyName(), internshipToEdit.getContactName(),
                 internshipToEdit.getContactEmail(), internshipToEdit.getContactNumber(),
-                internshipToEdit.getLocation(), internshipToEdit.getApplicationStatus(),
-                internshipToEdit.getDescription(), internshipToEdit.getRole(),
+                internshipToEdit.getLocation().orElse(null), internshipToEdit.getApplicationStatus(),
+                internshipToEdit.getDescription(), internshipToEdit.getRole().orElse(null),
                 remark, internshipToEdit.getTaskList());
 
         model.setInternship(internshipToEdit, editedInternship);
