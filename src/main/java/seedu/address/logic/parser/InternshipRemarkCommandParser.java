@@ -40,6 +40,8 @@ public class InternshipRemarkCommandParser {
 
         remark = InternshipParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_REMARK);
+
         return new InternshipRemarkCommand(index, remark);
     }
 }
