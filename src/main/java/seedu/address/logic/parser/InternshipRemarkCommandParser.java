@@ -2,10 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.InternshipRemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.internship.Remark;
@@ -20,19 +20,26 @@ public class InternshipRemarkCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public InternshipRemarkCommand parse(String args) throws ParseException {
+        // addremark 1 /remark remark here
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_REMARK);
 
         Index index;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (IllegalValueException ive) {
+        Remark remark;
+
+        if (argMultimap.getPreamble().isEmpty() || argMultimap.getValue(PREFIX_REMARK).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    InternshipRemarkCommand.MESSAGE_USAGE), ive);
+                    InternshipRemarkCommand.MESSAGE_USAGE));
         }
 
-        String remark = argMultimap.getValue(PREFIX_REMARK).orElse("");
+        try {
+            index = InternshipParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX, pe);
+        }
 
-        return new InternshipRemarkCommand(index, new Remark(remark));
+        remark = InternshipParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+
+        return new InternshipRemarkCommand(index, remark);
     }
 }

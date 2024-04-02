@@ -2,11 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX;
 import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELECT_TASK;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.InternshipMessages;
 import seedu.address.logic.commands.InternshipDeleteTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -35,7 +35,7 @@ public class InternshipDeleteTaskCommandParser implements InternshipParser<Inter
         try {
             internshipIndex = InternshipParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(InternshipMessages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX, pe);
+            throw new ParseException(MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX, pe);
         }
 
         try {
