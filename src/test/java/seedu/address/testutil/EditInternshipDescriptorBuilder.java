@@ -22,10 +22,6 @@ public class EditInternshipDescriptorBuilder {
         descriptor = new EditInternshipDescriptor();
     }
 
-    public EditInternshipDescriptorBuilder(EditInternshipDescriptor descriptor) {
-        this.descriptor = new EditInternshipDescriptor(descriptor);
-    }
-
     /**
      * Returns an {@code EditInternshipDescriptor} with fields containing {@code person}'s details
      */
@@ -39,6 +35,8 @@ public class EditInternshipDescriptorBuilder {
         descriptor.setContactEmail(internship.getContactEmail());
         descriptor.setContactNumber(internship.getContactNumber());
         descriptor.setApplicationStatus(internship.getApplicationStatus());
+        descriptor.setRemark(internship.getRemark());
+        descriptor.setTaskList(internship.getTaskList());
     }
 
     /**

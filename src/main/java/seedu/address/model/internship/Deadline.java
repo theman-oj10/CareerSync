@@ -38,7 +38,6 @@ public class Deadline {
     public static boolean isValidDeadline(String test) {
         try {
             LocalDate date = LocalDate.parse(test, formatter);
-            System.out.println(date);
         } catch (DateTimeParseException e) {
             return false;
         }

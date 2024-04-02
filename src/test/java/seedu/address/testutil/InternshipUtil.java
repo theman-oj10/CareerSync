@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
@@ -63,6 +64,8 @@ public class InternshipUtil {
                 description -> sb.append(PREFIX_DESCRIPTION).append(" ").append(description.description).append(" "));
         descriptor.getRole().ifPresent(
                 role -> sb.append(PREFIX_ROLE).append(" ").append(role.role).append(" "));
+        descriptor.getRemark().ifPresent(
+                remark -> sb.append(PREFIX_REMARK).append(" ").append(remark.value).append(" "));
 
         return sb.toString();
     }

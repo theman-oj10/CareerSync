@@ -125,7 +125,7 @@ public class InternshipEditCommand extends InternshipCommand {
                 .orElse(internshipToEdit.getApplicationStatus());
         Remark updatedRemark = editInternshipDescriptor.getRemark().orElse(internshipToEdit.getRemark());
         // edit command cannot be used to edit task list
-        TaskList taskList = internshipToEdit.getTaskList();
+        TaskList taskList = editInternshipDescriptor.getTaskList().orElse(internshipToEdit.getTaskList());
         return new Internship(updatedCompanyName, updatedContactName, updatedContactEmail, updatedContactNumber,
                 updatedLocation, updatedApplicationStatus, updatedDescription, updatedRole, updatedRemark, taskList);
     }
@@ -169,6 +169,7 @@ public class InternshipEditCommand extends InternshipCommand {
         private ContactNumber contactNumber;
         private ApplicationStatus applicationStatus;
         private Remark remark;
+        private TaskList taskList;
 
         /**
          * Copy constructor.
@@ -183,6 +184,7 @@ public class InternshipEditCommand extends InternshipCommand {
             setContactNumber(toCopy.contactNumber);
             setApplicationStatus(toCopy.applicationStatus);
             setRemark(toCopy.remark);
+            setTaskList(toCopy.taskList);
         }
 
         public EditInternshipDescriptor() {}
@@ -248,6 +250,12 @@ public class InternshipEditCommand extends InternshipCommand {
         public Optional<Remark> getRemark() {
             return Optional.ofNullable(remark);
         }
+        public void setTaskList(TaskList taskList) {
+            this.taskList = taskList;
+        }
+        public Optional<TaskList> getTaskList() {
+            return Optional.ofNullable(taskList);
+        }
 
         @Override
         public boolean equals(Object other) {
@@ -284,6 +292,7 @@ public class InternshipEditCommand extends InternshipCommand {
                     .add("Contact Number", contactNumber)
                     .add("Application Status", applicationStatus)
                     .add("Remark", remark)
+                    .add("Task List", taskList)
                     .toString();
         }
     }

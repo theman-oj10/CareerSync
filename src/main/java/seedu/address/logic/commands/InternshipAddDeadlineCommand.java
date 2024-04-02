@@ -32,10 +32,6 @@ public class InternshipAddDeadlineCommand extends InternshipCommand {
             + PREFIX_DEADLINE + " 20/04/2024";
 
     public static final String MESSAGE_ADD_DEADLINE_SUCCESS = "Deadline Added: %1$s";
-
-    public static final String MESSAGE_INVALID_DISPLAYED_TASK_INDEX = "Invalid task index.";
-
-    public static final String MESSAGE_EMPTY_DEADLINE = "Deadline cannot be blank!";
     private final Index internshipIndex;
     private final Index taskIndex;
     private final Deadline deadline;
