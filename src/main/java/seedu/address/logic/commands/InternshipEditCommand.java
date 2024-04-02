@@ -59,7 +59,7 @@ public class InternshipEditCommand extends InternshipCommand {
             + PREFIX_CONTACT_EMAIL + " john@example.com "
             + PREFIX_CONTACT_NUMBER + " 96661666";
 
-    public static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
+    public static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Internship edited! New edited internship: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This entry already exists in the internship data.";
 
