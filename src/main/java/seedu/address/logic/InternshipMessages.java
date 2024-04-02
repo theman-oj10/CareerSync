@@ -41,8 +41,12 @@ public class InternshipMessages {
         final StringBuilder builder = new StringBuilder();
         builder.append("\nCompany Name: ")
                 .append(internship.getCompanyName());
+        builder.append("\nLocation: ")
+                .append(internship.getLocation());
         builder.append("\nDescription: ")
                 .append(internship.getDescription());
+        builder.append("\nRole: ")
+                .append(internship.getRole());
         builder.append("\nContact Name: ")
                 .append(internship.getContactName());
         builder.append("\nContact Email: ")
@@ -55,10 +59,6 @@ public class InternshipMessages {
                 .append(internship.getRemark());
         builder.append("\nTask List: ")
                 .append(internship.getTaskList());
-        internship.getLocation().ifPresent(location ->
-                builder.append("Location: ").append(location));
-        internship.getRole().ifPresent(role ->
-                builder.append("Role: ").append(role));
         return builder.toString();
     }
 

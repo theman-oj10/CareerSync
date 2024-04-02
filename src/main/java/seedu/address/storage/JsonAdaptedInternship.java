@@ -79,8 +79,8 @@ public class JsonAdaptedInternship {
         description = source.getDescription().description;
 
         // Handle optional fields
-        location = source.getLocation().isPresent() ? source.getLocation().get().toString() : null;
-        role = source.getRole().isPresent() ? source.getRole().get().toString() : null;
+        location = source.getLocation().map(Location::toString).orElse(null);
+        role = source.getRole().map(Role::toString).orElse(null);
 
         // Remark field
         remark = source.getRemark().toString();
