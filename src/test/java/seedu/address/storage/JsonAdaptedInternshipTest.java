@@ -27,7 +27,6 @@ public class JsonAdaptedInternshipTest {
     private static final String INVALID_LOCATION = "invalid location";
     private static final String INVALID_APPLICATION_STATUS = "invalid status";
     private static final String INVALID_DESCRIPTION = "";
-    private static final String INVALID_ROLE = "";
 
     private static final String VALID_COMPANY_NAME = ALICE_MICROSOFT.getCompanyName().toString();
     private static final String VALID_CONTACT_NAME = ALICE_MICROSOFT.getContactName().toString();

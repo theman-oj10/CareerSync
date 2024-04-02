@@ -18,7 +18,6 @@ import seedu.address.model.internship.Remark;
 import seedu.address.model.internship.Role;
 import seedu.address.model.internship.Task;
 import seedu.address.model.internship.TaskList;
-
 /**
  * Jackson-friendly version of {@link Internship}.
  */
@@ -38,6 +37,7 @@ public class JsonAdaptedInternship {
 
     private final ArrayList<Task> taskList;
 
+
     /**
      * Constructs a {@code JsonAdaptedInternship} with the given internship details.
      */
@@ -52,6 +52,7 @@ public class JsonAdaptedInternship {
                                  @JsonProperty("role") String role,
                                  @JsonProperty("remark") String remark,
                                  @JsonProperty("taskList") ArrayList<Task> taskList) {
+
         this.companyName = companyName;
         this.contactName = contactName;
         this.contactEmail = contactEmail;
@@ -68,15 +69,21 @@ public class JsonAdaptedInternship {
      * Converts a given {@code Internship} into this class for Jackson use.
      */
     public JsonAdaptedInternship(Internship source) {
+
+        // Mandatory fields
         companyName = source.getCompanyName().companyName;
         contactName = source.getContactName().contactName;
         contactEmail = source.getContactEmail().value;
         contactNumber = source.getContactNumber().value;
         applicationStatus = source.getApplicationStatus().toString();
-        location = source.getLocation().map(Location::toString).orElse(null);
         description = source.getDescription().description;
-        role = source.getRole().map(Role::toString).orElse(null);
-        remark = source.getRemark().value;
+
+        // Handle optional fields
+        location = source.getLocation().isPresent() ? source.getLocation().get().toString() : null;
+        role = source.getRole().isPresent() ? source.getRole().get().toString() : null;
+
+        // Remark field
+        remark = source.getRemark().toString();
         taskList = source.getTaskList().getArrayListTaskList();
     }
 
@@ -140,15 +147,6 @@ public class JsonAdaptedInternship {
         }
         final Description modelDescription = new Description(description);
 
-        final Role modelRole;
-        if (role == null) {
-            modelRole = null;
-        } else if (!Role.isValidRole(role)) {
-            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
-        } else {
-            modelRole = new Role(role);
-        }
-
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
@@ -159,6 +157,15 @@ public class JsonAdaptedInternship {
                     TaskList.class.getSimpleName()));
         }
         final TaskList modelTaskList = new TaskList(taskList);
+
+        final Role modelRole;
+        if (role == null) {
+            modelRole = null;
+        } else if (!Role.isValidRole(role)) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+        } else {
+            modelRole = new Role(role);
+        }
 
         final Location modelLocation;
         if (location == null) {
@@ -172,4 +179,6 @@ public class JsonAdaptedInternship {
         return new Internship(modelCompanyName, modelContactName, modelContactEmail, modelContactNumber,
                 modelLocation, modelApplicationStatus, modelDescription, modelRole, modelRemark, modelTaskList);
     }
+
+
 }
