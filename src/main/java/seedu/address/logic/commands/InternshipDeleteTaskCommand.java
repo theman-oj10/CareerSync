@@ -48,14 +48,13 @@ public class InternshipDeleteTaskCommand extends InternshipCommand {
         requireNonNull(model);
         List<Internship> lastShownList = model.getFilteredInternshipList();
 
-        if (internshipIndex.getOneBased() > lastShownList.size() || internshipIndex.getOneBased() <= 0) {
+        if (internshipIndex.getOneBased() > lastShownList.size()) {
             throw new CommandException(InternshipMessages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
         }
 
         Internship internshipToDeleteTask = lastShownList.get(internshipIndex.getZeroBased());
 
-        if (taskIndex.getOneBased() > internshipToDeleteTask.getTaskList().getTaskListSize()
-                || taskIndex.getOneBased() <= 0) {
+        if (taskIndex.getOneBased() > internshipToDeleteTask.getTaskList().getTaskListSize()) {
             throw new CommandException(InternshipMessages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
         Task taskToDelete = internshipToDeleteTask.getTaskList().getTask(taskIndex.getZeroBased());

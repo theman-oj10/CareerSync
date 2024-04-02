@@ -17,7 +17,7 @@ public class InternshipMessages {
     public static final String MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX = "Index has to be a positive number "
             + "(1,2,3...) and one of the displayed internship indexes.";
     public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "Task index has to be a positive number "
-            + "(1,2,3...) and one of the displayed task indexes.";
+            + "(1,2,3...) and one of the displayed task indexes of the internship.";
     public static final String MESSAGE_INTERNSHIPS_LISTED_OVERVIEW = "%1$d internships listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
