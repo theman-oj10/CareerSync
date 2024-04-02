@@ -40,13 +40,13 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, InternshipFindCommandParser.supportedPrefixes);
 
+        if (!anyPrefixesPresent(argMultimap, InternshipFindCommandParser.supportedPrefixes)) {
+            throw new ParseException(InternshipFindCommand.NO_SEARCH_KEY_SPECIFIED);
+        }
+
         String mode = argMultimap.getPreamble().trim();
         if (!mode.equals(MODE_WITHALL) && !mode.equals(MODE_WITHANY)) {
             throw new ParseException(InternshipFindCommand.INVALID_MODE_SPECIFIED);
-        }
-
-        if (!anyPrefixesPresent(argMultimap, InternshipFindCommandParser.supportedPrefixes)) {
-            throw new ParseException(InternshipFindCommand.NO_SEARCH_KEY_SPECIFIED);
         }
 
         if (!prefixesPresentAreNotEmpty(argMultimap, InternshipFindCommandParser.supportedPrefixes)) {
@@ -72,5 +72,12 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
                 Objects.equals(mode, MODE_WITHALL));
 
         return predicate;
+    }
+
+    /**
+     * @return an array of the supported prefixes
+     */
+    public static Prefix[] getSupportedPrefixes() {
+        return supportedPrefixes.clone();
     }
 }
