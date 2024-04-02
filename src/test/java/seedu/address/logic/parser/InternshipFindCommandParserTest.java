@@ -28,6 +28,12 @@ public class InternshipFindCommandParserTest {
     }
 
     @Test
+    public void parse_prefixPresentButNoKey_throwsParseException() {
+        assertParseFailure(parser, MODE_WITHALL + " /com",
+                InternshipFindCommand.NO_KEYWORD_SPECIFIED);
+    }
+
+    @Test
     public void parse_noMode_throwsParseException() {
         assertParseFailure(parser, " /com Microsoft Google",
                 String.format(InternshipFindCommand.INVALID_MODE_SPECIFIED));
