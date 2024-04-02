@@ -140,13 +140,14 @@ public class JsonAdaptedInternship {
         }
         final Description modelDescription = new Description(description);
 
+        final Role modelRole;
         if (role == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
-        }
-        if (!Role.isValidRole(role)) {
+            modelRole = null;
+        } else if (!Role.isValidRole(role)) {
             throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+        } else {
+            modelRole = new Role(role);
         }
-        final Role modelRole = new Role(role);
 
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
@@ -159,14 +160,14 @@ public class JsonAdaptedInternship {
         }
         final TaskList modelTaskList = new TaskList(taskList);
 
+        final Location modelLocation;
         if (location == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Location.class.getSimpleName()));
-        }
-        if (!Location.isValidLocation(location)) {
+            modelLocation = null;
+        } else if (!Location.isValidLocation(location)) {
             throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
+        } else {
+            modelLocation = new Location(location);
         }
-        final Location modelLocation = new Location(location);
 
         return new Internship(modelCompanyName, modelContactName, modelContactEmail, modelContactNumber,
                 modelLocation, modelApplicationStatus, modelDescription, modelRole, modelRemark, modelTaskList);
