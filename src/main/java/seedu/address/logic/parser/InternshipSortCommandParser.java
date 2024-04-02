@@ -128,7 +128,7 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, InternshipSortCommand.MESSAGE_USAGE));
         }
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, SUPPORTED_PREFIXES);
-
+        argMultimap.verifyNoDuplicatePrefixesFor(SUPPORTED_PREFIXES);
         if (!anyPrefixesPresent(argMultimap, SUPPORTED_PREFIXES)) {
             logger.warning("Internship sort command has no valid prefixes");
             throw new ParseException(InternshipSortCommand.MESSAGE_INVALID_FIELD);

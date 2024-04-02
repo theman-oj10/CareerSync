@@ -54,7 +54,7 @@ public class InternshipSortCommand extends InternshipCommand {
             + "Example: " + COMMAND_WORD + " /com " + ORDER_ASCENDING + "\n";
     public static final String MESSAGE_INVALID_ORDER = "Invalid order specified. Please specify either "
             + ORDER_ASCENDING + " to sort in ascending order or " + ORDER_DESCENDING
-            + " to sort in descending order."
+            + " to sort in descending order.\n"
             + "Example: " + COMMAND_WORD + " /com " + ORDER_ASCENDING + "\n";
     public static final String MESSAGE_NO_FIELD = "Please specify one of the following fields to sort by: "
             + PREFIX_COMPANY + ": Company Name\n"
