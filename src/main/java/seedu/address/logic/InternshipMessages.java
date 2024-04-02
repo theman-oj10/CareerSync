@@ -41,31 +41,31 @@ public class InternshipMessages {
         final StringBuilder builder = new StringBuilder();
         builder.append("\nCompany Name: ")
                 .append(internship.getCompanyName())
-                .append("\n")
-                .append("Description: ")
+                .append("\n");
+        builder.append("\nDescription: ")
                 .append(internship.getDescription())
-                .append("\n")
-                .append("Contact Name: ")
-                .append(internship.getContactName())
-                .append("\n")
-                .append("Contact Email: ")
-                .append(internship.getContactEmail())
-                .append("\n")
-                .append("Contact Number: ")
-                .append(internship.getContactNumber())
-                .append("\n")
-                .append("Application Status: ")
-                .append(internship.getApplicationStatus())
-                .append("\n")
-                .append("Remark: ")
-                .append(internship.getRemark())
-                .append("\n")
-                .append("Tasks:\n")
-                .append(internship.getTaskList());
+                .append("\n");
 
+        builder.append("\nContact Name: ")
+                .append(internship.getContactName())
+                .append("\n");
+        builder.append("\nContact Email: ")
+                .append(internship.getContactEmail())
+                .append("\n");
+        builder.append("\nContact Number: ")
+                .append(internship.getContactNumber())
+                .append("\n");
+        builder.append("\nApplication Status: ")
+                .append(internship.getApplicationStatus())
+                .append("\n");
+        builder.append("\nRemark: ")
+                .append(internship.getRemark())
+                .append("\n");
+        builder.append("\nTask List: ")
+                .append(internship.getTaskList())
+                .append("\n");
         internship.getLocation().ifPresent(location ->
                 builder.append("Location: ").append(location));
-
         internship.getRole().ifPresent(role ->
                 builder.append("Role: ").append(role));
 
