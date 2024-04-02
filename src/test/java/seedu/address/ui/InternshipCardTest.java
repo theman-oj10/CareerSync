@@ -52,6 +52,17 @@ class InternshipCardTest extends UiTestBase {
                 .hasText("Remark: " + testInternship.getRemark().toString());
     }
 
+
+    @Test
+    void getLocationLabel_locationNotSet_labelIsEmpty() {
+        // Create an internship with a null location
+        Internship internshipWithNoLocation = new InternshipBuilder(testInternship).withLocation(null).build();
+        InternshipCard internshipCard = new InternshipCard(internshipWithNoLocation, 1);
+
+        // Check that the location label is an empty string
+        assertThat(internshipCard.getLocationLabel()).hasText("");
+    }
+
     @Test
     void checkStatusColours() {
         // TO_APPLY status -> Style should be font colour cyan
