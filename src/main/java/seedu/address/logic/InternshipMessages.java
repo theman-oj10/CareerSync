@@ -40,35 +40,25 @@ public class InternshipMessages {
     public static String format(Internship internship) {
         final StringBuilder builder = new StringBuilder();
         builder.append("\nCompany Name: ")
-                .append(internship.getCompanyName())
-                .append("\n");
+                .append(internship.getCompanyName());
         builder.append("\nDescription: ")
-                .append(internship.getDescription())
-                .append("\n");
-
+                .append(internship.getDescription());
         builder.append("\nContact Name: ")
-                .append(internship.getContactName())
-                .append("\n");
+                .append(internship.getContactName());
         builder.append("\nContact Email: ")
-                .append(internship.getContactEmail())
-                .append("\n");
+                .append(internship.getContactEmail());
         builder.append("\nContact Number: ")
-                .append(internship.getContactNumber())
-                .append("\n");
+                .append(internship.getContactNumber());
         builder.append("\nApplication Status: ")
-                .append(internship.getApplicationStatus())
-                .append("\n");
+                .append(internship.getApplicationStatus());
         builder.append("\nRemark: ")
-                .append(internship.getRemark())
-                .append("\n");
+                .append(internship.getRemark());
         builder.append("\nTask List: ")
-                .append(internship.getTaskList())
-                .append("\n");
+                .append(internship.getTaskList());
         internship.getLocation().ifPresent(location ->
                 builder.append("Location: ").append(location));
         internship.getRole().ifPresent(role ->
                 builder.append("Role: ").append(role));
-
         return builder.toString();
     }
 

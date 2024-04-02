@@ -43,12 +43,12 @@ public class InternshipAddCommandParser implements InternshipParser<InternshipAd
                         PREFIX_CONTACT_EMAIL, PREFIX_CONTACT_NUMBER, PREFIX_LOCATION, PREFIX_ROLE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_COMPANY, PREFIX_DESCRIPTION, PREFIX_STATUS, PREFIX_CONTACT_NAME,
-                PREFIX_CONTACT_EMAIL, PREFIX_CONTACT_NUMBER)
-                || !argMultimap.getPreamble().isEmpty()) {
+                PREFIX_CONTACT_EMAIL, PREFIX_CONTACT_NUMBER)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, InternshipAddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COMPANY, PREFIX_DESCRIPTION, PREFIX_STATUS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COMPANY, PREFIX_DESCRIPTION, PREFIX_STATUS, PREFIX_CONTACT_NAME,
+                PREFIX_CONTACT_EMAIL, PREFIX_CONTACT_NUMBER, PREFIX_LOCATION, PREFIX_ROLE);
 
         CompanyName com = InternshipParserUtil.parseCompanyName(argMultimap.getValue(PREFIX_COMPANY).get());
         ContactName poc = InternshipParserUtil.parseContactName(argMultimap.getValue(PREFIX_CONTACT_NAME).get());
