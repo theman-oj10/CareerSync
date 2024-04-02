@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
@@ -23,7 +24,7 @@ import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
  */
 public class InternshipFindCommandParser implements InternshipParser<InternshipFindCommand> {
     private static final Prefix[] supportedPrefixes = {PREFIX_COMPANY, PREFIX_CONTACT_NAME, PREFIX_LOCATION,
-        PREFIX_STATUS, PREFIX_DESCRIPTION, PREFIX_ROLE};
+        PREFIX_STATUS, PREFIX_DESCRIPTION, PREFIX_ROLE, PREFIX_REMARK};
     /**
      * Parses the given {@code String} of arguments in the context of the InternshipFindCommand
      * and returns a InternshipFindCommand object for execution.
@@ -62,6 +63,7 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
                 argMultimap.getValue(PREFIX_STATUS).orElse(null),
                 argMultimap.getValue(PREFIX_DESCRIPTION).orElse(null),
                 argMultimap.getValue(PREFIX_ROLE).orElse(null),
+                argMultimap.getValue(PREFIX_REMARK).orElse(null),
                 Objects.equals(mode, MODE_WITHALL));
 
         return predicate;
