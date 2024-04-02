@@ -23,7 +23,7 @@ public class InternshipDeleteTaskCommand extends InternshipCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete a task from the internship identified "
             + "by the index number used in the displayed internship data.\n"
-            + "Parameters: INDEX (must be a positive integer) " + PREFIX_SELECT_TASK + " TASK_INDEX "
+            + "Parameters: INDEX (must be a positive integer) " + PREFIX_SELECT_TASK + " TASK_INDEX\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_SELECT_TASK + " 1";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Task Deleted: %1$s";
@@ -48,13 +48,14 @@ public class InternshipDeleteTaskCommand extends InternshipCommand {
         requireNonNull(model);
         List<Internship> lastShownList = model.getFilteredInternshipList();
 
-        if (internshipIndex.getOneBased() > lastShownList.size()) {
+        if (internshipIndex.getOneBased() > lastShownList.size() || internshipIndex.getOneBased() <= 0) {
             throw new CommandException(InternshipMessages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
         }
 
         Internship internshipToDeleteTask = lastShownList.get(internshipIndex.getZeroBased());
 
-        if (taskIndex.getOneBased() > internshipToDeleteTask.getTaskList().getTaskListSize()) {
+        if (taskIndex.getOneBased() > internshipToDeleteTask.getTaskList().getTaskListSize()
+                || taskIndex.getOneBased() <= 0) {
             throw new CommandException(InternshipMessages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
         Task taskToDelete = internshipToDeleteTask.getTaskList().getTask(taskIndex.getZeroBased());
