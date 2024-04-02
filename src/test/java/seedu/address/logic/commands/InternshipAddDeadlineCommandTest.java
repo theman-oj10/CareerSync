@@ -42,7 +42,7 @@ public class InternshipAddDeadlineCommandTest {
                 INDEX_FIRST_TASK, DEFAULT_DEADLINE);
 
         String expectedMessage = String.format(InternshipAddDeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS,
-                InternshipMessages.format(internshipWithAddedDeadline));
+                DEFAULT_DEADLINE);
 
         InternshipModel expectedModel = new InternshipModelManager(new InternshipData(getTypicalInternshipData()),
                 new InternshipUserPrefs());
