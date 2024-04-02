@@ -1,7 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.InternshipMessages;
@@ -9,9 +18,6 @@ import seedu.address.logic.parser.InternshipFindCommandParser;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.InternshipModel;
 import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * Finds and lists all internships in internship data whose name contains any of the argument keywords.
