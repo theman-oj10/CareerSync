@@ -22,10 +22,6 @@ public class EditInternshipDescriptorBuilder {
         descriptor = new EditInternshipDescriptor();
     }
 
-    public EditInternshipDescriptorBuilder(EditInternshipDescriptor descriptor) {
-        this.descriptor = new EditInternshipDescriptor(descriptor);
-    }
-
     /**
      * Returns an {@code EditInternshipDescriptor} with fields containing {@code person}'s details
      */
