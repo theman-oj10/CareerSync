@@ -55,8 +55,6 @@ public class InternshipAddDeadlineCommandParser implements InternshipParser<Inte
                     Deadline.MESSAGE_CONSTRAINTS), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SELECT_TASK, PREFIX_DEADLINE);
-
         return new InternshipAddDeadlineCommand(internshipIndex, taskIndex, deadline);
     }
 }

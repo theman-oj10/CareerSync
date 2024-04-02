@@ -24,8 +24,8 @@ public class InternshipAddDeadlineCommand extends InternshipCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a deadline to the task of the internship "
             + "identified by the index number used in the displayed internship data. "
-            + "Parameters: INDEX_INTERNSHIP (must be a positive integer)" + PREFIX_SELECT_TASK
-            + " INDEX_TASK (must be a positive integer) "
+            + "Parameters: INDEX_INTERNSHIP (must be a positive integer)\n"
+            + PREFIX_SELECT_TASK + " INDEX_TASK (must be a positive integer)\n"
             + PREFIX_DEADLINE + " DEADLINE\n"
             + Deadline.MESSAGE_CONSTRAINTS + "\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_SELECT_TASK + " 1 "
@@ -73,7 +73,7 @@ public class InternshipAddDeadlineCommand extends InternshipCommand {
         model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
 
         return new CommandResult(String.format(MESSAGE_ADD_DEADLINE_SUCCESS,
-                InternshipMessages.format(internshipToAddDeadline)));
+                deadline));
     }
 
     @Override

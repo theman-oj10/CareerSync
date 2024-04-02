@@ -560,7 +560,7 @@ Sorts the internships by the specified field in ascending or descending order.
 
 * FIELD is the field to sort by. It is case-sensitive. The list of valid fields can be found [here](#field-summary).
     * `/status` sorts the internships by status in the order of `TO_APPLY` -> `ONGOING` -> `PENDING` -> `ACCEPTED` -> `REJECTED`.
-* ORDER is either 'asc' or 'desc'.
+* ORDER is either `asc` or `desc`.
     * `asc` sorts the internships in ascending order.
     * `desc` sorts the internships in descending order.
 
@@ -570,11 +570,12 @@ Sorts the internships by the specified field in ascending or descending order.
 
 1. Input:<br>
    `sort /com asc`<br>
-   ![Before filtering by all to_apply and remote](./images/find/find-before.png)<br>
-This will sort the list of internships by company name in ascending order.
+   ![Before filtering by all to_apply and remote](./images/sort/sort-before.png)<br>
+This will sort the list of internships by company name in ascending order.<br>
+<br>
 
 2. Successful Output after sorting:<br>
-   ![After successfully filtering by all to_apply and remote](./images/find/findToApplyRemote-after.png)<br><br>
+   ![After successfully filtering by all to_apply and remote](./images/sort/sort-after.png)<br><br>
 
 3. Other examples:<br>
    i.`sort /status desc` returns internships sorted in the following order: `TO_APPLY` -> `ONGOING` -> `PENDING` -> `ACCEPTED` -> `REJECTED`<br>
@@ -582,10 +583,21 @@ This will sort the list of internships by company name in ascending order.
 </div>
 
 **Common errors:** * error messages to be updated
-1. If no field prefixes are specified to sort by, the command will be rejected with error message:<br>
-   `At least one field prefix and keyword must be specified to be searched.`
+1. If an invalid field or no field is specified to sort by, the command will be rejected with error message:<br>
+   `Invalid field specified. Please specify one of the following: `<br>
+   `/com: Company Name `<br>
+   `/poc: Contact Name`<br>
+   `/phone: Contact Number`<br>
+   `/email: Contact Email`<br>
+   `/loc: Location`<br>
+   `/status: Status`<br>
+   `/desc: Description`<br>
+   `/role: Role`<br>
+   `/remark: Remark`<br>
+   `Example: sort /com asc`<br>
+
 2. ORDER must be present, and be either `asc` or `desc`. If not, the command will be rejected with error message:<br>
-   `Invalid mode specified. Please specify either 'withall' or 'withany'.`
+   `Invalid order specified. Please specify either asc to sort in ascending order or desc to sort in descending order. Example: sort /com asc`
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
@@ -678,9 +690,6 @@ After every command that changes the data, <span style="color: #f66a0a;">CareerS
 **The solution** is to delete the `preferences.json` file from the folder where you installed the application. Then, run the application again.
 
 [Go to Table of Contents](#table-of-contents)
-
---------------------------------------------------------------------------------------------------------------------
-
 
 ### Field Summary
 

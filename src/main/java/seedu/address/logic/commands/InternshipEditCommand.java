@@ -43,22 +43,23 @@ public class InternshipEditCommand extends InternshipCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the internship identified "
             + "by the index number used in the displayed internship data. "
+            + "At least one field to edit must be provided. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_COMPANY + "COMPANY] "
-            + "[" + PREFIX_CONTACT_NAME + " CONTACT_NAME] "
-            + "[" + PREFIX_CONTACT_EMAIL + " CONTACT_EMAIL] "
-            + "[" + PREFIX_CONTACT_NUMBER + " CONTACT_NUMBER] "
-            + "[" + PREFIX_LOCATION + " LOCATION] "
-            + "[" + PREFIX_STATUS + " STATUS] "
-            + "[" + PREFIX_DESCRIPTION + " DESCRIPTION] "
-            + "[" + PREFIX_ROLE + " ROLE] "
-            + "[" + PREFIX_REMARK + " REMARK] "
+            + "Parameters: INDEX (must be a positive integer) \n"
+            + "[" + PREFIX_COMPANY + " Company Name]\n"
+            + "[" + PREFIX_CONTACT_NAME + " Contact Name]\n"
+            + "[" + PREFIX_CONTACT_EMAIL + " Contact Email]\n"
+            + "[" + PREFIX_CONTACT_NUMBER + " Contact Number]\n"
+            + "[" + PREFIX_LOCATION + " Location]\n"
+            + "[" + PREFIX_STATUS + " Status]\n"
+            + "[" + PREFIX_DESCRIPTION + " Description]\n"
+            + "[" + PREFIX_ROLE + " Role]\n"
+            + "[" + PREFIX_REMARK + " Remark]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_CONTACT_EMAIL + " john@example.com"
-            + PREFIX_CONTACT_NUMBER + "9666 1666";
+            + PREFIX_CONTACT_EMAIL + " john@example.com "
+            + PREFIX_CONTACT_NUMBER + " 96661666";
 
-    public static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
+    public static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Internship edited! New edited internship: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This entry already exists in the internship data.";
 
