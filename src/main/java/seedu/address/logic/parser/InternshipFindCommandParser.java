@@ -38,13 +38,13 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, InternshipFindCommandParser.supportedPrefixes);
 
-        if (!anyPrefixesPresent(argMultimap, InternshipFindCommandParser.supportedPrefixes)) {
-            throw new ParseException(InternshipFindCommand.NO_SEARCH_KEY_SPECIFIED);
-        }
-
         String mode = argMultimap.getPreamble().trim();
         if (!mode.equals(MODE_WITHALL) && !mode.equals(MODE_WITHANY)) {
             throw new ParseException(InternshipFindCommand.INVALID_MODE_SPECIFIED);
+        }
+
+        if (!anyPrefixesPresent(argMultimap, InternshipFindCommandParser.supportedPrefixes)) {
+            throw new ParseException(InternshipFindCommand.NO_SEARCH_KEY_SPECIFIED);
         }
 
         return new InternshipFindCommand(createPredicate(mode, argMultimap));

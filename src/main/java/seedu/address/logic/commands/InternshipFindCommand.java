@@ -23,17 +23,18 @@ public class InternshipFindCommand extends InternshipCommand {
     public static final String MODE_WITHALL = "withall";
     public static final String MODE_WITHANY = "withany";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all internships whose fields, specified using "
-            + "the prefix, contain all/any (depending on mode) of the specified keywords (case-insensitive) "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all internships whose fields match the keywords "
             + "and displays them as a list with index numbers. \n"
-            + "Parameters: MODE ('withall' or 'withany', to specify if all keywords "
-            + "must be present or just any keyword must be present)\n"
-            + "[" + PREFIX_COMPANY + " COMPANY_NAME_KEYWORD [MORE_COMPANY_NAME_KEYWORDS]\n"
-            + "[" + PREFIX_CONTACT_NAME + " CONTACT_NAME_KEYWORD [MORE_CONTACT_NAME_KEYWORDS]\n"
-            + "[" + PREFIX_LOCATION + " LOCATION_KEYWORD [MORE_LOCATION_KEYWORDS]\n"
-            + "[" + PREFIX_STATUS + " STATUS_KEYWORD [MORE_STATUS_KEYWORDS]\n"
-            + "[" + PREFIX_DESCRIPTION + " DESCRIPTION_KEYWORD [MORE_DESCRIPTION_KEYWORDS]\n"
-            + "[" + PREFIX_ROLE + " ROLE_KEYWORD [MORE_ROLE_KEYWORDS]\n"
+            + "Parameters:\n"
+            + "MODE: 'withall' or 'withany'. To specify if the search has to match every "
+            + "prefix-keywords predicate or any prefix-keywords predicate.\n"
+            + "KEYWORDS: keywords separated by whitespace that will be matched against the preceding prefix.\n"
+            + "[" + PREFIX_COMPANY + " KEYWORDS]\n"
+            + "[" + PREFIX_CONTACT_NAME + " KEYWORDS]\n"
+            + "[" + PREFIX_LOCATION + " KEYWORDS]\n"
+            + "[" + PREFIX_STATUS + " KEYWORDS]\n"
+            + "[" + PREFIX_DESCRIPTION + " KEYWORDS]\n"
+            + "[" + PREFIX_ROLE + " KEYWORDS]\n"
             + "Example: " + COMMAND_WORD + " withany "
             + PREFIX_COMPANY + " Tiktok Google " + PREFIX_STATUS + " accepted";
     public static final String NO_SEARCH_KEY_SPECIFIED = "At least one field prefix and keyword "
