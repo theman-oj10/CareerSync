@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_NAME;
@@ -13,9 +14,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.InternshipAddCommand;
 import seedu.address.logic.commands.InternshipEditCommand;
 import seedu.address.logic.commands.InternshipEditCommand.EditInternshipDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+
+import java.util.stream.Stream;
 
 /**
  * Parses input arguments and creates a new InternshipEditCommand object
@@ -36,11 +40,16 @@ public class InternshipEditCommandParser implements InternshipParser<InternshipE
 
         Index index;
 
+        if (!areAnyPrefixesPresent(argMultimap, PREFIX_COMPANY, PREFIX_DESCRIPTION, PREFIX_STATUS, PREFIX_CONTACT_NAME,
+                PREFIX_CONTACT_EMAIL, PREFIX_CONTACT_NUMBER, PREFIX_LOCATION, PREFIX_ROLE, PREFIX_REMARK)
+                || argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, InternshipEditCommand.MESSAGE_USAGE));
+        }
+
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, InternshipEditCommand.MESSAGE_USAGE),
-                    pe);
+            throw new ParseException(MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COMPANY, PREFIX_CONTACT_NAME, PREFIX_CONTACT_EMAIL,
@@ -92,4 +101,7 @@ public class InternshipEditCommandParser implements InternshipParser<InternshipE
         return new InternshipEditCommand(index, editInternshipDescriptor);
     }
 
+    private static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
 }
