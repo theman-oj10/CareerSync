@@ -517,7 +517,7 @@ Adds a remark or modifies the existing one, of an existing internship at the spe
 
 You can use this to filter the visible internships in CareerSync by keywords.
 
-**Format:** `find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS]`
+**Format:** `find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS] [/remark REMARK_KEYWORDS]`
 
 * MODE is either 'withall' or 'withany'.
   * 'withall' returns internships that match each prefix-keyword predicate.
@@ -529,7 +529,6 @@ You can use this to filter the visible internships in CareerSync by keywords.
 * Internship matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hewlett Song` will return `Hewlett Packard`, `Song Fa`
 
-** screenshots to be updated
 <div markdown="span" class="alert alert-success">
 
 💡 **Try It Out:**<br>
@@ -560,9 +559,6 @@ This will filter the list of internships to show you only those with both status
 2. Make sure you specify the MODE of search, either `withall` or `withany`. If not, the command will be rejected with error message:<br>
 `Invalid mode specified. Please specify either 'withall' or 'withany'.`<br>
 </div>
-
-**Common errors:**
-
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
