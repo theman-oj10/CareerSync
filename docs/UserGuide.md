@@ -744,9 +744,8 @@ Users are **NOT** recommended to modify their data file directly, since wrong fo
 Only do so if you are an experienced user! <br>
 </div>
 
-
-<span style="color: #f66a0a;">CareerSync</span> data is saved in the hard disk, as a [JSON](#glossary) file at the path `[JAR file location]/data/internship.json`.
-After every command that changes the data, <span style="color: #f66a0a;">CareerSync</span> performs a save automatically. There is no need to save manually.
+<span style="color: #f66a0a;">CareerSync</span> data is saved in the hard disk, as a [JSON](#glossary) file at the path 
+`[JAR file location]/data/internship.json`. After every command that changes the data, <span style="color: #f66a0a;">CareerSync</span> performs a save automatically. There is no need to save manually.
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
