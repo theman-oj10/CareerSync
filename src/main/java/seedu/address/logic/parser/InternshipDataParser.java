@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.InternshipAddCommand;
-import seedu.address.logic.commands.InternshipSetDeadlineCommand;
 import seedu.address.logic.commands.InternshipAddTaskCommand;
 import seedu.address.logic.commands.InternshipClearCommand;
 import seedu.address.logic.commands.InternshipCommand;
@@ -21,6 +20,7 @@ import seedu.address.logic.commands.InternshipFindCommand;
 import seedu.address.logic.commands.InternshipHelpCommand;
 import seedu.address.logic.commands.InternshipListCommand;
 import seedu.address.logic.commands.InternshipRemarkCommand;
+import seedu.address.logic.commands.InternshipSetDeadlineCommand;
 import seedu.address.logic.commands.InternshipSortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
