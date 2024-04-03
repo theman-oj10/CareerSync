@@ -123,11 +123,18 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
         requireNonNull(args);
         logger.info("Parsing internship sort command with args: " + args);
         String trimmedArgs = args.trim();
+        String[] splitArgs = trimmedArgs.split(" ");
         if (trimmedArgs.isEmpty()) {
             logger.warning("Internship sort command has no arguments");
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, InternshipSortCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, InternshipSortCommand.MESSAGE_INVALID_FIELD));
         }
+        if (splitArgs.length != 2) {
+            logger.warning("Internship sort command has invalid number of arguments");
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_EXTRA_ARGUMENTS));
+        }
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, SUPPORTED_PREFIXES);
         argMultimap.verifyNoDuplicatePrefixesFor(SUPPORTED_PREFIXES);
 
