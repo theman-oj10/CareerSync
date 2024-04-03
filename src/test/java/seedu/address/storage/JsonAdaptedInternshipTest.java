@@ -17,6 +17,7 @@ import seedu.address.model.internship.ContactName;
 import seedu.address.model.internship.ContactNumber;
 import seedu.address.model.internship.Description;
 import seedu.address.model.internship.Location;
+import seedu.address.model.internship.Role;
 import seedu.address.model.internship.Task;
 
 public class JsonAdaptedInternshipTest {
@@ -170,6 +171,26 @@ public class JsonAdaptedInternshipTest {
                         VALID_CONTACT_NUMBER, INVALID_LOCATION, VALID_APPLICATION_STATUS, VALID_DESCRIPTION,
                         VALID_ROLE, VALID_REMARK, VALID_TASKLIST);
         String expectedMessage = Location.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullLocation_throwsIllegalValueException() {
+        JsonAdaptedInternship internship =
+                new JsonAdaptedInternship(VALID_COMPANY_NAME, VALID_CONTACT_NAME, VALID_CONTACT_EMAIL,
+                        VALID_CONTACT_NUMBER, null, VALID_APPLICATION_STATUS, VALID_DESCRIPTION,
+                        VALID_ROLE, VALID_REMARK, VALID_TASKLIST);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Location.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullRole_throwsIllegalValueException() {
+        JsonAdaptedInternship internship =
+                new JsonAdaptedInternship(VALID_COMPANY_NAME, VALID_CONTACT_NAME, VALID_CONTACT_EMAIL,
+                        VALID_CONTACT_NUMBER, VALID_LOCATION, VALID_APPLICATION_STATUS, VALID_DESCRIPTION,
+                        null, VALID_REMARK, VALID_TASKLIST);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, internship::toModelType);
     }
 
