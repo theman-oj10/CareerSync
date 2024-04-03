@@ -360,7 +360,7 @@ Let's you add an internship entry to be tracked by CareerSync!
 * The field `LOCATION_ENUM` accepts only the following inputs: `remote`, `local`, `overseas` (case-insensitive)
 
 <div markdown="span" class="alert alert-info">
-ℹ️ **Tip:** If you haven't already, head over to the [Tutorial](#tutorial) section to learn how to add an internship entry !
+ℹ️ **Tip:** If you haven't already, head over to the [Tutorial](#add-an-internship-entry-add) section to learn how to add an internship entry !
 </div>
 
 
@@ -387,7 +387,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-info">
-ℹ️ **Tip:** If you haven't already, head over to the [Tutorial](#tutorial) section to learn how to delete an internship entry !
+ℹ️ **Tip:** If you haven't already, head over to the [Tutorial](#delete-an-internship-entry-delete) section to learn how to delete an internship entry !
 </div>
 
 <div markdown="span" class="alert alert-danger">
