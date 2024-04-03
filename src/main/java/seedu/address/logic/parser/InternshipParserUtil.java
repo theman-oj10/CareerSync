@@ -219,11 +219,11 @@ public class InternshipParserUtil {
      */
     public static Location parseOptionalLocation(Optional<String> location) throws ParseException {
         if (location.isEmpty()) {
-            return null;
+            return new Location("UNKNOWN");
         }
         String trimmedLocation = location.get().trim();
         if (trimmedLocation.isBlank()) {
-            return null;
+            return new Location("UNKNOWN");
         }
         if (!Location.isValidLocation(trimmedLocation)) {
             throw new ParseException(Location.MESSAGE_CONSTRAINTS);

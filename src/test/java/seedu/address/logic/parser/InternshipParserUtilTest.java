@@ -13,6 +13,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.internship.Location;
 import seedu.address.model.internship.Remark;
 
 
@@ -46,15 +47,14 @@ class InternshipParserUtilTest {
     }
 
     @Test
-    public void parseOptionalLocation_emptyOptional_returnsNull() throws ParseException {
-        assertNull(InternshipParserUtil.parseOptionalLocation(Optional.empty()));
+    public void parseOptionalLocation_emptyOptional_returnsUnknown() throws ParseException {
+        assertEquals(new Location("UNKNOWN"), InternshipParserUtil.parseOptionalLocation(Optional.empty()));
     }
 
     @Test
     public void parseOptionalLocation_presentOptionalBlank_returnsNull() throws ParseException {
-        assertNull(InternshipParserUtil.parseOptionalLocation(Optional.of(" ")));
+        assertEquals(new Location("UNKNOWN"), InternshipParserUtil.parseOptionalLocation(Optional.empty()));
     }
-
 
     @Test
     void anyPrefixesPresent_noPrefixesPresent_false() {
