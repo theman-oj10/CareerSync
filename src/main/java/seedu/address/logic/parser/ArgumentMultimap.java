@@ -75,4 +75,19 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public void verifyNoExtraArguments(int validArgs) throws IllegalArgumentException {
+        int count = 0;
+        for (List<String> values : argMultimap.values()) {
+            count += values.size();
+        }
+        if (count > validArgs) {
+            throw new IllegalArgumentException("Extra arguments provided. Only "
+                    + validArgs + " arguments are allowed.");
+        }
+    }
 }

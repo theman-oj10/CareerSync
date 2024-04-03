@@ -21,6 +21,7 @@ import seedu.address.logic.commands.InternshipFindCommand;
 import seedu.address.logic.commands.InternshipHelpCommand;
 import seedu.address.logic.commands.InternshipListCommand;
 import seedu.address.logic.commands.InternshipRemarkCommand;
+import seedu.address.logic.commands.InternshipSortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -84,6 +85,9 @@ public class InternshipDataParser {
 
         case InternshipRemarkCommand.COMMAND_WORD:
             return new InternshipRemarkCommandParser().parse(arguments);
+
+        case InternshipSortCommand.COMMAND_WORD:
+            return new InternshipSortCommandParser().parse(arguments);
 
         case InternshipAddTaskCommand.COMMAND_WORD:
             return new InternshipAddTaskCommandParser().parse(arguments);
