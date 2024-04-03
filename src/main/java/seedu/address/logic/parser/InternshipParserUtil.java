@@ -140,16 +140,15 @@ public class InternshipParserUtil {
      */
     public static Role parseOptionalRole(Optional<String> role) throws ParseException {
         if (role.isEmpty()) {
-            return null;
+            return new Role("Unknown Role");
+        } else {
+            requireNonNull(role);
+            String trimmedRole = role.get().trim();
+            if (!Role.isValidRole(trimmedRole)) {
+                throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+            }
+            return new Role(trimmedRole);
         }
-        String trimmedRole = role.get().trim();
-        if (trimmedRole.isBlank()) {
-            return null;
-        }
-        if (!Role.isValidRole(trimmedRole)) {
-            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
-        }
-        return new Role(trimmedRole);
     }
 
     /**
@@ -220,15 +219,14 @@ public class InternshipParserUtil {
     public static Location parseOptionalLocation(Optional<String> location) throws ParseException {
         if (location.isEmpty()) {
             return new Location("UNKNOWN");
+        } else {
+            requireNonNull(location);
+            String trimmedLocation = location.get().trim();
+            if (!Location.isValidLocation(trimmedLocation)) {
+                throw new ParseException(Location.MESSAGE_CONSTRAINTS);
+            }
+            return new Location(trimmedLocation);
         }
-        String trimmedLocation = location.get().trim();
-        if (trimmedLocation.isBlank()) {
-            return new Location("UNKNOWN");
-        }
-        if (!Location.isValidLocation(trimmedLocation)) {
-            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
-        }
-        return new Location(trimmedLocation);
     }
 
     /**

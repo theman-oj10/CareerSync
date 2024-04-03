@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
@@ -15,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.internship.Location;
 import seedu.address.model.internship.Remark;
+import seedu.address.model.internship.Role;
 
 
 class InternshipParserUtilTest {
@@ -37,13 +37,13 @@ class InternshipParserUtilTest {
     }
 
     @Test
-    public void parseOptionalRole_emptyOptional_returnsNull() throws ParseException {
-        assertNull(InternshipParserUtil.parseOptionalRole(Optional.empty()));
+    public void parseOptionalRole_emptyOptional_returnsUnknown() throws ParseException {
+        assertEquals(new Role("Unknown Role"), InternshipParserUtil.parseOptionalRole(Optional.empty()));
     }
 
     @Test
-    public void parseOptionalRole_presentOptionalBlank_returnsNull() throws ParseException {
-        assertNull(InternshipParserUtil.parseOptionalRole(Optional.of(" ")));
+    public void parseOptionalRole_presentOptionalBlank_returnsUnknown() throws ParseException {
+        assertEquals(new Role("Unknown Role"), InternshipParserUtil.parseOptionalRole(Optional.empty()));
     }
 
     @Test
@@ -52,7 +52,7 @@ class InternshipParserUtilTest {
     }
 
     @Test
-    public void parseOptionalLocation_presentOptionalBlank_returnsNull() throws ParseException {
+    public void parseOptionalLocation_presentOptionalBlank_returnsUnknown() throws ParseException {
         assertEquals(new Location("UNKNOWN"), InternshipParserUtil.parseOptionalLocation(Optional.empty()));
     }
 

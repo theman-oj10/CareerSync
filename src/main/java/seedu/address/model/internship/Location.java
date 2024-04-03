@@ -29,9 +29,13 @@ public class Location {
      * @param location A valid location.
      */
     public Location(String location) {
-        requireNonNull(location);
-        checkArgument(isValidLocation(location), MESSAGE_CONSTRAINTS);
-        this.location = Location.LocationEnum.valueOf(location.toUpperCase());
+        if (location.isEmpty()) {
+            this.location = Location.LocationEnum.UNKNOWN;
+        } else {
+            requireNonNull(location);
+            checkArgument(isValidLocation(location), MESSAGE_CONSTRAINTS);
+            this.location = Location.LocationEnum.valueOf(location.toUpperCase());
+        }
     }
 
     /**

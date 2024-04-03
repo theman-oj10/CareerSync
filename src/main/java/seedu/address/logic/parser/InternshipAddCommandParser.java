@@ -42,7 +42,7 @@ public class InternshipAddCommandParser implements InternshipParser<InternshipAd
                         PREFIX_CONTACT_EMAIL, PREFIX_CONTACT_NUMBER, PREFIX_LOCATION, PREFIX_ROLE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_COMPANY, PREFIX_DESCRIPTION, PREFIX_STATUS, PREFIX_CONTACT_NAME,
-                PREFIX_CONTACT_EMAIL, PREFIX_CONTACT_NUMBER)) {
+                PREFIX_CONTACT_EMAIL, PREFIX_CONTACT_NUMBER) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, InternshipAddCommand.MESSAGE_USAGE));
         }
 

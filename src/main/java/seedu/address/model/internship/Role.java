@@ -7,6 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represent's an internship's role in the internship book
  */
 public class Role {
+
     public static final String MESSAGE_CONSTRAINTS =
             "Roles should not be blank!";
 
@@ -23,9 +24,13 @@ public class Role {
      * @param role A valid role.
      */
     public Role(String role) {
-        requireNonNull(role);
-        checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
-        this.role = role;
+        if (role.isEmpty()) {
+            this.role = "Unknown Role";
+        } else {
+            requireNonNull(role);
+            checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
+            this.role = role;
+        }
     }
 
     /**
