@@ -24,13 +24,9 @@ public class Role {
      * @param role A valid role.
      */
     public Role(String role) {
-        if (role.isEmpty()) {
-            this.role = "Unknown Role";
-        } else {
-            requireNonNull(role);
-            checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
-            this.role = role;
-        }
+        requireNonNull(role);
+        checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
+        this.role = role;
     }
 
     /**

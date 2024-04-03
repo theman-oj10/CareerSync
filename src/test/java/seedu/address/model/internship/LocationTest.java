@@ -1,6 +1,5 @@
 package seedu.address.model.internship;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -11,13 +10,6 @@ public class LocationTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Location(null));
-    }
-
-    @Test
-    public void constructor_emptyLocation_createsUnknownLocation() {
-        // Test with empty string
-        Location unknown = new Location("");
-        assertEquals(unknown.getLocation(), Location.LocationEnum.UNKNOWN);
     }
 
     @Test
