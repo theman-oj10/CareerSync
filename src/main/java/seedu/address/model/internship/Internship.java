@@ -109,6 +109,7 @@ public class Internship {
         return otherInternship != null
                 && companyName.equals(otherInternship.companyName)
                 && role.equals(otherInternship.role)
+                && location.equals(otherInternship.location)
                 && description.equals(otherInternship.description);
     }
 
