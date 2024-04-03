@@ -8,6 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -16,6 +17,7 @@ import seedu.address.logic.InternshipLogic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.internship.Internship;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private InternshipListPanel internshipListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private DetailedInternshipWindow detailedInternshipWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +69,40 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        detailedInternshipWindow = new DetailedInternshipWindow(primaryStage, logic);
+
+        internshipListPanelPlaceholder.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> handleMouseClick());
+
+    }
+
+    /**
+     * Handles the event when the user clicks on an internship in the list. Sets the selected internship in the logic
+     * and shows the detailed internship window. If the user clicks on an empty space, nothing happens.
+     */
+    @FXML
+    public void handleMouseClick() {
+        Internship selectedInternship = internshipListPanel.handleMouseClick();
+        if (selectedInternship == null) { // no internship selected, clicked on empty space
+            return;
+        }
+        logic.setSelectedInternship(selectedInternship);
+        showSelectedInternshipDetails();
+        logger.info("User clicked on internship: " + selectedInternship);
+    }
+    /**
+     * Opens the detailed internship window or focuses on it if it's already opened.
+     */
+    @FXML
+    private void showSelectedInternshipDetails() {
+        detailedInternshipWindow.populateInternshipDetails();
+        if (!detailedInternshipWindow.isShowing()) {
+            System.out.println("showing");
+            detailedInternshipWindow.show();
+        } else {
+            System.out.println("focusing");
+            detailedInternshipWindow.focus();
+        }
     }
 
     public Stage getPrimaryStage() {
@@ -161,6 +198,7 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+        detailedInternshipWindow.hide();
     }
 
     public InternshipListPanel getInternshipListPanel() {

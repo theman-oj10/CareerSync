@@ -2,25 +2,30 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.InternshipSortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.internship.ApplicationStatus;
 import seedu.address.model.internship.CompanyName;
 import seedu.address.model.internship.ContactEmail;
 import seedu.address.model.internship.ContactName;
 import seedu.address.model.internship.ContactNumber;
+import seedu.address.model.internship.Deadline;
 import seedu.address.model.internship.Description;
 import seedu.address.model.internship.Location;
 import seedu.address.model.internship.Remark;
 import seedu.address.model.internship.Role;
+import seedu.address.model.internship.Task;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class InternshipParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index has to be a positive number! (1,2,3...).";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -162,9 +167,84 @@ public class InternshipParserUtil {
      *
      * @throws ParseException if the given {@code remark} is invalid.
      */
-    public static Remark parseRemark(String remark) throws ParseException {
+    public static Remark parseRemark(String remark) {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
         return new Remark(trimmedRemark);
     }
+
+    /**
+     * Parses a {@code String order} into a {@code InternshipSortCommandParser.OrderEnum}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code order} is invalid.
+     */
+    public static InternshipSortCommandParser.OrderEnum parseOrder(String order) throws ParseException {
+        requireNonNull(order);
+        String trimmedOrder = order.trim();
+        if (!InternshipSortCommandParser.OrderEnum.isValidOrder(trimmedOrder)) {
+            throw new ParseException(InternshipSortCommand.MESSAGE_INVALID_ORDER);
+        }
+        InternshipSortCommandParser.OrderEnum orderEnum = InternshipSortCommandParser
+                .OrderEnum.getOrderEnum(trimmedOrder);
+        return orderEnum;
+    }
+
+    /**
+     * Parses a {@code String task} into a {@code task}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code task} is invalid.
+     */
+    public static Task parseTask(String task) throws ParseException {
+        requireNonNull(task);
+        String trimmedTask = task.trim();
+        if (!Task.isValidTask(trimmedTask)) {
+            throw new ParseException(Task.MESSAGE_CONSTRAINTS);
+        }
+        return new Task(trimmedTask);
+    }
+
+    /**
+     * Parses a {@code String deadline} into a {@code Deadline}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code deadline} is invalid.
+     */
+    public static Deadline parseDeadline(String deadline) throws ParseException {
+        requireNonNull(deadline);
+        String trimmedDeadline = deadline.trim();
+        if (!Deadline.isValidDeadline(trimmedDeadline)) {
+            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
+        }
+        return new Deadline(trimmedDeadline);
+    }
+
+
+    /**
+     * Returns true if any of the prefixes contains {@code Optional} values, which are possibly empty, in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean anyPrefixesPresent(ArgumentMultimap argMulMap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argMulMap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if all prefixes present in the {@code ArgumentMultimap} are non-empty.
+     * Vacuously true if no prefixes are present.
+     */
+    public static boolean prefixesPresentAreNotEmpty(ArgumentMultimap argMulMap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix ->
+                argMulMap.getValue(prefix).isEmpty()
+                        || (argMulMap.getValue(prefix).isPresent() && !argMulMap.getValue(prefix).get().isEmpty()));
+    }
+
+    /**
+     * Returns true if all the prefixes contains {@code Optional} values, which could be empty, in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argMulMap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argMulMap.getValue(prefix).isPresent());
+    }
+
 }

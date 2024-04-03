@@ -1,15 +1,19 @@
 package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.InternshipComparators;
+import seedu.address.logic.parser.InternshipSortCommandParser;
 import seedu.address.model.internship.ApplicationStatus;
 import seedu.address.model.internship.CompanyName;
 import seedu.address.model.internship.ContactEmail;
@@ -20,6 +24,8 @@ import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Location;
 import seedu.address.model.internship.Remark;
 import seedu.address.model.internship.Role;
+import seedu.address.model.internship.TaskList;
+import seedu.address.testutil.InternshipBuilder;
 
 public class InternshipModelManagerTest {
 
@@ -34,7 +40,8 @@ public class InternshipModelManagerTest {
             new ApplicationStatus("rejected"),
             new Description("Business Development Internship"),
             new Role("Business Development Associate"),
-            new Remark("")
+            new Remark(""),
+            new TaskList()
     );
 
     @Test
@@ -73,6 +80,18 @@ public class InternshipModelManagerTest {
     }
 
     @Test
+    public void sortInternshipList_nullComparator_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> internshipModelManager.sortFilteredInternshipList(null));
+    }
+
+    @Test
+    public void sortInternshipList_validComparator_success() {
+        internshipModelManager.addInternship(internship);
+        internshipModelManager.sortFilteredInternshipList(InternshipSortCommandParser.getComparator(
+                InternshipSortCommandParser.FieldEnum.COMPANY, true));
+        assertEquals(internship, internshipModelManager.getFilteredInternshipList().get(0));
+    }
+    @Test
     public void equals() {
         InternshipData internshipData = new InternshipData();
         internshipData.addInternship(internship);
@@ -81,10 +100,10 @@ public class InternshipModelManagerTest {
 
         // same values -> returns true
         InternshipModelManager modelManagerCopy = new InternshipModelManager(internshipData, userPrefs);
-        assertTrue(internshipModelManager.equals(modelManagerCopy));
+        assertEquals(internshipModelManager, modelManagerCopy);
 
         // same object -> returns true
-        assertTrue(internshipModelManager.equals(internshipModelManager));
+        assertEquals(internshipModelManager, internshipModelManager);
     }
 
     @Test
@@ -97,7 +116,7 @@ public class InternshipModelManagerTest {
     public void deleteInternship() {
         internshipModelManager.addInternship(internship);
         internshipModelManager.deleteInternship(internship);
-        assertTrue(!internshipModelManager.hasInternship(internship));
+        assertFalse(internshipModelManager.hasInternship(internship));
     }
 
     @Test
@@ -111,7 +130,8 @@ public class InternshipModelManagerTest {
                 new ApplicationStatus("rejected"),
                 new Description("Business Development Internship"),
                 new Role("Business Development Associate"),
-                new Remark("")
+                new Remark(""),
+                new TaskList()
         );
         Internship internship2 = new Internship(
                 new CompanyName("Google"),
@@ -122,11 +142,12 @@ public class InternshipModelManagerTest {
                 new ApplicationStatus("pending"),
                 new Description("Software Engineering Internship"),
                 new Role("Software Engineer"),
-                new Remark("")
+                new Remark(""),
+                new TaskList()
         );
         internshipModelManager.addInternship(internship1);
         internshipModelManager.setInternship(internship1, internship2);
-        assertTrue(!internshipModelManager.hasInternship(internship1));
+        assertFalse(internshipModelManager.hasInternship(internship1));
         assertTrue(internshipModelManager.hasInternship(internship2));
     }
 
@@ -178,5 +199,119 @@ public class InternshipModelManagerTest {
         newInternshipData.addInternship(internship);
         internshipModelManager.setInternshipData(newInternshipData);
         assertEquals(newInternshipData, internshipModelManager.getInternshipData());
+    }
+
+    @Test
+    public void getCompanyNameComparator() {
+        InternshipBuilder internshipBuilder = new InternshipBuilder();
+        Internship internship1 = internshipBuilder.withCompanyName("AAA").build();
+        Internship internship2 = internshipBuilder.withCompanyName("BBB").build();
+        Comparator<Internship> testComparator = InternshipSortCommandParser.getComparator(
+                InternshipSortCommandParser.FieldEnum.COMPANY, true);
+        Comparator<Internship> expectedComparator = InternshipComparators.byCompanyName(true);
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
+    }
+
+    @Test
+    public void getDescriptionComparator() {
+        InternshipBuilder internshipBuilder = new InternshipBuilder();
+        Internship internship1 = internshipBuilder.withDescription("aaa").build();
+        Internship internship2 = internshipBuilder.withDescription("bbb").build();
+        Comparator<Internship> testComparator = InternshipSortCommandParser.getComparator(
+                InternshipSortCommandParser.FieldEnum.DESCRIPTION, true);
+        Comparator<Internship> expectedComparator = InternshipComparators.byDescription(true);
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
+    }
+
+    @Test
+    public void getRoleComparator() {
+        InternshipBuilder internshipBuilder = new InternshipBuilder();
+        Internship internship1 = internshipBuilder.withRole("aaa").build();
+        Internship internship2 = internshipBuilder.withRole("bbb").build();
+        Comparator<Internship> testComparator = InternshipSortCommandParser.getComparator(
+                InternshipSortCommandParser.FieldEnum.ROLE, true);
+        Comparator<Internship> expectedComparator = InternshipComparators.byRole(true);
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
+    }
+
+    @Test
+    public void getContactNameComparator() {
+        InternshipBuilder internshipBuilder = new InternshipBuilder();
+        Internship internship1 = internshipBuilder.withContactName("aaa").build();
+        Internship internship2 = internshipBuilder.withContactName("bbb").build();
+        Comparator<Internship> testComparator = InternshipSortCommandParser.getComparator(
+                InternshipSortCommandParser.FieldEnum.CONTACT_NAME, true);
+        Comparator<Internship> expectedComparator = InternshipComparators.byContactName(true);
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
+    }
+
+    @Test
+    public void getContactNumberComparator() {
+        InternshipBuilder internshipBuilder = new InternshipBuilder();
+        Internship internship1 = internshipBuilder.withContactNumber("12345678").build();
+        Internship internship2 = internshipBuilder.withContactNumber("23456789").build();
+        Comparator<Internship> testComparator = InternshipSortCommandParser.getComparator(
+                InternshipSortCommandParser.FieldEnum.CONTACT_NUMBER, true);
+        Comparator<Internship> expectedComparator = InternshipComparators.byPhone(true);
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
+    }
+
+    @Test
+    public void getLocationComparator() {
+        InternshipBuilder internshipBuilder = new InternshipBuilder();
+        Internship internship1 = internshipBuilder.withLocation("remote").build();
+        Internship internship2 = internshipBuilder.withLocation("overseas").build();
+        Comparator<Internship> testComparator = InternshipSortCommandParser.getComparator(
+                InternshipSortCommandParser.FieldEnum.LOCATION, true);
+        Comparator<Internship> expectedComparator = InternshipComparators.byLocation(true);
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
+    }
+
+    @Test
+    public void getRemarkComparator() {
+        InternshipBuilder internshipBuilder = new InternshipBuilder();
+        Internship internship1 = internshipBuilder.withRemark("aaa").build();
+        Internship internship2 = internshipBuilder.withRemark("bbb").build();
+        Comparator<Internship> testComparator = InternshipSortCommandParser.getComparator(
+                InternshipSortCommandParser.FieldEnum.REMARK, true);
+        Comparator<Internship> expectedComparator = InternshipComparators.byRemark(true);
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
+    }
+
+    @Test
+    public void getStatusComparator() {
+        InternshipBuilder internshipBuilder = new InternshipBuilder();
+        Internship internship1 = internshipBuilder.withApplicationStatus("to_apply").build();
+        Internship internship2 = internshipBuilder.withApplicationStatus("rejected").build();
+        Comparator<Internship> testComparator = InternshipSortCommandParser.getComparator(
+                InternshipSortCommandParser.FieldEnum.STATUS, true);
+        Comparator<Internship> expectedComparator = InternshipComparators.byApplicationStatus(true);
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
+    }
+
+    @Test
+    public void getContactEmailComparator() {
+        InternshipBuilder internshipBuilder = new InternshipBuilder();
+        Internship internship1 = internshipBuilder.withContactEmail("email1@gmail.com").build();
+        Internship internship2 = internshipBuilder.withContactEmail("email2@gmail.com").build();
+        Comparator<Internship> testComparator = InternshipSortCommandParser.getComparator(
+                InternshipSortCommandParser.FieldEnum.CONTACT_EMAIL, true);
+        Comparator<Internship> expectedComparator = InternshipComparators.byContactEmail(true);
+        assertEquals(testComparator.compare(internship1, internship2),
+                expectedComparator.compare(internship1, internship2));
+    }
+
+    @Test
+    public void getFilteredInternshipList() {
+        assertEquals(internshipModelManager.getFilteredInternshipList(),
+                internshipModelManager.getFilteredInternshipList());
     }
 }

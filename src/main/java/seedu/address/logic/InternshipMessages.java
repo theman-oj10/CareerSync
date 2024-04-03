@@ -14,7 +14,10 @@ public class InternshipMessages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX = "The internship index provided is invalid";
+    public static final String MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX = "Index has to be a positive number "
+            + "(1,2,3...) and one of the displayed internship indexes.";
+    public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "Task index has to be a positive number "
+            + "(1,2,3...) and one of the displayed task indexes of the internship.";
     public static final String MESSAGE_INTERNSHIPS_LISTED_OVERVIEW = "%1$d internships listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
@@ -36,22 +39,35 @@ public class InternshipMessages {
      */
     public static String format(Internship internship) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" Company Name: ")
+        builder.append("\nCompany Name: ")
                 .append(internship.getCompanyName())
-                .append("; Location: ")
+                .append("\n")
+                .append("Location: ")
                 .append(internship.getLocation())
-                .append("; Description: ")
+                .append("\n")
+                .append("Description: ")
                 .append(internship.getDescription())
-                .append("; Role: ")
+                .append("\n")
+                .append("Role: ")
                 .append(internship.getRole())
-                .append("; Contact Name: ")
+                .append("\n")
+                .append("Contact Name: ")
                 .append(internship.getContactName())
-                .append("; Contact Email: ")
+                .append("\n")
+                .append("Contact Email: ")
                 .append(internship.getContactEmail())
-                .append("; Contact Number: ")
+                .append("\n")
+                .append("Contact Number: ")
                 .append(internship.getContactNumber())
-                .append("; Application Status: ")
-                .append(internship.getApplicationStatus());
+                .append("\n")
+                .append("Application Status: ")
+                .append(internship.getApplicationStatus())
+                .append("\n")
+                .append("Remark: ")
+                .append(internship.getRemark())
+                .append("\n")
+                .append("Tasks:\n")
+                .append(internship.getTaskList());
         return builder.toString();
     }
 

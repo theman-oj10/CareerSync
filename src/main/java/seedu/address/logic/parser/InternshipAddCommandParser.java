@@ -9,8 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-
-import java.util.stream.Stream;
+import static seedu.address.logic.parser.InternshipParserUtil.arePrefixesPresent;
 
 import seedu.address.logic.commands.InternshipAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -24,6 +23,7 @@ import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Location;
 import seedu.address.model.internship.Remark;
 import seedu.address.model.internship.Role;
+import seedu.address.model.internship.TaskList;
 
 /**
  * Parses input arguments and creates a new InternshipAddCommand object
@@ -59,17 +59,10 @@ public class InternshipAddCommandParser implements InternshipParser<InternshipAd
         Description desc = InternshipParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Role role = InternshipParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
         Remark remark = new Remark(""); // Add Command does not allow adding remarks immediately
+        TaskList taskList = new TaskList(); // Add Command does not allow adding tasks immediately (for now
 
-        Internship internship = new Internship(com, poc, email, phon, loc, status, desc, role, remark);
+        Internship internship = new Internship(com, poc, email, phon, loc, status, desc, role, remark, taskList);
 
         return new InternshipAddCommand(internship);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

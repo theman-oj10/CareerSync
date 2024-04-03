@@ -32,6 +32,7 @@ import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.Location;
 import seedu.address.model.internship.Remark;
 import seedu.address.model.internship.Role;
+import seedu.address.model.internship.TaskList;
 
 /**
  * Edits the details of an existing internship in the internship data.
@@ -42,22 +43,23 @@ public class InternshipEditCommand extends InternshipCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the internship identified "
             + "by the index number used in the displayed internship data. "
+            + "At least one field to edit must be provided. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_COMPANY + "COMPANY] "
-            + "[" + PREFIX_CONTACT_NAME + " CONTACT_NAME] "
-            + "[" + PREFIX_CONTACT_EMAIL + " CONTACT_EMAIL] "
-            + "[" + PREFIX_CONTACT_NUMBER + " CONTACT_NUMBER] "
-            + "[" + PREFIX_LOCATION + " LOCATION] "
-            + "[" + PREFIX_STATUS + " STATUS] "
-            + "[" + PREFIX_DESCRIPTION + " DESCRIPTION] "
-            + "[" + PREFIX_ROLE + " ROLE] "
-            + "[" + PREFIX_REMARK + " REMARK] "
+            + "Parameters: INDEX (must be a positive integer) \n"
+            + "[" + PREFIX_COMPANY + " COMPANY_NAME]\n"
+            + "[" + PREFIX_CONTACT_NAME + " CONTACT_NAME]\n"
+            + "[" + PREFIX_CONTACT_EMAIL + " CONTACT_EMAIL]\n"
+            + "[" + PREFIX_CONTACT_NUMBER + " CONTACT_NUMBER]\n"
+            + "[" + PREFIX_LOCATION + " LOCATION]\n"
+            + "[" + PREFIX_STATUS + " STATUS]\n"
+            + "[" + PREFIX_DESCRIPTION + " DESCRIPTION]\n"
+            + "[" + PREFIX_ROLE + " ROLE]\n"
+            + "[" + PREFIX_REMARK + " REMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_CONTACT_EMAIL + " john@example.com"
-            + PREFIX_CONTACT_NUMBER + "9666 1666";
+            + PREFIX_CONTACT_EMAIL + " john@example.com "
+            + PREFIX_CONTACT_NUMBER + " 96661666";
 
-    public static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Edited Internship: %1$s";
+    public static final String MESSAGE_EDIT_INTERNSHIP_SUCCESS = "Internship edited! New edited internship: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_INTERNSHIP = "This entry already exists in the internship data.";
 
@@ -123,8 +125,10 @@ public class InternshipEditCommand extends InternshipCommand {
         ApplicationStatus updatedApplicationStatus = editInternshipDescriptor.getApplicationStatus()
                 .orElse(internshipToEdit.getApplicationStatus());
         Remark updatedRemark = editInternshipDescriptor.getRemark().orElse(internshipToEdit.getRemark());
+        // edit command cannot be used to edit task list
+        TaskList taskList = editInternshipDescriptor.getTaskList().orElse(internshipToEdit.getTaskList());
         return new Internship(updatedCompanyName, updatedContactName, updatedContactEmail, updatedContactNumber,
-                updatedLocation, updatedApplicationStatus, updatedDescription, updatedRole, updatedRemark);
+                updatedLocation, updatedApplicationStatus, updatedDescription, updatedRole, updatedRemark, taskList);
     }
 
     @Override
@@ -166,6 +170,7 @@ public class InternshipEditCommand extends InternshipCommand {
         private ContactNumber contactNumber;
         private ApplicationStatus applicationStatus;
         private Remark remark;
+        private TaskList taskList;
 
         /**
          * Copy constructor.
@@ -180,6 +185,7 @@ public class InternshipEditCommand extends InternshipCommand {
             setContactNumber(toCopy.contactNumber);
             setApplicationStatus(toCopy.applicationStatus);
             setRemark(toCopy.remark);
+            setTaskList(toCopy.taskList);
         }
 
         public EditInternshipDescriptor() {}
@@ -245,6 +251,12 @@ public class InternshipEditCommand extends InternshipCommand {
         public Optional<Remark> getRemark() {
             return Optional.ofNullable(remark);
         }
+        public void setTaskList(TaskList taskList) {
+            this.taskList = taskList;
+        }
+        public Optional<TaskList> getTaskList() {
+            return Optional.ofNullable(taskList);
+        }
 
         @Override
         public boolean equals(Object other) {
@@ -281,6 +293,7 @@ public class InternshipEditCommand extends InternshipCommand {
                     .add("Contact Number", contactNumber)
                     .add("Application Status", applicationStatus)
                     .add("Remark", remark)
+                    .add("Task List", taskList)
                     .toString();
         }
     }

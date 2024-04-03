@@ -6,9 +6,9 @@ skinparam classBackgroundColor LOGIC_COLOR
 
 package InternshipLogic as InternshipLogicPackage {
 
-package "Parser Classes" as ParserClasses{
+package "Internship Parser Classes" as InternshipParserClasses{
 }
-Class XYZCommand
+Class InternshipXYZCommand
 Class CommandResult
 Class "{abstract}\nInternshipCommand" as InternshipCommand
 
@@ -17,7 +17,7 @@ Class "<<interface>>\nInternshipLogic" as InternshipLogic
 Class InternshipLogicManager
 }
 
-package Model {
+package InternshipModel {
 Class HiddenModel #FFFFFF
 }
 
@@ -28,18 +28,18 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> InternshipLogic
 
 InternshipLogicManager .right.|> InternshipLogic
-InternshipLogicManager -right->"1" ParserClasses
-ParserClasses ..> XYZCommand : <<create>>
+InternshipLogicManager -right-> " 1 " InternshipParserClasses
+InternshipParserClasses ..> InternshipXYZCommand : <<create>>
 
-XYZCommand -up-|> InternshipCommand
+InternshipXYZCommand -up-|> InternshipCommand
 InternshipLogicManager .left.> InternshipCommand : <<call>>
 
-InternshipLogicManager --> Model
+InternshipLogicManager --> InternshipModel
 InternshipLogicManager --> Storage
-Storage --[hidden] Model
+Storage --[hidden] InternshipModel
 InternshipCommand .[hidden]up.> Storage
-InternshipCommand .right.> Model
-note right of XYZCommand: XYZCommand = InternshipAddCommand, \nInternshipFindCommand, etc
+InternshipCommand .right.> InternshipModel
+note right of InternshipXYZCommand: InternshipXYZCommand = InternshipAddCommand, \nInternshipFindCommand, etc
 
 InternshipLogic ..> CommandResult
 InternshipLogicManager .down.> CommandResult

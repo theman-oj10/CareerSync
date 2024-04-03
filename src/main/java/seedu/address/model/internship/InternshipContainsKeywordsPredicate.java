@@ -19,6 +19,7 @@ public class InternshipContainsKeywordsPredicate implements Predicate<Internship
     private final Optional<Set<String>> statusKeywords;
     private final Optional<Set<String>> descriptionKeywords;
     private final Optional<Set<String>> roleKeywords;
+    private final Optional<Set<String>> remarkKeywords;
 
     /**
      * Creates a predicate that checks if an internship's fields contain any of the keywords specified for that field.
@@ -33,13 +34,15 @@ public class InternshipContainsKeywordsPredicate implements Predicate<Internship
      * @param isMatchAll    A boolean to indicate if all keywords must be matched
      */
     public InternshipContainsKeywordsPredicate(String companyNames, String contactNames, String locations,
-                                               String statuses, String descriptions, String roles, boolean isMatchAll) {
+                                               String statuses, String descriptions, String roles, String remarks,
+                                               boolean isMatchAll) {
         this.companyNameKeywords = getKeywords(companyNames);
         this.contactNameKeywords = getKeywords(contactNames);
         this.locationKeywords = getKeywords(locations);
         this.statusKeywords = getKeywords(statuses);
         this.descriptionKeywords = getKeywords(descriptions);
         this.roleKeywords = getKeywords(roles);
+        this.remarkKeywords = getKeywords(remarks);
         this.isMatchAll = isMatchAll;
     }
 
@@ -73,12 +76,16 @@ public class InternshipContainsKeywordsPredicate implements Predicate<Internship
                 .map(set -> set.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
                         internship.getRole().role, keyword)))
                 .reduce((a, b) -> a || b).orElse(isMatchAll);
+        boolean foundInRemark = remarkKeywords.stream()
+                .map(set -> set.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
+                        internship.getRemark().value, keyword)))
+                .reduce((a, b) -> a || b).orElse(isMatchAll);
         if (isMatchAll) {
             return foundInCompanyName && foundInContactName && foundInLocation
-                    && foundInStatus && foundInDescription && foundInRole;
+                    && foundInStatus && foundInDescription && foundInRole && foundInRemark;
         } else { // match any
             return foundInCompanyName || foundInContactName || foundInLocation
-                    || foundInStatus || foundInDescription || foundInRole;
+                    || foundInStatus || foundInDescription || foundInRole || foundInRemark;
         }
     }
 
@@ -101,6 +108,7 @@ public class InternshipContainsKeywordsPredicate implements Predicate<Internship
                 && this.statusKeywords.equals(otherInternshipPredicate.statusKeywords)
                 && this.descriptionKeywords.equals(otherInternshipPredicate.descriptionKeywords)
                 && this.roleKeywords.equals(otherInternshipPredicate.roleKeywords)
+                && this.remarkKeywords.equals(otherInternshipPredicate.remarkKeywords)
                 && this.isMatchAll == otherInternshipPredicate.isMatchAll;
     }
 
@@ -113,6 +121,7 @@ public class InternshipContainsKeywordsPredicate implements Predicate<Internship
                 .add(" statusKeywords", statusKeywords.orElse(Collections.singleton("")))
                 .add(" descriptionKeywords", descriptionKeywords.orElse(Collections.singleton("")))
                 .add(" roleKeywords", roleKeywords.orElse(Collections.singleton("")))
+                .add(" remarkKeywords", remarkKeywords.orElse(Collections.singleton("")))
                 .add(" isMatchAll", isMatchAll).toString();
     }
 

@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalInternships.HOON_APPLE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -156,6 +157,19 @@ public class InternshipAddCommandTest {
 
         @Override
         public void updateFilteredInternshipList(Predicate<Internship> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortFilteredInternshipList(Comparator<Internship> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+        public void setSelectedInternship(Internship internship) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Internship> getSelectedInternship() {
             throw new AssertionError("This method should not be called.");
         }
     }

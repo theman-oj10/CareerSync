@@ -35,7 +35,6 @@ public class InternshipEditCommandTest {
 
     private final InternshipModel model = new InternshipModelManager(getTypicalInternshipData(),
             new InternshipUserPrefs());
-
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Internship editedInternship = new InternshipBuilder().build();
@@ -45,11 +44,16 @@ public class InternshipEditCommandTest {
         String expectedMessage = String.format(InternshipEditCommand.MESSAGE_EDIT_INTERNSHIP_SUCCESS,
                 InternshipMessages.format(editedInternship));
 
-        InternshipModel expectedModel = new InternshipModelManager(new InternshipData(model.getInternshipData()),
+        //creating another model because the static model seems to be affected by modifications from tests in other
+        //files
+        InternshipModel otherModel = new InternshipModelManager(getTypicalInternshipData(),
                 new InternshipUserPrefs());
-        expectedModel.setInternship(model.getFilteredInternshipList().get(0), editedInternship);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        InternshipModel expectedModel = new InternshipModelManager(new InternshipData(otherModel.getInternshipData()),
+                new InternshipUserPrefs());
+        expectedModel.setInternship(otherModel.getFilteredInternshipList().get(0), editedInternship);
+
+        assertCommandSuccess(editCommand, otherModel, expectedMessage, expectedModel);
     }
 
     @Test
