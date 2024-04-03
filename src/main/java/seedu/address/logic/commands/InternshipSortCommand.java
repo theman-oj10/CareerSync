@@ -69,6 +69,9 @@ public class InternshipSortCommand extends InternshipCommand {
 
     public static final String MESSAGE_NO_ORDER = "Please specify the order to sort by: "
             + ORDER_ASCENDING + " to sort in ascending order or " + ORDER_DESCENDING + " to sort in descending order.";
+    public static final String MESSAGE_EXTRA_ARGUMENTS = "Extra arguments detected. Please only specify one "
+            + "field and one order.\n"
+            + "Example: " + COMMAND_WORD + " /com " + ORDER_ASCENDING + "\n";
     private final InternshipSortCommandParser.FieldEnum field;
     private final InternshipSortCommandParser.OrderEnum order;
 

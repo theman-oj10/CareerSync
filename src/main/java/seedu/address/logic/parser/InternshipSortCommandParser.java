@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.InternshipSortCommand.MESSAGE_EXTRA_ARGUMENTS;
 import static seedu.address.logic.commands.InternshipSortCommand.ORDER_ASCENDING;
 import static seedu.address.logic.commands.InternshipSortCommand.ORDER_DESCENDING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
@@ -129,12 +130,18 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
         }
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, SUPPORTED_PREFIXES);
         argMultimap.verifyNoDuplicatePrefixesFor(SUPPORTED_PREFIXES);
+
         if (!anyPrefixesPresent(argMultimap, SUPPORTED_PREFIXES)) {
             logger.warning("Internship sort command has no valid prefixes");
             throw new ParseException(InternshipSortCommand.MESSAGE_INVALID_FIELD);
         }
         OrderEnum parsedOrder = assignOrder(argMultimap);
         FieldEnum field = assignField(argMultimap);
+        try {
+            argMultimap.verifyNoExtraArguments(2);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(MESSAGE_EXTRA_ARGUMENTS);
+        }
         return new InternshipSortCommand(field, parsedOrder);
     }
 
