@@ -303,22 +303,20 @@ Let's do a quick review of the commands!
 
 #### Command Summary
 
-| Action                                                      | Description                              | Format |
-|-------------------------------------------------------------|------------------------------------------|------------------------------------------|
-| [add](#adding-an-internship-add)                            | Adds an Internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER /loc LOCATION_ENUM /role ROLE` |
-| [delete](#deleting-an-internship-delete)                    | Removes a Internship.                    | `delete INDEX` |
-| [list](#listing-all-internships-list)                       | Removes a Internship.                    | `list` |
-| [edit](#editing-an-internship-edit)                         | Modifies an existing Internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE` |
-| [addremark](#adding-a-remark-addremark)                     | Adds a remark to an existing Internship. | `addremark INDEX [/remark REMARK]` |
-| [clear](#clearing-all-internships-clear)                    | Removes all Internships from the deck.   | `clear` |
-| [find](#finding-internships-by-keywords-find)               | Finds an Internship by keywords.         |`find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS]`|
-| [sort](#sorting-internships-by-fields-sort)                 | Sorts the Internships by fields.         | `sort FIELD ORDER` |
-| [addtask](#add-a-task-to-an-internship-addtask)             | Adds a task to an internship.            | `addtask /task Task` |
-| [setdeadline](#set-deadline-to-a-task-setdeadline)          | Sets a deadline to a task.            | `setdeadline INDEX_INTERNSHIP /selecttask INDEX_TASK /deadline Deadline` |
-| [deletetask](#deleting-tasks-from-an-internship-deletetask) | Deletes a task from an internship.            | `deletetask INDEX_INTERNSHIP /selecttask INDEX_TASK` |
-| [sort](#sorting-internships-by-fields-sort)                 | Sorts the Internships by fields.         | `sort FIELD ORDER` |
-| [exit](#exiting-the-program-exit)                           | Exits and closes the application.        | `exit` |
-
+| Action                                         | Description                              | Format                                                                                                                                                                                                |
+|------------------------------------------------|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [add](#adding-an-entry-add)                    | Adds an internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER [/loc LOCATION_ENUM] [/role ROLE]`                                               |
+| [delete](#deleting-an-internship-delete)       | Removes a internship.                    | `delete INDEX`                                                                                                                                                                                        |
+| [list](#listing-all-internships-list)          | Lists all internships.                   | `list`                                                                                                                                                                                                |
+| [edit](#editing-an-internship-edit)            | Modifies an existing internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE]`                            |
+| [addremark](#adding-a-remark-addremark)        | Adds a remark to an existing internship. | `addremark INDEX [/remark REMARK]`                                                                                                                                                                    |
+| [find](#finding-internships-by-keywords-find)  | Finds an internship by keywords.         | `find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS] [/remark REMARK_KEYWORDS]` |
+| [sort](#sorting-internships-by-fields-sort)    | Sorts the internships by fields.         | `sort FIELD ORDER`                                                                                                                                                                                    |
+| [addtask](#add-a-task-to-an-internship-addtask) | Adds a task to an internship.            | `addtask /task TASK`                                                                                                                                                                                  |
+| [setdeadline](#set-deadline-to-a-task-setdeadline) | Sets a deadline to a task.               | `setdeadline INDEX_INTERNSHIP /selecttask INDEX_TASK /deadline DEADLINE`                                                                                                                              |
+| [deletetask](#deleting-tasks-from-an-internship-deletetask) | Deletes a task from an internship.       | `deletetask INDEX_INTERNSHIP /selecttask INDEX_TASK`                                                                                                                                                  |
+| [clear](#clearing-all-internships-clear)       | Removes all internships from the app.    | `clear`                                                                                                                                                                                               |
+| [exit](#exiting-the-program-exit)              | Exits and closes the application.        | `exit`                                                                                                                                                                                                |
 
 <div markdown="block" class="alert alert-info">
 
