@@ -27,7 +27,7 @@ class InternshipCardTest extends UiTestBase {
 
         // Test the company name and role label
         assertThat(this.internshipCard.getCompanyNameAndRoleLabel())
-                .hasText(testInternship.getCompanyName().companyName + " -- " + testInternship.getRole().get());
+                .hasText(testInternship.getCompanyName().companyName + " -- " + testInternship.getRole().role);
 
         // Test the status label
         assertThat(this.internshipCard.getStatusLabel())
@@ -39,7 +39,7 @@ class InternshipCardTest extends UiTestBase {
 
         // Test the location label
         assertThat(this.internshipCard.getLocationLabel())
-                .hasText(testInternship.getLocation().get().toString());
+                .hasText(testInternship.getLocation().toString());
 
         // Test the POC label
         assertThat(this.internshipCard.getPocLabel())

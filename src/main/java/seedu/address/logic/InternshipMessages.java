@@ -40,24 +40,33 @@ public class InternshipMessages {
     public static String format(Internship internship) {
         final StringBuilder builder = new StringBuilder();
         builder.append("\nCompany Name: ")
-                .append(internship.getCompanyName());
-        internship.getLocation().ifPresent(location ->
-                builder.append("\nLocation: ").append(location));
-        builder.append("\nDescription: ")
-                .append(internship.getDescription());
-        internship.getRole().ifPresent(role ->
-                builder.append("\nRole: ").append(role));
-        builder.append("\nContact Name: ")
-                .append(internship.getContactName());
-        builder.append("\nContact Email: ")
-                .append(internship.getContactEmail());
-        builder.append("\nContact Number: ")
-                .append(internship.getContactNumber());
-        builder.append("\nApplication Status: ")
-                .append(internship.getApplicationStatus());
-        builder.append("\nRemark: ")
-                .append(internship.getRemark());
-        builder.append("\nTask List: ")
+                .append(internship.getCompanyName())
+                .append("\n")
+                .append("Location: ")
+                .append(internship.getLocation())
+                .append("\n")
+                .append("Description: ")
+                .append(internship.getDescription())
+                .append("\n")
+                .append("Role: ")
+                .append(internship.getRole())
+                .append("\n")
+                .append("Contact Name: ")
+                .append(internship.getContactName())
+                .append("\n")
+                .append("Contact Email: ")
+                .append(internship.getContactEmail())
+                .append("\n")
+                .append("Contact Number: ")
+                .append(internship.getContactNumber())
+                .append("\n")
+                .append("Application Status: ")
+                .append(internship.getApplicationStatus())
+                .append("\n")
+                .append("Remark: ")
+                .append(internship.getRemark())
+                .append("\n")
+                .append("Tasks:\n")
                 .append(internship.getTaskList());
         return builder.toString();
     }

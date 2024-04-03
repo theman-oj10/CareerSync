@@ -61,10 +61,10 @@ public class DetailedInternshipCard extends UiPart<Region> {
         super(FXML);
         setStyles(true, companyNameAndRole, status, description, loc,
                 cName, cEmail, cNum, remark, tasks);
-        setCompanyNameAndRoleLabel(internship.getCompanyName(), internship.getRole().orElse(null));
+        setCompanyNameAndRoleLabel(internship.getCompanyName(), internship.getRole());
         setStatusLabel(internship.getApplicationStatus());
         setDescriptionLabel(internship.getDescription());
-        setLocationLabel(internship.getLocation().orElse(null));
+        setLocationLabel(internship.getLocation());
         setContactNameLabel(internship.getContactName());
         setContactEmailLabel(internship.getContactEmail());
         setContactNumberLabel(internship.getContactNumber());

@@ -3,7 +3,6 @@ package seedu.address.model.internship;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
-import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
 
@@ -61,8 +60,8 @@ public class Internship {
         return contactNumber;
     }
 
-    public Optional<Location> getLocation() {
-        return Optional.ofNullable(location);
+    public Location getLocation() {
+        return location;
     }
 
     public ApplicationStatus getApplicationStatus() {
@@ -73,8 +72,8 @@ public class Internship {
         return description;
     }
 
-    public Optional<Role> getRole() {
-        return Optional.ofNullable(role);
+    public Role getRole() {
+        return role;
     }
 
     public Remark getRemark() {

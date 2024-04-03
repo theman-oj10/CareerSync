@@ -63,10 +63,10 @@ public class InternshipBuilder {
         contactName = internshipToCopy.getContactName();
         contactEmail = internshipToCopy.getContactEmail();
         contactNumber = internshipToCopy.getContactNumber();
-        location = internshipToCopy.getLocation().isPresent() ? internshipToCopy.getLocation().get() : null;
+        location = internshipToCopy.getLocation();
         applicationStatus = internshipToCopy.getApplicationStatus();
         description = internshipToCopy.getDescription();
-        role = internshipToCopy.getRole().isPresent() ? internshipToCopy.getRole().get() : null;
+        role = internshipToCopy.getRole();
         remark = internshipToCopy.getRemark();
         taskList = internshipToCopy.getTaskList();
     }

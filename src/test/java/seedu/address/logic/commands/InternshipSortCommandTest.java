@@ -138,7 +138,7 @@ public class InternshipSortCommandTest {
         Comparator<Internship> comparator = InternshipSortCommandParser.getComparator(fieldLocation, true);
         model.sortFilteredInternshipList(comparator);
         expectedModel.sortFilteredInternshipList(comparator);
-        assertEquals("Optional[LOCAL]", model.getFilteredInternshipList().get(0).getLocation().toString());
+        assertEquals("LOCAL", model.getFilteredInternshipList().get(0).getLocation().toString());
     }
 
     @Test
@@ -174,7 +174,7 @@ public class InternshipSortCommandTest {
                 InternshipSortCommandParser.FieldEnum.ROLE, false);
         model.sortFilteredInternshipList(comparator);
         expectedModel.sortFilteredInternshipList(comparator);
-        assertEquals("Optional[ZZZ]", model.getFilteredInternshipList().get(0).getRole().toString());
+        assertEquals("ZZZ", model.getFilteredInternshipList().get(0).getRole().toString());
     }
 
 

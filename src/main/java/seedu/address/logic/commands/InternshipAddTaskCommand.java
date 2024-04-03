@@ -103,8 +103,8 @@ public class InternshipAddTaskCommand extends InternshipCommand {
 
         return new Internship(internshipToAddTask.getCompanyName(), internshipToAddTask.getContactName(),
                 internshipToAddTask.getContactEmail(), internshipToAddTask.getContactNumber(),
-                internshipToAddTask.getLocation().orElse(null), internshipToAddTask.getApplicationStatus(),
-                internshipToAddTask.getDescription(), internshipToAddTask.getRole().orElse(null),
+                internshipToAddTask.getLocation(), internshipToAddTask.getApplicationStatus(),
+                internshipToAddTask.getDescription(), internshipToAddTask.getRole(),
                 internshipToAddTask.getRemark(),
                 newTaskList);
     }

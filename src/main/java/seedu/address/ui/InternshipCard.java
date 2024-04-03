@@ -65,10 +65,10 @@ public class InternshipCard extends UiPart<Region> {
         this.internship = internship;
 
         id.setText(displayedIndex + ". ");
-        setCompanyNameAndRoleLabel(internship.getCompanyName(), internship.getRole().orElse(null));
+        setCompanyNameAndRoleLabel(internship.getCompanyName(), internship.getRole());
         setStatusLabel(internship.getApplicationStatus());
         setDescriptionLabel(internship.getDescription());
-        setLocationLabel(internship.getLocation().orElse(null));
+        setLocationLabel(internship.getLocation());
         setPocLabel(internship.getContactName(), internship.getContactEmail(), internship.getContactNumber());
         setRemarkLabel(internship.getRemark());
         setTasksLabel(internship.getTaskList());

@@ -74,7 +74,7 @@ public class InternshipContainsKeywordsPredicate implements Predicate<Internship
                 .reduce((a, b) -> a || b).orElse(isMatchAll);
         boolean foundInRole = roleKeywords.stream()
                 .map(set -> set.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
-                        internship.getRole().get().role, keyword)))
+                        internship.getRole().role, keyword)))
                 .reduce((a, b) -> a || b).orElse(isMatchAll);
         boolean foundInRemark = remarkKeywords.stream()
                 .map(set -> set.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
