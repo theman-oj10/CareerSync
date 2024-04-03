@@ -6,7 +6,7 @@ pageNav: 3
 ### Table of Contents
 1. [Introduction](#introduction)
     - [Who is CareerSync for?](#who-is-careersync-for)
-    - [What is the purpose of this User Guide?](#what-is-the-purpose-of-this-user-guide)
+    - [What is the purpose of this User Guide](#what-is-the-purpose-of-this-user-guide)
     - [What can students do with CareerSync?](#what-can-students-do-with-careersync)
 2. [Essential Terms & Symbols](#essential-terms--symbols)
     - [Glossary](#glossary)
@@ -170,7 +170,7 @@ For the restrictions on what is accepted for each field, kindly refer to [Fields
 ### Tutorial
 This section would guide you through the basic commands of <span style="color: #f66a0a;">CareerSync</span>, and how to use them.
 
-#### Clear sample internship entries: `clear`
+#### Clearing sample internship entries: `clear`
 
 To begin using <span style="color: #f66a0a;">CareerSync</span>, you should clear the sample internship entries that are present when you first start the 
 application.
@@ -190,7 +190,7 @@ Key in the command `clear` in the CLI and press `Enter` to clear the sample inte
    There are no more internships in the list.
 </div>
 
-#### Add an internship entry: `add`
+#### Adding an internship entry: `add`
 
 Next, let us try to add an internship entry. 
 
@@ -206,7 +206,7 @@ Successful output after adding the entry:<br>
    You can now see your new internship with the details you entered in the **Internship List Display!**
 </div>
 
-#### Edit an internship entry: `edit`
+#### Editing an internship entry: `edit`
 
 Oh no! You made a mistake in the email address of the contact person. Let's edit the email address.
 
@@ -243,7 +243,7 @@ Successful output after finding all entries that satisfy the conditions:<br>
 Your **Internship List Display** now only has all the internships satisfying both conditions.
 </div>
 
-#### Delete an internship entry: `delete`
+#### Deleting an internship entry: `delete`
 You decide that to no longer pursue the internship at Facebook. Let's delete that entry.
 
 <div markdown="span" class="alert alert-success">
@@ -257,7 +257,7 @@ Successful output after deleting the entry:<br>
 The Facebook internship entry has been removed, and is no longer present in your database.
 </div>
 
-#### List all internships: `list`
+#### Listing all internships: `list`
 You used find to filter the internships. How do you see all the internships again?
 
 <div markdown="span" class="alert alert-success">
@@ -272,7 +272,7 @@ You now see all your internships. Your Tiktok internship, previously hidden, is 
 </div>
 
 
-#### Exit the program: `exit`
+#### Exiting the program: `exit`
 You decide that you are done for the day. How do you exit the application and save the file?
 
 <div markdown="span" class="alert alert-success">
@@ -303,21 +303,21 @@ Let's do a quick review of the commands!
 
 #### Command Summary
 
-| Action                                                      | Description                              | Format |
-|-------------------------------------------------------------|------------------------------------------|------------------------------------------|
-| [add](#adding-an-internship-add)                            | Adds an Internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER /loc LOCATION_ENUM /role ROLE` |
-| [delete](#deleting-an-internship-delete)                    | Removes a Internship.                    | `delete INDEX` |
-| [list](#listing-all-internships-list)                       | Removes a Internship.                    | `list` |
-| [edit](#editing-an-internship-edit)                         | Modifies an existing Internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE` |
-| [addremark](#adding-a-remark-addremark)                     | Adds a remark to an existing Internship. | `addremark INDEX [/remark REMARK]` |
-| [clear](#clearing-all-internships-clear)                    | Removes all Internships from the deck.   | `clear` |
-| [find](#finding-internships-by-keywords-find)               | Finds an Internship by keywords.         |`find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS]`|
-| [sort](#sorting-internships-by-fields-sort)                 | Sorts the Internships by fields.         | `sort FIELD ORDER` |
-| [addtask](#add-a-task-to-an-internship-addtask)             | Adds a task to an internship.            | `addtask /task Task` |
-| [setdeadline](#set-deadline-to-a-task-setdeadline)          | Sets a deadline to a task.            | `setdeadline INDEX_INTERNSHIP /selecttask INDEX_TASK /deadline Deadline` |
+| Action                                         | Description                              | Format |
+|------------------------------------------------|------------------------------------------|------------------------------------------|
+| [add](#adding-an-entry-add)                    | Adds an Internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER /loc LOCATION_ENUM /role ROLE` |
+| [delete](#deleting-an-internship-delete)       | Removes a Internship.                    | `delete INDEX` |
+| [list](#listing-all-internships-list)          | Removes a Internship.                    | `list` |
+| [edit](#editing-an-internship-edit)            | Modifies an existing Internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE` |
+| [addremark](#adding-a-remark-addremark)        | Adds a remark to an existing Internship. | `addremark INDEX [/remark REMARK]` |
+| [clear](#clearing-all-internships-clear)       | Removes all Internships from the deck.   | `clear` |
+| [find](#finding-internships-by-keywords-find)  | Finds an Internship by keywords.         |`find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS]`|
+| [sort](#sorting-internships-by-fields-sort)    | Sorts the Internships by fields.         | `sort FIELD ORDER` |
+| [addtask](#add-a-task-to-an-internship-addtask) | Adds a task to an internship.            | `addtask /task Task` |
+| [setdeadline](#set-deadline-to-a-task-setdeadline) | Sets a deadline to a task.            | `setdeadline INDEX_INTERNSHIP /selecttask INDEX_TASK /deadline Deadline` |
 | [deletetask](#deleting-tasks-from-an-internship-deletetask) | Deletes a task from an internship.            | `deletetask INDEX_INTERNSHIP /selecttask INDEX_TASK` |
-| [sort](#sorting-internships-by-fields-sort)                 | Sorts the Internships by fields.         | `sort FIELD ORDER` |
-| [exit](#exiting-the-program-exit)                           | Exits and closes the application.        | `exit` |
+| [sort](#sorting-internships-by-fields-sort)    | Sorts the Internships by fields.         | `sort FIELD ORDER` |
+| [exit](#exiting-the-program-exit)              | Exits and closes the application.        | `exit` |
 
 
 <div markdown="block" class="alert alert-info">
@@ -722,9 +722,10 @@ Clears all entries from the application.
 2. Successful Output after clearing entries:<br>
    ![After successfully clearing](./images/clear/clear-after.png)
 There are no more internships in the list.
-</div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
+
+<div style="margin-top: 20px;"></div>
 
 #### Exiting the program: `exit`
 
