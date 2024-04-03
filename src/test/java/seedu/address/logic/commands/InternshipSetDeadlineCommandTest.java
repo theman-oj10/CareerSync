@@ -22,9 +22,9 @@ import seedu.address.model.internship.Deadline;
 import seedu.address.model.internship.Internship;
 
 /**
- * Contains integration tests (interaction with the InternshipModel) and unit tests for InternshipAddDeadlineCommand.
+ * Contains integration tests (interaction with the InternshipModel) and unit tests for InternshipSetDeadlineCommand.
  */
-public class InternshipAddDeadlineCommandTest {
+public class InternshipSetDeadlineCommandTest {
     private static final Index INDEX_FIRST_TASK = Index.fromOneBased(1);
     private static final Index INDEX_SECOND_TASK = Index.fromOneBased(2);
     private static final Deadline DEFAULT_DEADLINE = new Deadline("20/04/2024");
@@ -38,10 +38,10 @@ public class InternshipAddDeadlineCommandTest {
         Internship internshipWithAddedDeadline = getTypicalInternshipData().getInternshipList().get(0);
         internshipWithAddedDeadline.getTaskList().getTask(0).addDeadline(DEFAULT_DEADLINE);
 
-        InternshipAddDeadlineCommand addDeadlineCommand = new InternshipAddDeadlineCommand(INDEX_FIRST_INTERNSHIP,
+        InternshipSetDeadlineCommand addDeadlineCommand = new InternshipSetDeadlineCommand(INDEX_FIRST_INTERNSHIP,
                 INDEX_FIRST_TASK, DEFAULT_DEADLINE);
 
-        String expectedMessage = String.format(InternshipAddDeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS,
+        String expectedMessage = String.format(InternshipSetDeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS,
                 DEFAULT_DEADLINE);
 
         InternshipModel expectedModel = new InternshipModelManager(new InternshipData(getTypicalInternshipData()),
@@ -54,7 +54,7 @@ public class InternshipAddDeadlineCommandTest {
     @Test
     public void execute_invalidInternshipIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredInternshipList().size() + 1);
-        InternshipAddDeadlineCommand addDeadlineCommand = new InternshipAddDeadlineCommand(outOfBoundIndex,
+        InternshipSetDeadlineCommand addDeadlineCommand = new InternshipSetDeadlineCommand(outOfBoundIndex,
                 INDEX_FIRST_TASK, DEFAULT_DEADLINE);
 
         assertCommandFailure(addDeadlineCommand, model, InternshipMessages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
@@ -64,7 +64,7 @@ public class InternshipAddDeadlineCommandTest {
     public void execute_invalidTaskIndex_failure() {
         Internship internshipWithTask = getTypicalInternships().get(0);
         Index outOfBoundIndex = Index.fromOneBased(internshipWithTask.getTaskListSize() + 1);
-        InternshipAddDeadlineCommand addDeadlineCommand = new InternshipAddDeadlineCommand(INDEX_FIRST_INTERNSHIP,
+        InternshipSetDeadlineCommand addDeadlineCommand = new InternshipSetDeadlineCommand(INDEX_FIRST_INTERNSHIP,
                 outOfBoundIndex, DEFAULT_DEADLINE);
 
         assertCommandFailure(addDeadlineCommand, model, InternshipMessages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -72,11 +72,11 @@ public class InternshipAddDeadlineCommandTest {
 
     @Test
     public void equals() {
-        final InternshipAddDeadlineCommand standardCommand = new
-                InternshipAddDeadlineCommand(INDEX_FIRST_INTERNSHIP, INDEX_FIRST_TASK, DEFAULT_DEADLINE);
+        final InternshipSetDeadlineCommand standardCommand = new
+                InternshipSetDeadlineCommand(INDEX_FIRST_INTERNSHIP, INDEX_FIRST_TASK, DEFAULT_DEADLINE);
 
         // same values -> returns true
-        InternshipAddDeadlineCommand commandWithSameValues = new InternshipAddDeadlineCommand(INDEX_FIRST_INTERNSHIP,
+        InternshipSetDeadlineCommand commandWithSameValues = new InternshipSetDeadlineCommand(INDEX_FIRST_INTERNSHIP,
                 INDEX_FIRST_TASK, DEFAULT_DEADLINE);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -90,15 +90,15 @@ public class InternshipAddDeadlineCommandTest {
         assertFalse(standardCommand.equals(new InternshipClearCommand()));
 
         // different internship index -> returns false
-        assertFalse(standardCommand.equals(new InternshipAddDeadlineCommand(INDEX_SECOND_INTERNSHIP, INDEX_FIRST_TASK,
+        assertFalse(standardCommand.equals(new InternshipSetDeadlineCommand(INDEX_SECOND_INTERNSHIP, INDEX_FIRST_TASK,
                 DEFAULT_DEADLINE)));
 
         // different task index -> returns false
-        assertFalse(standardCommand.equals(new InternshipAddDeadlineCommand(INDEX_FIRST_INTERNSHIP, INDEX_SECOND_TASK,
+        assertFalse(standardCommand.equals(new InternshipSetDeadlineCommand(INDEX_FIRST_INTERNSHIP, INDEX_SECOND_TASK,
                 DEFAULT_DEADLINE)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new InternshipAddDeadlineCommand(INDEX_FIRST_INTERNSHIP, INDEX_FIRST_TASK,
+        assertFalse(standardCommand.equals(new InternshipSetDeadlineCommand(INDEX_FIRST_INTERNSHIP, INDEX_FIRST_TASK,
                 new Deadline("22/02/2022"))));
     }
 
@@ -106,9 +106,9 @@ public class InternshipAddDeadlineCommandTest {
     public void toStringMethod() {
         Index internshipIndex = Index.fromOneBased(1);
         Index taskIndex = Index.fromOneBased(1);
-        InternshipAddDeadlineCommand addDeadlineCommand = new InternshipAddDeadlineCommand(internshipIndex, taskIndex,
+        InternshipSetDeadlineCommand addDeadlineCommand = new InternshipSetDeadlineCommand(internshipIndex, taskIndex,
                 DEFAULT_DEADLINE);
-        String expected = InternshipAddDeadlineCommand.class.getCanonicalName() + "{internshipIndex=" + internshipIndex
+        String expected = InternshipSetDeadlineCommand.class.getCanonicalName() + "{internshipIndex=" + internshipIndex
                 + ", taskIndex=" + taskIndex + ", deadline=" + DEFAULT_DEADLINE + "}";
         assertEquals(expected, addDeadlineCommand.toString());
     }
