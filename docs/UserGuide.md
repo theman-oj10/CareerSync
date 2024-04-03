@@ -667,6 +667,7 @@ Before you try this command, you need an internship that has at least 1 task. Yo
 <div markdown="span" class="alert alert-danger">
 ⚠️ **Common errors:** <br>
 1. Don't forget that you need to include both the internship index and the task index!
+2. If your day or month is single-digit, remember to include a leading zero. For example, `01/04/2024` instead of `1/4/2024`.
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
@@ -692,13 +693,24 @@ Lets you delete a task from an existing internship after it is complete!
    ![After successfully deleting the task](./images/deletetask/deletetask-after.png)<br><br>
 </div>
 
+<div markdown="span" class="alert alert-danger">
+⚠️ **Common errors:** <br>
+1. Don't forget that you need to include both the internship index and the task index!
+</div>
+
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
 <div style="margin-top: 20px;"></div>
 
 #### Clearing all internships: `clear`
 
-Clears all entries from the application.
+This clears all your internship entries from CareerSync.
+
+<div markdown="span" class="alert alert-danger">
+
+⚠️ Caution:
+This operation is irreversible. Once you clear all entries, you cannot undo it.
+</div>
 
 **Format:** `clear`
 
@@ -713,14 +725,13 @@ Clears all entries from the application.
 2. Successful Output after clearing entries:<br>
    ![After successfully clearing](./images/clear/clear-after.png)
 There are no more internships in the list.
+</div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
-<div style="margin-top: 20px;"></div>
-
 #### Exiting the program: `exit`
 
-Exits the program.
+When you're done using CareerSync, you can exit the application using this command.
 
 Format: `exit`
 
@@ -738,7 +749,7 @@ Only do so if you are an experienced user! <br>
 </div>
 
 <span style="color: #f66a0a;">CareerSync</span> data is saved in the hard disk, as a [JSON](#glossary) file at the path 
-`[JAR file location]/data/internship.json`. After every command that changes the data, <span style="color: #f66a0a;">CareerSync</span> performs a save automatically. There is no need to save manually.
+`[JAR file location]/data/internshipdata.json`. After every command that changes the data, <span style="color: #f66a0a;">CareerSync</span> performs a save automatically. There is no need to save manually.
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
