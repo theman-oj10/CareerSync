@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.internship.Internship;
@@ -21,7 +23,8 @@ public class InternshipModelManager implements InternshipModel {
 
     private final InternshipData internshipData;
     private final InternshipUserPrefs userPrefs;
-    private final FilteredList<Internship> filteredInternships;
+    private FilteredList<Internship> filteredInternships;
+    private SortedList<Internship> sortedInternships;
 
     // The internship that is currently selected. Even though it is a list, it should only ever show one internship.
     // It is set as a FilteredList, so it can work with the existing UI components.
@@ -38,6 +41,7 @@ public class InternshipModelManager implements InternshipModel {
         this.internshipData = new InternshipData(internshipData);
         this.userPrefs = new InternshipUserPrefs(userPrefs);
         filteredInternships = new FilteredList<>(this.internshipData.getInternshipList());
+        sortedInternships = new SortedList<>(filteredInternships);
         selectedInternship = new FilteredList<>(this.internshipData.getInternshipList());
     }
 
@@ -123,9 +127,17 @@ public class InternshipModelManager implements InternshipModel {
      */
     @Override
     public ObservableList<Internship> getFilteredInternshipList() {
-        return filteredInternships;
+        return sortedInternships;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Internship} backed by the internal list of
+     * {@code InternshipData}
+     */
+    public void sortFilteredInternshipList(Comparator<Internship> comparator) {
+        requireNonNull(comparator);
+        sortedInternships.setComparator(comparator);
+    }
     @Override
     public void setSelectedInternship(Internship internship) {
         selectedInternship.setPredicate(internship::equals);

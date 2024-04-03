@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -85,6 +86,11 @@ public interface InternshipModel {
      */
     void updateFilteredInternshipList(Predicate<Internship> predicate);
 
+    /**
+     * Sorts the filtered internship list according to the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void sortFilteredInternshipList(Comparator<Internship> comparator);
     /**
      * Sets the selected {@code internship} in the model selected internship.
      * This represents the internship that the user is currently viewing in the detailed internship window.
