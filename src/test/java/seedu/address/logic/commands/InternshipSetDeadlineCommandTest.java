@@ -33,12 +33,11 @@ public class InternshipSetDeadlineCommandTest {
 
     @Test
     public void execute_internshipWithSpecifiedTaskAndDeadline_success() {
-        //this is ALICE_MICROSOFT, cannot add deadline to it directly because the change will persist and affect
-        //other tests
-        Internship internshipWithAddedDeadline = getTypicalInternshipData().getInternshipList().get(0);
+        //this is BENSON_GOOGLE
+        Internship internshipWithAddedDeadline = getTypicalInternshipData().getInternshipList().get(1);
         internshipWithAddedDeadline.getTaskList().getTask(0).addDeadline(DEFAULT_DEADLINE);
 
-        InternshipSetDeadlineCommand addDeadlineCommand = new InternshipSetDeadlineCommand(INDEX_FIRST_INTERNSHIP,
+        InternshipSetDeadlineCommand addDeadlineCommand = new InternshipSetDeadlineCommand(INDEX_SECOND_INTERNSHIP,
                 INDEX_FIRST_TASK, DEFAULT_DEADLINE);
 
         String expectedMessage = String.format(InternshipSetDeadlineCommand.MESSAGE_ADD_DEADLINE_SUCCESS,
@@ -46,7 +45,7 @@ public class InternshipSetDeadlineCommandTest {
 
         InternshipModel expectedModel = new InternshipModelManager(new InternshipData(getTypicalInternshipData()),
                 new InternshipUserPrefs());
-        expectedModel.setInternship(expectedModel.getFilteredInternshipList().get(0), internshipWithAddedDeadline);
+        expectedModel.setInternship(expectedModel.getFilteredInternshipList().get(1), internshipWithAddedDeadline);
 
         assertCommandSuccess(addDeadlineCommand, model, expectedMessage, expectedModel);
     }
