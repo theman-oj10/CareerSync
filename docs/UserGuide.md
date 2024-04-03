@@ -135,8 +135,7 @@ When you first start <span style="color: #f66a0a;">CareerSync</span>, you will s
 ![Ui](images/Ui.png)
 
    * `add /com Tiktok /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com
-      /phone 90890301 /loc remote /role Software Intern` : Adds this internship entry to the <span style="color:
-     #f66a0a;">CareerSync</span> application.
+      /phone 90890301 /loc remote /role Software Intern` : Adds this internship entry to the <span style="color:#f66a0a;">CareerSync</span> application.
 #### Areas
 The main window of <span style="color: #f66a0a;">CareerSync</span> is divided into four main areas: the **Tab Area**, the **CLI**, the **Message Box** and the **Internship List Display**.
 
@@ -300,16 +299,16 @@ you fully understand each command and their usage.
 ____________________________________________________________________________________________________________________
 ### **Commands**
 
-** add signpost
+Let's do a quick review of the commands!
 
 #### Command Summary
 
 | Action                                         | Description                              | Format                                                                                                                                                                                                |
 |------------------------------------------------|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [add](#adding-an-entry-add)                    | Adds an internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER /loc LOCATION_ENUM /role ROLE`                                                   |
+| [add](#adding-an-entry-add)                    | Adds an internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER [/loc LOCATION_ENUM] [/role ROLE]`                                               |
 | [delete](#deleting-an-internship-delete)       | Removes a internship.                    | `delete INDEX`                                                                                                                                                                                        |
 | [list](#listing-all-internships-list)          | Lists all internships.                   | `list`                                                                                                                                                                                                |
-| [edit](#editing-an-internship-edit)            | Modifies an existing internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE`                             |
+| [edit](#editing-an-internship-edit)            | Modifies an existing internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE]`                            |
 | [addremark](#adding-a-remark-addremark)        | Adds a remark to an existing internship. | `addremark INDEX [/remark REMARK]`                                                                                                                                                                    |
 | [find](#finding-internships-by-keywords-find)  | Finds an internship by keywords.         | `find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS] [/remark REMARK_KEYWORDS]` |
 | [sort](#sorting-internships-by-fields-sort)    | Sorts the internships by fields.         | `sort FIELD ORDER`                                                                                                                                                                                    |
@@ -353,7 +352,7 @@ With any internship manager, it is important to know how to add an internship en
 
 This command lets you add an internship entry easily!
 
-**Format:** `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER /loc LOCATION_ENUM /role ROLE ​` <br>
+**Format:** `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER [/loc LOCATION_ENUM] [/role ROLE] ​` <br>
 
 * The fields `COMPANY_NAME`, `DESCRIPTION`, `CONTACT_NAME` and `ROLE` allow the use of any text, number and/or spaces
 * The field `STATUS` accepts only the following inputs: `to_apply`, `ongoing`, `rejected`, `accepted`
@@ -740,14 +739,13 @@ Format: `exit`
 #### Saving and Editing Your Internship Data
 
 <div markdown="span" class="alert alert-danger">
-
 ⚠️ Caution:
 Users are **NOT** recommended to modify their data file directly, since wrong formatting will cause the app to malfunction.
 Only do so if you are an experienced user! <br>
 </div>
 
-<span style="color: #f66a0a;">CareerSync</span> data is saved in the hard disk, as a [JSON](#glossary) file at the path `[JAR file location]/data/internship.json`.
-After every command that changes the data, <span style="color: #f66a0a;">CareerSync</span> performs a save automatically. There is no need to save manually.
+<span style="color: #f66a0a;">CareerSync</span> data is saved in the hard disk, as a [JSON](#glossary) file at the path 
+`[JAR file location]/data/internship.json`. After every command that changes the data, <span style="color: #f66a0a;">CareerSync</span> performs a save automatically. There is no need to save manually.
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
