@@ -1,5 +1,6 @@
 package seedu.address.model.internship;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -9,6 +10,13 @@ public class RoleTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Role(null));
+    }
+
+    @Test
+    public void constructor_emptyRole_createsUnknownRole() {
+        // Test with empty string
+        Role unknown = new Role("");
+        assertEquals(unknown.toString(), "Unknown Role");
     }
 
     @Test
