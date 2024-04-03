@@ -135,8 +135,7 @@ When you first start <span style="color: #f66a0a;">CareerSync</span>, you will s
 ![Ui](images/Ui.png)
 
    * `add /com Tiktok /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com
-      /phone 90890301 /loc remote /role Software Intern` : Adds this internship entry to the <span style="color:
-     #f66a0a;">CareerSync</span> application.
+      /phone 90890301 /loc remote /role Software Intern` : Adds this internship entry to the <span style="color:#f66a0a;">CareerSync</span> application.
 #### Areas
 The main window of <span style="color: #f66a0a;">CareerSync</span> is divided into four main areas: the **Tab Area**, the **CLI**, the **Message Box** and the **Internship List Display**.
 
@@ -300,7 +299,7 @@ you fully understand each command and their usage.
 ____________________________________________________________________________________________________________________
 ### **Commands**
 
-** add signpost
+Let's do a quick review of the commands!
 
 #### Command Summary
 
@@ -354,7 +353,7 @@ With any internship manager, it is important to know how to add an internship en
 
 This command lets you add an internship entry easily!
 
-**Format:** `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER /loc LOCATION_ENUM /role ROLE ​` <br>
+**Format:** `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER [/loc LOCATION_ENUM] [/role ROLE] ​` <br>
 
 * The fields `COMPANY_NAME`, `DESCRIPTION`, `CONTACT_NAME` and `ROLE` allow the use of any text, number and/or spaces
 * The field `STATUS` accepts only the following inputs: `to_apply`, `ongoing`, `rejected`, `accepted`
@@ -516,44 +515,50 @@ Adds a remark or modifies the existing one, of an existing internship at the spe
 
 #### Finding internships by keywords: `find`
 
-Finds internship entries whose specified fields contains the keywords.
+You can use this to filter the visible internships in CareerSync by keywords.
 
-**Format:** `find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS]`
+**Format:** `find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS] [/remark REMARK_KEYWORDS]`
 
 * MODE is either 'withall' or 'withany'.
   * 'withall' returns internships that match each prefix-keyword predicate.
-    * Within each prefix field, the Internship just has to contain any of the keywords.
+    * Within each prefix field that you specified, the internship just has to contain any of the keywords.
   * 'withany' returns internships that match at least one prefix-keyword predicate.
 * The search is case-insensitive. e.g `google` will match `Google`
 * The order of the keywords does not matter. e.g. `Microsoft Google` will match `Google Microsoft`
-* Only the name is searched.
 * Only full words will be matched e.g. `Goo` will not match `Google`
 * Internship matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hewlett Song` will return `Hewlett Packard`, `Song Fa`
 
-** screenshots to be updated
 <div markdown="span" class="alert alert-success">
 
 💡 **Try It Out:**<br>
 
 1. Input:<br>
    `find withall /status to_apply /loc remote`<br>
-   ![Before filtering by all toapply and remote](./images/find/find-before.png)<br><br>
-This will filter the list of internships to show only those with both status `TO_APPLY` and location `REMOTE`.
+   ![Before filtering by all toapply and remote](./images/find/find-before.png)<br>
+This will filter the list of internships to show you only those with both status `TO_APPLY` and location `REMOTE`.<br><br>
 
 2. Successful Output after filtering:<br>
-   ![After successfully filtering by all toapply and remote](./images/find/findToApplyRemote-after.png)<br><br>
+   ![After successfully filtering by all toapply and remote](./images/find/find-after.png)<br><br>
 
 3. Other examples:<br>
-   i.`find withany /com Google /loc local` returns Internships with either company name (case-insensitive) `Google` or location `LOCAL`<br>
-   ii.`find withall /poc John /desc paperwork` returns Internships with both contact name (case-insensitive) `John` and description containing `paperwork`
+   i.`find withany /com Google /loc local` shows you internships with either company name (case-insensitive) `Google` or location `LOCAL`<br>
+   ii.`find withall /poc John /desc paperwork` shows you internships with both contact name (case-insensitive) `John` and description containing `paperwork`
 </div>
 
-**Common errors:**
-1. If no field prefixes are specified to search by, the command will be rejected with error message:<br>
-`At least one field prefix and keyword must be specified to be searched.`
-2. MODE must be present, and be either `withall` or `withany`. If not, the command will be rejected with error message:<br>
-`Invalid mode specified. Please specify either 'withall' or 'withany'.`
+<div markdown="span" class="alert alert-info">
+ℹ️ **Tip:** If you want to view all internships again, simply use the [list](#listing-all-internships-list) command.
+</div>
+
+<div markdown="span" class="alert alert-danger">
+⚠️ **Common errors:** <br>
+
+1. If you do not specify any field prefixes, or specified an invalid field prefix, the command will be rejected with error message:<br>
+   `At least one supported field prefix and keyword must be specified to be searched.
+   Supported prefixes are /com, /poc, /loc, /status, /desc, /role, /remark`<br>
+2. Make sure you specify the MODE of search, either `withall` or `withany`. If not, the command will be rejected with error message:<br>
+`Invalid mode specified. Please specify either 'withall' or 'withany'.`<br>
+</div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
@@ -614,9 +619,9 @@ This will sort the list of internships by company name in ascending order.<br>
 
 Using this function, you can add a task to an internship so that you won't forget to complete it!
 
-**Format:** `addtask /task Task`
+**Format:** `addtask /task TASK`
 
-- `Task` is the task you want to add to the internship.
+- `TASK` is the task you want to add to the internship.
 
 <div markdown="span" class="alert alert-success">
 
@@ -646,16 +651,16 @@ Refer to the error message displayed for the correct format to use!
 
 Using this function, you can set the deadline to a task under an internship so that you won't miss the deadline!
 
-**Format:** `setdeadline INDEX_INTERNSHIP /selecttask INDEX_TASK /deadline Deadline`
+**Format:** `setdeadline INDEX_INTERNSHIP /selecttask INDEX_TASK /deadline DEADLINE`
 
 - `INDEX_INTERNSHIP` is the index of the internship with the task you want to set the deadline for.
 - `INDEX_TASK` is the index of the task that you want to set the deadline for.
-- `Deadline` is the deadline you want to set for the task. It must be in the format `yyyy-MM-dd`, and a valid date.
+- `DEADLINE` is the deadline you want to set for the task. It must be in the format `DD/MM/YYYY`, and a valid date.
 
 <div markdown="span" class="alert alert-success">
 
 💡 **Try It Out:**<br>
-Before you try this command, you need an internship that has at least 1 task. You can add it by using the `addtask` command. <br>
+Before you try this command, you need an internship that has at least 1 task. You can add it by using the [addtask](#add-a-task-to-an-internship-addtask) command. <br>
 1. Input:<br>
    `setdeadline 1 /selecttask 1 /deadline 24/04/2024`<br>
    ![Before Setting Deadline](./images/setdeadline/setdeadline-before.png)<br>
@@ -665,9 +670,7 @@ Before you try this command, you need an internship that has at least 1 task. Yo
 </div>
 
 <div markdown="span" class="alert alert-info">
-ℹ️ **Tip:** Once you add a deadline to a task, you cannot remove it. You can only update it using this command.<br>
-To have the same task without the deadline, you can add a new task without a deadline using the `addtask` command, then delete the old task. <br>
-You cannot add more than 1 task at a time with 1 command. To add multiple tasks, use multiple commands, one for each task.
+ℹ️ **Tip:** Once you set a deadline to a task, you can't remove it! You can only change the deadline using this command.
 </div>
 
 <div markdown="span" class="alert alert-danger">
@@ -742,8 +745,8 @@ Users are **NOT** recommended to modify their data file directly, since wrong fo
 Only do so if you are an experienced user! <br>
 </div>
 
-<span style="color: #f66a0a;">CareerSync</span> data is saved in the hard disk, as a [JSON](#glossary) file at the path `[JAR file location]/data/internship.json`.
-After every command that changes the data, <span style="color: #f66a0a;">CareerSync</span> performs a save automatically. There is no need to save manually.
+<span style="color: #f66a0a;">CareerSync</span> data is saved in the hard disk, as a [JSON](#glossary) file at the path 
+`[JAR file location]/data/internship.json`. After every command that changes the data, <span style="color: #f66a0a;">CareerSync</span> performs a save automatically. There is no need to save manually.
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
@@ -782,6 +785,6 @@ After every command that changes the data, <span style="color: #f66a0a;">CareerS
 | `/role`    | Role for the Internship             | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `/remark`  | Remark for the Internship           | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `/task`    | Task for the Internship             | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `/deadline`| Deadline for the Task               | Valid format: `YYYY-MM-DD`<br>- The date must be a valid date.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `/deadline`| Deadline for the Task               | Valid format: `DD/MM/YYYY`<br>- The date must be a valid date.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
 [Go to Table of Contents](#table-of-contents)

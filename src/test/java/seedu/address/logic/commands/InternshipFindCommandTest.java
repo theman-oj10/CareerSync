@@ -40,10 +40,10 @@ public class InternshipFindCommandTest {
     public void equals() {
         InternshipContainsKeywordsPredicate firstPredicate =
                 new InternshipContainsKeywordsPredicate("first", null, null,
-                        null, null, null, false);
+                        null, null, null, null, false);
         InternshipContainsKeywordsPredicate secondPredicate =
                 new InternshipContainsKeywordsPredicate("second", null, null,
-                        null, null, null, false);
+                        null, null, null, null, false);
 
         InternshipFindCommand findFirstCommand = new InternshipFindCommand(firstPredicate);
         InternshipFindCommand findSecondCommand = new InternshipFindCommand(secondPredicate);
@@ -70,7 +70,7 @@ public class InternshipFindCommandTest {
         String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 0);
         InternshipContainsKeywordsPredicate predicate =
                 new InternshipContainsKeywordsPredicate("Tiktok", null, null,
-                null, null, null, false);
+                null, null, null, null, false);
         InternshipFindCommand command = new InternshipFindCommand(predicate);
         expectedModel.updateFilteredInternshipList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -82,7 +82,7 @@ public class InternshipFindCommandTest {
         String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 2);
         InternshipContainsKeywordsPredicate predicate =
                 new InternshipContainsKeywordsPredicate("Microsoft OpenAI", null, null,
-                        null, null, null, false);
+                        null, null, null, null, false);
         InternshipFindCommand command = new InternshipFindCommand(predicate);
         expectedModel.updateFilteredInternshipList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -95,7 +95,7 @@ public class InternshipFindCommandTest {
         String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 4);
         InternshipContainsKeywordsPredicate predicateRole =
                 new InternshipContainsKeywordsPredicate(null, null, null,
-                        null, null, "Engineer", true);
+                        null, null, "Engineer", null, true);
         InternshipFindCommand command = new InternshipFindCommand(predicateRole);
         expectedModel.updateFilteredInternshipList(predicateRole);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -108,7 +108,7 @@ public class InternshipFindCommandTest {
         String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 2);
         InternshipContainsKeywordsPredicate predicateRoleStatus =
                 new InternshipContainsKeywordsPredicate(null, null, null,
-                        "ongoing", null, "Engineer", true);
+                        "ongoing", null, "Engineer", null, true);
         InternshipFindCommand command = new InternshipFindCommand(predicateRoleStatus);
         expectedModel.updateFilteredInternshipList(predicateRoleStatus);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -122,7 +122,7 @@ public class InternshipFindCommandTest {
         String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 5);
         InternshipContainsKeywordsPredicate predicateRoleStatus =
                 new InternshipContainsKeywordsPredicate(null, null, null,
-                        "pending", null, "Engineer", false);
+                        "pending", null, "Engineer", null, false);
         InternshipFindCommand command = new InternshipFindCommand(predicateRoleStatus);
         expectedModel.updateFilteredInternshipList(predicateRoleStatus);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -131,7 +131,7 @@ public class InternshipFindCommandTest {
     public void toStringMethod() {
         InternshipContainsKeywordsPredicate predicate =
                 new InternshipContainsKeywordsPredicate("Tiktok", null, null,
-                        null, null, null, false);
+                        null, null, null, null, false);
         InternshipFindCommand findCommand = new InternshipFindCommand(predicate);
         String expected = InternshipFindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());

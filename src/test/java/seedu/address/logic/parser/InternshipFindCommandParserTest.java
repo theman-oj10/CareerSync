@@ -28,6 +28,17 @@ public class InternshipFindCommandParserTest {
     }
 
     @Test
+    public void parse_prefixPresentButNoKey_throwsParseException() {
+        assertParseFailure(parser, MODE_WITHALL + " /com",
+                InternshipFindCommand.NO_KEYWORD_SPECIFIED);
+    }
+
+    @Test
+    public void parse_unsupportedPrefix_throwsParseException() {
+        assertParseFailure(parser, MODE_WITHALL + " /invalidPrefix Microsoft Google",
+                String.format(InternshipFindCommand.NO_SEARCH_KEY_SPECIFIED));
+    }
+    @Test
     public void parse_noMode_throwsParseException() {
         assertParseFailure(parser, " /com Microsoft Google",
                 String.format(InternshipFindCommand.INVALID_MODE_SPECIFIED));
@@ -44,7 +55,7 @@ public class InternshipFindCommandParserTest {
         InternshipFindCommand expectedFindCommand =
                 new InternshipFindCommand(new InternshipContainsKeywordsPredicate(
                         "Microsoft Google", null, null,
-                        null, null, null, true));
+                        null, null, null, null, true));
 
         assertParseSuccess(parser, MODE_WITHALL + " "
                 + PREFIX_COMPANY + " Microsoft Google ", expectedFindCommand);

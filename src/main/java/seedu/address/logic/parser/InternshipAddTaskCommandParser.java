@@ -45,6 +45,8 @@ public class InternshipAddTaskCommandParser implements InternshipParser<Internsh
                     InternshipAddTaskCommand.MESSAGE_EMPTY_TASK), pe);
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TASK);
+
         return new InternshipAddTaskCommand(index, task);
     }
 }

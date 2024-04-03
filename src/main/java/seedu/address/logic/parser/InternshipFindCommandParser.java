@@ -8,11 +8,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.InternshipParserUtil.anyPrefixesPresent;
+import static seedu.address.logic.parser.InternshipParserUtil.prefixesPresentAreNotEmpty;
 
 import java.util.Objects;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.InternshipFindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -23,7 +25,7 @@ import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
  */
 public class InternshipFindCommandParser implements InternshipParser<InternshipFindCommand> {
     private static final Prefix[] supportedPrefixes = {PREFIX_COMPANY, PREFIX_CONTACT_NAME, PREFIX_LOCATION,
-        PREFIX_STATUS, PREFIX_DESCRIPTION, PREFIX_ROLE};
+        PREFIX_STATUS, PREFIX_DESCRIPTION, PREFIX_ROLE, PREFIX_REMARK};
     /**
      * Parses the given {@code String} of arguments in the context of the InternshipFindCommand
      * and returns a InternshipFindCommand object for execution.
@@ -47,6 +49,11 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
             throw new ParseException(InternshipFindCommand.INVALID_MODE_SPECIFIED);
         }
 
+        if (!prefixesPresentAreNotEmpty(argMultimap, InternshipFindCommandParser.supportedPrefixes)) {
+            throw new ParseException(InternshipFindCommand.NO_KEYWORD_SPECIFIED);
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(InternshipFindCommandParser.supportedPrefixes);
         return new InternshipFindCommand(createPredicate(mode, argMultimap));
     }
 
@@ -62,18 +69,16 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
                 argMultimap.getValue(PREFIX_STATUS).orElse(null),
                 argMultimap.getValue(PREFIX_DESCRIPTION).orElse(null),
                 argMultimap.getValue(PREFIX_ROLE).orElse(null),
+                argMultimap.getValue(PREFIX_REMARK).orElse(null),
                 Objects.equals(mode, MODE_WITHALL));
 
         return predicate;
     }
 
     /**
-     * Returns true if any of the prefixes contains non-empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
+     * @return an array of the supported prefixes
      */
-    private static boolean anyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent() && !argumentMultimap
-                .getValue(prefix).get().isEmpty());
+    public static Prefix[] getSupportedPrefixes() {
+        return supportedPrefixes.clone();
     }
-
 }
