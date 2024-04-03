@@ -93,11 +93,7 @@ public class InternshipCard extends UiPart<Region> {
      * @param loc location of the internship
      */
     private void setLocationLabel(Location loc) {
-        if (loc != null) {
-            this.loc.setText(loc.toString());
-        } else {
-            this.loc.setText(""); // Set an empty string or a default value when loc is null
-        }
+        this.loc.setText(loc.toString());
     }
 
     /**
@@ -116,12 +112,7 @@ public class InternshipCard extends UiPart<Region> {
      * @param role role of the internship under the Internship entry
      */
     private void setCompanyNameAndRoleLabel(CompanyName companyName, Role role) {
-        String stringToSet;
-        if (role != null) {
-            stringToSet = companyName.toString() + " -- " + role.toString();
-        } else {
-            stringToSet = companyName.toString();
-        }
+        String stringToSet = companyName.toString() + " -- " + role.toString();
         companyNameAndRole.setText(stringToSet);
     }
 
