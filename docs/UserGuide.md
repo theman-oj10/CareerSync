@@ -558,7 +558,7 @@ This will filter the list of internships to show you only those with both status
 1. If you do not specify any field prefixes, or specified an invalid field prefix, the command will be rejected with error message:<br>
    `At least one supported field prefix and keyword must be specified to be searched.
    Supported prefixes are /com, /poc, /loc, /status, /desc, /role, /remark`<br>
-2. Make sure you specify the MODE of search, either `withall` or `withany`. If not, the command will be rejected with error message:<br>
+2. Make sure you specify the MODE of search, which must be either `withall` or `withany`. If not, the command will be rejected with error message:<br>
 `Invalid mode specified. Please specify either 'withall' or 'withany'.`<br>
 </div>
 
@@ -567,13 +567,13 @@ This will filter the list of internships to show you only those with both status
 <div style="margin-top: 20px;"></div>
 
 #### Sorting internships by fields: `sort`
-
-Sorts the internships by the specified field in ascending or descending order.
+This command allows you to sort the internships in CareerStnc by the specified field in ascending or descending order.
 
 **Format:** `sort FIELD ORDER`
 
 * FIELD is the field to sort by. It is case-sensitive. The list of valid fields can be found [here](#field-summary).
-    * `/status` sorts the internships by status in the order of `TO_APPLY` -> `ONGOING` -> `PENDING` -> `ACCEPTED` -> `REJECTED`.
+    * `/status` has an implicit ordering, in ascending order: `TO_APPLY` -> `ONGOING` -> `PENDING` -> `ACCEPTED` -> `REJECTED`.
+    * The rest of the fields are sorted in alphanumeric order. (A before Z, 0 before 9)
 * ORDER is either `asc` or `desc`.
     * `asc` sorts the internships in ascending order.
     * `desc` sorts the internships in descending order.
@@ -592,26 +592,15 @@ This will sort the list of internships by company name in ascending order.<br>
    ![After successfully filtering by all to_apply and remote](./images/sort/sort-after.png)<br><br>
 
 3. Other examples:<br>
-   i.`sort /status desc` returns internships sorted in the following order: `TO_APPLY` -> `ONGOING` -> `PENDING` -> `ACCEPTED` -> `REJECTED`<br>
-   ii.`sort /phone asc` returns internships sorted in ascending order of phone numbers.
+   i.`sort /status asc` sorts your internships in the following order: `TO_APPLY` -> `ONGOING` -> `PENDING` -> `ACCEPTED` -> `REJECTED`<br>
+   ii.`sort /phone asc` sorts your internships in ascending order of phone numbers.
 </div>
 
-**Common errors:** * error messages to be updated
-1. If an invalid field or no field is specified to sort by, the command will be rejected with error message:<br>
-   `Invalid field specified. Please specify one of the following: `<br>
-   `/com: Company Name `<br>
-   `/poc: Contact Name`<br>
-   `/phone: Contact Number`<br>
-   `/email: Contact Email`<br>
-   `/loc: Location`<br>
-   `/status: Status`<br>
-   `/desc: Description`<br>
-   `/role: Role`<br>
-   `/remark: Remark`<br>
-   `Example: sort /com asc`<br>
+<div markdown="span" class="alert alert-danger">
+⚠️ **Common errors:** <br>
 
-2. ORDER must be present, and be either `asc` or `desc`. If not, the command will be rejected with error message:<br>
-   `Invalid order specified. Please specify either asc to sort in ascending order or desc to sort in descending order. Example: sort /com asc`
+1. Don't forget to specify the ORDER of sorting, which must be either `asc` or `desc`.
+</div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
