@@ -41,12 +41,12 @@ public class InternshipMessages {
         final StringBuilder builder = new StringBuilder();
         builder.append("\nCompany Name: ")
                 .append(internship.getCompanyName());
-        builder.append("\nLocation: ")
-                .append(internship.getLocation());
+        internship.getLocation().ifPresent(location ->
+                builder.append("\nLocation: ").append(location));
         builder.append("\nDescription: ")
                 .append(internship.getDescription());
-        builder.append("\nRole: ")
-                .append(internship.getRole());
+        internship.getRole().ifPresent(role ->
+                builder.append("\nRole: ").append(role));
         builder.append("\nContact Name: ")
                 .append(internship.getContactName());
         builder.append("\nContact Email: ")

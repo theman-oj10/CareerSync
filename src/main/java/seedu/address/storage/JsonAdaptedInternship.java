@@ -158,23 +158,22 @@ public class JsonAdaptedInternship {
         }
         final TaskList modelTaskList = new TaskList(taskList);
 
-        final Role modelRole;
-        if (role == null || role.isEmpty()) {
-            modelRole = null;
-        } else if (!Role.isValidRole(role)) {
+        if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
+        }
+        if (!Role.isValidRole(role)) {
             throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
-        } else {
-            modelRole = new Role(role);
         }
+        final Role modelRole = new Role(role);
 
-        final Location modelLocation;
-        if (location == null || location.isEmpty()) {
-            modelLocation = null;
-        } else if (!Location.isValidLocation(location)) {
-            throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
-        } else {
-            modelLocation = new Location(location);
+        if (location == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Location.class.getSimpleName()));
         }
+        if (!Location.isValidLocation(location)) {
+            throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
+        }
+        final Location modelLocation = new Location(location);
 
         return new Internship(modelCompanyName, modelContactName, modelContactEmail, modelContactNumber,
                 modelLocation, modelApplicationStatus, modelDescription, modelRole, modelRemark, modelTaskList);
