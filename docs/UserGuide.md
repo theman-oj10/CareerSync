@@ -349,7 +349,7 @@ Format: `help`
 <div style="margin-top: 20px;"></div>
 
 #### Adding an internship: `add`
-Let's you add an internship entry to be tracked by CareerSync!
+Lets you add an internship entry to be tracked by CareerSync!
 
 **Format:** `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER [/loc LOCATION_ENUM] [/role ROLE] ​` <br>
 
@@ -378,7 +378,7 @@ Make sure to refer to the error message displayed for the correct format to use!
 <div style="margin-top: 20px;"></div>
 
 #### Deleting an internship: `delete`
-Let's you delete an internship entry from CareerSync.
+Lets you delete an internship entry from CareerSync.
 
 Format: `delete INDEX`
 
@@ -401,13 +401,13 @@ Format: `delete INDEX`
 
 #### Listing all internships: `list`
 
-Shows a list of all internships in the application.
+Shows you a list of all your internships tracked by CareerSync.
 
 **Format:** `list`
 
 <div markdown="span" class="alert alert-success">
 
-💡 **Tip:**<br>
+💡 **Try It Out:**<br>
 When you first start the application, you will see a list of all the internships you have added. <br>
 The [find](#finding-internships-by-keywords-find) command might be used to filter the visible list of internships. <br>
 If you want to see all internships again, simply type `list` and press enter.
@@ -422,6 +422,11 @@ In this example, the current view shows only internships with location 'REMOTE'.
 2. Successful Output after executing list: <br>
    ![After successfully listing all internships](./images/list/list-after.png)
 Any present filter will be removed, and all internships will be displayed in the list.
+</div>
+
+<div markdown="span" class="alert alert-info">
+ℹ️ **Tip:** If you can't seem to find an internship you added, try using `list` to see all your internships.
+You may have had a filter applied that is hiding the internship you are looking for.
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
@@ -443,14 +448,15 @@ Shows the full details of an internship entry. This replaces the current view of
 
 #### Editing an internship: `edit`
 
-Edits an existing internship entry in the application.
+Lets you edit an existing internship entry in CareerSync.
 
 **Format** : `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE] …​`
 
 * Edits the internship at the specified `INDEX`. The index refers to the index number shown in the displayed internship list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided. Multiple fields can be edited at once.
+* At least one of the optional fields must be provided. 
+* Multiple fields can be edited at once.
 * Existing values will be updated to the input values.
-* When editing status, only the valid statuses will be accepted. Not-valid statuses will cause the command to be rejected.
+* Only valid field values will be accepted. For example, you cannot set the status to 'ghosted' as it is not a valid status.
 
 <div markdown="span" class="alert alert-success">
 
@@ -465,21 +471,24 @@ Edits an existing internship entry in the application.
    The email field of the first internship is successfully updated to `tiktok@gmail.com`.
 </div>
 
+<div markdown="span" class="alert alert-danger">
+⚠️ **Common errors:** <br>
+1. Make sure not to miss out the mandatory `INDEX` field. If you do, CareerSync won't know which internship to edit!
+</div>
+
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
 <div style="margin-top: 20px;"></div>
 
 #### Adding a remark: `addremark`
 
-Adds a remark or modifies the existing one, of an existing internship at the specified `INDEX`.
+You can use this to add a remark or modify an existing one, of the internship at the specified `INDEX`.
+Use this to keep track of your personal notes about the internship!
 
 **Format:** `addremark INDEX /remark REMARK`
 
 * `INDEX` refers to the index in the internship list and **must be a positive integer** 1, 2, 3, …
- 
-**Examples:**
-*  `addremark 1 /remark This internship has a behavioural interview!` <br> Adds or modifies the remark of the internship at index 1 to be `This internship has a behavioural interview!`.
- 
+
 <div markdown="span" class="alert alert-success">
 
 💡 **Try It Out:**<br>
@@ -490,10 +499,16 @@ Adds a remark or modifies the existing one, of an existing internship at the spe
 
 2. Successful Output after adding a remark:<br>
    ![After successfully adding a remark](./images/add-remark/addremark-after.png)
+This sets the remark of the internship at index 1 to be `This internship has a behavioural interview!`.
 </div>
 
 <div markdown="span" class="alert alert-info">
 ℹ️ **Tip:** To delete an existing remark, simply input an empty string as the remark like so: <br>`addremark INDEX /remark`.
+</div>
+
+<div markdown="span" class="alert alert-danger">
+⚠️ **Common errors:** <br>
+1. Don't forget to have the `/remark` prefix before the remark you want to add.
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
