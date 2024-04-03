@@ -170,7 +170,7 @@ For the restrictions on what is accepted for each field, kindly refer to [Fields
 ### Tutorial
 This section would guide you through the basic commands of <span style="color: #f66a0a;">CareerSync</span>, and how to use them.
 
-#### Clearing sample internship entries: `clear`
+#### Clear sample internship entries: `clear`
 
 To begin using <span style="color: #f66a0a;">CareerSync</span>, you should clear the sample internship entries that are present when you first start the 
 application.
@@ -190,7 +190,7 @@ Key in the command `clear` in the CLI and press `Enter` to clear the sample inte
    There are no more internships in the list.
 </div>
 
-#### Adding an internship entry: `add`
+#### Add an internship entry: `add`
 
 Next, let us try to add an internship entry. 
 
@@ -206,7 +206,7 @@ Successful output after adding the entry:<br>
    You can now see your new internship with the details you entered in the **Internship List Display!**
 </div>
 
-#### Editing an internship entry: `edit`
+#### Edit an internship entry: `edit`
 
 Oh no! You made a mistake in the email address of the contact person. Let's edit the email address.
 
@@ -243,7 +243,7 @@ Successful output after finding all entries that satisfy the conditions:<br>
 Your **Internship List Display** now only has all the internships satisfying both conditions.
 </div>
 
-#### Deleting an internship entry: `delete`
+#### Delete an internship entry: `delete`
 You decide that to no longer pursue the internship at Facebook. Let's delete that entry.
 
 <div markdown="span" class="alert alert-success">
@@ -257,7 +257,7 @@ Successful output after deleting the entry:<br>
 The Facebook internship entry has been removed, and is no longer present in your database.
 </div>
 
-#### Listing all internships: `list`
+#### List all internships: `list`
 You used find to filter the internships. How do you see all the internships again?
 
 <div markdown="span" class="alert alert-success">
@@ -272,7 +272,7 @@ You now see all your internships. Your Tiktok internship, previously hidden, is 
 </div>
 
 
-#### Exiting the program: `exit`
+#### Exit the program: `exit`
 You decide that you are done for the day. How do you exit the application and save the file?
 
 <div markdown="span" class="alert alert-success">
@@ -305,7 +305,7 @@ Let's do a quick review of the commands!
 
 | Action                                         | Description                              | Format                                                                                                                                                                                                |
 |------------------------------------------------|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [add](#adding-an-entry-add)                    | Adds an internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER [/loc LOCATION_ENUM] [/role ROLE]`                                               |
+| [add](#adding-an-internship-add)                    | Adds an internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER [/loc LOCATION_ENUM] [/role ROLE]`                                               |
 | [delete](#deleting-an-internship-delete)       | Removes a internship.                    | `delete INDEX`                                                                                                                                                                                        |
 | [list](#listing-all-internships-list)          | Lists all internships.                   | `list`                                                                                                                                                                                                |
 | [edit](#editing-an-internship-edit)            | Modifies an existing internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE]`                            |
@@ -317,7 +317,6 @@ Let's do a quick review of the commands!
 | [deletetask](#deleting-tasks-from-an-internship-deletetask) | Deletes a task from an internship.       | `deletetask INDEX_INTERNSHIP /selecttask INDEX_TASK`                                                                                                                                                  |
 | [clear](#clearing-all-internships-clear)       | Removes all internships from the app.    | `clear`                                                                                                                                                                                               |
 | [exit](#exiting-the-program-exit)              | Exits and closes the application.        | `exit`                                                                                                                                                                                                |
-
 
 <div markdown="block" class="alert alert-info">
 
@@ -742,6 +741,7 @@ Format: `exit`
 #### Saving and Editing Your Internship Data
 
 <div markdown="span" class="alert alert-danger">
+
 ⚠️ Caution:
 Users are **NOT** recommended to modify their data file directly, since wrong formatting will cause the app to malfunction.
 Only do so if you are an experienced user! <br>
