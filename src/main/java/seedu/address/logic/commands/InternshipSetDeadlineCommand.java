@@ -60,15 +60,15 @@ public class InternshipSetDeadlineCommand extends InternshipCommand {
             throw new CommandException(InternshipMessages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
         }
 
-        Internship internshipToAddDeadline = lastShownList.get(internshipIndex.getZeroBased());
+        Internship internshipToSetDeadline = lastShownList.get(internshipIndex.getZeroBased());
 
-        if (taskIndex.getOneBased() > internshipToAddDeadline.getTaskList().getTaskListSize()) {
+        if (taskIndex.getOneBased() > internshipToSetDeadline.getTaskList().getTaskListSize()) {
             throw new CommandException(InternshipMessages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-        internshipToAddDeadline.getTaskList().getTask(taskIndex.getZeroBased()).addDeadline(deadline);
+        internshipToSetDeadline.getTaskList().getTask(taskIndex.getZeroBased()).setDeadline(deadline);
 
         // This is necessary to trigger the UI to update the displayed deadline
-        model.setInternship(internshipToAddDeadline, internshipToAddDeadline);
+        model.setInternship(internshipToSetDeadline, internshipToSetDeadline);
 
         model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
 
@@ -87,10 +87,10 @@ public class InternshipSetDeadlineCommand extends InternshipCommand {
             return false;
         }
 
-        InternshipSetDeadlineCommand otherAddDeadlineCommand = (InternshipSetDeadlineCommand) other;
-        return internshipIndex.equals(otherAddDeadlineCommand.internshipIndex)
-                && taskIndex.equals(otherAddDeadlineCommand.taskIndex)
-                && deadline.equals(otherAddDeadlineCommand.deadline);
+        InternshipSetDeadlineCommand otherSetDeadlineCommand = (InternshipSetDeadlineCommand) other;
+        return internshipIndex.equals(otherSetDeadlineCommand.internshipIndex)
+                && taskIndex.equals(otherSetDeadlineCommand.taskIndex)
+                && deadline.equals(otherSetDeadlineCommand.deadline);
     }
 
     @Override
