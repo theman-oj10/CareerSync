@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.InternshipSortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.internship.ApplicationStatus;
 import seedu.address.model.internship.CompanyName;
@@ -161,6 +162,23 @@ public class InternshipParserUtil {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
         return new Remark(trimmedRemark);
+    }
+
+    /**
+     * Parses a {@code String order} into a {@code InternshipSortCommandParser.OrderEnum}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code order} is invalid.
+     */
+    public static InternshipSortCommandParser.OrderEnum parseOrder(String order) throws ParseException {
+        requireNonNull(order);
+        String trimmedOrder = order.trim();
+        if (!InternshipSortCommandParser.OrderEnum.isValidOrder(trimmedOrder)) {
+            throw new ParseException(InternshipSortCommand.MESSAGE_INVALID_ORDER);
+        }
+        InternshipSortCommandParser.OrderEnum orderEnum = InternshipSortCommandParser
+                .OrderEnum.getOrderEnum(trimmedOrder);
+        return orderEnum;
     }
 
     /**

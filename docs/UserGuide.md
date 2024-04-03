@@ -135,8 +135,7 @@ When you first start <span style="color: #f66a0a;">CareerSync</span>, you will s
 ![Ui](images/Ui.png)
 
    * `add /com Tiktok /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com
-      /phone 90890301 /loc remote /role Software Intern` : Adds this internship entry to the <span style="color:
-     #f66a0a;">CareerSync</span> application.
+      /phone 90890301 /loc remote /role Software Intern` : Adds this internship entry to the <span style="color:#f66a0a;">CareerSync</span> application.
 #### Areas
 The main window of <span style="color: #f66a0a;">CareerSync</span> is divided into four main areas: the **Tab Area**, the **CLI**, the **Message Box** and the **Internship List Display**.
 
@@ -300,25 +299,24 @@ you fully understand each command and their usage.
 ____________________________________________________________________________________________________________________
 ### **Commands**
 
-** add signpost
+Let's do a quick review of the commands!
 
 #### Command Summary
 
-| Action                                         | Description                              | Format |
-|------------------------------------------------|------------------------------------------|------------------------------------------|
-| [add](#adding-an-entry-add)                    | Adds an Internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER /loc LOCATION_ENUM /role ROLE` |
-| [delete](#deleting-an-internship-delete)       | Removes a Internship.                    | `delete INDEX` |
-| [list](#listing-all-internships-list)          | Removes a Internship.                    | `list` |
-| [edit](#editing-an-internship-edit)            | Modifies an existing Internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE` |
-| [addremark](#adding-a-remark-addremark)        | Adds a remark to an existing Internship. | `addremark INDEX [/remark REMARK]` |
-| [clear](#clearing-all-internships-clear)       | Removes all Internships from the deck.   | `clear` |
-| [find](#finding-internships-by-keywords-find)  | Finds an Internship by keywords.         |`find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS]`|
-| [sort](#sorting-internships-by-fields-sort)    | Sorts the Internships by fields.         | `sort FIELD ORDER` |
-| [addtask](#add-a-task-to-an-internship-addtask) | Adds a task to an internship.            | `addtask /task Task` |
-| [setdeadline](#set-deadline-to-a-task-setdeadline) | Sets a deadline to a task.            | `setdeadline INDEX_INTERNSHIP /selecttask INDEX_TASK /deadline Deadline` |
-| [deletetask](#deleting-tasks-from-an-internship-deletetask) | Deletes a task from an internship.            | `deletetask INDEX_INTERNSHIP /selecttask INDEX_TASK` |
-| [sort](#sorting-internships-by-fields-sort)    | Sorts the Internships by fields.         | `sort FIELD ORDER` |
-| [exit](#exiting-the-program-exit)              | Exits and closes the application.        | `exit` |
+| Action                                         | Description                              | Format                                                                                                                                                                                                |
+|------------------------------------------------|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [add](#adding-an-entry-add)                    | Adds an internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER [/loc LOCATION_ENUM] [/role ROLE]`                                               |
+| [delete](#deleting-an-internship-delete)       | Removes a internship.                    | `delete INDEX`                                                                                                                                                                                        |
+| [list](#listing-all-internships-list)          | Lists all internships.                   | `list`                                                                                                                                                                                                |
+| [edit](#editing-an-internship-edit)            | Modifies an existing internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE]`                            |
+| [addremark](#adding-a-remark-addremark)        | Adds a remark to an existing internship. | `addremark INDEX [/remark REMARK]`                                                                                                                                                                    |
+| [find](#finding-internships-by-keywords-find)  | Finds an internship by keywords.         | `find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS] [/remark REMARK_KEYWORDS]` |
+| [sort](#sorting-internships-by-fields-sort)    | Sorts the internships by fields.         | `sort FIELD ORDER`                                                                                                                                                                                    |
+| [addtask](#add-a-task-to-an-internship-addtask) | Adds a task to an internship.            | `addtask /task TASK`                                                                                                                                                                                  |
+| [setdeadline](#set-deadline-to-a-task-setdeadline) | Sets a deadline to a task.               | `setdeadline INDEX_INTERNSHIP /selecttask INDEX_TASK /deadline DEADLINE`                                                                                                                              |
+| [deletetask](#deleting-tasks-from-an-internship-deletetask) | Deletes a task from an internship.       | `deletetask INDEX_INTERNSHIP /selecttask INDEX_TASK`                                                                                                                                                  |
+| [clear](#clearing-all-internships-clear)       | Removes all internships from the app.    | `clear`                                                                                                                                                                                               |
+| [exit](#exiting-the-program-exit)              | Exits and closes the application.        | `exit`                                                                                                                                                                                                |
 
 
 <div markdown="block" class="alert alert-info">
@@ -354,7 +352,7 @@ With any internship manager, it is important to know how to add an internship en
 
 This command lets you add an internship entry easily!
 
-**Format:** `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER /loc LOCATION_ENUM /role ROLE ​` <br>
+**Format:** `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER [/loc LOCATION_ENUM] [/role ROLE] ​` <br>
 
 * The fields `COMPANY_NAME`, `DESCRIPTION`, `CONTACT_NAME` and `ROLE` allow the use of any text, number and/or spaces
 * The field `STATUS` accepts only the following inputs: `to_apply`, `ongoing`, `rejected`, `accepted`
@@ -516,44 +514,50 @@ Adds a remark or modifies the existing one, of an existing internship at the spe
 
 #### Finding internships by keywords: `find`
 
-Finds internship entries whose specified fields contains the keywords.
+You can use this to filter the visible internships in CareerSync by keywords.
 
-**Format:** `find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS]`
+**Format:** `find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS] [/remark REMARK_KEYWORDS]`
 
 * MODE is either 'withall' or 'withany'.
   * 'withall' returns internships that match each prefix-keyword predicate.
-    * Within each prefix field, the Internship just has to contain any of the keywords.
+    * Within each prefix field that you specified, the internship just has to contain any of the keywords.
   * 'withany' returns internships that match at least one prefix-keyword predicate.
 * The search is case-insensitive. e.g `google` will match `Google`
 * The order of the keywords does not matter. e.g. `Microsoft Google` will match `Google Microsoft`
-* Only the name is searched.
 * Only full words will be matched e.g. `Goo` will not match `Google`
 * Internship matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hewlett Song` will return `Hewlett Packard`, `Song Fa`
 
-** screenshots to be updated
 <div markdown="span" class="alert alert-success">
 
 💡 **Try It Out:**<br>
 
 1. Input:<br>
    `find withall /status to_apply /loc remote`<br>
-   ![Before filtering by all toapply and remote](./images/find/find-before.png)<br><br>
-This will filter the list of internships to show only those with both status `TO_APPLY` and location `REMOTE`.
+   ![Before filtering by all toapply and remote](./images/find/find-before.png)<br>
+This will filter the list of internships to show you only those with both status `TO_APPLY` and location `REMOTE`.<br><br>
 
 2. Successful Output after filtering:<br>
-   ![After successfully filtering by all toapply and remote](./images/find/findToApplyRemote-after.png)<br><br>
+   ![After successfully filtering by all toapply and remote](./images/find/find-after.png)<br><br>
 
 3. Other examples:<br>
-   i.`find withany /com Google /loc local` returns Internships with either company name (case-insensitive) `Google` or location `LOCAL`<br>
-   ii.`find withall /poc John /desc paperwork` returns Internships with both contact name (case-insensitive) `John` and description containing `paperwork`
+   i.`find withany /com Google /loc local` shows you internships with either company name (case-insensitive) `Google` or location `LOCAL`<br>
+   ii.`find withall /poc John /desc paperwork` shows you internships with both contact name (case-insensitive) `John` and description containing `paperwork`
 </div>
 
-**Common errors:**
-1. If no field prefixes are specified to search by, the command will be rejected with error message:<br>
-`At least one field prefix and keyword must be specified to be searched.`
-2. MODE must be present, and be either `withall` or `withany`. If not, the command will be rejected with error message:<br>
-`Invalid mode specified. Please specify either 'withall' or 'withany'.`
+<div markdown="span" class="alert alert-info">
+ℹ️ **Tip:** If you want to view all internships again, simply use the [list](#listing-all-internships-list) command.
+</div>
+
+<div markdown="span" class="alert alert-danger">
+⚠️ **Common errors:** <br>
+
+1. If you do not specify any field prefixes, or specified an invalid field prefix, the command will be rejected with error message:<br>
+   `At least one supported field prefix and keyword must be specified to be searched.
+   Supported prefixes are /com, /poc, /loc, /status, /desc, /role, /remark`<br>
+2. Make sure you specify the MODE of search, either `withall` or `withany`. If not, the command will be rejected with error message:<br>
+`Invalid mode specified. Please specify either 'withall' or 'withany'.`<br>
+</div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
@@ -735,14 +739,13 @@ Format: `exit`
 #### Saving and Editing Your Internship Data
 
 <div markdown="span" class="alert alert-danger">
-
 ⚠️ Caution:
 Users are **NOT** recommended to modify their data file directly, since wrong formatting will cause the app to malfunction.
 Only do so if you are an experienced user! <br>
 </div>
 
-<span style="color: #f66a0a;">CareerSync</span> data is saved in the hard disk, as a [JSON](#glossary) file at the path `[JAR file location]/data/internship.json`.
-After every command that changes the data, <span style="color: #f66a0a;">CareerSync</span> performs a save automatically. There is no need to save manually.
+<span style="color: #f66a0a;">CareerSync</span> data is saved in the hard disk, as a [JSON](#glossary) file at the path 
+`[JAR file location]/data/internship.json`. After every command that changes the data, <span style="color: #f66a0a;">CareerSync</span> performs a save automatically. There is no need to save manually.
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
