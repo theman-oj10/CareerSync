@@ -1,8 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -84,8 +83,28 @@ public class InternshipSortCommandParserTest {
     @Test
     public void parseMultipleFields() {
         // Invalid input: multiple fields
-        assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_COMPANY.getPrefix() + " asc"
-                + PREFIX_CONTACT_EMAIL.getPrefix() + " asc"));
+        assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_COMPANY.getPrefix()
+                + " asc " + PREFIX_CONTACT_EMAIL + " asc"));
+    }
+
+    @Test
+    public void parseValidInput_contactNameAsc() throws ParseException {
+        InternshipSortCommand expectedCommand = new InternshipSortCommand(
+                InternshipSortCommandParser.FieldEnum.CONTACT_NAME,
+                InternshipSortCommandParser.OrderEnum.ASCENDING
+        );
+        InternshipSortCommand actualCommand = parser.parse(" " + PREFIX_CONTACT_NAME.getPrefix() + " asc");
+        assertEquals(expectedCommand, actualCommand);
+    }
+
+    @Test
+    public void getValue() {
+        assertEquals(PREFIX_COMPANY.getPrefix(), InternshipSortCommandParser.FieldEnum.COMPANY.getValue());
+    }
+
+    @Test
+    public void fromPrefixString() {
+        assertThrows(ParseException.class,  () -> InternshipSortCommandParser.FieldEnum.fromPrefixString("c"));
     }
 
 }

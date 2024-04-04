@@ -138,6 +138,7 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
             throw new ParseException(InternshipSortCommand.MESSAGE_INVALID_FIELD);
         }
         if (splitArgs.length != 2) {
+            System.out.println("HIT");
             logger.warning("Internship sort command has invalid number of arguments");
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_EXTRA_ARGUMENTS));
