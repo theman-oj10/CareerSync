@@ -26,19 +26,6 @@ public class InternshipSortCommandParserTest {
         actualCommand = parser.parse(" " + PREFIX_CONTACT_EMAIL.getPrefix() + " desc");
         assertEquals(expectedCommand, actualCommand);
     }
-
-    @Test
-    public void parseInvalidInput() {
-        // Invalid input: missing order
-        assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_COMPANY.getPrefix()));
-
-        // Invalid input: invalid field
-        assertThrows(ParseException.class, () -> parser.parse("invalid_field asc"));
-
-        // Invalid input: invalid order
-        assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_COMPANY.getPrefix() + " invalid_order"));
-    }
-
     @Test
     public void parseEmptyField() {
         // Invalid input: empty field
@@ -69,5 +56,28 @@ public class InternshipSortCommandParserTest {
         assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_COMPANY.getPrefix() + " asc extra"));
     }
 
-}
+    @Test
+    public void parseMultiplePrefix() {
+        // Invalid input: multiple prefixes
+        assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_COMPANY.getPrefix() + " " + PREFIX_CONTACT_EMAIL.getPrefix() + " asc"));
+    }
 
+    @Test
+    public void parseInvalidField() {
+        // Invalid input: invalid field
+        assertThrows(ParseException.class, () -> parser.parse(" invalid_field asc"));
+    }
+
+    @Test
+    public void parseInvalidOrder() {
+        // Invalid input: invalid order
+        assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_COMPANY.getPrefix() + " invalid_order"));
+    }
+
+    @Test
+    public void parseInvalidFieldAndOrder() {
+        // Invalid input: invalid field and order
+        assertThrows(ParseException.class, () -> parser.parse(" invalid_field invalid_order"));
+    }
+
+}
