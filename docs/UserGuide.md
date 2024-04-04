@@ -77,7 +77,7 @@ This section explains the common terms that you may not be familiar with, and th
 you understand the contents of this User Guide.
 
 #### Glossary
-
+## Update meaning with short descriptions
 | Term      | Meaning                                                                                                                 |
 |-----------|-------------------------------------------------------------------------------------------------------------------------|
 | CLI       | [Command Line Interface](https://en.wikipedia.org/wiki/Command-line_interface)                                          |
@@ -310,7 +310,7 @@ Let's do a quick review of the commands!
 | [add](#adding-an-internship-add)               | Adds an internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER [/loc LOCATION_ENUM] [/role ROLE]`                                               |
 | [delete](#deleting-an-internship-delete)       | Removes a internship.                    | `delete INDEX`                                                                                                                                                                                        |
 | [list](#listing-all-internships-list)          | Lists all internships.                   | `list`                                                                                                                                                                                                |
-| [edit](#editing-an-internship-edit)            | Modifies an existing internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE]`                            |
+| [edit](#editing-an-internship-edit)            | Modifies an existing internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE] [/remark REMARK]`           |
 | [addremark](#adding-a-remark-addremark)        | Adds a remark to an existing internship. | `addremark INDEX [/remark REMARK]`                                                                                                                                                                    |
 | [find](#finding-internships-by-keywords-find)  | Finds an internship by keywords.         | `find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS] [/remark REMARK_KEYWORDS]` |
 | [sort](#sorting-internships-by-fields-sort)    | Sorts the internships by fields.         | `sort FIELD ORDER`                                                                                                                                                                                    |
@@ -455,7 +455,7 @@ However, it serves as an aid to view the details of an internship entry in a mor
 
 Lets you edit an existing internship entry in CareerSync.
 
-**Format** : `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE] …​`
+**Format** : `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE] [/remark remark] …​`
 
 * Edits the internship at the specified `INDEX`. The index refers to the index number shown in the displayed internship list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided. 
