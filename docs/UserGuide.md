@@ -77,7 +77,7 @@ This section explains the common terms that you may not be familiar with, and th
 you understand the contents of this User Guide.
 
 #### Glossary
-## Update meaning with short descriptions
+
 | Term      | Meaning                                                                                                                 |
 |-----------|-------------------------------------------------------------------------------------------------------------------------|
 | CLI       | [Command Line Interface](https://en.wikipedia.org/wiki/Command-line_interface)                                          |
