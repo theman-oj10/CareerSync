@@ -52,7 +52,8 @@ public class InternshipAddCommandParser implements InternshipParser<InternshipAd
         CompanyName com = InternshipParserUtil.parseCompanyName(argMultimap.getValue(PREFIX_COMPANY).get());
         ContactName poc = InternshipParserUtil.parseContactName(argMultimap.getValue(PREFIX_CONTACT_NAME).get());
         ContactEmail email = InternshipParserUtil.parseContactEmail(argMultimap.getValue(PREFIX_CONTACT_EMAIL).get());
-        ContactNumber phon = InternshipParserUtil.parseContactNumber(argMultimap.getValue(PREFIX_CONTACT_NUMBER).get());
+        ContactNumber phone =
+                InternshipParserUtil.parseContactNumber(argMultimap.getValue(PREFIX_CONTACT_NUMBER).get());
         Location loc = InternshipParserUtil.parseOptionalLocation(argMultimap.getValue(PREFIX_LOCATION));
         ApplicationStatus status = InternshipParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
         Description desc = InternshipParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
@@ -60,7 +61,7 @@ public class InternshipAddCommandParser implements InternshipParser<InternshipAd
         Remark remark = new Remark(""); // Add Command does not allow adding remarks immediately
         TaskList taskList = new TaskList(); // Add Command does not allow adding tasks immediately (for now)
 
-        Internship internship = new Internship(com, poc, email, phon, loc, status, desc, role, remark, taskList);
+        Internship internship = new Internship(com, poc, email, phone, loc, status, desc, role, remark, taskList);
 
         return new InternshipAddCommand(internship);
     }
