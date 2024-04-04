@@ -31,7 +31,7 @@ public class InternshipAddCommand extends InternshipCommand {
             + PREFIX_CONTACT_NAME + " CONTACT_NAME "
             + PREFIX_CONTACT_EMAIL + " CONTACT_EMAIL "
             + PREFIX_CONTACT_NUMBER + " CONTACT_NUMBER "
-            + "[" + PREFIX_LOCATION + " LOCATION]"
+            + "[" + PREFIX_LOCATION + " LOCATION] "
             + "[" + PREFIX_ROLE + " ROLE]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_COMPANY + " Tiktok "
