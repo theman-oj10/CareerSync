@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -104,7 +106,6 @@ public class InternshipSortCommandParserTest {
 
     @Test
     public void fromPrefixString() {
-        assertThrows(ParseException.class,  () -> InternshipSortCommandParser.FieldEnum.fromPrefixString("c"));
+        assertThrows(ParseException.class, () -> InternshipSortCommandParser.FieldEnum.fromPrefixString("c"));
     }
-
 }
