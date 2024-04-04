@@ -565,6 +565,8 @@ This will filter the list of internships to show you only those with both status
    Supported prefixes are /com, /poc, /loc, /status, /desc, /role, /remark`<br>
 2. Make sure you specify the MODE of search, which must be either `withall` or `withany`. If not, the command will be rejected with error message:<br>
 `Invalid mode specified. Please specify either 'withall' or 'withany'.`<br>
+3. Just to note, the unsupported fields in this version are `/phone`, `/email`, `/task`, `/selecttask` and `/deadline`.<br>
+Searching for these fields will result in an error message, highlighting the unsupported fields explicitly.
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
