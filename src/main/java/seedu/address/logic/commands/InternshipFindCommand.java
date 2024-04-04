@@ -9,9 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.InternshipMessages;
 import seedu.address.logic.parser.InternshipFindCommandParser;
@@ -48,12 +45,13 @@ public class InternshipFindCommand extends InternshipCommand {
             + PREFIX_COMPANY + " Tiktok Google " + PREFIX_STATUS + " accepted";
     public static final String NO_SEARCH_KEY_SPECIFIED = "At least one supported field prefix and keyword "
             + "must be specified to be searched.\nSupported prefixes are "
-            + Arrays.stream(InternshipFindCommandParser.getSupportedPrefixes())
-                    .map(Prefix::toString).collect(Collectors.joining(", "));
+            + Prefix.getPrefixesAsString(", ", InternshipFindCommandParser.getSupportedPrefixes());
+    public static final String UNSUPPORTED_PREFIX_SPECIFIED = "Unsupported field prefix specified: %s\n"
+            + "Please specify only supported prefixes.\nSupported prefixes are "
+            + Prefix.getPrefixesAsString(", ", InternshipFindCommandParser.getSupportedPrefixes());
     public static final String INVALID_MODE_SPECIFIED = "Invalid mode specified. "
             + "Please specify either 'withall' or 'withany'.";
     public static final String NO_KEYWORD_SPECIFIED = "At least one keyword must be specified for each field prefix.";
-
     private final InternshipContainsKeywordsPredicate predicate;
 
     public InternshipFindCommand(InternshipContainsKeywordsPredicate predicate) {
