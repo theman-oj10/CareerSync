@@ -12,6 +12,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new InternshipDeleteCommand object
  */
 public class InternshipDeleteCommandParser implements InternshipParser<InternshipDeleteCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the InternshipDeleteCommand
+     * and returns a InternshipDeleteCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+
     public InternshipDeleteCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
