@@ -33,17 +33,17 @@ public class ContactNumberTest {
         assertFalse(ContactNumber.isValidContactNumber("9312 1534")); // spaces within digits
 
         // valid contactNumber numbers
-        assertTrue(ContactNumber.isValidContactNumber("911")); // exactly 3 numbers
+        assertTrue(ContactNumber.isValidContactNumber("9114433")); // exactly 7 numbers
         assertTrue(ContactNumber.isValidContactNumber("93121534"));
         assertTrue(ContactNumber.isValidContactNumber("124293842033123")); // long contactNumber numbers
     }
 
     @Test
     public void equals() {
-        ContactNumber contactNumber = new ContactNumber("999");
+        ContactNumber contactNumber = new ContactNumber("9999999");
 
         // same values -> returns true
-        assertTrue(contactNumber.equals(new ContactNumber("999")));
+        assertTrue(contactNumber.equals(new ContactNumber("9999999")));
 
         // same object -> returns true
         assertTrue(contactNumber.equals(contactNumber));
@@ -55,6 +55,6 @@ public class ContactNumberTest {
         assertFalse(contactNumber.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(contactNumber.equals(new ContactNumber("995")));
+        assertFalse(contactNumber.equals(new ContactNumber("9999995")));
     }
 }
