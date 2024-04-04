@@ -50,12 +50,12 @@ public class TypicalInternships {
 
     // Manually added
     public static final Internship HOON_APPLE = new InternshipBuilder().withCompanyName("Apple")
-            .withContactName("Hoon Meier").withContactEmail("hoon@gmail.com").withContactNumber("8482424")
+            .withContactName("Hoon Meier").withContactEmail("hoon@gmail.com").withContactNumber("84824242")
             .withLocation("local").withApplicationStatus("pending").withDescription("Develop iOS applications")
             .withRole("iOS Developer").withRemark("OA due tomorrow!").build();
 
     public static final Internship IDA_NETFLIX = new InternshipBuilder().withCompanyName("Netflix")
-            .withContactName("Ida Mueller").withContactEmail("ida@example.com").withContactNumber("8482131")
+            .withContactName("Ida Mueller").withContactEmail("ida@example.com").withContactNumber("84821312")
             .withLocation("remote").withApplicationStatus("ongoing").withDescription("Write REST APIs for netflix")
             .withRole("Backend Engineer").withRemark("Has a behavioural interview").build();
 
