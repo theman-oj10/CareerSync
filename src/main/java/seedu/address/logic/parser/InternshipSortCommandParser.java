@@ -127,7 +127,7 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
         if (trimmedArgs.isEmpty()) {
             logger.warning("Internship sort command has no arguments");
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, InternshipSortCommand.MESSAGE_INVALID_FIELD));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, InternshipSortCommand.MESSAGE_USAGE));
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, SUPPORTED_PREFIXES);
