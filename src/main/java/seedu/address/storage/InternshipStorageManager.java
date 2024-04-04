@@ -12,20 +12,13 @@ import seedu.address.model.ReadOnlyInternshipData;
 import seedu.address.model.ReadOnlyInternshipUserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of InternshipData in local storage.
  */
 public class InternshipStorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(InternshipStorageManager.class);
     private InternshipDataStorage internshipDataStorage;
     private InternshipUserPrefsStorage userPrefsStorage;
-
-    /**
-     * Creates a {@code InternshipStorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
-     */
-    public InternshipStorageManager(InternshipUserPrefsStorage userPrefsStorage) {
-        this.userPrefsStorage = userPrefsStorage;
-    }
 
     /**
      * Creates a {@code InternshipStorageManager} with the given

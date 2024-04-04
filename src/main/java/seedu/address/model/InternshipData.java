@@ -49,7 +49,7 @@ public class InternshipData implements ReadOnlyInternshipData {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code InternshipData} with {@code newData}.
      */
     public void resetData(ReadOnlyInternshipData newData) {
         requireNonNull(newData);
@@ -59,7 +59,7 @@ public class InternshipData implements ReadOnlyInternshipData {
     //// internship-level operations
 
     /**
-     * Returns true if a internship with the same identity as {@code internship} exists in the address book.
+     * Returns true if a internship with the same identity as {@code internship} exists in the internship data.
      */
     public boolean hasInternship(Internship internship) {
         requireNonNull(internship);
@@ -67,8 +67,8 @@ public class InternshipData implements ReadOnlyInternshipData {
     }
 
     /**
-     * Adds a internship to the address book.
-     * The internship must not already exist in the address book.
+     * Adds a internship to the internship data.
+     * The internship must not already exist in the internship data.
      */
     public void addInternship(Internship i) {
         internshipList.add(i);
@@ -76,9 +76,9 @@ public class InternshipData implements ReadOnlyInternshipData {
 
     /**
      * Replaces the given internship {@code target} in the list with {@code editedInternship}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the internship data.
      * The internship identity of {@code editedInternship} must not be the same as another existing internship in the
-     * address book.
+     * internship data.
      */
     public void setInternship(Internship target, Internship editedInternship) {
         requireNonNull(editedInternship);
@@ -87,8 +87,8 @@ public class InternshipData implements ReadOnlyInternshipData {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code InternshipData}.
+     * {@code key} must exist in the internship data.
      */
     public void removeInternship(Internship key) {
         internshipList.remove(key);
@@ -119,8 +119,8 @@ public class InternshipData implements ReadOnlyInternshipData {
             return false;
         }
 
-        InternshipData otherAddressBook = (InternshipData) other;
-        return internshipList.equals(otherAddressBook.internshipList);
+        InternshipData otherInternshipData = (InternshipData) other;
+        return internshipList.equals(otherInternshipData.internshipList);
     }
 
     @Override

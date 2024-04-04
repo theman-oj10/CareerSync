@@ -36,21 +36,21 @@ public interface InternshipModel {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' internship data file path.
      */
     Path getInternshipDataFilePath();
 
     /**
-     * Sets the user prefs 'address book file path.
+     * Sets the user prefs internshipData file path.
      */
-    void setInternshipDataFilePath(Path addressBookFilePath);
+    void setInternshipDataFilePath(Path internshipDataFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces internship data with the data in {@code internshipData}.
      */
     void setInternshipData(ReadOnlyInternshipData internshipData);
 
-    /** Returns the AddressBook */
+    /** Returns the InternshipData */
     ReadOnlyInternshipData getInternshipData();
 
     /**
@@ -60,19 +60,19 @@ public interface InternshipModel {
 
     /**
      * Deletes the given internship.
-     * The internship must exist in the address book.
+     * The internship must exist in the internship data.
      */
     void deleteInternship(Internship target);
 
     /**
      * Adds the given internship.
-     * {@code internship} must not already exist in the address book.
+     * {@code internship} must not already exist in the internship data.
      */
     void addInternship(Internship internship);
 
     /**
      * Replaces the given internship {@code target} with {@code editedInternship}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the internship data.
      * The internship identity of {@code editedInternship} must not be the same as another existing internship in the
      * internship list.
      */

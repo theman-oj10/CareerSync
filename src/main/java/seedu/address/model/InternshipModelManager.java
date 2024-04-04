@@ -79,9 +79,9 @@ public class InternshipModelManager implements InternshipModel {
     }
 
     @Override
-    public void setInternshipDataFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setInternshipDataFilePath(addressBookFilePath);
+    public void setInternshipDataFilePath(Path internshipDataFilePath) {
+        requireNonNull(internshipDataFilePath);
+        userPrefs.setInternshipDataFilePath(internshipDataFilePath);
     }
 
     //=========== InternshipData ================================================================================

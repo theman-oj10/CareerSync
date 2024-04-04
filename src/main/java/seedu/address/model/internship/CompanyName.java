@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Company's name in the address book.
+ * Represents a Company's name in the internship data.
  * Guarantees: immutable; is valid as declared in {@link #isValidCompanyName(String)}
  */
 public class CompanyName {

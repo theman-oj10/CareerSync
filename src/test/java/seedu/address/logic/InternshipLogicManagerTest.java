@@ -162,7 +162,7 @@ public class InternshipLogicManagerTest {
 
         logic = new InternshipLogicManager(model, storage);
 
-        // Triggers the saveAddressBook method by executing an add command
+        // Triggers the saveInternshipData method by executing an add command
         String addCommand = InternshipUtil.getAddCommand(new InternshipBuilder(AMY).build());
         Internship expectedInternship = new InternshipBuilder(AMY).build();
         InternshipModelManager expectedModel = new InternshipModelManager();
