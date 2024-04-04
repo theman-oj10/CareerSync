@@ -59,7 +59,8 @@ public class InternshipSortCommandParserTest {
     @Test
     public void parseMultiplePrefix() {
         // Invalid input: multiple prefixes
-        assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_COMPANY.getPrefix() + " " + PREFIX_CONTACT_EMAIL.getPrefix() + " asc"));
+        assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_COMPANY.getPrefix() + " "
+                + PREFIX_CONTACT_EMAIL.getPrefix() + " asc"));
     }
 
     @Test
