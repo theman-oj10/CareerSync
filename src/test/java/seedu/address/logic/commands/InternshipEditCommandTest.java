@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.InternshipCommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.InternshipCommandTestUtil.DESC_BOB;
@@ -162,6 +163,56 @@ public class InternshipEditCommandTest {
                 new EditInternshipDescriptorBuilder().withCompanyName(VALID_COMPANY_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, InternshipMessages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_selectedInternshipBeingEdited_updatesSelectedInternship() {
+        Internship internshipInFilteredList = model.getFilteredInternshipList()
+                .get(INDEX_FIRST_INTERNSHIP.getZeroBased());
+
+        model.setSelectedInternship(internshipInFilteredList); // set selected internship to the first internship
+
+        Internship editedInternship = new InternshipBuilder(internshipInFilteredList)
+                .withCompanyName("Microhard").build();
+        InternshipEditCommand editCommand = new InternshipEditCommand(INDEX_FIRST_INTERNSHIP,
+                new EditInternshipDescriptorBuilder().withCompanyName("Microhard").build());
+
+        String expectedMessage = String.format(InternshipEditCommand.MESSAGE_EDIT_INTERNSHIP_SUCCESS,
+                InternshipMessages.format(editedInternship));
+
+        InternshipModel expectedModel = new InternshipModelManager(new InternshipData(model.getInternshipData()),
+                new InternshipUserPrefs());
+        expectedModel.setInternship(model.getFilteredInternshipList().get(0), editedInternship);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+
+        assertEquals(model.getSelectedInternship().get(0), editedInternship);
+    }
+
+    @Test
+    public void execute_nonSelectedInternshipBeingEdited_noUpdateToSelectedInternship() {
+        Internship internshipInFilteredList = model.getFilteredInternshipList()
+                .get(INDEX_FIRST_INTERNSHIP.getZeroBased());
+
+        // set selected internship to the second internship, which is not the same as the first
+        model.setSelectedInternship(model.getFilteredInternshipList().get(INDEX_SECOND_INTERNSHIP.getZeroBased()));
+
+        Internship editedInternship = new InternshipBuilder(internshipInFilteredList)
+                .withCompanyName("Microhard").build();
+        InternshipEditCommand editCommand = new InternshipEditCommand(INDEX_FIRST_INTERNSHIP,
+                new EditInternshipDescriptorBuilder().withCompanyName("Microhard").build());
+
+        String expectedMessage = String.format(InternshipEditCommand.MESSAGE_EDIT_INTERNSHIP_SUCCESS,
+                InternshipMessages.format(editedInternship));
+
+        InternshipModel expectedModel = new InternshipModelManager(new InternshipData(model.getInternshipData()),
+                new InternshipUserPrefs());
+        expectedModel.setInternship(model.getFilteredInternshipList().get(0), editedInternship);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+
+        assertNotEquals(model.getSelectedInternship().get(0), editedInternship);
+        assertEquals(model.getSelectedInternship().get(0), model.getFilteredInternshipList().get(1));
     }
 
     @Test

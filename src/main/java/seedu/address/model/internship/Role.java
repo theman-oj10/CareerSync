@@ -7,6 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represent's an internship's role in the internship book
  */
 public class Role {
+
     public static final String MESSAGE_CONSTRAINTS =
             "Roles should not be blank!";
 

@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class ContactNumber {
     public static final String MESSAGE_CONSTRAINTS =
-            "Contact Number should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Contact Number should only contain numbers, and it should be at least 7 digits long";
+    public static final String VALIDATION_REGEX = "\\d{7,}";
     public final String value;
 
     /**

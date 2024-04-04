@@ -17,10 +17,10 @@ public class InternshipContainsKeywordsPredicateTest {
 
         InternshipContainsKeywordsPredicate firstPredicate =
                 new InternshipContainsKeywordsPredicate(firstPredicateKeywords, null, null,
-                null, null, null, false);
+                null, null, null, null, false);
         InternshipContainsKeywordsPredicate secondPredicate =
                 new InternshipContainsKeywordsPredicate(secondPredicateKeywords, null, null,
-                null, null, null, false);
+                null, null, null, null, false);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
@@ -28,7 +28,7 @@ public class InternshipContainsKeywordsPredicateTest {
         // same values -> returns true
         InternshipContainsKeywordsPredicate firstPredicateCopy =
                 new InternshipContainsKeywordsPredicate(firstPredicateKeywords, null, null,
-                        null, null, null, false);
+                        null, null, null, null, false);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -46,22 +46,22 @@ public class InternshipContainsKeywordsPredicateTest {
         // One keyword
         InternshipContainsKeywordsPredicate predicate =
                 new InternshipContainsKeywordsPredicate("Google", null, null,
-                        null, null, null, false);
+                        null, null, null, null, false);
         assertTrue(predicate.test(new InternshipBuilder().withCompanyName("Google").build()));
 
         // Multiple keywords
         predicate = new InternshipContainsKeywordsPredicate("Hewlett Packard", null, null,
-                null, null, null, false);
+                null, null, null, null, false);
         assertTrue(predicate.test(new InternshipBuilder().withCompanyName("Hewlett Packard").build()));
 
         // Only one matching keyword
         predicate = new InternshipContainsKeywordsPredicate("Microsoft Google", null, null,
-                null, null, null, false);
+                null, null, null, null, false);
         assertTrue(predicate.test(new InternshipBuilder().withCompanyName("Microsoft Facebook").build()));
 
         // Mixed-case keywords
         predicate = new InternshipContainsKeywordsPredicate("MicrOSoFt GOOgle", null, null,
-                null, null, null, false);
+                null, null, null, null, false);
         assertTrue(predicate.test(new InternshipBuilder().withCompanyName("Microsoft Google").build()));
     }
     @Test
@@ -72,10 +72,11 @@ public class InternshipContainsKeywordsPredicateTest {
         String statusKeywords = "accepted";
         String descriptionKeywords = "AI";
         String roleKeywords = "developer";
+        String remarkKeywords = "good";
         boolean isMatchAll = false;
         InternshipContainsKeywordsPredicate predicate = new InternshipContainsKeywordsPredicate(
                 companyNameKeywords, contactNameKeywords, locationKeywords,
-                statusKeywords, descriptionKeywords, roleKeywords, isMatchAll);
+                statusKeywords, descriptionKeywords, roleKeywords, remarkKeywords, isMatchAll);
 
         String expected = InternshipContainsKeywordsPredicate.class.getCanonicalName() + "{"
                 + " companyNameKeywords=[" + companyNameKeywords + "], "
@@ -84,6 +85,7 @@ public class InternshipContainsKeywordsPredicateTest {
                 + " statusKeywords=[" + statusKeywords + "], "
                 + " descriptionKeywords=[" + descriptionKeywords + "], "
                 + " roleKeywords=[" + roleKeywords + "], "
+                + " remarkKeywords=[" + remarkKeywords + "], "
                 + " isMatchAll=" + isMatchAll + "}";
         assertEquals(expected, predicate.toString());
     }

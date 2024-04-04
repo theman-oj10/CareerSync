@@ -67,11 +67,13 @@ public class InternshipLogicManagerTest {
         assertCommandSuccess(listCommand, InternshipListCommand.MESSAGE_SUCCESS, model);
     }
 
+
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
                 InternshipLogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
     }
+
 
     @Test
     public void execute_storageThrowsAdException_throwsCommandException() {

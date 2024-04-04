@@ -31,6 +31,7 @@ public class InternshipDataParserTest {
 
     private final InternshipDataParser parser = new InternshipDataParser();
 
+
     @Test
     public void parseCommand_add() throws Exception {
         Internship person = new InternshipBuilder().build();
