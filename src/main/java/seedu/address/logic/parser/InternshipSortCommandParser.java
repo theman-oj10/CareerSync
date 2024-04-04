@@ -127,12 +127,7 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
         if (trimmedArgs.isEmpty()) {
             logger.warning("Internship sort command has no arguments");
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, InternshipSortCommand.MESSAGE_INVALID_FIELD));
-        }
-        if (splitArgs.length != 2) {
-            logger.warning("Internship sort command has invalid number of arguments");
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_EXTRA_ARGUMENTS));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, InternshipSortCommand.MESSAGE_USAGE));
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, SUPPORTED_PREFIXES);
@@ -142,6 +137,13 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
             logger.warning("Internship sort command has no valid prefixes");
             throw new ParseException(InternshipSortCommand.MESSAGE_INVALID_FIELD);
         }
+        if (splitArgs.length != 2) {
+            System.out.println("HIT");
+            logger.warning("Internship sort command has invalid number of arguments");
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_EXTRA_ARGUMENTS));
+        }
+
         OrderEnum parsedOrder = assignOrder(argMultimap);
         FieldEnum field = assignField(argMultimap);
         try {
