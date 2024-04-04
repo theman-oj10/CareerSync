@@ -110,7 +110,8 @@ Red blocks contain warnings to note when using <span style="color: #f66a0a;">Car
 #### Installation
 1. Ensure that you have [Java 11 or above](https://www.java.com/en/download/) installed on your computer if you are using Windows.
     - If you are using MacOS, follow the instructions [here](https://nus-cs2103-ay2324s2.github.io/website/admin/programmingLanguages.html) instead.
-2. Download the latest `CareerSync.jar` file [here](https://github.com/AY2324S2-CS2103T-W11-1/tp/releases/tag/v1.2).
+2. Download the latest `CareerSync.jar` file [here](https://github.com/AY2324S2-CS2103T-W11-1/tp/releases/tag/v1.2). 
+## Update link for final 1.3 release^^
 3. Make sure your [jar](#glossary) file is located in an empty folder.
 4. Start <span style="color: #f66a0a;">CareerSync</span>.
     - For **MacOS**:
@@ -303,20 +304,21 @@ Let's do a quick review of the commands!
 
 #### Command Summary
 
-| Action                                         | Description                              | Format                                                                                                                                                                                                |
-|------------------------------------------------|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [add](#adding-an-internship-add)                    | Adds an internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER [/loc LOCATION_ENUM] [/role ROLE]`                                               |
-| [delete](#deleting-an-internship-delete)       | Removes a internship.                    | `delete INDEX`                                                                                                                                                                                        |
-| [list](#listing-all-internships-list)          | Lists all internships.                   | `list`                                                                                                                                                                                                |
-| [edit](#editing-an-internship-edit)            | Modifies an existing internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE]`                            |
-| [addremark](#adding-a-remark-addremark)        | Adds a remark to an existing internship. | `addremark INDEX [/remark REMARK]`                                                                                                                                                                    |
+| Action                                         | Description                              | Format                                                                                                                                                                                              |
+|------------------------------------------------|------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [help](#viewing-help-help)                     | Get access to the help page              | `help`                                                                                                                                                                               |
+| [add](#adding-an-internship-add)               | Adds an internship.                      | `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER [/loc LOCATION_ENUM] [/role ROLE]`                                             |
+| [delete](#deleting-an-internship-delete)       | Removes a internship.                    | `delete INDEX`                                                                                                                                                                                      |
+| [list](#listing-all-internships-list)          | Lists all internships.                   | `list`                                                                                                                                                                                              |
+| [edit](#editing-an-internship-edit)            | Modifies an existing internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE]`                          |
+| [addremark](#adding-a-remark-addremark)        | Adds a remark to an existing internship. | `addremark INDEX [/remark REMARK]`                                                                                                                                                                  |
 | [find](#finding-internships-by-keywords-find)  | Finds an internship by keywords.         | `find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS] [/remark REMARK_KEYWORDS]` |
-| [sort](#sorting-internships-by-fields-sort)    | Sorts the internships by fields.         | `sort FIELD ORDER`                                                                                                                                                                                    |
-| [addtask](#add-a-task-to-an-internship-addtask) | Adds a task to an internship.            | `addtask /task TASK`                                                                                                                                                                                  |
-| [setdeadline](#set-deadline-to-a-task-setdeadline) | Sets a deadline to a task.               | `setdeadline INDEX_INTERNSHIP /selecttask INDEX_TASK /deadline DEADLINE`                                                                                                                              |
-| [deletetask](#deleting-tasks-from-an-internship-deletetask) | Deletes a task from an internship.       | `deletetask INDEX_INTERNSHIP /selecttask INDEX_TASK`                                                                                                                                                  |
-| [clear](#clearing-all-internships-clear)       | Removes all internships from the app.    | `clear`                                                                                                                                                                                               |
-| [exit](#exiting-the-program-exit)              | Exits and closes the application.        | `exit`                                                                                                                                                                                                |
+| [sort](#sorting-internships-by-fields-sort)    | Sorts the internships by fields.         | `sort FIELD ORDER`                                                                                                                                                                                  |
+| [addtask](#add-a-task-to-an-internship-addtask) | Adds a task to an internship.            | `addtask /task TASK`                                                                                                                                                                               |
+| [setdeadline](#set-deadline-to-a-task-setdeadline) | Sets a deadline to a task.               | `setdeadline INDEX_INTERNSHIP /selecttask INDEX_TASK /deadline DEADLINE`                                                                                                                        |
+| [deletetask](#deleting-tasks-from-an-internship-deletetask) | Deletes a task from an internship.       | `deletetask INDEX_INTERNSHIP /selecttask INDEX_TASK`                                                                                                                                   |
+| [clear](#clearing-all-internships-clear)       | Removes all internships from the app.    | `clear`                                                                                                                                                                                             |
+| [exit](#exiting-the-program-exit)              | Exits and closes the application.        | `exit`                                                                                                                                                                                              |
 
 <div markdown="block" class="alert alert-info">
 
@@ -326,7 +328,7 @@ Let's do a quick review of the commands!
 the displayed internship indexes.
 
 * Items in square brackets are optional.<br>
-  e.g `/com COMPANY_NAME [/poc NAME_OF_CONTACT]` can be used as `/com Alibaba /poc Jack Ma` or as `/com Alibaba`.
+  e.g `/com COMPANY_NAME [/desc DESCRIPTION]` can be used as `/com Alibaba /desc Free shipping for employees` or as `/com Alibaba`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `/com COMPANY_NAME /desc DESCRIPTION`, `/desc DESCRIPTION /com COMPANY_NAME` is also acceptable.
@@ -337,7 +339,8 @@ the displayed internship indexes.
 
 #### Viewing help: `help`
 
-Shows a message explaining how to access the help page.
+If you ever get lost or need a refresher on the commands, you can always use the `help` command to view the help message.<br>
+This directs you to the User Guide (this page!), where you can find all the information you need to use CareerSync.
 
 ![help message](images/helpMessage.png)
 
@@ -346,35 +349,28 @@ Format: `help`
 <div style="margin-top: 20px;"></div>
 
 #### Adding an internship: `add`
-
-With any internship manager, it is important to know how to add an internship entry with all the relevant fields. <br>
-
-This command lets you add an internship entry easily!
+Lets you add an internship entry to be tracked by CareerSync!
 
 **Format:** `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER [/loc LOCATION_ENUM] [/role ROLE] ​` <br>
 
 * The fields `COMPANY_NAME`, `DESCRIPTION`, `CONTACT_NAME` and `ROLE` allow the use of any text, number and/or spaces
-* The field `STATUS` accepts only the following inputs: `to_apply`, `ongoing`, `rejected`, `accepted`
-* The field `CONTACT_EMAIL` accepts only the format of `<email> @ domain.com`
-* The field `CONTACT_NUMBER` accepts only positive integers and it must be minimally 3 **positive** integers and above
-  * A **positive integer** refers to 1, 2, 3, …​
-* The field `LOCATION_ENUM` accepts only the following inputs: `remote`, `local`, `overseas`
-
-**Successful Output After Executing Add:** <br>
-![success-add](images/add/add-success.png)
-
-**Unsuccessful Output After Executing Add:** <br>
-![success-add](images/add/add-failure.png)
+* The field `STATUS` accepts only the following inputs: `to_apply`, `ongoing`, `rejected`, `accepted` (case-insensitive)
+* The field `CONTACT_EMAIL` accepts only the format of `<email>@<domain>.com`
+* The field `CONTACT_NUMBER` must be unsigned, and it must be at least 3 digits long
+* The field `LOCATION_ENUM` accepts only the following inputs: `remote`, `local`, `overseas` (case-insensitive)
 
 <div markdown="span" class="alert alert-info">
-ℹ️ **Tip:** Head over to the [Tutorial](#tutorial) and learn how to add an internship entry !
+ℹ️ **Tip:** If you haven't already, head over to the [Tutorial](#add-an-internship-entry-add) section to learn how to add an internship entry !
 </div>
 
 
 <div markdown="span" class="alert alert-danger">
 ⚠️ **Common errors:** <br>
-1. If no field prefixes are specified or if there are errors, the command will be rejected with error message seen above.
-Refer to the format and example displayed along with this message, to help you rectify your errors!
+
+1. If you miss out any of the mandatory fields, the command will be rejected with an error message.
+Make sure to refer to the error message displayed for the correct format to use!<br>
+2. If you input an invalid status, location or email format, the command will be rejected with an error message highlighting the valid values. <br>
+
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
@@ -382,10 +378,7 @@ Refer to the format and example displayed along with this message, to help you r
 <div style="margin-top: 20px;"></div>
 
 #### Deleting an internship: `delete`
-
-With any internship manager, it is important to know how to delete an internship entry with all the relevant fields. <br>
-
-This command lets you delete the internship entry with the corresponding index (based on the displayed list at point of deletion)
+Lets you delete an internship entry from CareerSync.
 
 Format: `delete INDEX`
 
@@ -393,20 +386,13 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed list of internship entries at point of deletion.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-**Successful Output After Executing Delete:** <br>
-![success-delete](images/delete/delete-success.png)
-
-**Unsuccessful Output After Executing Delete:** <br>
-![success-failure](images/delete/delete-failure.png)
-
 <div markdown="span" class="alert alert-info">
-ℹ️ **Tip:** Head over to the [Tutorial](#tutorial) and learn how to delete an internship entry !
+ℹ️ **Tip:** If you haven't already, head over to the [Tutorial](#delete-an-internship-entry-delete) section to learn how to delete an internship entry !
 </div>
 
 <div markdown="span" class="alert alert-danger">
 ⚠️ **Common errors:** <br>
-1. The index must be a positive integer (like 1, 2, 3 …) and one of the displayed internship indexes. If not, the command will be rejected.
-Refer to the error message displayed for the correct format to use!
+1. If you input an index that is not one of the displayed internship indexes, the command will not be executed and an error message will be displayed.
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
@@ -415,13 +401,13 @@ Refer to the error message displayed for the correct format to use!
 
 #### Listing all internships: `list`
 
-Shows a list of all internships in the application.
+Shows you a list of all your internships tracked by CareerSync.
 
 **Format:** `list`
 
 <div markdown="span" class="alert alert-success">
 
-💡 **Tip:**<br>
+💡 **Try It Out:**<br>
 When you first start the application, you will see a list of all the internships you have added. <br>
 The [find](#finding-internships-by-keywords-find) command might be used to filter the visible list of internships. <br>
 If you want to see all internships again, simply type `list` and press enter.
@@ -436,6 +422,11 @@ In this example, the current view shows only internships with location 'REMOTE'.
 2. Successful Output after executing list: <br>
    ![After successfully listing all internships](./images/list/list-after.png)
 Any present filter will be removed, and all internships will be displayed in the list.
+</div>
+
+<div markdown="span" class="alert alert-info">
+ℹ️ **Tip:** If you can't seem to find an internship you added, try using `list` to see all your internships.
+You may have had a filter applied that is hiding the internship you are looking for.
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
@@ -457,14 +448,15 @@ Shows the full details of an internship entry. This replaces the current view of
 
 #### Editing an internship: `edit`
 
-Edits an existing internship entry in the application.
+Lets you edit an existing internship entry in CareerSync.
 
 **Format** : `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE] …​`
 
 * Edits the internship at the specified `INDEX`. The index refers to the index number shown in the displayed internship list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided. Multiple fields can be edited at once.
+* At least one of the optional fields must be provided. 
+* Multiple fields can be edited at once.
 * Existing values will be updated to the input values.
-* When editing status, only the valid statuses will be accepted. Not-valid statuses will cause the command to be rejected.
+* Only valid field values will be accepted. For example, you cannot set the status to 'ghosted' as it is not a valid status.
 
 <div markdown="span" class="alert alert-success">
 
@@ -479,21 +471,24 @@ Edits an existing internship entry in the application.
    The email field of the first internship is successfully updated to `tiktok@gmail.com`.
 </div>
 
+<div markdown="span" class="alert alert-danger">
+⚠️ **Common errors:** <br>
+1. Make sure not to miss out the mandatory `INDEX` field. If you do, CareerSync won't know which internship to edit!
+</div>
+
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
 <div style="margin-top: 20px;"></div>
 
 #### Adding a remark: `addremark`
 
-Adds a remark or modifies the existing one, of an existing internship at the specified `INDEX`.
+You can use this to add a remark or modify an existing one, of the internship at the specified `INDEX`.
+Use this to keep track of your personal notes about the internship!
 
 **Format:** `addremark INDEX /remark REMARK`
 
 * `INDEX` refers to the index in the internship list and **must be a positive integer** 1, 2, 3, …
- 
-**Examples:**
-*  `addremark 1 /remark This internship has a behavioural interview!` <br> Adds or modifies the remark of the internship at index 1 to be `This internship has a behavioural interview!`.
- 
+
 <div markdown="span" class="alert alert-success">
 
 💡 **Try It Out:**<br>
@@ -504,10 +499,16 @@ Adds a remark or modifies the existing one, of an existing internship at the spe
 
 2. Successful Output after adding a remark:<br>
    ![After successfully adding a remark](./images/add-remark/addremark-after.png)
+This sets the remark of the internship at index 1 to be `This internship has a behavioural interview!`.
 </div>
 
 <div markdown="span" class="alert alert-info">
 ℹ️ **Tip:** To delete an existing remark, simply input an empty string as the remark like so: <br>`addremark INDEX /remark`.
+</div>
+
+<div markdown="span" class="alert alert-danger">
+⚠️ **Common errors:** <br>
+1. Don't forget to have the `/remark` prefix before the remark you want to add.
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
@@ -557,7 +558,7 @@ This will filter the list of internships to show you only those with both status
 1. If you do not specify any field prefixes, or specified an invalid field prefix, the command will be rejected with error message:<br>
    `At least one supported field prefix and keyword must be specified to be searched.
    Supported prefixes are /com, /poc, /loc, /status, /desc, /role, /remark`<br>
-2. Make sure you specify the MODE of search, either `withall` or `withany`. If not, the command will be rejected with error message:<br>
+2. Make sure you specify the MODE of search, which must be either `withall` or `withany`. If not, the command will be rejected with error message:<br>
 `Invalid mode specified. Please specify either 'withall' or 'withany'.`<br>
 </div>
 
@@ -566,13 +567,13 @@ This will filter the list of internships to show you only those with both status
 <div style="margin-top: 20px;"></div>
 
 #### Sorting internships by fields: `sort`
-
-Sorts the internships by the specified field in ascending or descending order.
+This command allows you to sort the internships in CareerStnc by the specified field in ascending or descending order.
 
 **Format:** `sort FIELD ORDER`
 
 * FIELD is the field to sort by. It is case-sensitive. The list of valid fields can be found [here](#field-summary).
-    * `/status` sorts the internships by status in the order of `TO_APPLY` -> `ONGOING` -> `PENDING` -> `ACCEPTED` -> `REJECTED`.
+    * `/status` has an implicit ordering, in ascending order: `TO_APPLY` -> `ONGOING` -> `PENDING` -> `ACCEPTED` -> `REJECTED`.
+    * The rest of the fields are sorted in alphanumeric order. (A before Z, 0 before 9)
 * ORDER is either `asc` or `desc`.
     * `asc` sorts the internships in ascending order.
     * `desc` sorts the internships in descending order.
@@ -591,26 +592,15 @@ This will sort the list of internships by company name in ascending order.<br>
    ![After successfully filtering by all to_apply and remote](./images/sort/sort-after.png)<br><br>
 
 3. Other examples:<br>
-   i.`sort /status desc` returns internships sorted in the following order: `TO_APPLY` -> `ONGOING` -> `PENDING` -> `ACCEPTED` -> `REJECTED`<br>
-   ii.`sort /phone asc` returns internships sorted in ascending order of phone numbers.
+   i.`sort /status asc` sorts your internships in the following order: `TO_APPLY` -> `ONGOING` -> `PENDING` -> `ACCEPTED` -> `REJECTED`<br>
+   ii.`sort /phone asc` sorts your internships in ascending order of phone numbers.
 </div>
 
-**Common errors:** * error messages to be updated
-1. If an invalid field or no field is specified to sort by, the command will be rejected with error message:<br>
-   `Invalid field specified. Please specify one of the following: `<br>
-   `/com: Company Name `<br>
-   `/poc: Contact Name`<br>
-   `/phone: Contact Number`<br>
-   `/email: Contact Email`<br>
-   `/loc: Location`<br>
-   `/status: Status`<br>
-   `/desc: Description`<br>
-   `/role: Role`<br>
-   `/remark: Remark`<br>
-   `Example: sort /com asc`<br>
+<div markdown="span" class="alert alert-danger">
+⚠️ **Common errors:** <br>
 
-2. ORDER must be present, and be either `asc` or `desc`. If not, the command will be rejected with error message:<br>
-   `Invalid order specified. Please specify either asc to sort in ascending order or desc to sort in descending order. Example: sort /com asc`
+1. Don't forget to specify the ORDER of sorting, which must be either `asc` or `desc`.
+</div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
@@ -677,6 +667,7 @@ Before you try this command, you need an internship that has at least 1 task. Yo
 <div markdown="span" class="alert alert-danger">
 ⚠️ **Common errors:** <br>
 1. Don't forget that you need to include both the internship index and the task index!
+2. If your day or month is single-digit, remember to include a leading zero. For example, `01/04/2024` instead of `1/4/2024`.
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
@@ -702,13 +693,24 @@ Lets you delete a task from an existing internship after it is complete!
    ![After successfully deleting the task](./images/deletetask/deletetask-after.png)<br><br>
 </div>
 
+<div markdown="span" class="alert alert-danger">
+⚠️ **Common errors:** <br>
+1. Don't forget that you need to include both the internship index and the task index!
+</div>
+
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
 <div style="margin-top: 20px;"></div>
 
 #### Clearing all internships: `clear`
 
-Clears all entries from the application.
+This clears all your internship entries from CareerSync.
+
+<div markdown="span" class="alert alert-danger">
+
+⚠️ Caution:
+This operation is irreversible. Once you clear all entries, you cannot undo it.
+</div>
 
 **Format:** `clear`
 
@@ -723,14 +725,13 @@ Clears all entries from the application.
 2. Successful Output after clearing entries:<br>
    ![After successfully clearing](./images/clear/clear-after.png)
 There are no more internships in the list.
+</div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
-<div style="margin-top: 20px;"></div>
-
 #### Exiting the program: `exit`
 
-Exits the program.
+When you're done using CareerSync, you can exit the application using this command.
 
 Format: `exit`
 
@@ -748,7 +749,7 @@ Only do so if you are an experienced user! <br>
 </div>
 
 <span style="color: #f66a0a;">CareerSync</span> data is saved in the hard disk, as a [JSON](#glossary) file at the path 
-`[JAR file location]/data/internship.json`. After every command that changes the data, <span style="color: #f66a0a;">CareerSync</span> performs a save automatically. There is no need to save manually.
+`[JAR file location]/data/internshipdata.json`. After every command that changes the data, <span style="color: #f66a0a;">CareerSync</span> performs a save automatically. There is no need to save manually.
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
