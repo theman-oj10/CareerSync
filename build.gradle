@@ -86,7 +86,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'CareerSync.jar'
 }
 
 run {
