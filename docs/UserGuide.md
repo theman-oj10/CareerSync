@@ -110,8 +110,7 @@ Red blocks contain warnings to note when using <span style="color: #f66a0a;">Car
 #### Installation
 1. Ensure that you have [Java 11 or above](https://www.java.com/en/download/) installed on your computer if you are using Windows.
     - If you are using MacOS, follow the instructions [here](https://nus-cs2103-ay2324s2.github.io/website/admin/programmingLanguages.html) instead.
-2. Download the latest `CareerSync.jar` file [here](https://github.com/AY2324S2-CS2103T-W11-1/tp/releases/tag/v1.2). 
-## Update link for final 1.3 release^^
+2. Download the latest `CareerSync.jar` file [here](https://github.com/AY2324S2-CS2103T-W11-1/tp/releases/tag/v1.3). 
 3. Make sure your [jar](#glossary) file is located in an empty folder.
 4. Start <span style="color: #f66a0a;">CareerSync</span>.
     - For **MacOS**:
@@ -135,8 +134,6 @@ When you first start <span style="color: #f66a0a;">CareerSync</span>, you will s
 
 ![Ui](images/Ui.png)
 
-   * `add /com Tiktok /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com
-      /phone 90890301 /loc remote /role Software Intern` : Adds this internship entry to the <span style="color:#f66a0a;">CareerSync</span> application.
 #### Areas
 The main window of <span style="color: #f66a0a;">CareerSync</span> is divided into four main areas: the **Tab Area**, the **CLI**, the **Message Box** and the **Internship List Display**.
 
@@ -163,6 +160,8 @@ For the restrictions on what is accepted for each field, kindly refer to [Fields
 7. `CONTACT_NAME` - The name of the contact person.
 8. `CONTACT_EMAIL` - The email of the contact person.
 9. `CONTACT_NUMBER` - The phone number of the contact person.
+10. `TASK` - The description of the task.
+11. `DEADLINE` - The deadline of the task.
 
 [Go to Table of Contents](#table-of-contents)
 
@@ -187,7 +186,7 @@ Key in the command `clear` in the CLI and press `Enter` to clear the sample inte
    ![Before clearing](./images/clear/clear-before.png)<br><br>
 
 2. Successful Output after clearing entries:<br>
-   ![After successfully clearing](./images/clear/clear-after.png)
+   ![After successfully clearing](./images/clear/clear-after.png)<br>
    There are no more internships in the list.
 </div>
 
@@ -200,10 +199,10 @@ Next, let us try to add an internship entry.
 💡 **Try It Out:**<br>
 
 Key in the following command in the CLI: `add /com Tiktok /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com
-/phone 90890301 /loc remote /role Software Intern`
+/phone 90890301 /loc remote /role Software Intern`<br>
 
 Successful output after adding the entry:<br>
-   ![After successfully adding](./images/tutorial/add.png)
+   ![After successfully adding](./images/tutorial/add.png)<br>
    You can now see your new internship with the details you entered in the **Internship List Display!**
 </div>
 
@@ -214,10 +213,10 @@ Oh no! You made a mistake in the email address of the contact person. Let's edit
 <div markdown="span" class="alert alert-success">
 
 💡 **Try It Out:**<br>
-Key in the following command in the CLI: `edit 1 /email janeyeo@gmail.com`
+Key in the following command in the CLI: `edit 1 /email janeyeo@gmail.com`<br>
 
 Successful output after editing the entry:<br>
-![After successfully editing](./images/tutorial/edit.png)
+![After successfully editing](./images/tutorial/edit.png)<br>
 Your internship now has the updated email that you keyed in.
 </div>
 
@@ -228,7 +227,7 @@ Before you continue, add a few more internship entries using these commands:
 2. `add /com Facebook /desc create new social media platform /status to_apply /poc jane tan /email facebookhr@gmail.com /phone 87654321 /loc remote /role Software Intern`
 
 Successful output after adding the entries:<br>
-![After successfully adding more](./images/tutorial/addmore.png)
+![After successfully adding more](./images/tutorial/addmore.png)<br>
 
 Let's say you want to find all internships that you want to apply for, that give you a software intern role.
 `find` is the command you need!
@@ -237,10 +236,10 @@ Let's say you want to find all internships that you want to apply for, that give
 
 💡 **Try It Out:**<br>
 
-Key in the following command in the CLI: `find withall /status to_apply /role Software Intern`
+Key in the following command in the CLI: `find withall /status to_apply /role Software Intern`<br>
 
 Successful output after finding all entries that satisfy the conditions:<br>
-![After successfully finding](./images/tutorial/find.png)
+![After successfully finding](./images/tutorial/find.png)<br>
 Your **Internship List Display** now only has all the internships satisfying both conditions.
 </div>
 
@@ -251,10 +250,10 @@ You decide that to no longer pursue the internship at Facebook. Let's delete tha
 
 💡 **Try It Out:**<br>
 
-Key in the following command in the CLI: `delete 2`
+Key in the following command in the CLI: `delete 2`<br>
 
 Successful output after deleting the entry:<br>
-![After successfully deleting](./images/tutorial/delete.png)
+![After successfully deleting](./images/tutorial/delete.png)<br>
 The Facebook internship entry has been removed, and is no longer present in your database.
 </div>
 
@@ -265,10 +264,10 @@ You used find to filter the internships. How do you see all the internships agai
 
 💡 **Try It Out:**<br>
 
-Key in the following command in the CLI: `list`
+Key in the following command in the CLI: `list`<br>
 
 Successful output after listing:<br>
-![After successfully listing](./images/tutorial/list.png)
+![After successfully listing](./images/tutorial/list.png)<br>
 You now see all your internships. Your Tiktok internship, previously hidden, is now back in view.
 </div>
 
@@ -280,10 +279,10 @@ You decide that you are done for the day. How do you exit the application and sa
 
 💡 **Try It Out:**<br>
 
-Key in the following command in the CLI: `exit`
+Key in the following command in the CLI: `exit`<br>
 
 Upon reopening the app:<br>
-![After successfully reopening](./images/tutorial/reopen.png)
+![After successfully reopening](./images/tutorial/reopen.png)<br>
 You now see all your internships that you have when you exited. Your data was saved!
 </div>
 
@@ -356,10 +355,11 @@ Lets you add an internship entry to be tracked by CareerSync!
 * The fields `COMPANY_NAME`, `DESCRIPTION`, `CONTACT_NAME` and `ROLE` allow the use of any text, number and/or spaces
 * The field `STATUS` accepts only the following inputs: `to_apply`, `ongoing`, `rejected`, `accepted` (case-insensitive)
 * The field `CONTACT_EMAIL` accepts only the format of `<email>@<domain>.com`
-* The field `CONTACT_NUMBER` must be unsigned, and it must be at least 3 digits long
+* The field `CONTACT_NUMBER` must be unsigned, and it must be at least 7 digits long
 * The field `LOCATION_ENUM` accepts only the following inputs: `remote`, `local`, `overseas` (case-insensitive)
 
 <div markdown="span" class="alert alert-info">
+
 ℹ️ **Tip:** If you haven't already, head over to the [Tutorial](#add-an-internship-entry-add) section to learn how to add an internship entry !
 </div>
 
@@ -415,12 +415,12 @@ If you want to see all internships again, simply type `list` and press enter.
 
 1. Input:<br>
    `list`<br>
-   ![Before listing all internships](./images/list/list-before.png)
+   ![Before listing all internships](./images/list/list-before.png)<br>
 In this example, the current view shows only internships with location 'REMOTE'.
 <br><br>
 
 2. Successful Output after executing list: <br>
-   ![After successfully listing all internships](./images/list/list-after.png)
+   ![After successfully listing all internships](./images/list/list-after.png)<br>
 Any present filter will be removed, and all internships will be displayed in the list.
 </div>
 
@@ -468,12 +468,12 @@ Lets you edit an existing internship entry in CareerSync.
 💡 **Try It Out:**<br>
 
 1. Input:<br>
-   `edit 1 /email tiktok@gmail.com`<br>
+   `edit 1 /email google@gmail.com`<br>
    ![Before editing](./images/edit/edit-before.png)<br><br>
 
-2. Successful Output after clearing entries:<br>
-   ![After successfully editing](./images/edit/edit-after.png)
-   The email field of the first internship is successfully updated to `tiktok@gmail.com`.
+2. Successful Output after editing an entry:<br>
+   ![After successfully editing](./images/edit/edit-after.png)<br>
+   The email field of the first internship is successfully updated to `google@gmail.com`.
 </div>
 
 <div markdown="span" class="alert alert-danger">
@@ -503,7 +503,7 @@ Use this to keep track of your personal notes about the internship!
    ![Before adding a remark](./images/add-remark/addremark-before.png)<br><br>
 
 2. Successful Output after adding a remark:<br>
-   ![After successfully adding a remark](./images/add-remark/addremark-after.png)
+   ![After successfully adding a remark](./images/add-remark/addremark-after.png)<br>
 This sets the remark of the internship at index 1 to be `This internship has a behavioural interview!`.
 </div>
 
@@ -542,7 +542,7 @@ You can use this to filter the visible internships in CareerSync by keywords.
 
 1. Input:<br>
    `find withall /status to_apply /loc remote`<br>
-   ![Before filtering by all toapply and remote](./images/find/find-before.png)<br>
+   ![Before filtering by all toapply and remote](./images/find/find-before.png)<br><br>
 This will filter the list of internships to show you only those with both status `TO_APPLY` and location `REMOTE`.<br><br>
 
 2. Successful Output after filtering:<br>
@@ -572,7 +572,7 @@ This will filter the list of internships to show you only those with both status
 <div style="margin-top: 20px;"></div>
 
 #### Sorting internships by fields: `sort`
-This command allows you to sort the internships in CareerStnc by the specified field in ascending or descending order.
+This command allows you to sort the internships in CareerSync by the specified field in ascending or descending order.
 
 **Format:** `sort FIELD ORDER`
 
@@ -590,8 +590,7 @@ This command allows you to sort the internships in CareerStnc by the specified f
 1. Input:<br>
    `sort /com asc`<br>
    ![Before filtering by all to_apply and remote](./images/sort/sort-before.png)<br>
-This will sort the list of internships by company name in ascending order.<br>
-<br>
+This will sort the list of internships by company name in ascending order.<br><br>
 
 2. Successful Output after sorting:<br>
    ![After successfully filtering by all to_apply and remote](./images/sort/sort-after.png)<br><br>
@@ -625,7 +624,7 @@ Using this function, you can add a task to an internship so that you won't forge
 
 1. Input:<br>
    `addtask 1 /task Edit Resume`<br>
-   ![Before Adding Task](./images/addtask/addtask-before.png)<br>
+   ![Before Adding Task](./images/addtask/addtask-before.png)<br><br>
 
 2. Successful Output after deleting task:<br>
    ![After Successfully Adding Task](./images/addtask/addtask-after.png)<br><br>
@@ -659,7 +658,7 @@ Using this function, you can set the deadline to a task under an internship so t
 Before you try this command, you need an internship that has at least 1 task. You can add it by using the [addtask](#add-a-task-to-an-internship-addtask) command. <br>
 1. Input:<br>
    `setdeadline 1 /selecttask 1 /deadline 24/04/2024`<br>
-   ![Before Setting Deadline](./images/setdeadline/setdeadline-before.png)<br>
+   ![Before Setting Deadline](./images/setdeadline/setdeadline-before.png)<br><br>
 
 2. Successful Output after adding deadline:<br>
    ![After Setting Deadline](./images/setdeadline/setdeadline-after.png)<br><br>
@@ -692,7 +691,7 @@ Lets you delete a task from an existing internship after it is complete!
 
 1. Input:<br>
    `deletetask 1 /selecttask 2`<br>
-   ![Before Deleting Task](./images/deletetask/deletetask-before.png)<br>
+   ![Before Deleting Task](./images/deletetask/deletetask-before.png)<br><br>
 
 2. Successful Output after deleting task:<br>
    ![After successfully deleting the task](./images/deletetask/deletetask-after.png)<br><br>
@@ -728,7 +727,7 @@ This operation is irreversible. Once you clear all entries, you cannot undo it.
    ![Before clearing](./images/clear/clear-before.png)<br><br>
 
 2. Successful Output after clearing entries:<br>
-   ![After successfully clearing](./images/clear/clear-after.png)
+   ![After successfully clearing](./images/clear/clear-after.png)<br>
 There are no more internships in the list.
 </div>
 
@@ -788,7 +787,7 @@ Only do so if you are an experienced user! <br>
 | `/status`  | Status of Application               | `to_apply`, `ongoing`, `rejected`, `accepted`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `/poc`     | Name of Person of Contact           | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `/email`   | Email of Person of Contact          | Valid format: `local-part@domain`<br>- The local-part should only contain alphanumeric characters and these special characters: `!#$%&'*+-/=?^_{ \|}~`. It may start or end with any special characters.<br>- The domain name is made up of domain labels separated by periods. The domain name must:<br> * End with a domain label at least 2 characters long <br> * Have each domain label start and end with alphanumeric characters<br> * Have each domain label consist of alphanumeric characters, separated only by hyphens, if any. |
-| `/phone`   | Contact Number of Person of Contact | At least 3 numbers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `/phone`   | Contact Number of Person of Contact | At least 7 numbers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `/loc`     | Location of Internship              | `remote`, `local`, `overseas`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `/role`    | Role for the Internship             | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `/remark`  | Remark for the Internship           | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
