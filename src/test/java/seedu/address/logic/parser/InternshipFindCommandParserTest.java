@@ -85,7 +85,8 @@ public class InternshipFindCommandParserTest {
     public void getPrefixesPresent() {
         // EP: Prefixes present
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize("withall /com Microsoft Google", PREFIX_COMPANY);
-        Prefix[] prefixesPresent = InternshipFindCommandParser.getPrefixesPresent(argMultimap, new Prefix[]{PREFIX_COMPANY});
+        Prefix[] prefixesPresent = InternshipFindCommandParser
+                .getPrefixesPresent(argMultimap, new Prefix[]{PREFIX_COMPANY});
         assertEquals(1, prefixesPresent.length);
         assertEquals(PREFIX_COMPANY, prefixesPresent[0]);
 
