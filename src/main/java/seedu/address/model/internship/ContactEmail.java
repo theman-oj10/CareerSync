@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents an Internship Contact's email in the internship book.
+ * Represents an Internship Contact's email in the internship data.
  */
 public class ContactEmail {
 

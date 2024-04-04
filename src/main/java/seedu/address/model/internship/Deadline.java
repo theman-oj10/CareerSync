@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents an internship's deadline in the internship book
+ * Represents an internship's deadline in the internship data.
  */
 public class Deadline {
     public static final String MESSAGE_CONSTRAINTS =

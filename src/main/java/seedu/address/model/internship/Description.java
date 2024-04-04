@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents an Internship's description in the internship book.
+ * Represents an Internship's description in the internship data.
  */
 public class Description {
     public static final String MESSAGE_CONSTRAINTS =

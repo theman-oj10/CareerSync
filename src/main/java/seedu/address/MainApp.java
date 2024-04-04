@@ -69,7 +69,8 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s internship data and {@code userPrefs}. <br>
+     * Returns a {@code InternshipModelManager} with the data from {@code storage}'s internship data and
+     * {@code userPrefs}. <br>
      * The data from the sample internship data will be used instead if {@code storage}'s internship data is not found,
      * or an empty internship data will be used instead if errors occur when reading {@code storage}'s internship data.
      */

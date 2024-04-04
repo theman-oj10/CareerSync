@@ -7,7 +7,7 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents an Internship in the internship book.
+ * Represents an Internship in the internship data.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Internship {
