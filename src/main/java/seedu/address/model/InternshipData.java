@@ -10,8 +10,8 @@ import seedu.address.model.internship.Internship;
 import seedu.address.model.internship.UniqueInternshipList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the internship-display level
+ * Duplicates are not allowed (by .isSameInternship comparison)
  */
 public class InternshipData implements ReadOnlyInternshipData {
 
@@ -31,7 +31,7 @@ public class InternshipData implements ReadOnlyInternshipData {
     public InternshipData() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an InternshipData using the Internships in the {@code toBeCopied}
      */
     public InternshipData(ReadOnlyInternshipData toBeCopied) {
         this();
@@ -41,8 +41,8 @@ public class InternshipData implements ReadOnlyInternshipData {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the internship list with {@code internships}.
+     * {@code internships} must not contain duplicate internships.
      */
     public void setInternships(List<Internship> internships) {
         this.internshipList.setInternships(internships);
@@ -56,10 +56,10 @@ public class InternshipData implements ReadOnlyInternshipData {
         setInternships(newData.getInternshipList());
     }
 
-    //// person-level operations
+    //// internship-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a internship with the same identity as {@code internship} exists in the address book.
      */
     public boolean hasInternship(Internship internship) {
         requireNonNull(internship);
@@ -67,17 +67,18 @@ public class InternshipData implements ReadOnlyInternshipData {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a internship to the address book.
+     * The internship must not already exist in the address book.
      */
     public void addInternship(Internship i) {
         internshipList.add(i);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given internship {@code target} in the list with {@code editedInternship}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The internship identity of {@code editedInternship} must not be the same as another existing internship in the
+     * address book.
      */
     public void setInternship(Internship target, Internship editedInternship) {
         requireNonNull(editedInternship);

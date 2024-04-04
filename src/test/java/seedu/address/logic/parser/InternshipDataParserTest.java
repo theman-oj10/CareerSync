@@ -33,9 +33,10 @@ public class InternshipDataParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Internship person = new InternshipBuilder().build();
-        InternshipAddCommand command = (InternshipAddCommand) parser.parseCommand(InternshipUtil.getAddCommand(person));
-        assertEquals(new InternshipAddCommand(person), command);
+        Internship internship = new InternshipBuilder().build();
+        InternshipAddCommand command = (InternshipAddCommand) parser.parseCommand(
+                InternshipUtil.getAddCommand(internship));
+        assertEquals(new InternshipAddCommand(internship), command);
     }
 
     @Test
@@ -53,8 +54,8 @@ public class InternshipDataParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Internship person = new InternshipBuilder().build();
-        EditInternshipDescriptor descriptor = new EditInternshipDescriptorBuilder(person).build();
+        Internship internship = new InternshipBuilder().build();
+        EditInternshipDescriptor descriptor = new EditInternshipDescriptorBuilder(internship).build();
         InternshipEditCommand command = (InternshipEditCommand) parser.parseCommand(
                 InternshipEditCommand.COMMAND_WORD + " " + INDEX_FIRST_INTERNSHIP.getOneBased()
                         + " " + InternshipUtil.getEditInternshipDescriptorDetails(descriptor));

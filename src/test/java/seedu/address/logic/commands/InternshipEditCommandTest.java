@@ -99,8 +99,8 @@ public class InternshipEditCommandTest {
     public void execute_filteredList_success() {
         showInternshipAtIndex(model, INDEX_FIRST_INTERNSHIP);
 
-        Internship personInFilteredList = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
-        Internship editedInternship = new InternshipBuilder(personInFilteredList)
+        Internship internshipInFilteredList = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
+        Internship editedInternship = new InternshipBuilder(internshipInFilteredList)
                 .withCompanyName(VALID_COMPANY_NAME_BOB).build();
         InternshipEditCommand editCommand = new InternshipEditCommand(INDEX_FIRST_INTERNSHIP,
                 new EditInternshipDescriptorBuilder().withCompanyName(VALID_COMPANY_NAME_BOB).build());
@@ -128,11 +128,11 @@ public class InternshipEditCommandTest {
     public void execute_duplicateInternshipFilteredList_failure() {
         showInternshipAtIndex(model, INDEX_FIRST_INTERNSHIP);
 
-        // edit person in filtered list into a duplicate in address book
-        Internship personInList = model.getInternshipData().getInternshipList().get(INDEX_SECOND_INTERNSHIP
+        // edit internship in filtered list into a duplicate in internship data
+        Internship internshipInList = model.getInternshipData().getInternshipList().get(INDEX_SECOND_INTERNSHIP
                 .getZeroBased());
         InternshipEditCommand editCommand = new InternshipEditCommand(INDEX_FIRST_INTERNSHIP,
-                new EditInternshipDescriptorBuilder(personInList).build());
+                new EditInternshipDescriptorBuilder(internshipInList).build());
 
         assertCommandFailure(editCommand, model, InternshipEditCommand.MESSAGE_DUPLICATE_INTERNSHIP);
     }

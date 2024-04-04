@@ -19,7 +19,7 @@ import seedu.address.model.internship.Internship;
  * Represents the in-memory model of the Internship data.
  */
 public class InternshipModelManager implements InternshipModel {
-    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final Logger logger = LogsCenter.getLogger(InternshipModelManager.class);
 
     private final InternshipData internshipData;
     private final InternshipUserPrefs userPrefs;
@@ -114,9 +114,9 @@ public class InternshipModelManager implements InternshipModel {
     }
 
     @Override
-    public void setInternship(Internship target, Internship editedPerson) {
-        requireAllNonNull(target, editedPerson);
-        internshipData.setInternship(target, editedPerson);
+    public void setInternship(Internship target, Internship editedInternship) {
+        requireAllNonNull(target, editedInternship);
+        internshipData.setInternship(target, editedInternship);
     }
 
     //=========== Filtered Internship List Accessors =============================================================

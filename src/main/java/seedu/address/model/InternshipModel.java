@@ -54,34 +54,34 @@ public interface InternshipModel {
     ReadOnlyInternshipData getInternshipData();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if an internship with the same identity as {@code internship} exists in the internship list.
      */
     boolean hasInternship(Internship internship);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given internship.
+     * The internship must exist in the address book.
      */
     void deleteInternship(Internship target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given internship.
+     * {@code internship} must not already exist in the address book.
      */
     void addInternship(Internship internship);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given internship {@code target} with {@code editedInternship}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The internship identity of {@code editedInternship} must not be the same as another existing internship in the address book.
      */
     void setInternship(Internship target, Internship editedInternship);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /** Returns an unmodifiable view of the filtered internship list */
     ObservableList<Internship> getFilteredInternshipList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered internship list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredInternshipList(Predicate<Internship> predicate);

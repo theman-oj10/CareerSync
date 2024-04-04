@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.InternshipUserPrefs;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyInternshipData;
 import seedu.address.model.ReadOnlyInternshipUserPrefs;
 
@@ -18,16 +17,13 @@ import seedu.address.model.ReadOnlyInternshipUserPrefs;
 public class InternshipStorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(InternshipStorageManager.class);
-    private AddressBookStorage addressBookStorage;
     private InternshipDataStorage internshipDataStorage;
     private InternshipUserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code InternshipStorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public InternshipStorageManager(AddressBookStorage addressBookStorage,
-                                    InternshipUserPrefsStorage userPrefsStorage) {
-        this.addressBookStorage = addressBookStorage;
+    public InternshipStorageManager(InternshipUserPrefsStorage userPrefsStorage) {
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -55,37 +51,6 @@ public class InternshipStorageManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-
-    // ================ AddressBook methods ==============================
-
-    @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
-    }
-
-    @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
-    }
-
-    @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
-        logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
-    }
-
-    @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
-    }
-
-    @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
-    }
-
-    // ================ InternshipData methods ==============================
     @Override
     public Path getInternshipDataFilePath() {
         return internshipDataStorage.getInternshipDataFilePath();
