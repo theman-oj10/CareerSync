@@ -65,7 +65,7 @@ public class InternshipUtil {
                 role -> sb.append(PREFIX_ROLE).append(" ").append(role.role).append(" "));
         descriptor.getRemark().ifPresent(
                 remark -> sb.append(PREFIX_REMARK).append(" ").append(remark.value).append(" "));
-
+        // TaskList is not included in the EditInternshipDescriptor because we can't add tasks through the edit command
         return sb.toString();
     }
 }

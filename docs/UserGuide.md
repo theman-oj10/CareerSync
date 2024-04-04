@@ -435,10 +435,15 @@ You may have had a filter applied that is hiding the internship you are looking 
 
 #### Viewing an internship entry's details
 
-This feature is accessible by clicking on an internship entry in the internship list.
-Click the back button to return to the previous view of internship entries.
+When you click on an internship entry in the internship list, a separate window will be open showing
+the detailed view of the internship entry.<br>
+This view will show all the fields of the internship entry in a bigger font size for easier reading.<br>
+![Detailed view window](./images/detailedview/detailedViewWindow.png)<br>
 
-Shows the full details of an internship entry. This replaces the current view of internship entries.
+<div markdown="span" class="alert alert-info">
+ℹ️ **Tip:** This feature is not recommended for efficient use of the application, as it is not a command that can be inputted into the CLI.
+However, it serves as an aid to view the details of an internship entry in a more readable format.
+</div>
 
 [CLI](#glossary) input will be implemented in a future release.
 

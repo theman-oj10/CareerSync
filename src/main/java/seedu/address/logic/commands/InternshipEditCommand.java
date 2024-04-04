@@ -82,12 +82,17 @@ public class InternshipEditCommand extends InternshipCommand {
     public CommandResult execute(InternshipModel model) throws CommandException {
         requireNonNull(model);
         List<Internship> lastShownList = model.getFilteredInternshipList();
+        // This is the internship being displayed by the UI.
+        Internship currentSelectedInternship = model.getSelectedInternship().get(0);
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(InternshipMessages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
         }
 
         Internship internshipToEdit = lastShownList.get(index.getZeroBased());
+
+        boolean isCurrentSelectedInternshipBeingEdited = currentSelectedInternship.equals(internshipToEdit);
+
         Internship editedInternship = createEditedInternship(internshipToEdit, editInternshipDescriptor);
 
         if (!internshipToEdit.isSameInternship(editedInternship) && model.hasInternship(editedInternship)) {
@@ -96,6 +101,12 @@ public class InternshipEditCommand extends InternshipCommand {
 
         model.setInternship(internshipToEdit, editedInternship);
         model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
+
+        if (isCurrentSelectedInternshipBeingEdited) {
+            // This maintains the selected internship across the edit.
+            model.setSelectedInternship(editedInternship);
+        }
+
         return new CommandResult(String.format(MESSAGE_EDIT_INTERNSHIP_SUCCESS,
                 InternshipMessages.format(editedInternship)));
     }
