@@ -5,15 +5,21 @@ import static seedu.address.logic.InternshipMessages.MESSAGE_INVALID_COMMAND_FOR
 import static seedu.address.logic.commands.InternshipFindCommand.MODE_WITHALL;
 import static seedu.address.logic.commands.InternshipFindCommand.MODE_WITHANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SELECT_TASK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
 import static seedu.address.logic.parser.InternshipParserUtil.anyPrefixesPresent;
 import static seedu.address.logic.parser.InternshipParserUtil.prefixesPresentAreNotEmpty;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 import seedu.address.logic.commands.InternshipFindCommand;
@@ -26,6 +32,10 @@ import seedu.address.model.internship.InternshipContainsKeywordsPredicate;
 public class InternshipFindCommandParser implements InternshipParser<InternshipFindCommand> {
     private static final Prefix[] supportedPrefixes = {PREFIX_COMPANY, PREFIX_CONTACT_NAME, PREFIX_LOCATION,
         PREFIX_STATUS, PREFIX_DESCRIPTION, PREFIX_ROLE, PREFIX_REMARK};
+
+    private static final Prefix[] unsupportedPrefixes = {PREFIX_CONTACT_EMAIL,
+        PREFIX_CONTACT_NUMBER, PREFIX_SELECT_TASK, PREFIX_TASK, PREFIX_DEADLINE};
+
     /**
      * Parses the given {@code String} of arguments in the context of the InternshipFindCommand
      * and returns a InternshipFindCommand object for execution.
@@ -39,6 +49,17 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
         }
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, InternshipFindCommandParser.supportedPrefixes);
+
+        ArgumentMultimap unsupportedArgMultimap =
+                ArgumentTokenizer.tokenize(args, InternshipFindCommandParser.unsupportedPrefixes);
+
+        if (anyPrefixesPresent(unsupportedArgMultimap, InternshipFindCommandParser.unsupportedPrefixes)) {
+            Prefix[] unsupportedPrefixesPresent =
+                    getPrefixesPresent(unsupportedArgMultimap, InternshipFindCommandParser.unsupportedPrefixes);
+
+            throw new ParseException(String.format(InternshipFindCommand.UNSUPPORTED_PREFIX_SPECIFIED,
+                    Prefix.getPrefixesAsString(", ", unsupportedPrefixesPresent)));
+        }
 
         if (!anyPrefixesPresent(argMultimap, InternshipFindCommandParser.supportedPrefixes)) {
             throw new ParseException(InternshipFindCommand.NO_SEARCH_KEY_SPECIFIED);
@@ -80,5 +101,13 @@ public class InternshipFindCommandParser implements InternshipParser<InternshipF
      */
     public static Prefix[] getSupportedPrefixes() {
         return supportedPrefixes.clone();
+    }
+
+    /**
+     * @return an array of the prefixes from {@code prefixes} that are present in the given {@code ArgumentMultimap}
+     */
+    protected static Prefix[] getPrefixesPresent(ArgumentMultimap argMultimap, Prefix[] prefixes) {
+        return Arrays.stream(prefixes).filter(prefix -> argMultimap.getValue(prefix).isPresent())
+                .toArray(Prefix[]::new);
     }
 }
