@@ -81,4 +81,11 @@ public class InternshipSortCommandParserTest {
         assertThrows(ParseException.class, () -> parser.parse(" invalid_field invalid_order"));
     }
 
+    @Test
+    public void parseMultipleFields() {
+        // Invalid input: multiple fields
+        assertThrows(ParseException.class, () -> parser.parse(" " + PREFIX_COMPANY.getPrefix() + " asc"
+                + PREFIX_CONTACT_EMAIL.getPrefix() + " asc"));
+    }
+
 }
