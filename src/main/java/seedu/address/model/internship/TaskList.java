@@ -3,7 +3,7 @@ package seedu.address.model.internship;
 import java.util.ArrayList;
 
 /**
- * Represents a list of tasks in the internship book.
+ * Represents a list of tasks in the internship data.
  */
 public class TaskList {
     private final ArrayList<Task> taskList;

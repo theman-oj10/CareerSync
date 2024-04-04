@@ -26,7 +26,7 @@ public class UiManager implements Ui {
     private MainWindow mainWindow;
 
     /**
-     * Creates a {@code UiManager} with the given {@code Logic}.
+     * Creates a {@code UiManager} with the given {@code InternshipLogic}.
      */
     public UiManager(InternshipLogic logic) {
         this.logic = logic;

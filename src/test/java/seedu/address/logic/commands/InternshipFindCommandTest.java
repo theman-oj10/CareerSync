@@ -66,7 +66,7 @@ public class InternshipFindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_zeroKeywords_noInternshipsFound() {
         String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 0);
         InternshipContainsKeywordsPredicate predicate =
                 new InternshipContainsKeywordsPredicate("Tiktok", null, null,
@@ -78,7 +78,7 @@ public class InternshipFindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
+    public void execute_multipleKeywords_multipleInternshipsFound() {
         String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 2);
         InternshipContainsKeywordsPredicate predicate =
                 new InternshipContainsKeywordsPredicate("Microsoft OpenAI", null, null,
@@ -90,7 +90,7 @@ public class InternshipFindCommandTest {
     }
 
     @Test
-    public void execute_oneFieldIsMatchAll_multiplePersonsFound() {
+    public void execute_oneFieldIsMatchAll_multipleInternshipsFound() {
         // Predicate only role contains "Engineer"
         String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 4);
         InternshipContainsKeywordsPredicate predicateRole =
@@ -103,7 +103,7 @@ public class InternshipFindCommandTest {
     }
 
     @Test
-    public void execute_twoFieldsIsMatchAll_lessPersonsFound() {
+    public void execute_twoFieldsIsMatchAll_lessInternshipsFound() {
         // Predicate with role contains "Engineer" and status contains "ongoing"
         String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 2);
         InternshipContainsKeywordsPredicate predicateRoleStatus =
@@ -117,7 +117,7 @@ public class InternshipFindCommandTest {
     }
 
     @Test
-    public void execute_twoFieldsIsMatchAny_morePersonsFound() {
+    public void execute_twoFieldsIsMatchAny_moreInternshipsFound() {
         // Predicate with role contains "Engineer" or status contains "pending"
         String expectedMessage = String.format(MESSAGE_INTERNSHIPS_LISTED_OVERVIEW, 5);
         InternshipContainsKeywordsPredicate predicateRoleStatus =

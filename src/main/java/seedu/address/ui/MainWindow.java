@@ -54,7 +54,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     /**
-     * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
+     * Creates a {@code MainWindow} with the given {@code Stage} and {@code InternshipLogic}.
      */
     public MainWindow(Stage primaryStage, InternshipLogic logic) {
         super(FXML, primaryStage);
@@ -206,9 +206,9 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Executes the command and returns the result.
+     * Executes the internship command and returns the result.
      *
-     * @see seedu.address.logic.Logic#execute(String)
+     * @see seedu.address.logic.InternshipLogic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {

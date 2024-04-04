@@ -100,8 +100,9 @@ public class InternshipEditCommandTest {
     public void execute_filteredList_success() {
         showInternshipAtIndex(model, INDEX_FIRST_INTERNSHIP);
 
-        Internship personInFilteredList = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
-        Internship editedInternship = new InternshipBuilder(personInFilteredList)
+        Internship internshipInFilteredList = model.getFilteredInternshipList().get(
+                INDEX_FIRST_INTERNSHIP.getZeroBased());
+        Internship editedInternship = new InternshipBuilder(internshipInFilteredList)
                 .withCompanyName(VALID_COMPANY_NAME_BOB).build();
         InternshipEditCommand editCommand = new InternshipEditCommand(INDEX_FIRST_INTERNSHIP,
                 new EditInternshipDescriptorBuilder().withCompanyName(VALID_COMPANY_NAME_BOB).build());
@@ -129,11 +130,11 @@ public class InternshipEditCommandTest {
     public void execute_duplicateInternshipFilteredList_failure() {
         showInternshipAtIndex(model, INDEX_FIRST_INTERNSHIP);
 
-        // edit person in filtered list into a duplicate in address book
-        Internship personInList = model.getInternshipData().getInternshipList().get(INDEX_SECOND_INTERNSHIP
+        // edit internship in filtered list into a duplicate in internship data
+        Internship internshipInList = model.getInternshipData().getInternshipList().get(INDEX_SECOND_INTERNSHIP
                 .getZeroBased());
         InternshipEditCommand editCommand = new InternshipEditCommand(INDEX_FIRST_INTERNSHIP,
-                new EditInternshipDescriptorBuilder(personInList).build());
+                new EditInternshipDescriptorBuilder(internshipInList).build());
 
         assertCommandFailure(editCommand, model, InternshipEditCommand.MESSAGE_DUPLICATE_INTERNSHIP);
     }
@@ -150,13 +151,13 @@ public class InternshipEditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of internship data
      */
     @Test
     public void execute_invalidInternshipIndexFilteredList_failure() {
         showInternshipAtIndex(model, INDEX_FIRST_INTERNSHIP);
         Index outOfBoundIndex = INDEX_SECOND_INTERNSHIP;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of internship data list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getInternshipData().getInternshipList().size());
 
         InternshipEditCommand editCommand = new InternshipEditCommand(outOfBoundIndex,

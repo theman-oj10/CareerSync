@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents an Internship Contact's contactNumber in the internship book.
+ * Represents an Internship Contact's contactNumber in the internship data.
  * Guarantees: immutable; is valid as declared in {@link #isValidContactNumber(String)}
  */
 

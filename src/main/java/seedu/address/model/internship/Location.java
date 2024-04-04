@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents an Internship's location in the internship book.
+ * Represents an Internship's location in the internship data.
  */
 public class Location {
     public static final String MESSAGE_CONSTRAINTS = "Locations have to be either local, overseas, or remote";

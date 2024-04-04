@@ -26,10 +26,4 @@ public class InternshipSampleDataUtilTest {
         assertEquals("Facebook", sampleInternshipData.getInternshipList().get(1).getCompanyName().toString());
         assertEquals("Amazon", sampleInternshipData.getInternshipList().get(2).getCompanyName().toString());
     }
-
-    @Test
-    public void getTagSet() {
-        assertEquals(3, InternshipSampleDataUtil.getTagSet("tag1", "tag2", "tag3").size());
-        assertEquals(0, InternshipSampleDataUtil.getTagSet().size());
-    }
 }

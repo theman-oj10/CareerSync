@@ -90,7 +90,7 @@ public class DetailedInternshipWindow extends UiPart<Stage> {
     /**
      * Executes the command and returns the result.
      *
-     * @see seedu.address.logic.Logic#execute(String)
+     * @see seedu.address.logic.InternshipLogic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException {
         String notImplementedMessage = "Commands are not implemented yet in detailed internship window";
