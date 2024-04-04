@@ -99,7 +99,8 @@ public class InternshipEditCommandTest {
     public void execute_filteredList_success() {
         showInternshipAtIndex(model, INDEX_FIRST_INTERNSHIP);
 
-        Internship internshipInFilteredList = model.getFilteredInternshipList().get(INDEX_FIRST_INTERNSHIP.getZeroBased());
+        Internship internshipInFilteredList = model.getFilteredInternshipList().get(
+                INDEX_FIRST_INTERNSHIP.getZeroBased());
         Internship editedInternship = new InternshipBuilder(internshipInFilteredList)
                 .withCompanyName(VALID_COMPANY_NAME_BOB).build();
         InternshipEditCommand editCommand = new InternshipEditCommand(INDEX_FIRST_INTERNSHIP,

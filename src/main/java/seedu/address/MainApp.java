@@ -76,15 +76,15 @@ public class MainApp extends Application {
     private InternshipModel initModelManager(Storage storage, ReadOnlyInternshipUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getInternshipDataFilePath());
 
-        Optional<ReadOnlyInternshipData> addressBookOptional;
+        Optional<ReadOnlyInternshipData> internshipDataOptional;
         ReadOnlyInternshipData initialData;
         try {
-            addressBookOptional = storage.readInternshipData();
-            if (!addressBookOptional.isPresent()) {
+            internshipDataOptional = storage.readInternshipData();
+            if (!internshipDataOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getInternshipDataFilePath()
                         + " populated with a sample InternshipData.");
             }
-            initialData = addressBookOptional.orElseGet(InternshipSampleDataUtil::getSampleInternshipData);
+            initialData = internshipDataOptional.orElseGet(InternshipSampleDataUtil::getSampleInternshipData);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getInternshipDataFilePath() + " could not be loaded."
                     + " Will be starting with an empty InternshipData.");
