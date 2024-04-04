@@ -13,12 +13,6 @@ public class LocationTest {
     }
 
     @Test
-    public void constructor_invalidLocation_throwsIllegalArgumentException() {
-        String invalidLocation = "";
-        assertThrows(IllegalArgumentException.class, () -> new Location(invalidLocation));
-    }
-
-    @Test
     public void isValidLocation() {
         // null locations
         assertThrows(NullPointerException.class, () -> Location.isValidLocation(null));

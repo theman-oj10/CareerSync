@@ -31,8 +31,7 @@ public class Internship {
     public Internship(CompanyName companyName, ContactName contactName, ContactEmail contactEmail,
                       ContactNumber contactNumber, Location location, ApplicationStatus applicationStatus,
                       Description description, Role role, Remark remark, TaskList taskList) {
-        requireAllNonNull(companyName, contactName, contactEmail, contactNumber, location, applicationStatus,
-                description, role);
+        requireAllNonNull(companyName, contactName, contactEmail, contactNumber, applicationStatus, description);
         this.companyName = companyName;
         this.contactName = contactName;
         this.contactEmail = contactEmail;
@@ -98,7 +97,7 @@ public class Internship {
     }
 
     /**
-     * Returns true if both internships have the same company name, location, role and description.
+     * Returns true if both internships have the same compulsory fields.
      * This defines the same notion of equality between two internships. (Identity fields)
      */
     public boolean isSameInternship(Internship otherInternship) {
@@ -108,8 +107,10 @@ public class Internship {
 
         return otherInternship != null
                 && companyName.equals(otherInternship.companyName)
-                && location.equals(otherInternship.location)
-                && role.equals(otherInternship.role)
+                && contactName.equals(otherInternship.contactName)
+                && contactEmail.equals(otherInternship.contactEmail)
+                && contactNumber.equals(otherInternship.contactNumber)
+                && applicationStatus.equals(otherInternship.applicationStatus)
                 && description.equals(otherInternship.description);
     }
 
@@ -133,10 +134,10 @@ public class Internship {
                 && contactName.equals(otherInternship.contactName)
                 && contactEmail.equals(otherInternship.contactEmail)
                 && contactNumber.equals(otherInternship.contactNumber)
-                && location.equals(otherInternship.location)
                 && applicationStatus.equals(otherInternship.applicationStatus)
                 && description.equals(otherInternship.description)
-                && role.equals(otherInternship.role);
+                && role.equals(otherInternship.role)
+                && location.equals(otherInternship.location);
     }
 
     @Override
