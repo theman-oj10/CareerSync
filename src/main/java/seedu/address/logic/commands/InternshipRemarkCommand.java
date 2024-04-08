@@ -29,7 +29,7 @@ public class InternshipRemarkCommand extends InternshipCommand {
             + PREFIX_REMARK + " Has a behavioural interview.";
 
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Internship: %1$s";
-    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Internship: %1$s";
+    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Internship!";
 
     private final Index index;
     private final Remark remark;
@@ -64,17 +64,16 @@ public class InternshipRemarkCommand extends InternshipCommand {
         model.setInternship(internshipToEdit, editedInternship);
         model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
 
-        return new CommandResult(generateSuccessMessage(editedInternship));
+        return new CommandResult(generateSuccessMessage());
     }
 
     /**
      * Generates a command execution success message based on whether
-     * the remark is added to or removed from
-     * {@code internshipToEdit}.
+     * the remark is added or removed
      */
-    private String generateSuccessMessage(Internship internshipToEdit) {
+    private String generateSuccessMessage() {
         String message = !remark.value.isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
-        return String.format(message, internshipToEdit);
+        return String.format(message, this.remark);
     }
 
     @Override
