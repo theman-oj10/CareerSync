@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Role {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Roles should not be blank!";
+            "Roles should not be blank! Else, it will be set to the default value of " + "unknown role";
 
     /*
      * Matches any characters that are not only whitespace
