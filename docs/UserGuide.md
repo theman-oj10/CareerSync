@@ -286,6 +286,26 @@ Upon reopening the app:<br>
 You now see all your internships that you have when you exited. Your data was saved!
 </div>
 
+<div markdown="span" class="alert alert-danger">
+⚠️ **BEFORE YOU BEGIN!:** <br>
+
+A crucial concept to understand when using the application is to understand **What Makes An Internship Unique**
+<br> This will help you avoid confusion when creating internship entries and avoid creating duplicate entries!
+
+The following is what makes an internship unique: <br>
+**Company Name**
+**Contact Name**
+**Contact Email**
+**Contact Number**
+**Description**
+**Role**
+**Location**
+
+In other words, an internship entry is considered a duplicate, if all of its above fields match with the exact same set 
+of fields for an already existing internship entry
+
+</div>
+
 #### Wrapping up the tutorial
 
 This wraps up our tutorial! Hope you now have a better understanding of how to use <span style="color: #f66a0a;">CareerSync</span> to manage your internship 
