@@ -10,7 +10,7 @@ import seedu.address.model.ReadOnlyInternshipData;
 import seedu.address.model.ReadOnlyInternshipUserPrefs;
 
 /**
- * API of the Storage component
+ * API of the InternshipStorage component
  */
 public interface InternshipStorage extends InternshipUserPrefsStorage, InternshipDataStorage {
 
