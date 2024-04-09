@@ -666,10 +666,9 @@ Refer to the error message displayed for the correct format to use!
 
 Using this function, you can set the deadline to a task under an internship so that you won't miss the deadline!
 
-**Format:** `setdeadline INDEX_INTERNSHIP /selecttask INDEX_TASK /deadline DEADLINE`
+**Format:** `setdeadline INDEX /selecttask INDEX /deadline DEADLINE`
 
-- `INDEX_INTERNSHIP` is the index of the internship with the task you want to set the deadline for.
-- `INDEX_TASK` is the index of the task that you want to set the deadline for.
+- The two `INDEX` denote the internship index and task index respectively.
 - `DEADLINE` is the deadline you want to set for the task. It must be in the format `DD/MM/YYYY`, and a valid date.
 
 <div markdown="span" class="alert alert-success">
@@ -701,9 +700,9 @@ Before you try this command, you need an internship that has at least 1 task. Yo
 
 Lets you delete a task from an existing internship after it is complete!
 
-**Format:** `deletetask INDEX /selecttask TASK_INDEX`
+**Format:** `deletetask INDEX /selecttask INDEX`
 
-- `INDEX` and `TASK_INDEX` denote the internship index and task index respectively.
+- The two `INDEX` denote the internship index and task index respectively.
 
 <div markdown="span" class="alert alert-success">
 
