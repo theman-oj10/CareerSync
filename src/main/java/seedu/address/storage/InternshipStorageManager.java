@@ -14,7 +14,7 @@ import seedu.address.model.ReadOnlyInternshipUserPrefs;
 /**
  * Manages storage of InternshipData in local storage.
  */
-public class InternshipStorageManager implements Storage {
+public class InternshipStorageManager implements InternshipStorage {
 
     private static final Logger logger = LogsCenter.getLogger(InternshipStorageManager.class);
     private InternshipDataStorage internshipDataStorage;
