@@ -127,16 +127,16 @@ The `Model` component,
 * stores a `InternshipUserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyInternshipUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-### Storage component
+### InternshipStorage component
 
-**API** : [`Storage.java`](https://github.com/AY2324S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`InternshipStorage.java`](https://github.com/AY2324S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/storage/InternshipStorage.java)
 
 <img src="images/InternshipStorageClassDiagram.png" width="550" />
 
-The `Storage` component,
+The `InternshipStorage` component,
 * can save both internship data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `InternshipDataStorage` and `InternshipUserPrefsStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* depends on some classes in the `InternshipModel` component (because the `Storage` component's job is to save/retrieve objects that belong to the `InternshipModel`)
 
 ### Common classes
 
