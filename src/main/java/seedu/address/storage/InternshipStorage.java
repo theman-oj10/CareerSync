@@ -12,7 +12,7 @@ import seedu.address.model.ReadOnlyInternshipUserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends InternshipUserPrefsStorage, InternshipDataStorage {
+public interface InternshipStorage extends InternshipUserPrefsStorage, InternshipDataStorage {
 
     @Override
     Optional<InternshipUserPrefs> readUserPrefs() throws DataLoadingException;

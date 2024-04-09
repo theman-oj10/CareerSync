@@ -27,7 +27,7 @@ import seedu.address.storage.InternshipStorageManager;
 import seedu.address.storage.InternshipUserPrefsStorage;
 import seedu.address.storage.JsonInternshipDataStorage;
 import seedu.address.storage.JsonInternshipUserPrefsStorage;
-import seedu.address.storage.Storage;
+import seedu.address.storage.InternshipStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -42,7 +42,7 @@ public class MainApp extends Application {
 
     protected Ui ui;
     protected InternshipLogic logic;
-    protected Storage storage;
+    protected InternshipStorage storage;
     protected InternshipModel model;
     protected Config config;
 
@@ -74,7 +74,7 @@ public class MainApp extends Application {
      * The data from the sample internship data will be used instead if {@code storage}'s internship data is not found,
      * or an empty internship data will be used instead if errors occur when reading {@code storage}'s internship data.
      */
-    private InternshipModel initModelManager(Storage storage, ReadOnlyInternshipUserPrefs userPrefs) {
+    private InternshipModel initModelManager(InternshipStorage storage, ReadOnlyInternshipUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getInternshipDataFilePath());
 
         Optional<ReadOnlyInternshipData> internshipDataOptional;
