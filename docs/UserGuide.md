@@ -670,7 +670,8 @@ Using this function, you can set the deadline to a task under an internship so t
 
 - `INDEX_INTERNSHIP` is the index of the internship with the task you want to set the deadline for.
 - `INDEX_TASK` is the index of the task that you want to set the deadline for.
-- `DEADLINE` is the deadline you want to set for the task. It must be in the format `DD/MM/YYYY`, and a valid date.
+- `DEADLINE` is the deadline you want to set for the task. It must be in the format `DD/MM/YYYY`. The day, month and year fields must be valid
+(day must be between 1 and 31 inclusive, month must be between 1 and 12 inclusive, year must be a valid 4 digit number)
 
 <div markdown="span" class="alert alert-success">
 
@@ -792,7 +793,7 @@ Only do so if you are an experienced user! <br>
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen.<br>
 **The solution** is to delete the `preferences.json` file from the folder where you installed the application. Then, run the application again.
-
+2. The deadline field accepts potentially invalid dates as long as the day, month and year are individually valid, including past dates.
 [Go to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -812,6 +813,6 @@ Only do so if you are an experienced user! <br>
 | `/role`    | Role for the Internship             | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `/remark`  | Remark for the Internship           | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `/task`    | Task for the Internship             | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `/deadline`| Deadline for the Task               | Valid format: `DD/MM/YYYY`<br>- The date must be a valid date.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `/deadline`| Deadline for the Task               | Valid format: `DD/MM/YYYY`<br>- The day, month and year fields must be valid.                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
 [Go to Table of Contents](#table-of-contents)
