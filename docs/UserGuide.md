@@ -475,7 +475,7 @@ However, it serves as an aid to view the details of an internship entry in a mor
 
 Lets you edit an existing internship entry in CareerSync.
 
-**Format** : `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE] [/remark remark] …​`
+**Format** : `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE] [/remark REMARK] …​`
 
 * Edits the internship at the specified `INDEX`. The index refers to the index number shown in the displayed internship list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided. 
@@ -494,6 +494,10 @@ Lets you edit an existing internship entry in CareerSync.
 2. Successful Output after editing an entry:<br>
    ![After successfully editing](./images/edit/edit-after.png)<br>
    The email field of the first internship is successfully updated to `google@gmail.com`.
+</div>
+
+<div markdown="span" class="alert alert-info">
+ℹ️ **Tip:** The remark field can accept an empty string as an argument. To delete an existing remark, simply leave the remark field empty like so: <br>`edit INDEX /remark`.
 </div>
 
 <div markdown="span" class="alert alert-danger">
