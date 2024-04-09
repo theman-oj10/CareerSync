@@ -330,7 +330,7 @@ Let's do a quick review of the commands!
 | [delete](#deleting-an-internship-delete)       | Removes a internship.                    | `delete INDEX`                                                                                                                                                                                        |
 | [list](#listing-all-internships-list)          | Lists all internships.                   | `list`                                                                                                                                                                                                |
 | [edit](#editing-an-internship-edit)            | Modifies an existing internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE] [/remark REMARK]`           |
-| [addremark](#adding-a-remark-addremark)        | Adds a remark to an existing internship. | `addremark INDEX [/remark REMARK]`                                                                                                                                                                    |
+| [addremark](#adding-a-remark-addremark)        | Adds a remark to an existing internship. | `addremark INDEX /remark REMARK`                                                                                                                                                                    |
 | [find](#finding-internships-by-keywords-find)  | Finds an internship by keywords.         | `find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS] [/remark REMARK_KEYWORDS]` |
 | [sort](#sorting-internships-by-fields-sort)    | Sorts the internships by fields.         | `sort FIELD ORDER`                                                                                                                                                                                    |
 | [addtask](#add-a-task-to-an-internship-addtask) | Adds a task to an internship.            | `addtask INDEX /task TASK`                                                                                                                                                                            |
@@ -513,6 +513,9 @@ Use this to keep track of your personal notes about the internship!
 **Format:** `addremark INDEX /remark REMARK`
 
 * `INDEX` refers to the index in the internship list and **must be a positive integer** 1, 2, 3, …
+<div markdown="span" class="alert alert-info">
+ℹ️ **Tip:** To delete an existing remark, simply leave the remark field empty like so: <br>`addremark INDEX /remark`.
+</div>
 
 <div markdown="span" class="alert alert-success">
 
@@ -526,11 +529,6 @@ Use this to keep track of your personal notes about the internship!
    ![After successfully adding a remark](./images/add-remark/addremark-after.png)<br>
 This sets the remark of the internship at index 1 to be `This internship has a behavioural interview!`.
 </div>
-
-<div markdown="span" class="alert alert-info">
-ℹ️ **Tip:** To delete an existing remark, simply input an empty string as the remark like so: <br>`addremark INDEX /remark`.
-</div>
-
 <div markdown="span" class="alert alert-danger">
 ⚠️ **Common errors:** <br>
 1. Don't forget to have the `/remark` prefix before the remark you want to add.
