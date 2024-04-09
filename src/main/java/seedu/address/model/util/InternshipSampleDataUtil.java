@@ -1,9 +1,5 @@
 package seedu.address.model.util;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import seedu.address.model.InternshipData;
 import seedu.address.model.ReadOnlyInternshipData;
 import seedu.address.model.internship.ApplicationStatus;
@@ -17,7 +13,6 @@ import seedu.address.model.internship.Location;
 import seedu.address.model.internship.Remark;
 import seedu.address.model.internship.Role;
 import seedu.address.model.internship.TaskList;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code InternshipData} with sample data.
@@ -52,14 +47,5 @@ public class InternshipSampleDataUtil {
             sampleInternshipData.addInternship(sampleInternship);
         }
         return sampleInternshipData;
-    }
-
-    /**
-     * Returns a tag set containing the list of strings given.
-     */
-    public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
     }
 }

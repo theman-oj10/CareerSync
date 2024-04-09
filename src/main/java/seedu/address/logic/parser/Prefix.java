@@ -1,8 +1,10 @@
 package seedu.address.logic.parser;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 /**
  * A prefix that marks the beginning of an argument in an arguments string.
- * E.g. 't/' in 'add James t/ friend'.
  */
 public class Prefix {
     private final String prefix;
@@ -23,6 +25,12 @@ public class Prefix {
     @Override
     public int hashCode() {
         return prefix == null ? 0 : prefix.hashCode();
+    }
+
+    public static String getPrefixesAsString(String delimiter, Prefix[] prefixes) {
+        return Arrays.stream(prefixes)
+                .map(Prefix::toString)
+                .collect(Collectors.joining(delimiter));
     }
 
     @Override

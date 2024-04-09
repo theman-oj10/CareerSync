@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import seedu.address.logic.Messages;
+import seedu.address.logic.InternshipMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -72,7 +72,7 @@ public class ArgumentMultimap {
                 .toArray(Prefix[]::new);
 
         if (duplicatedPrefixes.length > 0) {
-            throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
+            throw new ParseException(InternshipMessages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
 

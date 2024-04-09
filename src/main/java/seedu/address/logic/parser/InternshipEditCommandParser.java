@@ -47,7 +47,7 @@ public class InternshipEditCommandParser implements InternshipParser<InternshipE
         }
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = InternshipParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
         }

@@ -23,7 +23,7 @@ public class EditInternshipDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditInternshipDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditInternshipDescriptor} with fields containing {@code internship}'s details
      */
     public EditInternshipDescriptorBuilder(Internship internship) {
         descriptor = new EditInternshipDescriptor();

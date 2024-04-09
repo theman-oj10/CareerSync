@@ -110,7 +110,7 @@ Red blocks contain warnings to note when using <span style="color: #f66a0a;">Car
 #### Installation
 1. Ensure that you have [Java 11 or above](https://www.java.com/en/download/) installed on your computer if you are using Windows.
     - If you are using MacOS, follow the instructions [here](https://nus-cs2103-ay2324s2.github.io/website/admin/programmingLanguages.html) instead.
-2. Download the latest `CareerSync.jar` file [here](https://github.com/AY2324S2-CS2103T-W11-1/tp/releases/tag/v1.3). 
+2. Download the latest `CareerSync.jar` file [here](https://github.com/AY2324S2-CS2103T-W11-1/tp/releases/tag/v1.3.1). 
 3. Make sure your [jar](#glossary) file is located in an empty folder.
 4. Start <span style="color: #f66a0a;">CareerSync</span>.
     - For **MacOS**:
@@ -284,6 +284,26 @@ Key in the following command in the CLI: `exit`<br>
 Upon reopening the app:<br>
 ![After successfully reopening](./images/tutorial/reopen.png)<br>
 You now see all your internships that you have when you exited. Your data was saved!
+</div>
+
+<div markdown="span" class="alert alert-danger">
+⚠️ **BEFORE YOU BEGIN!:** <br>
+
+A crucial concept to understand when using the application is to understand **What Makes An Internship Unique**
+<br> This will help you avoid confusion when creating internship entries and avoid creating duplicate entries!
+
+The following is what makes an internship unique: <br>
+**Company Name**
+**Contact Name**
+**Contact Email**
+**Contact Number**
+**Description**
+**Role**
+**Location**
+
+In other words, an internship entry is considered a duplicate, if all of its above fields match with the exact same set 
+of fields for an already existing internship entry
+
 </div>
 
 #### Wrapping up the tutorial
@@ -565,6 +585,8 @@ This will filter the list of internships to show you only those with both status
    Supported prefixes are /com, /poc, /loc, /status, /desc, /role, /remark`<br>
 2. Make sure you specify the MODE of search, which must be either `withall` or `withany`. If not, the command will be rejected with error message:<br>
 `Invalid mode specified. Please specify either 'withall' or 'withany'.`<br>
+3. Just to note, the unsupported fields in this version are `/phone`, `/email`, `/task`, `/selecttask` and `/deadline`.<br>
+Searching for these fields will result in an error message, highlighting the unsupported fields explicitly.
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)

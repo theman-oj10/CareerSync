@@ -36,7 +36,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(1, 3, 1, true);
+    public static final Version VERSION = new Version(1, 3, 1, false);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -69,22 +69,23 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s internship data and {@code userPrefs}. <br>
+     * Returns a {@code InternshipModelManager} with the data from {@code storage}'s internship data and
+     * {@code userPrefs}. <br>
      * The data from the sample internship data will be used instead if {@code storage}'s internship data is not found,
      * or an empty internship data will be used instead if errors occur when reading {@code storage}'s internship data.
      */
     private InternshipModel initModelManager(Storage storage, ReadOnlyInternshipUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getInternshipDataFilePath());
 
-        Optional<ReadOnlyInternshipData> addressBookOptional;
+        Optional<ReadOnlyInternshipData> internshipDataOptional;
         ReadOnlyInternshipData initialData;
         try {
-            addressBookOptional = storage.readInternshipData();
-            if (!addressBookOptional.isPresent()) {
+            internshipDataOptional = storage.readInternshipData();
+            if (!internshipDataOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getInternshipDataFilePath()
                         + " populated with a sample InternshipData.");
             }
-            initialData = addressBookOptional.orElseGet(InternshipSampleDataUtil::getSampleInternshipData);
+            initialData = internshipDataOptional.orElseGet(InternshipSampleDataUtil::getSampleInternshipData);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getInternshipDataFilePath() + " could not be loaded."
                     + " Will be starting with an empty InternshipData.");

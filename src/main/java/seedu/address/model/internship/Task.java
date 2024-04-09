@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Represents an internship's Task in the internship book
+ * Represents an internship's Task in the internship data.
  */
 public class Task {
     public static final String MESSAGE_CONSTRAINTS =
