@@ -290,8 +290,8 @@ You now see all your internships that you have when you exited. Your data was sa
 
 <div markdown="span" class="alert alert-danger">
 ⚠️ **BEFORE YOU BEGIN!** <br>
-A crucial concept to understand when using the application is to know <br> **What Makes An Internship Unique** <br>
 
+<br>A crucial concept to understand when using the application is to know: <br> **What Makes An Internship Unique** 
 <br> This will help you avoid duplicate errors when creating internship entries! <br>
 
 <br> The following are what make an internship unique: <br>
