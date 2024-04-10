@@ -305,7 +305,7 @@ This will help you avoid duplicate errors when creating internship entries! <br>
 **Location** <br>
 
 <br> In other words, an internship entry is considered a duplicate, if **all of the above fields** for the current 
-internship entry and an already existing internship entry **are the same**!
+internship entry **are the same** as an already existing internship entry!
 
 </div>
 
