@@ -296,7 +296,7 @@ A crucial concept to understand when using the application is to understand <br>
 
 This will help you avoid confusion when creating internship entries and avoid creating duplicates! <br>
 
-<br> The following is what makes an internship unique: <br>
+<br> The following are what makes an internship unique: <br>
 **Company Name** <br>
 **Contact Name** <br>
 **Contact Email** <br>
