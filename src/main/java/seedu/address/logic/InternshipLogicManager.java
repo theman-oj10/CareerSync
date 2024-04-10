@@ -16,7 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.InternshipModel;
 import seedu.address.model.ReadOnlyInternshipData;
 import seedu.address.model.internship.Internship;
-import seedu.address.storage.Storage;
+import seedu.address.storage.InternshipStorage;
 
 /**
  * The main InternshipLogicManager of the app.
@@ -30,14 +30,14 @@ public class InternshipLogicManager implements InternshipLogic {
     private final Logger logger = LogsCenter.getLogger(InternshipLogicManager.class);
 
     private final InternshipModel model;
-    private final Storage storage;
+    private final InternshipStorage storage;
     private final InternshipDataParser internshipDataParser;
 
     /**
      * Constructs a {@code InternshipLogicManager} with the
      * given {@code InternshipModel} and {@code Storage}.
      */
-    public InternshipLogicManager(InternshipModel model, Storage storage) {
+    public InternshipLogicManager(InternshipModel model, InternshipStorage storage) {
         this.model = model;
         this.storage = storage;
         internshipDataParser = new InternshipDataParser();
