@@ -286,7 +286,7 @@ Upon reopening the app:<br>
 You now see all your internships that you have when you exited. Your data was saved!
 </div>
 
-#### Important Advisory: What Makes An Internship Unique
+#### Must-Know: What Makes An Internship Unique
 
 <div markdown="span" class="alert alert-danger">
 ⚠️ **BEFORE YOU BEGIN!:** <br>
