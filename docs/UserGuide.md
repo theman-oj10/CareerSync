@@ -290,12 +290,11 @@ You now see all your internships that you have when you exited. Your data was sa
 
 <div markdown="span" class="alert alert-danger">
 ⚠️ **BEFORE YOU BEGIN!** <br>
-<br>
-A crucial concept to understand when using the application is to know <br> **What Makes An Internship Unique**<br>
+A crucial concept to understand when using the application is to know <br> **What Makes An Internship Unique** <br>
 
-This will help you avoid duplicate errors when creating internship entries! <br>
+<br> This will help you avoid duplicate errors when creating internship entries! <br>
 
-<br> The following are what makes an internship unique: <br>
+<br> The following are what make an internship unique: <br>
 **Company Name** <br>
 **Contact Name** <br>
 **Contact Email** <br>
@@ -304,7 +303,7 @@ This will help you avoid duplicate errors when creating internship entries! <br>
 **Role** <br>
 **Location** <br>
 
-<br> In other words, an internship entry is considered a duplicate, if **all of the above fields** for the current 
+<br> Simply, an internship entry is considered a duplicate, if **all of the above fields** for the current 
 internship entry **are the same** as an already existing internship entry!
 
 </div>
