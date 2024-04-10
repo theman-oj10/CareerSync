@@ -578,7 +578,10 @@ This will filter the list of internships to show you only those with both status
 </div>
 
 <div markdown="span" class="alert alert-info">
-ℹ️ **Tip:** If you want to view all internships again, simply use the [list](#listing-all-internships-list) command.
+ℹ️ **Tip:** 
+<br>
+1. If you want to view all internships again, simply use the [list](#listing-all-internships-list) command.<br>
+2. Upon executing commands, with the exception of `find`, `delete`, `sort`, `clear`, `help` and `exit`, the filter will be removed i.e. the list will be reset to show all internships.
 </div>
 
 <div markdown="span" class="alert alert-danger">
