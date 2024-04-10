@@ -289,7 +289,8 @@ You now see all your internships that you have when you exited. Your data was sa
 #### Must-Know: What Makes An Internship Unique
 
 <div markdown="span" class="alert alert-danger">
-⚠️ **BEFORE YOU BEGIN!:** <br>
+⚠️ **BEFORE YOU BEGIN!** 
+<br>
 
 A crucial concept to understand when using the application is to understand <br> **What Makes An Internship Unique**<br>
 
