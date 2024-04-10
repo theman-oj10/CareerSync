@@ -540,7 +540,7 @@ This sets the remark of the internship at index 1 to be `This internship has a b
 
 #### Finding internships by keywords: `find`
 
-You can use this to filter the visible internships in CareerSync by keywords.
+You can use this to filter what internships you see in CareerSync based on the keywords you provide.
 
 **Format:** `find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS] [/remark REMARK_KEYWORDS]`
 
@@ -553,6 +553,12 @@ You can use this to filter the visible internships in CareerSync by keywords.
 * Only full words will be matched e.g. `Goo` will not match `Google`
 * Internship matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hewlett Song` will return `Hewlett Packard`, `Song Fa`
+
+<div markdown="span" class="alert alert-danger">
+
+⚠️ **Caution**:
+Do note that if you apply successive find commands do not compound the filters. Only your most recent find command will be applied.
+</div>
 
 <div markdown="span" class="alert alert-success">
 
@@ -732,7 +738,7 @@ This clears all your internship entries from CareerSync.
 
 <div markdown="span" class="alert alert-danger">
 
-⚠️ Caution:
+⚠️ **Caution**:
 This operation is irreversible. Once you clear all entries, you cannot undo it.
 </div>
 
@@ -767,7 +773,7 @@ Format: `exit`
 
 <div markdown="span" class="alert alert-danger">
 
-⚠️ Caution:
+⚠️ **Caution**:
 Users are **NOT** recommended to modify their data file directly, since wrong formatting will cause the app to malfunction.
 Only do so if you are an experienced user! <br>
 </div>
