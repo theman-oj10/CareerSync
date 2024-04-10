@@ -292,8 +292,10 @@ You now see all your internships that you have when you exited. Your data was sa
 ⚠️ **BEFORE YOU BEGIN!:** <br>
 
 A crucial concept to understand when using the application is to understand <br> **What Makes An Internship Unique**
+<br>
 
-This will help you avoid confusion when creating internship entries and avoid creating duplicates! <br>
+This will help you avoid confusion when creating internship entries and avoid creating duplicates! 
+<br>
 
 The following is what makes an internship unique: <br>
 **Company Name** <br>
