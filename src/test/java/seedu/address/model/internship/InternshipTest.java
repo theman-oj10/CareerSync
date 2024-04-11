@@ -61,6 +61,13 @@ public class InternshipTest {
         editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withApplicationStatus("rejected").build();
         assertFalse(ALICE_MICROSOFT.isSameInternship(editedAlice));
 
+        // different role, all other attributes same -> returns false
+        editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withRole("Data Analyst").build();
+        assertFalse(ALICE_MICROSOFT.isSameInternship(editedAlice));
+
+        // different location, all other attributes same -> returns false
+        editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withLocation("overseas").build();
+        assertFalse(ALICE_MICROSOFT.isSameInternship(editedAlice));
         // different description, all other attributes same -> returns false
         editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withDescription("Data Analyst Intern").build();
         assertFalse(ALICE_MICROSOFT.isSameInternship(editedAlice));
@@ -99,5 +106,33 @@ public class InternshipTest {
         // different contact email -> returns false
         editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withContactEmail("johnDoe@gmail.com").build();
         assertFalse(ALICE_MICROSOFT.equals(editedAlice));
+
+        // different contact number -> returns false
+        editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withContactNumber("91234567").build();
+        assertFalse(ALICE_MICROSOFT.equals(editedAlice));
+
+        // different location -> returns false
+        editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withLocation("local").build();
+        assertFalse(ALICE_MICROSOFT.equals(editedAlice));
+
+        // different application status -> returns false
+        editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withApplicationStatus("to_apply").build();
+        assertFalse(ALICE_MICROSOFT.equals(editedAlice));
+
+        // different description -> returns false
+        editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withDescription("Software Engineer Intern").build();
+        assertFalse(ALICE_MICROSOFT.equals(editedAlice));
+
+        // different role -> returns false
+        editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withRole("Software Engineer").build();
+        assertFalse(ALICE_MICROSOFT.equals(editedAlice));
+
+        // different remark -> returns true
+        editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withRemark("Good company").build();
+        assertTrue(ALICE_MICROSOFT.equals(editedAlice));
+
+        // different task list -> returns true
+        editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withTaskList("Task 1;Task 2").build();
+        assertTrue(ALICE_MICROSOFT.equals(editedAlice));
     }
 }
