@@ -55,8 +55,8 @@ public class Task {
 
     /**
      * Constructs a {@code Task}.
-     * @param task
-     * @param deadline
+     * @param task the string containing the task
+     * @param deadlineMap the map containing the deadline of the task
      * @param isDeadlineSet
      */
     @JsonCreator
