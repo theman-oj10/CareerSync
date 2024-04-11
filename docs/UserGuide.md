@@ -170,6 +170,13 @@ For the restrictions on what is accepted for each field, kindly refer to [Fields
 ### Tutorial
 This section would guide you through the basic commands of <span style="color: #f66a0a;">CareerSync</span>, and how to use them.
 
+<div markdown="span" class="alert alert-danger">
+
+⚠️ **Caution**:
+If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
+
 #### Clear sample internship entries: `clear`
 
 To begin using <span style="color: #f66a0a;">CareerSync</span>, you should clear the sample internship entries that are present when you first start the 
@@ -286,6 +293,26 @@ Upon reopening the app:<br>
 You now see all your internships that you have when you exited. Your data was saved!
 </div>
 
+<div markdown="span" class="alert alert-danger">
+⚠️ **BEFORE YOU BEGIN!:** <br>
+
+A crucial concept to understand when using the application is to understand **What Makes An Internship Unique**
+<br> This will help you avoid confusion when creating internship entries and avoid creating duplicate entries!
+
+The following is what makes an internship unique: <br>
+**Company Name**
+**Contact Name**
+**Contact Email**
+**Contact Number**
+**Description**
+**Role**
+**Location**
+
+In other words, an internship entry is considered a duplicate, if all of its above fields match with the exact same set 
+of fields for an already existing internship entry
+
+</div>
+
 #### Wrapping up the tutorial
 
 This wraps up our tutorial! Hope you now have a better understanding of how to use <span style="color: #f66a0a;">CareerSync</span> to manage your internship 
@@ -301,6 +328,13 @@ ________________________________________________________________________________
 
 Let's do a quick review of the commands!
 
+<div markdown="span" class="alert alert-danger">
+
+⚠️ **Caution**:
+If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines 
+as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
+
 #### Command Summary
 
 | Action                                         | Description                              | Format                                                                                                                                                                                                |
@@ -310,7 +344,7 @@ Let's do a quick review of the commands!
 | [delete](#deleting-an-internship-delete)       | Removes a internship.                    | `delete INDEX`                                                                                                                                                                                        |
 | [list](#listing-all-internships-list)          | Lists all internships.                   | `list`                                                                                                                                                                                                |
 | [edit](#editing-an-internship-edit)            | Modifies an existing internship.         | `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE] [/remark REMARK]`           |
-| [addremark](#adding-a-remark-addremark)        | Adds a remark to an existing internship. | `addremark INDEX [/remark REMARK]`                                                                                                                                                                    |
+| [addremark](#adding-a-remark-addremark)        | Adds a remark to an existing internship. | `addremark INDEX /remark REMARK`                                                                                                                                                                    |
 | [find](#finding-internships-by-keywords-find)  | Finds an internship by keywords.         | `find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS] [/remark REMARK_KEYWORDS]` |
 | [sort](#sorting-internships-by-fields-sort)    | Sorts the internships by fields.         | `sort FIELD ORDER`                                                                                                                                                                                    |
 | [addtask](#add-a-task-to-an-internship-addtask) | Adds a task to an internship.            | `addtask INDEX /task TASK`                                                                                                                                                                            |
@@ -332,8 +366,6 @@ the displayed internship indexes.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `/com COMPANY_NAME /desc DESCRIPTION`, `/desc DESCRIPTION /com COMPANY_NAME` is also acceptable.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
-  as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
 #### Viewing help: `help`
@@ -493,6 +525,9 @@ Use this to keep track of your personal notes about the internship!
 **Format:** `addremark INDEX /remark REMARK`
 
 * `INDEX` refers to the index in the internship list and **must be a positive integer** 1, 2, 3, …
+<div markdown="span" class="alert alert-info">
+ℹ️ **Tip:** To delete an existing remark, simply leave the remark field empty like so: <br>`addremark INDEX /remark`.
+</div>
 
 <div markdown="span" class="alert alert-success">
 
@@ -506,11 +541,6 @@ Use this to keep track of your personal notes about the internship!
    ![After successfully adding a remark](./images/add-remark/addremark-after.png)<br>
 This sets the remark of the internship at index 1 to be `This internship has a behavioural interview!`.
 </div>
-
-<div markdown="span" class="alert alert-info">
-ℹ️ **Tip:** To delete an existing remark, simply input an empty string as the remark like so: <br>`addremark INDEX /remark`.
-</div>
-
 <div markdown="span" class="alert alert-danger">
 ⚠️ **Common errors:** <br>
 1. Don't forget to have the `/remark` prefix before the remark you want to add.
@@ -782,18 +812,18 @@ Only do so if you are an experienced user! <br>
 
 ### Field Summary
 
-| Field Name | Description                         | Valid Inputs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-|------------|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `/com`     | Company Name                        | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `/desc`    | Description of Internship           | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `/status`  | Status of Application               | `to_apply`, `ongoing`, `rejected`, `accepted`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `/poc`     | Name of Person of Contact           | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `/email`   | Email of Person of Contact          | Valid format: `local-part@domain`<br>- The local-part should only contain alphanumeric characters and these special characters: `!#$%&'*+-/=?^_{ \|}~`. It may start or end with any special characters.<br>- The domain name is made up of domain labels separated by periods. The domain name must:<br> * End with a domain label at least 2 characters long <br> * Have each domain label start and end with alphanumeric characters<br> * Have each domain label consist of alphanumeric characters, separated only by hyphens, if any. |
-| `/phone`   | Contact Number of Person of Contact | At least 7 numbers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `/loc`     | Location of Internship              | `remote`, `local`, `overseas`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `/role`    | Role for the Internship             | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `/remark`  | Remark for the Internship           | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `/task`    | Task for the Internship             | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `/deadline`| Deadline for the Task               | Valid format: `DD/MM/YYYY`<br>- The date must be a valid date.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Field Name | Description                         | Valid Inputs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|------------|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `/com`     | Company Name                        | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `/desc`    | Description of Internship           | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `/status`  | Status of Application               | `to_apply`, `ongoing`, `rejected`, `accepted`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `/poc`     | Name of Person of Contact           | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `/email`   | Email of Person of Contact          | Valid format: `local-part@domain`<br>- The local-part should only contain alphanumeric characters and these special characters: `+_.-`. It may not start or end with any special characters.<br>- The domain name is made up of domain labels separated by periods. The domain name must:<br> * End with a domain label at least 2 characters long <br> * Have each domain label start and end with alphanumeric characters<br> * Have each domain label consist of alphanumeric characters, separated only by hyphens, if any. |
+| `/phone`   | Contact Number of Person of Contact | At least 7 numbers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `/loc`     | Location of Internship              | `remote`, `local`, `overseas`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `/role`    | Role for the Internship             | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `/remark`  | Remark for the Internship           | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `/task`    | Task for the Internship             | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `/deadline`| Deadline for the Task               | Valid format: `DD/MM/YYYY`<br>- The date must be a valid date.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
 [Go to Table of Contents](#table-of-contents)

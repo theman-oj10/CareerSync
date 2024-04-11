@@ -18,7 +18,6 @@ import seedu.address.model.internship.Internship;
  */
 @JsonRootName(value = "internshipdata")
 public class JsonSerializableInternshipData {
-
     public static final String MESSAGE_DUPLICATE_INTERNSHIP = "Internships list contains duplicate internship(s).";
 
     private final List<JsonAdaptedInternship> internships = new ArrayList<>();
