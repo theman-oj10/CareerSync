@@ -3,17 +3,17 @@ package seedu.address.model.internship;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 public class TaskListTest {
-    @Test
-    public void toStringTest() {
-        TaskList taskList = new TaskList();
-        taskList.addTask(new Task("Submit Supporting Documents"));
-        taskList.addTask(new Task("Finish Resume"));
-        assertEquals(taskList.toString(), "1. Submit Supporting Documents\n2. Finish Resume\n");
-    }
 
+    @Test
+    public void constructor_invalidTaskList_throwsIllegalArgumentException() {
+        // invalid deadline
+        assertThrows(IllegalArgumentException.class, () -> new TaskList("Submit Supporting Documents" +
+                "(Invalid Deadline)"));
+    }
     @Test
     public void addTaskTest() {
         TaskList taskList = new TaskList();
@@ -92,5 +92,21 @@ public class TaskListTest {
         TaskList taskList4 = new TaskList();
         taskList3.addTask(new Task("Submit Supporting Documents"));
         assertFalse(taskList4.equals(taskList));
+    }
+
+    @Test
+    public void string() {
+        // without deadline
+        TaskList taskList = new TaskList();
+        taskList.addTask(new Task("Submit Supporting Documents"));
+        taskList.addTask(new Task("Finish Resume"));
+        assertEquals(taskList.toString(), "1. Submit Supporting Documents\n2. Finish Resume\n");
+
+        // with deadline
+        TaskList taskList2 = new TaskList();
+        taskList2.addTask(new Task("Submit Supporting Documents", "24/04/2024"));
+        taskList2.addTask(new Task("Finish Resume"));
+        assertEquals(taskList2.toString(), "1. Submit Supporting Documents Deadline: 24/04/2024" +
+                "\n2. Finish Resume\n");
     }
 }
