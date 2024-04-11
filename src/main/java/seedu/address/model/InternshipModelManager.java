@@ -49,8 +49,6 @@ public class InternshipModelManager implements InternshipModel {
         this(new InternshipData(), new InternshipUserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
-
     @Override
     public void setUserPrefs(ReadOnlyInternshipUserPrefs userPrefs) {
         requireNonNull(userPrefs);
