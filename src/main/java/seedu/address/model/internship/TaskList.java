@@ -98,23 +98,6 @@ public class TaskList {
         return builder.toString();
     }
 
-    /**
-     * Converts the task list to a JSON string.
-     * @return JSON string representation of the task list
-     */
-    public String convertToJsonString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("[");
-        for (Task task : taskList) {
-            builder.append(task.convertToJsonString()).append(",");
-        }
-        if (taskList.size() > 0) {
-            builder.deleteCharAt(builder.length() - 1);
-        }
-        builder.append("]");
-        return builder.toString();
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
