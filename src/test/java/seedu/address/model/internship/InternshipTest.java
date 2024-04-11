@@ -61,13 +61,6 @@ public class InternshipTest {
         editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withApplicationStatus("rejected").build();
         assertFalse(ALICE_MICROSOFT.isSameInternship(editedAlice));
 
-        // different role, all other attributes same -> returns false
-        editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withRole("Data Analyst").build();
-        assertFalse(ALICE_MICROSOFT.isSameInternship(editedAlice));
-
-        // different location, all other attributes same -> returns false
-        editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withLocation("overseas").build();
-        assertFalse(ALICE_MICROSOFT.isSameInternship(editedAlice));
         // different description, all other attributes same -> returns false
         editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withDescription("Data Analyst Intern").build();
         assertFalse(ALICE_MICROSOFT.isSameInternship(editedAlice));

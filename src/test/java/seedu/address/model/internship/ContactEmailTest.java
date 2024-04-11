@@ -51,6 +51,8 @@ public class ContactEmailTest {
         assertFalse(ContactEmail.isValidContactEmail("peterjack@-example.com"));
         assertFalse(ContactEmail.isValidContactEmail("peterjack@example.com-")); // domain name ends with a hyphen
         assertFalse(ContactEmail.isValidContactEmail("peterjack@example.c"));
+        assertFalse(ContactEmail.isValidContactEmail("PeterJack_1190@example_com")); // underscore in domain name
+        assertFalse(ContactEmail.isValidContactEmail("PeterJack_1190@example+com")); // '+' symbol in domain name
 
         // valid contactEmail
         assertTrue(ContactEmail.isValidContactEmail("PeterJack_1190@example.com")); // underscore in local part
@@ -63,10 +65,8 @@ public class ContactEmailTest {
         assertTrue(ContactEmail.isValidContactEmail("a1+be.d@example1.com"));
         assertTrue(ContactEmail.isValidContactEmail("peter_jack@very-very-very-long-example.com"));
         assertTrue(ContactEmail.isValidContactEmail("if.you.dream.it_you.can.do.it@example.com"));
-        assertTrue(ContactEmail.isValidContactEmail("PeterJack_1190@example_com")); // underscore in domain name
-        assertTrue(ContactEmail.isValidContactEmail("PeterJack_1190@example+com")); // '+' symbol in domain name
-        assertTrue(ContactEmail.isValidContactEmail("PeterJack_1190@example-com")); // hyphen in domain name
         assertTrue(ContactEmail.isValidContactEmail("e1234567@u.nus.edu")); // more than one period in domain
+        assertTrue(ContactEmail.isValidContactEmail("PeterJack_1190@example-com")); // hyphen in domain name
     }
 
     @Test
