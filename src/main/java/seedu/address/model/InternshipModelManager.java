@@ -31,7 +31,7 @@ public class InternshipModelManager implements InternshipModel {
     private FilteredList<Internship> selectedInternship;
 
     /**
-     * Initializes a ModelManager with the given internshipData and userPrefs.
+     * Initializes a InternshipModelManager with the given internshipData and userPrefs.
      */
     public InternshipModelManager(ReadOnlyInternshipData internshipData, ReadOnlyInternshipUserPrefs userPrefs) {
         requireAllNonNull(internshipData, userPrefs);
