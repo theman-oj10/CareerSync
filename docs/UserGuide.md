@@ -170,6 +170,13 @@ For the restrictions on what is accepted for each field, kindly refer to [Fields
 ### Tutorial
 This section would guide you through the basic commands of <span style="color: #f66a0a;">CareerSync</span>, and how to use them.
 
+<div markdown="span" class="alert alert-danger">
+
+⚠️ **Caution**:
+If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
+
 #### Clear sample internship entries: `clear`
 
 To begin using <span style="color: #f66a0a;">CareerSync</span>, you should clear the sample internship entries that are present when you first start the 
@@ -321,6 +328,13 @@ ________________________________________________________________________________
 
 Let's do a quick review of the commands!
 
+<div markdown="span" class="alert alert-danger">
+
+⚠️ **Caution**:
+If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines 
+as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
+
 #### Command Summary
 
 | Action                                         | Description                              | Format                                                                                                                                                                                                |
@@ -352,8 +366,6 @@ the displayed internship indexes.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `/com COMPANY_NAME /desc DESCRIPTION`, `/desc DESCRIPTION /com COMPANY_NAME` is also acceptable.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
-  as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
 #### Viewing help: `help`
