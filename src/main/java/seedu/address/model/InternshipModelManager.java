@@ -84,8 +84,6 @@ public class InternshipModelManager implements InternshipModel {
         userPrefs.setInternshipDataFilePath(internshipDataFilePath);
     }
 
-    //=========== InternshipData ================================================================================
-
     @Override
     public void setInternshipData(ReadOnlyInternshipData internshipData) {
         this.internshipData.resetData(internshipData);
@@ -118,8 +116,6 @@ public class InternshipModelManager implements InternshipModel {
         requireAllNonNull(target, editedInternship);
         internshipData.setInternship(target, editedInternship);
     }
-
-    //=========== Filtered Internship List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Internship} backed by the internal list of
