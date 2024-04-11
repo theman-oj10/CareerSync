@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.util.InternshipSampleDataUtil.EMPTY_REMARK;
@@ -211,6 +212,27 @@ public class InternshipDataTest {
         InternshipData data2 = new InternshipData();
 
         assertEquals(data1, data2);
+
+        //equal with same internships
+        Internship internship1 = new Internship(
+                new CompanyName("Google"),
+                new ContactName("John Doe"),
+                new ContactEmail("johndoe@example.com"),
+                new ContactNumber("12345678"),
+                new Location("remote"),
+                new ApplicationStatus("pending"),
+                new Description("Software Engineering Internship"),
+                new Role("Software Engineer"),
+                EMPTY_REMARK,
+                EMPTY_TASKLIST
+        );
+        data1.addInternship(internship1);
+        data2.addInternship(internship1);
+        assertEquals(data1, data2);
+
+        //not equal with different internships
+        data2.removeInternship(internship1);
+        assertNotEquals(data1, data2);
     }
 
     @Test
@@ -271,22 +293,6 @@ public class InternshipDataTest {
         String expected = InternshipData.class.getCanonicalName() + "{Internship list="
                 + internshipData.getInternshipList() + "}";
         assertEquals(expected, internshipData.toString());
-    }
-
-    /**
-     * A stub ReadOnlyInternshipData whose internships list can violate interface constraints.
-     */
-    private static class InternshipDataStub implements ReadOnlyInternshipData {
-        private final ObservableList<Internship> internships = FXCollections.observableArrayList();
-
-        InternshipDataStub(Collection<Internship> internships) {
-            this.internships.setAll(internships);
-        }
-
-        @Override
-        public ObservableList<Internship> getInternshipList() {
-            return internships;
-        }
     }
 }
 
