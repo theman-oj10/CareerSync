@@ -85,13 +85,6 @@ public class Task {
     }
 
     /**
-     * Returns true if a given string is a valid task.
-     */
-    public String convertToJsonString() {
-        return "{\"task\": \"" + task + "\", \"deadline\": \"" + deadline + "\"}";
-    }
-
-    /**
      * Replace deadline with {@code deadline}.
      */
     public void setDeadline(Deadline deadline) {
