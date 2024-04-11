@@ -11,8 +11,8 @@ public class TaskListTest {
     @Test
     public void constructor_invalidTaskList_throwsIllegalArgumentException() {
         // invalid deadline
-        assertThrows(IllegalArgumentException.class, () -> new TaskList("Submit Supporting Documents" +
-                "(Invalid Deadline)"));
+        assertThrows(IllegalArgumentException.class, () -> new TaskList("Submit Supporting Documents"
+                + "(Invalid Deadline)"));
     }
     @Test
     public void addTaskTest() {
@@ -106,7 +106,7 @@ public class TaskListTest {
         TaskList taskList2 = new TaskList();
         taskList2.addTask(new Task("Submit Supporting Documents", "24/04/2024"));
         taskList2.addTask(new Task("Finish Resume"));
-        assertEquals(taskList2.toString(), "1. Submit Supporting Documents Deadline: 24/04/2024" +
-                "\n2. Finish Resume\n");
+        assertEquals(taskList2.toString(), "1. Submit Supporting Documents Deadline: 24/04/2024"
+                + "\n2. Finish Resume\n");
     }
 }

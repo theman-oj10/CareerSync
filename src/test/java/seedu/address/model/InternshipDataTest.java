@@ -12,13 +12,11 @@ import static seedu.address.testutil.TypicalInternships.ALICE_MICROSOFT;
 import static seedu.address.testutil.TypicalInternships.getTypicalInternshipData;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.internship.ApplicationStatus;
 import seedu.address.model.internship.CompanyName;
