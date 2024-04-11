@@ -60,6 +60,14 @@ public class InternshipTest {
         editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withDescription("Data Analyst Intern").build();
         assertFalse(ALICE_MICROSOFT.isSameInternship(editedAlice));
 
+        // different location, all other attributes same -> returns false
+        editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withLocation("overseas").build();
+        assertFalse(ALICE_MICROSOFT.isSameInternship(editedAlice));
+
+        // different role, all other attributes same -> returns false
+        editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withRole("Data Analyst").build();
+        assertFalse(ALICE_MICROSOFT.isSameInternship(editedAlice));
+
         // company name differs in case, all other attributes same -> returns false
         Internship editedBob = new InternshipBuilder(BOB).withCompanyName(VALID_COMPANY_NAME_BOB.toLowerCase()).build();
         assertFalse(BOB.isSameInternship(editedBob));
@@ -91,8 +99,24 @@ public class InternshipTest {
         editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withContactName("John Doe").build();
         assertFalse(ALICE_MICROSOFT.equals(editedAlice));
 
+        // different contact number -> returns false
+        editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withContactNumber("85462364").build();
+        assertFalse(ALICE_MICROSOFT.isSameInternship(editedAlice));
+
         // different contact email -> returns false
         editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withContactEmail("johnDoe@gmail.com").build();
         assertFalse(ALICE_MICROSOFT.equals(editedAlice));
+
+        // different description -> returns false
+        editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withDescription("Data Analyst Intern").build();
+        assertFalse(ALICE_MICROSOFT.isSameInternship(editedAlice));
+
+        // different location -> returns false
+        editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withLocation("overseas").build();
+        assertFalse(ALICE_MICROSOFT.isSameInternship(editedAlice));
+
+        // different role -> returns false
+        editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withRole("Data Analyst").build();
+        assertFalse(ALICE_MICROSOFT.isSameInternship(editedAlice));
     }
 }
