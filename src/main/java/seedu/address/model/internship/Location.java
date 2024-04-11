@@ -12,7 +12,7 @@ public class Location {
     public static final String VALIDATION_REGEX = "(?i)local|remote|overseas|unknown";
 
     /**
-     * Enum of locations
+     * Enum of locations. Location can be local, overseas, remote, or unknown.
      */
     public enum LocationEnum {
         LOCAL,
