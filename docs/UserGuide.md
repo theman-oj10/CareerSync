@@ -785,6 +785,9 @@ Only do so if you are an experienced user! <br>
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Do the following steps: <br> 1. Navigate to the folder where CareerSync.jar is stored. <br> 2. Copy your data file from data/internshipdata.json. <br> 3. Install the app in the other computer and overwrite the empty data file (data/internshipdata.json) it creates with the file that contains the data (JSON file) of your previous CareerSync home folder.
 
+**Q**: Why is my internship entry considered a duplicate?<br>
+**A**: Your new entry has the same value as an existing entry for one or more fields. For more information, please go [here](#must-know-what-makes-an-internship-unique).
+
 [Go to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
