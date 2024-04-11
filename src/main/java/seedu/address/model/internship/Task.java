@@ -111,6 +111,12 @@ public class Task {
         }
     }
 
+    /**
+     * Returns if two tasks are equal. Checks if the task and deadline are the same.
+     * @param other the other object to compare to.
+     * @return if the two tasks are equal.
+     */
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
