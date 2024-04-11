@@ -816,6 +816,8 @@ Only do so if you are an experienced user! <br>
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen.<br>
 **The solution** is to delete the `preferences.json` file from the folder where you installed the application. Then, run the application again.
+2. When using the `add` command, the `/phone` parameter allows for more digits that are necessary. <br>
+**The solution** is to manually ensure that the length of the phone numbers you input are correct.
 
 [Go to Table of Contents](#table-of-contents)
 
