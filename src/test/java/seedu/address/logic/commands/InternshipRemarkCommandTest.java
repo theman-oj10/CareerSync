@@ -35,7 +35,8 @@ public class InternshipRemarkCommandTest {
         InternshipRemarkCommand remarkCommand = new InternshipRemarkCommand(INDEX_FIRST_INTERNSHIP,
                 new Remark(editedInternship.getRemark().value));
 
-        String expectedMessage = String.format(InternshipRemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, editedInternship);
+        String expectedMessage = String.format(InternshipRemarkCommand.MESSAGE_ADD_REMARK_SUCCESS,
+                new Remark(editedInternship.getRemark().value));
 
         InternshipModel expectedModel = new InternshipModelManager(new InternshipData(model.getInternshipData()),
                 new InternshipUserPrefs());
@@ -52,7 +53,7 @@ public class InternshipRemarkCommandTest {
         InternshipRemarkCommand remarkCommand = new InternshipRemarkCommand(INDEX_FIRST_INTERNSHIP,
                 new Remark(editedInternship.getRemark().toString()));
 
-        String expectedMessage = String.format(InternshipRemarkCommand.MESSAGE_DELETE_REMARK_SUCCESS, editedInternship);
+        String expectedMessage = String.format(InternshipRemarkCommand.MESSAGE_DELETE_REMARK_SUCCESS);
 
         InternshipModel expectedModel = new InternshipModelManager(new InternshipData(model.getInternshipData()),
                 new InternshipUserPrefs());
@@ -73,7 +74,8 @@ public class InternshipRemarkCommandTest {
         InternshipRemarkCommand remarkCommand = new InternshipRemarkCommand(INDEX_FIRST_INTERNSHIP,
                 new Remark(editedInternship.getRemark().value));
 
-        String expectedMessage = String.format(InternshipRemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, editedInternship);
+        String expectedMessage = String.format(InternshipRemarkCommand.MESSAGE_ADD_REMARK_SUCCESS,
+                new Remark(editedInternship.getRemark().value));
 
         InternshipModel expectedModel = new InternshipModelManager(new InternshipData(model.getInternshipData()),
                 new InternshipUserPrefs());
