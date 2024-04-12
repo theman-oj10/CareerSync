@@ -661,6 +661,7 @@ Using this function, you can add a task to an internship so that you won't forge
 
 **Format:** `addtask INDEX /task TASK`
 
+- `INDEX` is the internship index you want to add the task to.
 - `TASK` is the task you want to add to the internship.
 
 <div markdown="span" class="alert alert-success">
@@ -693,8 +694,7 @@ Using this function, you can set the deadline to a task under an internship so t
 
 **Format:** `setdeadline INDEX /selecttask INDEX /deadline DEADLINE`
 
-- `INDEX_INTERNSHIP` is the index of the internship with the task you want to set the deadline for.
-- `INDEX_TASK` is the index of the task that you want to set the deadline for.
+- The two `INDEX` denote the internship index and task index respectively.
 - `DEADLINE` is the deadline you want to set for the task. It must be in the format `DD/MM/YYYY`. The day, month and year fields must be valid
 (day must be between 1 and 31 inclusive, month must be between 1 and 12 inclusive, year must be a valid 4 digit number)
 - The two `INDEX` denote the internship index and task index respectively.
@@ -821,6 +821,8 @@ Only do so if you are an experienced user! <br>
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen.<br>
 **The solution** is to delete the `preferences.json` file from the folder where you installed the application. Then, run the application again.
 2. The deadline field accepts potentially invalid dates as long as the day, month and year are individually valid, including past dates.
+
+
 [Go to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
