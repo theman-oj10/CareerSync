@@ -386,7 +386,7 @@ Lets you add an internship entry to be tracked by CareerSync!
 
 * The fields `COMPANY_NAME`, `DESCRIPTION`, `CONTACT_NAME` and `ROLE` allow the use of any text, number and/or spaces
 * The field `STATUS` accepts only the following inputs: `to_apply`, `ongoing`, `rejected`, `accepted` (case-insensitive)
-* The field `CONTACT_EMAIL` accepts only the format of `<email>@<domain>.com`
+* The field `CONTACT_EMAIL` accepts only the format of `<email>@<domain>`
 * The field `CONTACT_NUMBER` must be unsigned, and it must be at least 7 digits long
 * The field `LOCATION_ENUM` accepts only the following inputs: `remote`, `local`, `overseas` (case-insensitive)
 
