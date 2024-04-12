@@ -402,7 +402,7 @@ Lets you add an internship entry to be tracked by CareerSync!
 1. If you miss out any of the mandatory fields, the command will be rejected with an error message.
 Make sure to refer to the error message displayed for the correct format to use!<br>
 2. If you input an invalid status, location or email format, the command will be rejected with an error message highlighting the valid values. <br>
-
+3. When using the `add` command, the `/phone` parameter allows for more digits that are necessary. Do manually ensure that the length of the phone numbers you input are correct.
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
@@ -494,6 +494,7 @@ Lets you edit an existing internship entry in CareerSync.
 * Multiple fields can be edited at once.
 * Existing values will be updated to the input values.
 * Only valid field values will be accepted. For example, you cannot set the status to 'ghosted' as it is not a valid status.
+* To view the list of valid values for each field, refer to the [Field Summary](#field-summary) or [Adding an internship](#adding-an-internship-add)
 
 <div markdown="span" class="alert alert-success">
 
@@ -820,7 +821,6 @@ Only do so if you are an experienced user! <br>
 **The solution** is to delete the `preferences.json` file from the folder where you installed the application. Then, run the application again.
 2. The deadline field accepts potentially invalid dates as long as the day, month and year are individually valid, including past dates.
 
-
 [Go to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -842,4 +842,9 @@ Only do so if you are an experienced user! <br>
 | `/task`    | Task for the Internship             | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `/deadline`| Deadline for the Task               | Valid format: `DD/MM/YYYY`<br>- The day, month and year fields must be valid.                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
+<div markdown="span" class="alert alert-danger">
+⚠️ **Caution**:
+When using the `add` command, the `/phone` parameter allows for more digits that are necessary. <br>
+**The solution** is to manually ensure that the length of the phone numbers you input are correct.
+</div>
 [Go to Table of Contents](#table-of-contents)
