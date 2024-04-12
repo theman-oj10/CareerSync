@@ -697,8 +697,6 @@ Using this function, you can set the deadline to a task under an internship so t
 - The two `INDEX` denote the internship index and task index respectively.
 - `DEADLINE` is the deadline you want to set for the task. It must be in the format `DD/MM/YYYY`. The day, month and year fields must be valid
 (day must be between 1 and 31 inclusive, month must be between 1 and 12 inclusive, year must be a valid 4 digit number)
-- The two `INDEX` denote the internship index and task index respectively.
-- `DEADLINE` is the deadline you want to set for the task. It must be in the format `DD/MM/YYYY`, and a valid date.
 
 <div markdown="span" class="alert alert-success">
 
