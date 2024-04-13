@@ -307,7 +307,7 @@ Priorities: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not 
 
 1. User accesses the main page. 
 2. User selects the option to enter internship information. 
-3. System prompts the user to input internship details such as title, company, start/end dates, etc. 
+3. System prompts the user to input internship details such as company name, role title, description, etc. 
 4. User inputs the required internship details. 
 5. System validates the input data. 
 6. System saves the internship information. 
