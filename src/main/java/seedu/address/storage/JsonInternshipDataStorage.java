@@ -57,6 +57,9 @@ public class JsonInternshipDataStorage implements InternshipDataStorage {
         }
     }
 
+    /**
+     * {inheritDoc InternshipDataStorage#saveInternshipData(ReadOnlyInternshipData)}
+     */
     @Override
     public void saveInternshipData(ReadOnlyInternshipData internshipData) throws IOException {
         saveInternshipData(internshipData, filePath);
