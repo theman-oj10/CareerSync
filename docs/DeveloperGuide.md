@@ -21,7 +21,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* CareerSync's logo was generated using [LogoAI](https://www.logoai.com/logo-maker) and recreated for free using [Canva](https://www.canva.com/)
+* GitHub [CoPilot](https://github.com/features/copilot) was used to assist the writing of the code in this project.
 
 --------------------------------------------------------------------------------------------------------------------
 
