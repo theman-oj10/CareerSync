@@ -136,6 +136,7 @@ public class Internship {
                 && contactEmail.equals(otherInternship.contactEmail)
                 && contactNumber.equals(otherInternship.contactNumber)
                 && description.equals(otherInternship.description)
+                && applicationStatus.equals(otherInternship.applicationStatus)
                 && role.equals(otherInternship.role)
                 && location.equals(otherInternship.location);
     }
