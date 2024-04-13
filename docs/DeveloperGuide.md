@@ -525,3 +525,33 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+## **Appendix: Planned Enhancements**
+1. **Case insensitivity for all commands and fields:** Currently, CareerSync strictly only allow lower case commands and fields. Case insensitivity will enhance user experience as CLI users can input commands faster and with fewer syntax errors.
+2. **Undo Feature:** Currently, there is no confirmation message such as "Are you sure you want to delete this internship". While we understand the concern that it is easy to delete something accidentally we do not believe that a confirmation message is the solution as CareerSync is designed for efficiency seeking CLI users. Instead, we will implement an Undo feature which will allow them to undo the past few changes they made.
+    <br>Command: `delete 1`
+   <br>![Delete command has no confirmation message](./images/planned-enhancements/delete-command.png)<br><br>
+3. **Phone numbers can be at most 15 Digits Long:** Currently, there is no limit on the number of digits. Since, in the real world phone numbers longer than 15 digits are unlikely, this is a constraint we want to enforce.
+   <br>![Phone numbers has no length restriction](./images/planned-enhancements/unlimited-phonedigits.png)<br><br>
+4. **Limiting Deadlines to only future dates:** Adding deadlines in the past does not make sense and users will not require this. As such we want to enforce this as a constraint
+   <br>Command: `setdeadline 1 /selecttask`
+    <br>![Deadlines can have past dates](./images/planned-enhancements/past-deadlines.png)<br><br>
+5. **Edit command will require changes to be made to existing values:** Currently, the edit function allows you to re-enter the values that are already present, without any changes. We plan to add suitable error handling messages to enforce this constraint.
+   <br>Command: `edit 1 /com Facebook`
+    <br>![No changes made when editing value](./images/planned-enhancements/edit-no-changes-made.png)<br><br>
+6. **Editing Multiple fields:** Currently, when the subsequent prefix is incorrect the whole command is recognised as the argument to the first field, leading to errors such as the following. In the future, there will be additional checks to detect this as an invalid prefix error.
+   <br>Command: `edit 1 /email john@example.com /n john`
+    <br>![Incorrect prefix recognised as argument](./images/planned-enhancements/invalid-prefix-error.png)<br><br>
+7. **Consistent filtered lists:** Currently after calling find, if we enter another command it resets to the original list of internships. In the future we want to allow users to layer find, sort and other commands to improve our application's searching functionalities.
+   <br>Command: `find /status applied`
+   <br>![Example find command](./images/planned-enhancements/inconsistent-find-1.png)
+   <br>Command: `edit 1 /com Facebook`
+   <br>![Command after find resets the list](./images/planned-enhancements/inconsistent-find-2.png)<br><br>
+8. **Additional Checks in the Find Feature:** We will add constraints to the arguments for the find function where we will only allow valid values. We will add suitable error handling to handle these situations.
+   <br>Command: `find withany /status invalid_status`
+   <br>![Find allows invalid status](./images/planned-enhancements/find-invalid-status-error-message.png)<br><br>
+9. **Allowing more characters in names:** Characters such as - and / are prohibited in the name field. We recognise that these can be part of names and as such hope to add this to the list of allowed characters.<br><br>
+10. **Detecting space characters between argument's prefix and value:** For example, the command`edit 1 /company`runs successfully and updates the first internship's company field to the value`pany`. This may cause issues when the user misremembers the prefix for an argument. In the future we will implement checks that will check for a space between a prefix and its value.
+    <br>Command: `edit 1 /company`
+    <br>![Space between prefix and value](./images/planned-enhancements/space-in-edit-command.png)<br><br>
