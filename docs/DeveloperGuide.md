@@ -236,7 +236,40 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Sort feature
 
+### About this feature
+This feature allows users to sort the list of internships based on any one of the fields in ascending or descending order.
+#### Implementation
+The method takes in the field to sort by and the order of sorting as arguments. 
+The method then uses a comparator to sort the list of internships based on the specified field and order.
+The sort feature is primarily implemented in the `InternshipModelManager` class.
+
+Here is a step-by-step example of how the tag command might be executed:
+
+Step 1. User inputs the `sort /com asc` command.<br>
+Step 2. The command is parsed. The details can be found here.<br>
+Step 3. `InternshipDataParser`creates a `SortCommandParser` object and passes in the arguments (` /com asc`).<br>
+Step 4. The `SortCommandParser` object parses and validates the arguments using the `parse` method and creates a `SortCommand` object that now uses `FieldEnum` and `OrderEnum` instead of strings.<br>
+Step 5. The `InternshipLogicManager` receives the `SortCommand` object and calls the `Command::execute` method. This method finds the relevant comparator using `InternshipSortCommandParser::getComparator` method and feeds it into `Model::sortFilteredInternshipList` method.<br>
+Step 6. The `InternshipModelManager::sortFilteredInternshipList` class sorts the list of internships based on the comparator and updates the `sortedInternshipList`. <br>
+Step 7. Now when the `UI` component requests the list of internships via the `InternshipModelManager::getFilteredInternshipList` method, it gets the sorted list of internships.<br>
+
+#### Design considerations:
+* **Aspect: How the sorting is done:**
+    * **Alternative 1 (current choice):** Uses a comparator to sort the list of internships.
+        * Pros: Easy to implement.
+        * Cons: May have performance issues in terms of memory usage.
+    * **Alternative 2:** Uses a different data structure to store the internships.
+        * Pros: May have better performance.
+        * Cons: May be more complex to implement.
+* **Aspect: How the arguments are parsed:**
+    * **Alternative 1 (current choice):** Uses Enum classes to represent the fields and order of sorting.
+        * Pros: Ensures type safety.
+        * Cons: May be more complex to implement.
+    * **Alternative 2:** Uses strings to represent the fields and order of sorting.
+        * Pros: Easier to implement.
+        * Cons: May lead to runtime errors due to typos.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
