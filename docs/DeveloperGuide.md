@@ -276,12 +276,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**:
 
-``` plaintext
 Effortlessly manage, search, and sift through your various internship applications.
 Enter details rapidly using CLI, and avoid losing track of crucial information.
 Targeted to those with numerous applications to keep track of and prefer using CLI.
 Your all-in-one solution for seamless application management.
-```
+
 
 ### User stories
 
