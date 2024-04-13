@@ -481,8 +481,10 @@ Priorities: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not 
 
 * **API**: Application Programming Interface. The entirety of published methods, properties and other means for software developers to access an application through software they write using this application.
 * **GUI**: Graphical User Interface.  A graphical user interface uses graphical representations of commands, status feedbacks and data of an application, and offers methods to interact with it through graphical devices, such as a mouse or tablets.
+* **Internship Details**: Information about an internship, such as the company name, contact name, email, role etc. Refer to [User Guide Field Summary](UserGuide.md#field-summary) for more details.
+* **JAR**: Java ARchive. A package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file for distribution.
+* **JSON**: JavaScript Object Notation. A lightweight data-interchange format that is human-readable.
 * **Mainstream OS**: Mainstream Operating Systems. Refers to Windows, Linux, Unix and MacOS.
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **UI**: User Interface. The point where a user and a software application meet and interact.
 
 --------------------------------------------------------------------------------------------------------------------
