@@ -521,7 +521,7 @@ testers are expected to do more *exploratory* testing.
    Expected: No internship is edited. Error details shown in the status message. Status bar remains the same.
 
 
-5. Other incorrect edit commands to try: `edit`, `edit x`, `edit 1`, `edit 1 /com`, `edit x /com Facebook` where x is larger than the list size<br>
+5. Other incorrect edit commands to try: `edit`, `edit x`, `edit 1`,`edit -1`,`edit 1 /com`, `edit x /com Facebook` where x is larger than the list size<br>
    Expected: Similar to previous.
 
 
@@ -577,7 +577,7 @@ testers are expected to do more *exploratory* testing.
    Expected: No task is added. Error details shown in the status message. Status bar remains the same.
 
 
-3. Other incorrect addtask commands to try: `addtask`, `addtask x`, `addtask 1`, `addtask 1 /task`, `addtask x /task Attend meeting` (where x is larger than the list size)<br>
+3. Other incorrect addtask commands to try: `addtask`, `addtask x`, `addtask 1`,`addtask -1 /task Attend meeting`, `addtask 1 /task`, `addtask x /task Attend meeting` (where x is larger than the list size)<br>
    Expected: Similar to previous.
 
 
@@ -602,7 +602,7 @@ testers are expected to do more *exploratory* testing.
    Expected: No task is edited. Error details shown in the status message. Status bar remains the same.
 
 
-5. Other incorrect `setdeadline` commands to try: `setdeadline`, `setdeadline 1`, `setdeadline 1 1`, `setdeadline 1 /selecttask 1 /deadline 10-10-2024`, `setdeadline 1 /selecttask 1 10/10/2024`, `setdeadline 1 /selecttask 1 /deadline`, `setdeadline x /selecttask 1 /deadline 10/10/2024` (where x is larger than the internship list size), `setdeadline 1 /selecttask x /deadline 10/10/2024` (where x is larger than the task list size)<br>
+5. Other incorrect `setdeadline` commands to try: `setdeadline`, `setdeadline 1`,`setdeadline -1 /selecttask 1 /deadline 10/10/2024`,`setdeadline 1 1`, `setdeadline 1 /selecttask 1 /deadline 10-10-2024`, `setdeadline 1 /selecttask 1 10/10/2024`, `setdeadline 1 /selecttask 1 /deadline`, `setdeadline x /selecttask 1 /deadline 10/10/2024` (where x is larger than the internship list size), `setdeadline 1 /selecttask x /deadline 10/10/2024` (where x is larger than the task list size)<br>
    Expected: Similar to previous.
 
 
@@ -623,7 +623,7 @@ testers are expected to do more *exploratory* testing.
    Expected: No task is deleted. Error details shown in the status message. Status bar remains the same.
 
 
-4. Other incorrect deletetask commands to try: `deletetask`, `deletetask x`, `deletetask 1`, `deletetask 1 x` (where x is larger than the task list size)<br>
+4. Other incorrect deletetask commands to try: `deletetask`, `deletetask -1`, `deletetask x`, `deletetask 1`, `deletetask 1 x` (where x is larger than the task list size)<br>
    Expected: Similar to previous.
 
 
