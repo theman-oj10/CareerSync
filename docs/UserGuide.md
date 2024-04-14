@@ -307,23 +307,24 @@ Upon reopening the app:<br>
 You now see all your internships that you have when you exited. Your data was saved!
 </div>
 
+#### What Makes An Internship Unique
+
 <div markdown="span" class="alert alert-danger">
-⚠️ **BEFORE YOU BEGIN!:** <br>
+⚠️ **BEFORE YOU BEGIN!** <br>
+A crucial concept to understand when using the application is to know: <br> **What Makes An Internship Unique** 
+<br> This will help you avoid duplicate errors when creating internship entries! <br>
 
-A crucial concept to understand when using the application is to understand **What Makes An Internship Unique**
-<br> This will help you avoid confusion when creating internship entries and avoid creating duplicate entries!
+<br> The following are what make an internship unique: <br>
+**Company Name** <br>
+**Contact Name** <br>
+**Contact Email** <br>
+**Contact Number** <br>
+**Description** <br>
+**Role** <br>
+**Location** <br>
 
-The following is what makes an internship unique: <br>
-**Company Name**
-**Contact Name**
-**Contact Email**
-**Contact Number**
-**Description**
-**Role**
-**Location**
-
-In other words, an internship entry is considered a duplicate, if all of its above fields match with the exact same set 
-of fields for an already existing internship entry
+<br> Simply, an internship entry is considered a duplicate, if **all of the above fields** for the current 
+internship entry **are the same** as an already existing internship entry!
 
 </div>
 
@@ -415,10 +416,10 @@ Lets you add an internship entry to be tracked by CareerSync!
 <div markdown="span" class="alert alert-danger">
 ⚠️ **Common errors:** <br>
 
-1. If you miss out any of the mandatory fields, the command will be rejected with an error message.
-Make sure to refer to the error message displayed for the correct format to use!<br>
+1. If you miss out any of the mandatory fields, the command will be rejected with an error message. Make sure to refer to the error message displayed for the correct format to use! <br>
 2. If you input an invalid status, location or email format, the command will be rejected with an error message highlighting the valid values. <br>
-3. When using the `add` command, the `/phone` parameter allows for more digits that are necessary. Do manually ensure that the length of the phone numbers you input are correct.
+3. When using the `add` command, the `/phone` parameter allows for more digits that are necessary. Do manually ensure that the length of the phone numbers you input are correct. <br>
+4. If you encounter the `This internship already exists in the internship list` message, please go [here](#what-makes-an-internship-unique) to learn about what makes an internship unique.
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
@@ -513,7 +514,8 @@ Lets you edit an existing internship entry in CareerSync.
 
 <div markdown="span" class="alert alert-danger">
 ⚠️ **Common errors:** <br>
-1. Make sure not to miss out the mandatory `INDEX` field. If you do, CareerSync won't know which internship to edit!
+1. Make sure not to miss out the mandatory `INDEX` field. If you do, CareerSync won't know which internship to edit! <br>
+2. If you encounter the `This internship already exists in the internship list` message, please go [here](#what-makes-an-internship-unique) to learn about what makes an internship unique.
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
