@@ -23,30 +23,30 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+### **Acknowledgements**
 
 * CareerSync's logo was generated using [LogoAI](https://www.logoai.com/logo-maker) and recreated for free using [Canva](https://www.canva.com/)
 * GitHub [CoPilot](https://github.com/features/copilot) was used to assist the writing of the code in this project.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+### **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+### **Design**
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
-### Architecture
+#### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
-c
+
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
@@ -83,7 +83,7 @@ For example, the `InternshipLogic` component defines its API in the `InternshipL
 
 The sections below give more details of each component.
 
-### UI component
+#### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -100,7 +100,7 @@ The `UI` component,
 * keeps a reference to the `InternshipLogic` component, because the `UI` relies on the `InternshipLogic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### InternshipLogic component
+#### InternshipLogic component
 
 **API** : [`InternshipLogic.java`](https://github.com/AY2324S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/InternshipLogic/InternshipLogic.java)
 
@@ -131,7 +131,7 @@ How the parsing works:
 * When called upon to parse a user command, the `InternshipDataParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `InternshipDataParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### InternshipModel component
+#### InternshipModel component
 **API** : [`InternshipModel.java`](https://github.com/AY2324S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/model/InternshipModel.java)
 
 <img src="images/InternshipModelClassDiagram.png" width="450" />
@@ -144,7 +144,7 @@ The `Model` component,
 * stores a `InternshipUserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyInternshipUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-### InternshipStorage component
+#### InternshipStorage component
 
 **API** : [`InternshipStorage.java`](https://github.com/AY2324S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/storage/InternshipStorage.java)
 
@@ -155,17 +155,17 @@ The `InternshipStorage` component,
 * inherits from both `InternshipDataStorage` and `InternshipUserPrefsStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `InternshipModel` component (because the `Storage` component's job is to save/retrieve objects that belong to the `InternshipModel`)
 
-### Common classes
+#### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+### **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+#### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
@@ -249,7 +249,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+#### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
 
@@ -393,7 +393,7 @@ If either the internship index or the task index is either missing or invalid, a
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+### **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -403,9 +403,9 @@ If either the internship index or the task index is either missing or invalid, a
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+### **Appendix: Requirements**
 
-### Product scope
+#### Product scope
 
 **Target user profile**: People sourcing for internships (specifically, CS students)
 
@@ -423,7 +423,7 @@ Targeted to those with numerous applications to keep track of and prefer using C
 Your all-in-one solution for seamless application management.
 
 
-### User stories
+#### User stories
 
 Priorities: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not Useful) - `*`
 
@@ -438,7 +438,7 @@ Priorities: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not 
 
 *{More to be added}*
 
-### Use cases
+#### Use cases
 
 (For all use cases below, the **System** is `CareerSync` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -606,7 +606,7 @@ Priorities: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not 
 
 *{More to be added}*
 
-### Non-Functional Requirements
+#### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 100 internship entries without a noticeable sluggishness in performance for typical usage.
@@ -618,7 +618,7 @@ Priorities: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not 
 
 *{More to be added}*
 
-### Glossary
+#### Glossary
 
 * **API**: Application Programming Interface. The entirety of published methods, properties and other means for software developers to access an application through software they write using this application.
 * **GUI**: Graphical User Interface.  A graphical user interface uses graphical representations of commands, status feedbacks and data of an application, and offers methods to interact with it through graphical devices, such as a mouse or tablets.
@@ -630,7 +630,7 @@ Priorities: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+### **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -639,25 +639,32 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+#### Launch and shutdown
 
 1. Initial launch
 
     1. Download the CareerSync.jar file and copy into an empty folder
 
     1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   
    2. Alternatively run the jar file from the command line with `java -jar CareerSync.jar` Expected: Same as above.
 
 1. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Exiting the app
 
-### Deleting a person
+    1. Click the close button on the window.<br>
+       Expected: The app closes.
+
+   2. Use the `exit` command.<br>
+       Expected: The app closes.
+
+#### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
@@ -674,23 +681,32 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Saving data
+#### Saving data
+
 Make sure to use the `exit` command or the close button to save data while closing the app.
+
 1. Dealing with missing/corrupted data files
 
     1. To simulate a missing data file, delete the data file(`./data/internshipdata.json`) before launching the app. You will notice that the app automatically creates a new data file and repopulates it with sample data. To remove the sample data, enter the `clear` command.
+   
    2. To simulate a corrupted data file, edit the data file to contain some random text. Launch the app. The app should detect the corrupted file and automatically replace it with a new empty data file. You can then add new data to the app or reset the data to sample data by deleting the data file.
 
 1. _{ more test cases …​ }_
 
-### Sort Feature
-1. Prerequisites: Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
+#### Sort Feature
+
+1. Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
+
 2. Add another internship entry using the following command: `add /com Amazon /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 9089030 /loc remote /role Business Development Intern`
+
     1. Test case: `sort /status desc`<br>
       Expected: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
+   
    2. Test case: `sort /status asc` <br>
       Expected: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
       ![Sort by status asc](./images/manual-testing/sort-by-status.png)<br>
+   
    3. Test case: `sort /com asc`<br>
       Expected: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
       ![Sort by com asc](./images/manual-testing/status-sort-sort-by-com.png)<br>
+   
