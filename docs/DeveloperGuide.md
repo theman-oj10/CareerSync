@@ -262,12 +262,15 @@ The sort feature is primarily implemented in the `InternshipModelManager` class.
 Here is a step-by-step example of how the `sort` command might be executed:
 
 1. User inputs the `sort /com asc` command.<br>
-2. The command is parsed. The details can be found here.<br>
-3. `InternshipDataParser`creates a `SortCommandParser` object and passes in the arguments (` /com asc`).<br>
-4. The `SortCommandParser` object parses and validates the arguments using the `parse` method and creates a `SortCommand` object that now uses `FieldEnum` and `OrderEnum` instead of strings.<br>
-5. The `InternshipLogicManager` receives the `SortCommand` object and calls the `Command::execute` method. This method finds the relevant comparator using `InternshipSortCommandParser::getComparator` method and feeds it into `Model::sortFilteredInternshipList` method.<br>
-6. The `InternshipModelManager::sortFilteredInternshipList` class sorts the list of internships based on the comparator and updates the `sortedInternshipList`. <br>
-7. Now when the `UI` component requests the list of internships via the `InternshipModelManager::getFilteredInternshipList` method, it gets the sorted list of internships.<br>
+2. `InternshipDataParser` parses the command and creates a new `InternshipSortCommandParser` object.<br>
+3. The `InternshipSortCommandParser` then calls ArgumentTokenizer#tokenize to extract the field and order of sorting.<br>
+   If the field or order is missing, a ParseException will be thrown.<br>
+4. The `InternshipSortCommandParser` then creates a new `InternshipSortCommand` object with the extracted details.<br>
+5. The `InternshipSortCommand`'s execute() method is called, checking if the field is valid and the order is valid.<br>
+   If the field is invalid, a CommandException will be thrown.<br>
+6. The relevant comparator is gotten using the `InternshipSortCommandParser::getComparator` method, and it is passed into the `InternshipModel::sortFilteredInternshipList` method.<br>
+7. The `InternshipModel::sortFilteredInternshipList` class sorts the list of internships based on the comparator and updates the `sortedInternshipList`. <br>
+8. Now when the `UI` component requests the list of internships via the `InternshipModel::getFilteredInternshipList` method, it gets the sorted list of internships.<br>
 
 #### Design considerations:
 * **Aspect: How the sorting is done:**
