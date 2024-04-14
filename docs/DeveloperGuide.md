@@ -505,7 +505,7 @@ testers are expected to do more *exploratory* testing.
 1. Editing a single field of an internship
 
 
-1. Test case: `edit 1 /com Facebook`<br>
+1. **Test case**: `edit 1 /com Facebook`<br>
    Expected: The name of the first internship is changed to `Facebook`. Details of the edited internship shown in the status message.
 
 
@@ -513,11 +513,11 @@ testers are expected to do more *exploratory* testing.
    Expected: Similar to previous.
 
 
-3. Test case: `edit 0 n/editedName`<br>
+3. **Test case**: `edit 0 /com editedName`<br>
    Expected: No internship is edited. Error details shown in the status message. Status bar remains the same.
 
 
-4. Test case: `edit 1 /email invalidemail`<br>
+4. **Test case**: `edit 1 /email invalidemail`<br>
    Expected: No internship is edited. Error details shown in the status message. Status bar remains the same.
 
 
@@ -528,7 +528,7 @@ testers are expected to do more *exploratory* testing.
 2. Editing multiple fields of an internship
 
 
-1. Test case: `edit 1 /com Facebook /email google@gmail.com`<br>
+1. **Test case**: `edit 1 /com Facebook /email google@gmail.com`<br>
    Expected: The name of the company of the first internship is changed to `Facebook` and the email is changed to `google@gmail.com`. Details of the edited internship shown in the status message.
 
 
@@ -536,11 +536,11 @@ testers are expected to do more *exploratory* testing.
    Expected: Similar to previous.
 
 
-3. Test case: `edit 1 /com /com`<br>
+3. **Test case**: `edit 1 /com /com`<br>
    Expected: No internship is edited. Error details shown in the status message. Status bar remains the same.
 
 
-4. Test case: `edit 1 /com Facebook /email`<br>
+4. **Test case**: `edit 1 /com Facebook /email`<br>
    Expected: No internship is edited. Error details shown in the status message. Status bar remains the same.
 
 
@@ -550,15 +550,15 @@ testers are expected to do more *exploratory* testing.
 1. Prerequisites: Have at least one other internship. Add this internship to the list using this command: `add /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999 /remark This is a remark.`. Run `list` and ensure that this new internship added does not have index 1.
 
 
-2. Test case:  `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999 /remark This is a remark.`
+2. **Test case**:  `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999 /remark This is a remark.`
    Expected: No internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
 
 
-3. Test case:  `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999`
+3. **Test case**:  `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999`
    Expected: No internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
 
 
-4. Test case: `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com`, then `edit 1 /phone 99999999`
+4. **Test case**: `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com`, then `edit 1 /phone 99999999`
    Expected: For the first internship, the name of the company is changed to `TikTok`, status is changed to `ongoing`, description to `Software Intern`, point of contact to `John`, email to `tiktok@gmail.com`.
    Expected: No internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
 
@@ -569,11 +569,11 @@ testers are expected to do more *exploratory* testing.
 1. Adding a task to an existing internship
 
 
-1. Test case: `addtask 1 /task Attend meeting`<br>
+1. **Test case**: `addtask 1 /task Attend meeting`<br>
    Expected: A task `Attend meeting` is added to the task list of the first internship. Details of the added task shown in the status message.
 
 
-2. Test case: `addtask 0 /task Attend meeting`<br>
+2. **Test case**: `addtask 0 /task Attend meeting`<br>
    Expected: No task is added. Error details shown in the status message. Status bar remains the same.
 
 
