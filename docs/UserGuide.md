@@ -299,6 +299,7 @@ A crucial concept to understand when using the application is to know: <br> **Wh
 **Contact Email** <br>
 **Contact Number** <br>
 **Description** <br>
+**Application Status** <br>
 **Role** <br>
 **Location** <br>
 
