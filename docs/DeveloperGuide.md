@@ -13,11 +13,14 @@ title: Developer Guide
     - [InternshipStorage Component](#internshipstorage-component)
     - [Common classes](#common-classes)
 4. [Implementation](#implementation)
+    - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
+    - [[Proposed] Data archiving](#proposed-data-archiving)
+    - [Find](#find-feature)
     - [Sort](#sort-feature)
     - [Edit](#edit-feature)
-    - [AddTask](#addtask-feature)
-    - [SetDeadline](#setdeadline-feature)
-    - [DeleteTask](#deletetask-feature)
+    - [Add Task](#add-task-feature)
+    - [Set Deadline](#set-deadline-feature)
+    - [Delete Task](#delete-task-feature)
     - [Remark](#remark-feature)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Appendix: Requirements](#appendix-requirements)
@@ -254,6 +257,42 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Find feature 
+The `find` feature allows users to search for internships based on the given keywords. This allows users to filter the
+view of internships in CareerSync for easier access to the internships they are interested in. The `find` command applies
+a filter predicate to the list of internships in the `InternshipModel` to display only the internships that match the given
+keywords. Successive `find` commands will replace the existing filter predicate, and does not further filter the displayed internships.
+
+This method takes in a search mode, either 'withany' or 'withall', and the prefix-keyword pairs to search for.
+The prefix here refers to the fields of the internship that the user wants to search for. 
+
+There can be multiple keywords per prefix, as well as multiple prefixes. Within each prefix, as long as any of the 
+keywords match the field, the internship will be displayed. 
+
+If the search mode is 'withall', at least one keyword in **all** prefixes must match the field for the internship to be displayed.
+If the search mode is 'withany', at least one keyword in **any** prefix must match the field for the internship to be displayed.
+
+Currently, the supported prefixes to search by are '/com', '/poc', '/loc', '/status', '/description', '/role', '/remark'.
+Here is a step-by-step example of how the `find` command might be executed:
+
+1. The user inputs the `find` command, passing in the relevant arguments.<br>
+2. `InternshipDataParser` parses the command and creates a new `InternshipFindCommandParser` object.<br>
+3. The `InternshipFindCommandParser` then calls ArgumentTokenizer#tokenize to extract the search mode and the prefix-keyword pairs.<br>
+    If an unsupported prefix or invalid mode is given, or missing prefix or keyword to search by, a ParseException will be thrown.<br>
+4. The `InternshipFindCommandParser` then creates a new `InternshipContainsKeywordsPredicate` object based on the search mode and prefix-keyword pairs.<br>
+5. The `InternshipFindCommandParser` then creates a new `InternshipFindCommand` object with the `InternshipContainsKeywordsPredicate` object from above.<br>
+6. The `InternshipFindCommand`'s execute() method is called, which calls `InternshipModel::updateFilteredInternshipList` 
+   to update the filter predicate in the `InternshipModel` with the `InternshipContainsKeywordsPredicate` object, updating the internships displayed in the UI. <br>
+
+#### Design considerations:
+* **Aspect: How the filter is implemented:**
+    * **Alternative 1 (current choice):** Uses a single `InternshipContainsKeywordsPredicate` object to filter the list of internships.
+        * Pros: All keywords are stored in a single object, making it easier to manage.
+        * Cons: More complex to implement.
+    * **Alternative 2:** Use separate `XYZContainsKeywordsPredicate` objects for each prefix.
+        * Pros: More modular code.
+        * Cons: Harder to test and maintain, due to the number of classes needed.
+
 ### Sort feature
 This feature allows users to sort the list of internships based on any one of the fields in ascending or descending order.
 The method takes in the field to sort by and the order of sorting as arguments.
@@ -320,7 +359,7 @@ we decide to remove the `edit` command's ability to modify `TaskList` directly.
 The fields to determine if an internship is the same as another internship are `Company Name`, `Contact Name`, `Contact Phone`,
 `Contact Email`, `Role` and `Location`. `Application Status`, `Remark` and `Tasks` are excluded. Rationale is explained under the `add` command.
 
-### AddTask feature
+### Add Task feature
 The `addtask` command allows users to add tasks to the `TaskList` field of an existing internship entry. This allows users to
 keep track of the tasks they need to complete for each internship. The `TaskList` field contains an `ArrayList<Task>` field
 that stores the tasks for each internship. The `addtask` command directly adds a new `Task` object to the `TaskList` field
@@ -340,7 +379,7 @@ If the index is larger than the number of internships displayed, a CommandExcept
 6. The `InternshipAddTaskCommand` then calls `InternshipModel::setInternship` to replace the old internship with the new one with the task.<br>
 7. The `InternshipAddTaskCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.<br>
 
-### SetDeadline feature
+### Set Deadline feature
 The `setdeadline` command allows users to set a deadline for a `Task` in the `TaskList` field of an existing internship entry.
 To use this command, the user needs to specify both the internship index and the task index as displayed in the screen, in addition
 to specifying the deadline. The `setdeadline` command directly replaces the deadline of the specified `Task` in the `TaskList` field
@@ -374,7 +413,7 @@ check that it is a valid calendar date that is not in the past.<br>
     * Pros: Users will not forget to set a deadline.
     * Cons: May cause confusion for users who do not want to set a deadline.
 
-### DeleteTask feature
+### Delete Task feature
 The `deletetask` command allows users to delete a `Task` from the `TaskList` field of an existing internship entry.
 To use this command, the user needs to specify both the internship index and the task index as displayed in the screen.
 The `deletetask` command selects the specified `Task` in the `TaskList` field of the internship entry and removes it from its
