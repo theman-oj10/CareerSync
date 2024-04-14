@@ -741,39 +741,39 @@ For all the following test cases:
 Prerequisites: Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
 Then, list all internships using the `list` command.
 1. Filtering by company name
-   1. Test case: `find withall /com Amazon`<br>
-       Expected: 1 internship with the name 'Amazon' is shown. The status message shows how many internships were listed.
+   1. **Test case**: `find withall /com Amazon`<br>
+       **Expected**: 1 internship with the name 'Amazon' is shown. The status message shows how many internships were listed.
 
-   1. Test case: `find withall /com TikTok`<br>
-       Expected: No internships are shown. The status message shows how many internships were found.
+   2. **Test case**: `find withall /com TikTok`<br>
+      **Expected**: No internships are shown. The status message shows how many internships were listed.
 
-   1. Test case: `find withall /com`<br>
-       Expected: Visible internships do not change. The status message shows an error message about needing at least one search keyword. 
+   3. **Test case**: `find withall /com`<br>
+      **Expected**: Visible internships do not change. The status message shows an error message about needing at least one search keyword. 
 2. Filtering using `withany`
-    1. Test case: `find withany /com Amazon /status TO_APPLY`<br>
-       Expected: 2 internships with the company name 'Amazon' or status 'TO_APPLY' are shown. The status message shows how many internships were listed.
+    1. **Test case**: `find withany /com Amazon /status TO_APPLY`<br>
+       **Expected**: 2 internships with the company name 'Amazon' or status 'TO_APPLY' are shown. The status message shows how many internships were listed.
 3. Filtering with invalid mode
-   1. Test case: `find /com Amazon`<br>
-      Expected: Visible internships do not change. The status message shows an error message about invalid mode specified.
-   1. Test case: `find withInvalidMode /status pending`
-        Expected: Visible internships do not change. The status message shows an error message about invalid mode specified.
+   1. **Test case**: `find /com Amazon`<br>
+      **Expected**: Visible internships do not change. The status message shows an error message about invalid mode specified.
+   2. **Test case**: `find withInvalidMode /status pending`
+      **Expected**: Visible internships do not change. The status message shows an error message about invalid mode specified.
 4. Filtering with unsupported prefix `/phone`
-    1. Test case: `find withall /phone 12345678`<br>
-       Expected: Visible internships do not change. The status message shows an error message about unsupported prefix.
+    1. **Test case**: `find withall /phone 12345678`<br>
+       **Expected**: Visible internships do not change. The status message shows an error message about unsupported prefix.
 
 ### Sort Feature
 1. Prerequisites: Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
 2. Add another internship entry using the following command: `add /com Amazon /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 9089030 /loc remote /role Business Development Intern`
 
-    1. Test case: `sort /status desc`<br>
-       Expected: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
+    1. **Test case**: `sort /status desc`<br>
+       **Expected**: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
 
-    2. Test case: `sort /status asc` <br>
-       Expected: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
+    2. **Test case**: `sort /status asc` <br>
+       **Expected**: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
        ![Sort by status asc](./images/manual-testing/sort-by-status.png)<br>
 
-    3. Test case: `sort /com asc`<br>
-       Expected: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
+    3. **Test case**: `sort /com asc`<br>
+       **Expected**: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
        ![Sort by com asc](./images/manual-testing/status-sort-sort-by-com.png)<br>
 
 --------------------------------------------------------------------------------------------------------------------
