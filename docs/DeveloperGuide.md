@@ -277,11 +277,11 @@ Here is a step-by-step example of how the `find` command might be executed:
 
 1. The user inputs the `find` command, passing in the relevant arguments.<br>
 2. `InternshipDataParser` parses the command and creates a new `InternshipFindCommandParser` object.<br>
-3. The `InternshipFindCommandParser` then calls ArgumentTokenizer#tokenize to extract the search mode and the prefix-keyword pairs.<br>
+3. The `InternshipFindCommandParser` then calls `ArgumentTokenizer::tokenize` to extract the search mode and the prefix-keyword pairs.<br>
     If an unsupported prefix or invalid mode is given, or missing prefix or keyword to search by, a ParseException will be thrown.<br>
 4. The `InternshipFindCommandParser` then creates a new `InternshipContainsKeywordsPredicate` object based on the search mode and prefix-keyword pairs.<br>
 5. The `InternshipFindCommandParser` then creates a new `InternshipFindCommand` object with the `InternshipContainsKeywordsPredicate` object from above.<br>
-6. The `InternshipFindCommand`'s execute() method is called, which calls `InternshipModel::updateFilteredInternshipList` 
+6. The `InternshipFindCommand::execute` method is called, which calls `InternshipModel::updateFilteredInternshipList` 
    to update the filter predicate in the `InternshipModel` with the `InternshipContainsKeywordsPredicate` object, updating the internships displayed in the UI. <br>
 
 #### Design considerations:
