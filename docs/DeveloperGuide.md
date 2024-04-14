@@ -170,53 +170,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 # **Implementation**
 This section describes some noteworthy details on how certain features are implemented.
 
-## Optional Fields
-
-Certain fields in the Internship class are made optional to offer flexibility to the users.
-This report outlines the technical details of the implementation, including the different states, usage scenarios, design considerations, alternatives, and their implications.
-
-### Implementation Details (How Is It Implemented):
-
-**Field Conversion:** <br>
-Fields such as location and role have been converted to optional types (where default values have been set should the user not input any values for them). <br>
-This provides flexibility in representing internship data.
-
-**Constructor Modification:** <br>
-The constructor for the Internship class consists of 2 optional fields (`role` and `location`), ensuring compatibility with the new optional field structure. <br>
-The add command parser sets default values for the 2 aforementioned optional fields, should the user not input any values.
-
-**Equality Comparison:** <br>
-The isSameInternship() method checks for the equality of internships.
-
-
-**String Representation:** <br>
-The toString() method will include location and role if it exists in the string representation of an internship.
-
-### Usage Scenarios
-
-**Adding New Internship:** <br>
-When adding a new internship, optional fields such as location and role may remain unspecified, representing scenarios where these details are not provided.
-
-**Editing Existing Internship:** <br>
-Users can edit existing internship details, including optional fields, to update or modify internship information as needed.
-
-### Alternative and Its Implications
-
-#### Alternative Approach:
-The alternative approach was to directly transform role and location into optional fields using `Optional<>`. <br>
-
-**Implications:** <br>
-Pros: Avoids `NULL` values being passed around and caused complications when testing other features.
-This approach may also introduce maintenance challenges and potential errors if not implemented correctly.
-
-**Conclusion:** <br>
-The transformation of certain fields in the Internship class to optional types enhances the flexibility and usability of the internship application.
-By considering different states, usage scenarios, design considerations, and alternatives, the implementation ensures robustness and adaptability in managing internship data.
-
-**Recommendations:** <br>
-Thorough testing and validation are recommended to ensure the proper functioning of the modified Internship class in various usage scenarios.
-Documentation updates should be performed to reflect the changes made and to provide clear guidelines on utilizing optional fields in the Internship class.
-
 #### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -503,6 +456,48 @@ Here is a step-by-step example of how the `addremark` command might be executed:
 * **Alternative 2:** Implement a `deleteremark` command.
     * Pros: More intuitive for the user.
     * Cons: More complex implementation and documentation needed.
+
+### Optional Fields Feature
+
+Certain fields in the Internship class are made optional to offer flexibility to the users.
+This section outlines the technical details behind how the internship object is able to accept optional fields.
+
+**Field Conversion:** <br>
+Fields such as location and role have been converted to optional types (where default values have been set should the user not input any values for them). <br>
+This provides flexibility in representing internship data.
+
+**Constructor Modification:** <br>
+The constructor for the Internship class consists of 2 optional fields (`role` and `location`), ensuring compatibility with the new optional field structure. <br>
+The add command parser sets default values for the 2 aforementioned optional fields, should the user not input any values.
+
+**Equality Comparison:** <br>
+The isSameInternship() method checks for the equality of internships.
+
+**String Representation:** <br>
+The toString() method will include location and role if it exists in the string representation of an internship.
+
+### Usage Scenarios:
+
+**Adding New Internship:** <br>
+When adding a new internship, optional fields such as location and role may remain unspecified, representing scenarios where these details are not provided.
+
+**Editing Existing Internship:** <br>
+Users can edit existing internship details, including optional fields, to update or modify internship information as needed.
+
+### Alternative and Its Implications
+
+#### Alternative Approach: The alternative approach was to directly transform role and location into optional fields using `Optional<>`. <br>
+
+**Implications:** <br>
+Cons: Avoids `NULL` values being passed around and caused complications when testing other features. This approach may also introduce maintenance challenges and potential errors if not implemented correctly.
+
+**Conclusion:** <br>
+The transformation of certain fields in the Internship class to optional types enhances the flexibility and usability of the internship application. <br>
+By considering different states, usage scenarios, design considerations, and alternatives, the implementation ensures robustness and adaptability in managing internship data.
+
+**Recommendations:** <br>
+Thorough testing and validation are recommended to ensure the proper functioning of the modified Internship class in various usage scenarios. <br>
+Documentation updates should be performed to reflect the changes made and to provide clear guidelines on utilizing optional fields in the Internship class.
 
 --------------------------------------------------------------------------------------------------------------------
 
