@@ -513,22 +513,41 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Adding an internship
 
-1. Deleting a person while all persons are being shown
+1. Adding an internship 
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: Ensure that internship list is empty and that there are no existing entries similar to the successful internship entries used here
+
+    1. Test case: `add /com Tiktok /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 90890301 /loc remote /role Software Intern`<br>
+       Expected: Internship is added to the list in the Main Window. Details of the internship are shown in the Message Box, Main Window and Detailed Internship View.
+
+    1. Test case: `add /com Facebook /desc create new recommendation engine /status ongoing /poc sally tan /email hr@facebook.com /phone 90890375`<br>
+       Expected: Internship is added to the list in the Main Window. Details of the internship are shown in the Message Box, Main Window and Detailed Internship View.
+
+    1. Test case: `add /com Google /desc create new recommendation forum /status accepted /poc jane tan /email hr@google.com`<br>
+       Expected: Internship is not added to the list in the Main Window. Details of the internship are not shown in the Message Box, Main Window and Detailed Internship View. <br>
+       Reason: The internship entry is missing some compulsory fields (in this case, the phone number of the contact)
+
+    1. Test case: `add /co Stripe /desc create new application /status to_apply /poc janet sim /email hr@stripe.com`<br>
+       Expected: Internship is not added to the list in the Main Window. Details of the internship are not shown in the Message Box, Main Window and Detailed Internship View. <br>
+       Reason: The wrong command prefix for company is used (`/co` instead of `/com`)
+
+
+### Deleting an internship
+
+1. Deleting an internship while all internships are being shown or specific internships based on find command
+
+    1. Prerequisites: List all internships using the `list` command. Multiple persons in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First internship is deleted from the list. Details of the deleted internship shown in the message box. Details of the internship are no longer visible in the Main Window.
 
     1. Test case: `delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
