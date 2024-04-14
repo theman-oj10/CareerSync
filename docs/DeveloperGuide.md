@@ -161,6 +161,65 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### \[Implemented] Optional Fields
+
+The transformation of certain fields in the Internship class to optional types is a crucial step in enhancing the flexibility and robustness of the internship application.
+This report outlines the technical details of the implementation, including the different states, usage scenarios, design considerations, alternatives, and their implications.
+
+#### Implementation Details (How Is It Implemented):
+
+**Field Conversion:**
+Fields such as location and role have been converted to optional types (where default values have been set should the user not input any values for them)
+This transformation allows these fields to be nullable, providing flexibility in representing internship data.
+
+**Constructor Modification:**
+The constructor of the Internship class now accepts optional parameters for the transformed fields, ensuring compatibility with the new optional field structure.
+
+**Equality Comparison:**
+The equals() and isSameInternship() methods have been updated to compare optional fields properly, ensuring consistency in object comparison.
+
+**String Representation:**
+The toString() method has been updated to handle optional fields gracefully, providing a comprehensive view of internship details.
+
+**Different States:**
+
+Initial State: The internship application starts with an initial state where all fields are optional and nullable.
+
+Modified State: Upon user interaction or data manipulation, the internship data transitions to a modified state where certain fields may be populated with optional values.
+Usage Scenarios:
+
+**Adding New Internship:**
+When adding a new internship, optional fields such as location and role may remain unspecified, representing scenarios where these details are not provided.
+
+**Editing Existing Internship:**
+Users can edit existing internship details, including optional fields, to update or modify internship information as needed.
+
+#### Design considerations: (Why Was It Implemented This Way)
+
+**Flexibility vs. Performance:**
+The decision to use optional fields introduces increased flexibility in representing internship data.
+However, this flexibility may come at the cost of slightly reduced performance due to optional value handling.
+
+**Alternative and Its Implications:**
+
+#### Alternative Approach:
+The alternative approach was to directly transform role and location into optional fields using `Optional<>`. <br>
+This was attempted and removed as it did create some issues where `NULL` values were being passed around and created confusions when testing other features.
+
+**Implications:**
+Pros: Reduced memory usage as only relevant data for undo/redo operations is stored.
+Cons: Increased complexity and potential code duplication as undo/redo logic needs to be implemented for each command.
+This approach may also introduce maintenance challenges and potential errors if not implemented correctly.
+
+**Conclusion:**
+The transformation of certain fields in the Internship class to optional types enhances the flexibility and usability of the internship application.
+By considering different states, usage scenarios, design considerations, and alternatives, the implementation ensures robustness and adaptability in managing internship data.
+
+**Recommendations:**
+
+Thorough testing and validation are recommended to ensure the proper functioning of the modified Internship class in various usage scenarios.
+Documentation updates should be performed to reflect the changes made and to provide clear guidelines on utilizing optional fields in the Internship class.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
