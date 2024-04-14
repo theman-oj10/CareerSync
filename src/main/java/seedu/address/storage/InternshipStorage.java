@@ -5,16 +5,33 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.model.InternshipUserPrefs;
 import seedu.address.model.ReadOnlyInternshipData;
+import seedu.address.model.ReadOnlyInternshipUserPrefs;
 
 /**
- * Represents a storage for {@link seedu.address.model.InternshipData}.
+ * API of the InternshipStorage component
  */
-public interface InternshipDataStorage {
+public interface InternshipStorage extends InternshipUserPrefsStorage, InternshipDataStorage {
 
     /**
      * Returns the file path of the data file.
      */
+    @Override
+    Optional<InternshipUserPrefs> readUserPrefs() throws DataLoadingException;
+
+    /**
+     * Saves the given {@link ReadOnlyInternshipUserPrefs} to the storage.
+     * @param userPrefs cannot be null.
+     * @throws IOException if there was any problem writing to the file.
+     */
+    @Override
+    void saveUserPrefs(ReadOnlyInternshipUserPrefs userPrefs) throws IOException;
+
+    /**
+     * Returns the file path of the data file.
+     */
+    @Override
     Path getInternshipDataFilePath();
 
     /**
@@ -23,29 +40,15 @@ public interface InternshipDataStorage {
      *
      * @throws DataLoadingException if loading the data from storage failed.
      */
+    @Override
     Optional<ReadOnlyInternshipData> readInternshipData() throws DataLoadingException;
-
-    /**
-     * Returns InternshipData data as a {@link ReadOnlyInternshipData}.
-     * Returns {@code Optional.empty()} if storage file is not found.
-     *
-     * @param filePath
-     * @throws DataLoadingException if loading the data from storage failed.
-     */
-    Optional<ReadOnlyInternshipData> readInternshipData(Path filePath) throws DataLoadingException;
 
     /**
      * Saves the given {@link ReadOnlyInternshipData} to the storage.
      * @param internshipData cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
+    @Override
     void saveInternshipData(ReadOnlyInternshipData internshipData) throws IOException;
 
-    /**
-     * Saves the given {@link ReadOnlyInternshipData} to the storage.
-     * @param internshipData
-     * @param filePath
-     * @throws IOException
-     */
-    void saveInternshipData(ReadOnlyInternshipData internshipData, Path filePath) throws IOException;
 }
