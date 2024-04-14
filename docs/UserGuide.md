@@ -163,6 +163,20 @@ For the restrictions on what is accepted for each field, kindly refer to [Fields
 10. `TASK` - The description of the task.
 11. `DEADLINE` - The deadline of the task.
 
+#### Detailed View Window
+
+When you click on an internship entry in the internship list, a separate window will be open showing
+the detailed view of the internship entry.<br>
+This view will show all the fields of the internship entry in a bigger font size for easier reading.<br>
+![Detailed view window](./images/detailedview/detailedViewWindow.png)<br>
+
+<div markdown="span" class="alert alert-info">
+ℹ️ **Tip:** This feature is not recommended for efficient use of the application, as it is not a command that can be inputted into the CLI.
+However, it serves as an aid to view the details of an internship entry in a more readable format.
+</div>
+
+[CLI](#glossary) input will be implemented in a future release.
+
 [Go to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -460,24 +474,6 @@ Any present filter will be removed, and all internships will be displayed in the
 ℹ️ **Tip:** If you can't seem to find an internship you added, try using `list` to see all your internships.
 You may have had a filter applied that is hiding the internship you are looking for.
 </div>
-
-[Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
-
-<div style="margin-top: 20px;"></div>
-
-#### Viewing an internship entry's details
-
-When you click on an internship entry in the internship list, a separate window will be open showing
-the detailed view of the internship entry.<br>
-This view will show all the fields of the internship entry in a bigger font size for easier reading.<br>
-![Detailed view window](./images/detailedview/detailedViewWindow.png)<br>
-
-<div markdown="span" class="alert alert-info">
-ℹ️ **Tip:** This feature is not recommended for efficient use of the application, as it is not a command that can be inputted into the CLI.
-However, it serves as an aid to view the details of an internship entry in a more readable format.
-</div>
-
-[CLI](#glossary) input will be implemented in a future release.
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
