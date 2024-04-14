@@ -421,7 +421,7 @@ Lets you add an internship entry to be tracked by CareerSync!
 <<<<<<< Updated upstream
 3. When using the `add` command, the `/phone` parameter allows for more digits that are necessary. Do manually ensure that the length of the phone numbers you input are correct.
 =======
-3. If you encounter the **This internship already exists in the internship list** message, please refer to our [FAQ](#faq) to learn about what makes an internship unique.
+3. If you encounter the `This internship already exists in the internship list` message, please refer to our [FAQ](#faq) to learn about what makes an internship unique.
 
 >>>>>>> Stashed changes
 </div>
