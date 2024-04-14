@@ -250,29 +250,23 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 ### Edit feature
-The `edit` feature allows users to modify the details of an existing internship entry. This allows the user to update 
-the details of an internship entry without having to delete and re-add the entry. All fields except for `TaskList` are
-modifiable. To modify `TaskList`, the commands `addTask` and `deleteTask` should be used.
+The `edit` feature allows users to modify the details of an existing internship entry. This method takes in the index of
+the internship, the fields to be edited and the value of the fields as arguments. This method then updates all the fields 
+given. All fields except for `TaskList` are modifiable. To modify `TaskList`, the commands `addTask` and `deleteTask` should be used.
 
-#### How it is implemented
-1. The `edit` command is parsed by the `InternshipDataParser`, which creates an `InternshipEditCommandParser` object. 
-2. The `InternshipEditCommandParser` then calls the `ArgumentTokenizer#tokenize` method to extract the index and the fields to be edited.
-3. The `InternshipEditCommandParser` then creates an `InternshipEditCommand` object with the extracted details.
-4. The `InternshipEditCommand` creates a new `Internship` object based on the details. It then checks whether the resulting new internship is either the same internship as the old one or already exists in the current list, using `isSameInternship` and `hasInternship`.
-5. If neither holds true, the `InternshipEditCommand` then calls `InternshipModel` to replace the old internship with the new one via `setInternship`.
-6. The `InternshipEditCommand` then calls `updateFilteredInternshipList` to update the internship displayed on the UI.
-7. The `InternshipEditCommand` then returns a `CommandResult` object with a message containing the fields of the new internship.
+Here is a step-by-step example of how the `edit` command might be executed:
 
-#### Parsing user input
-1. The user inputs the `edit` command.
-2. The `InternshipDataParser` parses the command and creates a new `InternshipEditCommandParser` object.
-3. The `InternshipEditCommandParser` then calls the ArgumentTokenizer#tokenize to extract the index and the fields to be edited.
-If there are no prefixes, no index, invalid index or duplicate prefixes, a ParseException will be thrown.
-4. The `InternshipEditCommandParser` then creates a new `InternshipEditCommand` object with the extracted details.
-   If the index is larger than the number of internships displayed, a CommandException will be thrown.
-5. The `InternshipEditCommand` then checks if either the fields have changed, or the resulting internship already exists.
-If either are true, a CommandException will be thrown.
-6. The `InternshipEditCommand` is then executed by the `InternshipLogicManager`.
+Step 1. The user inputs the `edit` command.<br>
+Step 2. The `InternshipDataParser` parses the command and creates a new `InternshipEditCommandParser` object.<br>
+Step 3. The `InternshipEditCommandParser` then calls the ArgumentTokenizer#tokenize to extract the index and the fields to be edited.<br>
+If there are no prefixes, no index, invalid index or duplicate prefixes, a ParseException will be thrown.<br>
+Step 4. The `InternshipEditCommandParser` then creates a new `InternshipEditCommand` object with the extracted details.<br>
+If the index is larger than the number of internships displayed, a CommandException will be thrown.<br>
+Step 5. The `InternshipEditCommand` then checks if either none of the fields have changed using `Internship::isSameInternship`, or the resulting internship already exists using `InternshipModel::hasInternship`.<br>
+If either are true, a CommandException will be thrown.<br>
+Step 6. The old internship object is replaced with the new internship object using `InternshipModel::setInternship` .<br>
+Step 7. `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` is then called to update the internship displayed on the `UI`.<br>
+All internships will be shown on the `UI`. If a `find` command is used, all hidden internships will be shown.<br>
 
 #### Design Considerations
 In v1.2, the `edit` command initially allows users to edit all fields of an internship entry. In v1.3, with the addition of
@@ -289,26 +283,24 @@ The fields to determine if an internship is the same as another internship are `
 
 ### AddTask feature
 The `addtask` command allows users to add tasks to the `TaskList` field of an existing internship entry. This allows users to
-keep track of the tasks they need to complete for each internship. The `TaskList` field contains an `ArrayList<Task>` field 
+keep track of the tasks they need to complete for each internship. The `TaskList` field contains an `ArrayList<Task>` field
 that stores the tasks for each internship. The `addtask` command directly adds a new `Task` object to the `TaskList` field
 of the internship entry.
 
-#### How it is implemented
-1. The `addtask` command is parsed by the `InternshipDataParser`, which creates an `InternshipAddTaskParser` object.
-2. The `InternshipAddTaskParser` then calls the `ArgumentTokenizer#tokenize` method to extract the index and the task to be added.
-3. The `InternshipAddTaskParser` then creates an `InternshipAddTaskCommand` object with the extracted details.
-4. The `InternshipAddTaskCommand` creates a new `Task` object based on the details. It then calls `InternshipModel` to add the task to the `TaskList` field of the internship entry via `addTask`.
-5. The `InternshipAddTaskCommand` then calls `setInternship` to replace the old internship with the new one with the task via `setInternship`.
-6. The `InternshipAddTaskCommand` then calls `updateFilteredInternshipList` to update the internship displayed on the UI.
-7. The `InternshipAddTaskCommand` then returns a `CommandResult` object with a message containing the task added.
+This method takes in the index of the internship, and the task to be added. It then adds the task to the internship with the index.
 
-#### Parsing user input
-1. The user inputs the `edit` command.
-2. The `InternshipDataParser` parses the command and creates a new `InternshipAddTaskParser` object.
-3. The `InternshipAddTaskParser` then calls the ArgumentTokenizer#tokenize to extract the index and the task to be added.
-If either the index or the task is either missing or invalid, a ParseException will be thrown.
-4. The `InternshipAddTaskParser` then creates a new `InternshipAddTaskCommand` object with the extracted details.
-If the index is larger than the number of internships displayed, a CommandException will be thrown.
+
+Here is a step-by-step example of how the `addtask` command might be executed:
+
+1. The user inputs the `addtask` command.<br>
+2. The `InternshipDataParser` parses the command and creates a new `InternshipAddTaskParser` object.<br>
+3. The `InternshipAddTaskParser` then calls the ArgumentTokenizer#tokenize to extract the index and the task to be added.<br>
+If either the index or the task is either missing or invalid, a ParseException will be thrown.<br>
+4. The `InternshipAddTaskParser` then creates a new `InternshipAddTaskCommand` object with the extracted details.<br>
+If the index is larger than the number of internships displayed, a CommandException will be thrown.<br>
+5. The `InternshipAddTaskCommand` creates a new `Task` object based on the details. It then adds the task to the `TaskList` field of the internship entry via `TaskList::addTask`.<br>
+6. The `InternshipAddTaskCommand` then calls `InternshipModel::setInternship` to replace the old internship with the new one with the task.<br>
+7. The `InternshipAddTaskCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.<br>
 
 ### SetDeadline feature
 The `setdeadline` command allows users to set a deadline for a `Task` in the `TaskList` field of an existing internship entry.
@@ -316,32 +308,26 @@ To use this command, the user needs to specify both the internship index and the
 to specifying the deadline. The `setdeadline` command directly replaces the deadline of the specified `Task` in the `TaskList` field
 of the internship entry. The default deadline is `null`, and is displayed as a blank space in the UI.
 
-#### How it is implemented
-1. The `setdeadline` command is parsed by the `InternshipDataParser`, which creates an `InternshipSetDeadlineParser` object.
-2. The `InternshipSetDeadlineParser` then calls the `ArgumentTokenizer#tokenize` method to extract the internship index, task index and the deadline.
-3. The `InternshipSetDeadlineParser` then creates an `InternshipSetDeadlineCommand` object with the extracted details.
-4. The `InternshipSetDeadlineCommand` creates a new `Task` object based on the details. It then calls `InternshipModel` to set the deadline of the task in the `TaskList` field of the internship entry via `setDeadline`.
-5. The `InternshipSetDeadlineCommand` then calls `setInternship` to replace the old internship with the new one with the deadline via `setInternship`.
-6. The `InternshipSetDeadlineCommand` then calls `updateFilteredInternshipList` to update the internship displayed on the UI.
-7. The `InternshipSetDeadlineCommand` then returns a `CommandResult` object with a message containing the deadline set.
+Here is a step-by-step example of how the `setdeadline` command might be executed:
 
-#### Parsing user input
-1. The user inputs the `setdeadline` command.
-2. The `InternshipDataParser` parses the command and creates a new `InternshipSetDeadlineParser` object.
-3. The `InternshipSetDeadlineParser` then calls the ArgumentTokenizer#tokenize to extract the internship index, task index and the deadline.
-If either the internship index, task index or the deadline is either missing or invalid, a ParseException will be thrown.
-4. The `InternshipSetDeadlineParser` then creates a new `InternshipSetDeadlineCommand` object with the extracted details.
-If the internship index is larger than the number of internships displayed, a CommandException will be thrown.
-If the task index is larger than the number of tasks in the `TaskList` field of the internship, a CommandException will be thrown.
+1. The user inputs the `setdeadline` command.<br>
+2. The `InternshipSetDeadlineParser` then calls the `ArgumentTokenizer#tokenize` method to extract the internship index, task index and the deadline.<br>
+If either the internship index, task index or the deadline is either missing or invalid, a ParseException will be thrown.<br>
+3. The `InternshipSetDeadlineParser` then creates an `InternshipSetDeadlineCommand` object with the extracted details.<br>
+If the internship index is larger than the number of internships displayed, a CommandException will be thrown.<br>
+If the task index is larger than the number of tasks in the `TaskList` field of the internship, a CommandException will be thrown.<br>
+4. The `InternshipSetDeadlineCommand` creates a new `Task` object based on the details. It then calls `InternshipModel` to set the deadline of the task in the `TaskList` field of the internship entry via `setDeadline`.<br>
+5. The `InternshipSetDeadlineCommand` then calls `InternshipModel::setInternship` to replace the old internship with the new one with the deadline.<br>
+6. The `InternshipSetDeadlineCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.<br>
 
 #### Design Considerations
 For the deadline field's default value, we can have it either be null, or a default date that should not be used by any
 regular user. We decided to have the default value be null, as we do not want to cause confusion for users who do not want
-to set a deadline.
+to set a deadline.<br>
 We decide to choose `DD/MM/YYYY` as the date format for the deadline, as it is the most intuitive for users to understand.
-Other alternatives can be explored.
+Other alternatives can be explored.<br>
 A proposed improvement to this feature is to have the `isValidDeadline` not just check if it is a valid Java date, but also
-check that it is a valid calendar date that is not in the past.
+check that it is a valid calendar date that is not in the past.<br>
 
 #### Aspect: Default value of deadline saved
 * **Alternative 1 (current choice):** Default value of deadline is null.
