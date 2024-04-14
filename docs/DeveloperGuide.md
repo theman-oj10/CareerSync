@@ -563,7 +563,7 @@ Your all-in-one solution for seamless application management.
 
 **MSS**
 1. User accesses the main window.
-2. User uses the command and inputs internship details.
+2. User inputs the command, specifying internship details.
 3. System validates the input data.
 4. System saves the internship information.
 5. System displays the added internship details in the message box.
@@ -979,9 +979,9 @@ Make sure to use the `exit` command or the close button to save data while closi
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Design Decisions**
+### **Appendix: Design Decisions**
 
-### Prefix-based Command Format
+#### Prefix-based Command Format
 
 In the design of our command-line interface, we made the decision to use a prefix-based format for our commands, such as `/com` for company name, instead of the more conventional `com/`. <br>This decision was made based on several considerations:
 
@@ -991,7 +991,7 @@ In the design of our command-line interface, we made the decision to use a prefi
 
 We acknowledge that this design choice may have a slight learning curve for users who are accustomed to other command-line interfaces. However, we believe that the benefits in terms of uniqueness, ease of parsing, user experience, and flexibility outweigh this minor inconvenience.
 
-### Identity Fields in `isSameInternship` Method
+#### Identity Fields in `isSameInternship` Method
 
 In the `Internship` class, the `isSameInternship` method is used to compare two `Internship` objects based on certain fields. 
 <br> These fields are `companyName`, `contactName`, `contactEmail`, `contactNumber`, `description`, `role` and `location`. 
