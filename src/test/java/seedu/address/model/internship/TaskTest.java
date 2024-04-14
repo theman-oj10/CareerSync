@@ -13,8 +13,10 @@ public class TaskTest {
 
     @Test
     public void constructor_invalidTask_throwsIllegalArgumentException() {
-        String invalidTask = "";
-        assertThrows(IllegalArgumentException.class, () -> new Task(invalidTask));
+        // blank task
+        assertThrows(IllegalArgumentException.class, () -> new Task(""));
+        // invalid deadline
+        assertThrows(IllegalArgumentException.class, () -> new Task("Valid Task", "Invalid Deadline"));
     }
 
     @Test
