@@ -819,7 +819,6 @@ In the `Internship` class, the `isSameInternship` method is used to compare two 
 6. **Description**: The description of the internship could contain important details about the internship. Two internships with different descriptions are not the same.
 
 These fields are considered "compulsory" or "identity" fields, meaning they are essential to define the identity of an `Internship` object. If any of these fields differ between two `Internship` objects, then they are not considered the same internship. This design choice ensures that the `isSameInternship` method provides a meaningful comparison between two `Internship` objects.
-=======
 
 #### Sort Feature
 
@@ -830,12 +829,43 @@ These fields are considered "compulsory" or "identity" fields, meaning they are 
     1. Test case: `sort /status desc`<br>
       Expected: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
    
-   2. Test case: `sort /status asc` <br>
+    2. Test case: `sort /status asc` <br>
       Expected: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
       ![Sort by status asc](./images/manual-testing/sort-by-status.png)<br>
    
-   3. Test case: `sort /com asc`<br>
+    3. Test case: `sort /com asc`<br>
       Expected: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
       ![Sort by com asc](./images/manual-testing/status-sort-sort-by-com.png)<br>
+      
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+Note that to try out the below example commands you will need to reset the data to sample data. This can be done by deleting the `data` folder in the project directory and restarting the application.
+1. **Case insensitivity for all commands and fields:** Currently, CareerSync strictly only allow lower case commands and prefixes. Case insensitivity will enhance user experience as CLI users can input commands faster and with fewer syntax errors.
+2. **Return to default chronological sort** Currently, there is no way to return to the default chronological order (sorted by time of addition) after using the sort command. This can be confusing for users who are not familiar with the application. In the future we plan to add a command to return to the default chronological sort.
+3. **Email field does not require domain name** Currently, `example@gmail` is considered a valid email and there is no requirement for a proper domain (eg: .com). This is a constraint we want to enforce to reduce users mistyping emails.
+    <br>Command: `edit 1 /email example@gmail`
+   <br>![Invalid Email formatting](./images/planned-enhancements/invalid-email-field.png)<br><br>
+4. **Limiting Deadlines to only valid future dates:** Adding deadlines in the past does not make sense and users will not require this. Additionally, adding invalid dates such as 30th February is possible. As such we want to enforce this as a constraint.
+   <br>Command: `setdeadline 1 /selecttask 1 10/10/1985`
+    <br>![Deadlines can have past dates](./images/planned-enhancements/past-deadlines.png)<br><br>
+5. **Edit command will require changes to be made to existing values:** Currently, the edit function allows you to re-enter the values that are already present, without any changes. We plan to add suitable error handling messages to enforce this constraint.
+   <br>Command: `edit 1 /com Facebook`
+    <br>![No changes made when editing value](./images/planned-enhancements/edit-no-changes-made.png)<br><br>
+6. **Editing Multiple fields:** Currently, when the subsequent prefix is incorrect the whole command is recognised as the argument to the first field, leading to errors such as the following. In the future, there will be additional checks to detect this as an invalid prefix error.
+   <br>Command: `edit 1 /email john@example.com /n john`
+    <br>![Incorrect prefix recognised as argument](./images/planned-enhancements/invalid-prefix-error.png)<br><br>
+7. **Consistent filtered lists:** Currently after calling find, if we enter another command it resets to the original list of internships. In the future we want to allow users to layer find, sort and other commands to improve our application's searching functionalities.
+   <br>Command: `find withany /status pending`
+   <br>![Example find command](./images/planned-enhancements/inconsistent-find-1.png)
+   <br>Command: `edit 1 /com Facebook`
+   <br>![Command after find resets the list](./images/planned-enhancements/inconsistent-find-2.png)<br><br>
+8. **Additional Checks in the Find Feature:** We will add constraints to the arguments for the find function where we will only allow valid values. We will add suitable error handling to handle these situations.
+   <br>Command: `find withany /status invalid_status`
+   <br>![Find allows invalid status](./images/planned-enhancements/find-invalid-status-error-message.png)<br><br>
+9. **Allowing more characters in names:** Characters such as - and / are prohibited in the name field. We recognise that these can be part of names and as such hope to add this to the list of allowed characters.<br><br>
+10. **Detecting space characters between argument's prefix and value:** For example, the command`edit 1 /company`runs successfully and updates the first internship's company field to the value`pany`. This may cause issues when the user misremembers the prefix for an argument. In the future we will implement checks that will check for a space between a prefix and its value.
+    <br>Command: `edit 1 /company`
+    <br>![Space between prefix and value](./images/planned-enhancements/space-in-edit-command.png)<br><br>
 
 
