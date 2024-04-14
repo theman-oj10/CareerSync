@@ -683,9 +683,6 @@ testers are expected to do more *exploratory* testing.
 ### Editing an internship
 1. Editing a single field of an internship
 
-### Editing an internship
-1. Editing a single field of an internship
-
 1. **Test case**: `edit 1 /com Facebook`<br>
    **Expected**: The name of the first internship is changed to `Facebook`. Details of the edited internship shown in the status message.
 
