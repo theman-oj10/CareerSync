@@ -307,23 +307,24 @@ Upon reopening the app:<br>
 You now see all your internships that you have when you exited. Your data was saved!
 </div>
 
+#### What Makes An Internship Unique
+
 <div markdown="span" class="alert alert-danger">
-⚠️ **BEFORE YOU BEGIN!:** <br>
+⚠️ **BEFORE YOU BEGIN!** <br>
+A crucial concept to understand when using the application is to know: <br> **What Makes An Internship Unique** 
+<br> This will help you avoid duplicate errors when creating internship entries! <br>
 
-A crucial concept to understand when using the application is to understand **What Makes An Internship Unique**
-<br> This will help you avoid confusion when creating internship entries and avoid creating duplicate entries!
+<br> The following are what make an internship unique: <br>
+**Company Name** <br>
+**Contact Name** <br>
+**Contact Email** <br>
+**Contact Number** <br>
+**Description** <br>
+**Role** <br>
+**Location** <br>
 
-The following is what makes an internship unique: <br>
-**Company Name**
-**Contact Name**
-**Contact Email**
-**Contact Number**
-**Description**
-**Role**
-**Location**
-
-In other words, an internship entry is considered a duplicate, if all of its above fields match with the exact same set 
-of fields for an already existing internship entry
+<br> Simply, an internship entry is considered a duplicate, if **all of the above fields** for the current 
+internship entry **are the same** as an already existing internship entry!
 
 </div>
 
@@ -398,11 +399,13 @@ Lets you add an internship entry to be tracked by CareerSync!
 
 **Format:** `add /com COMPANY_NAME /desc DESCRIPTION /status STATUS /poc CONTACT_NAME /email CONTACT_EMAIL /phone CONTACT_NUMBER [/loc LOCATION_ENUM] [/role ROLE] ​` <br>
 
-* The fields `COMPANY_NAME`, `DESCRIPTION`, `CONTACT_NAME` and `ROLE` allow the use of any text, number and/or spaces
+* The fields `COMPANY_NAME`, `DESCRIPTION`, `CONTACT_NAME` allow the use of any text, number and/or spaces
 * The field `STATUS` accepts only the following inputs: `to_apply`, `ongoing`, `rejected`, `accepted` (case-insensitive)
 * The field `CONTACT_EMAIL` accepts only the format of `<email>@<domain>`
 * The field `CONTACT_NUMBER` must be unsigned, and it must be at least 7 digits long
-* The field `LOCATION_ENUM` accepts only the following inputs: `remote`, `local`, `overseas` (case-insensitive)
+* The field `LOCATION_ENUM` accepts only the following inputs: `unknown`, `remote`, `local`, `overseas` (case-insensitive)
+  * Do note that should you leave the location field empty, it will default to `unknown`
+* The field `ROLE` allow the use of any ASCII characters (excluding `!` and `?`)
 
 <div markdown="span" class="alert alert-info">
 
@@ -413,10 +416,10 @@ Lets you add an internship entry to be tracked by CareerSync!
 <div markdown="span" class="alert alert-danger">
 ⚠️ **Common errors:** <br>
 
-1. If you miss out any of the mandatory fields, the command will be rejected with an error message.
-Make sure to refer to the error message displayed for the correct format to use!<br>
+1. If you miss out any of the mandatory fields, the command will be rejected with an error message. Make sure to refer to the error message displayed for the correct format to use! <br>
 2. If you input an invalid status, location or email format, the command will be rejected with an error message highlighting the valid values. <br>
-3. When using the `add` command, the `/phone` parameter allows for more digits that are necessary. Do manually ensure that the length of the phone numbers you input are correct.
+3. When using the `add` command, the `/phone` parameter allows for more digits that are necessary. Do manually ensure that the length of the phone numbers you input are correct. <br>
+4. If you encounter the `This internship already exists in the internship list` message, please go [here](#what-makes-an-internship-unique) to learn about what makes an internship unique.
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
@@ -511,7 +514,8 @@ Lets you edit an existing internship entry in CareerSync.
 
 <div markdown="span" class="alert alert-danger">
 ⚠️ **Common errors:** <br>
-1. Make sure not to miss out the mandatory `INDEX` field. If you do, CareerSync won't know which internship to edit!
+1. Make sure not to miss out the mandatory `INDEX` field. If you do, CareerSync won't know which internship to edit! <br>
+2. If you encounter the `This internship already exists in the internship list` message, please go [here](#what-makes-an-internship-unique) to learn about what makes an internship unique.
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
@@ -824,19 +828,19 @@ Only do so if you are an experienced user! <br>
 
 ### Field Summary
 
-| Field Name | Description                         | Valid Inputs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-|------------|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `/com`     | Company Name                        | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `/desc`    | Description of Internship           | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `/status`  | Status of Application               | `to_apply`, `ongoing`, `rejected`, `accepted`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `/poc`     | Name of Person of Contact           | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Field Name | Description                         | Valid Inputs                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|------------|-------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `/com`     | Company Name                        | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `/desc`    | Description of Internship           | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `/status`  | Status of Application               | `to_apply`, `ongoing`, `rejected`, `accepted`                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `/poc`     | Name of Person of Contact           | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `/email`   | Email of Person of Contact          | Valid format: `local-part@domain`<br>- The local-part should only contain alphanumeric characters and these special characters: `+_.-`. It may not start or end with any special characters.<br>- The domain name is made up of domain labels separated by periods. The domain name must:<br> * End with a domain label at least 2 characters long <br> * Have each domain label start and end with alphanumeric characters<br> * Have each domain label consist of alphanumeric characters, separated only by hyphens, if any. |
-| `/phone`   | Contact Number of Person of Contact | At least 7 numbers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `/loc`     | Location of Internship              | `remote`, `local`, `overseas`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `/role`    | Role for the Internship             | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `/remark`  | Remark for the Internship           | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `/task`    | Task for the Internship             | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `/deadline`| Deadline for the Task               | Valid format: `DD/MM/YYYY`<br>- The day, month and year fields must be valid.                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `/phone`   | Contact Number of Person of Contact | At least 7 numbers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `/loc`     | Location of Internship              | `unknown`, `remote`, `local`, `overseas`                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `/role`    | Role for the Internship             | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `/remark`  | Remark for the Internship           | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `/task`    | Task for the Internship             | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `/deadline`| Deadline for the Task               | Valid format: `DD/MM/YYYY`<br>- The date must be a valid date.                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 <div markdown="span" class="alert alert-danger">
 ⚠️ **Caution**:
