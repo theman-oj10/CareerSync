@@ -88,6 +88,22 @@ public class JsonAdaptedInternship {
      * @throws IllegalValueException if there were any data constraints violated in the adapted internship.
      */
     public Internship toModelType() throws IllegalValueException {
+        return new Internship(
+                getValidCompanyName(),
+                getValidContactName(),
+                getValidContactEmail(),
+                getValidContactNumber(),
+                getValidLocation(),
+                getValidApplicationStatus(),
+                getValidDescription(),
+                getValidRole(),
+                getValidRemark(),
+                getValidTaskList()
+        );
+    }
+
+    private CompanyName getValidCompanyName() throws IllegalValueException {
+        String companyName = this.companyName;
         if (companyName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     CompanyName.class.getSimpleName()));
@@ -95,8 +111,11 @@ public class JsonAdaptedInternship {
         if (!CompanyName.isValidCompanyName(companyName)) {
             throw new IllegalValueException(CompanyName.MESSAGE_CONSTRAINTS);
         }
-        final CompanyName modelCompanyName = new CompanyName(companyName);
+        return new CompanyName(companyName);
+    }
 
+    private ContactName getValidContactName() throws IllegalValueException {
+        String contactName = this.contactName;
         if (contactName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ContactName.class.getSimpleName()));
@@ -104,8 +123,11 @@ public class JsonAdaptedInternship {
         if (!ContactName.isValidContactName(contactName)) {
             throw new IllegalValueException(ContactName.MESSAGE_CONSTRAINTS);
         }
-        final ContactName modelContactName = new ContactName(contactName);
+        return new ContactName(contactName);
+    }
 
+    private ContactEmail getValidContactEmail() throws IllegalValueException {
+        String contactEmail = this.contactEmail;
         if (contactEmail == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ContactEmail.class.getSimpleName()));
@@ -113,8 +135,11 @@ public class JsonAdaptedInternship {
         if (!ContactEmail.isValidContactEmail(contactEmail)) {
             throw new IllegalValueException(ContactEmail.MESSAGE_CONSTRAINTS);
         }
-        final ContactEmail modelContactEmail = new ContactEmail(contactEmail);
+        return new ContactEmail(contactEmail);
+    }
 
+    private ContactNumber getValidContactNumber() throws IllegalValueException {
+        String contactNumber = this.contactNumber;
         if (contactNumber == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ContactNumber.class.getSimpleName()));
@@ -122,45 +147,11 @@ public class JsonAdaptedInternship {
         if (!ContactNumber.isValidContactNumber(contactNumber)) {
             throw new IllegalValueException(ContactNumber.MESSAGE_CONSTRAINTS);
         }
-        final ContactNumber modelContactNumber = new ContactNumber(contactNumber);
+        return new ContactNumber(contactNumber);
+    }
 
-        if (applicationStatus == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    ApplicationStatus.class.getSimpleName()));
-        }
-        if (!ApplicationStatus.isValidApplicationStatus(applicationStatus)) {
-            throw new IllegalValueException(ApplicationStatus.MESSAGE_CONSTRAINTS);
-        }
-        final ApplicationStatus modelApplicationStatus = new ApplicationStatus(applicationStatus);
-
-        if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Description.class.getSimpleName()));
-        }
-        if (!Description.isValidDescription(description)) {
-            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
-        }
-        final Description modelDescription = new Description(description);
-
-        if (remark == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
-        }
-        final Remark modelRemark = new Remark(remark);
-
-        if (taskList == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    TaskList.class.getSimpleName()));
-        }
-        final TaskList modelTaskList = new TaskList(taskList);
-
-        if (role == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
-        }
-        if (!Role.isValidRole(role)) {
-            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
-        }
-        final Role modelRole = new Role(role);
-
+    private Location getValidLocation() throws IllegalValueException {
+        String location = this.location;
         if (location == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Location.class.getSimpleName()));
@@ -168,9 +159,60 @@ public class JsonAdaptedInternship {
         if (!Location.isValidLocation(location)) {
             throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
         }
-        final Location modelLocation = new Location(location);
+        return new Location(location);
+    }
 
-        return new Internship(modelCompanyName, modelContactName, modelContactEmail, modelContactNumber,
-                modelLocation, modelApplicationStatus, modelDescription, modelRole, modelRemark, modelTaskList);
+    private ApplicationStatus getValidApplicationStatus() throws IllegalValueException {
+        String applicationStatus = this.applicationStatus;
+        if (applicationStatus == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ApplicationStatus.class.getSimpleName()));
+        }
+        if (!ApplicationStatus.isValidApplicationStatus(applicationStatus)) {
+            throw new IllegalValueException(ApplicationStatus.MESSAGE_CONSTRAINTS);
+        }
+        return new ApplicationStatus(applicationStatus);
+    }
+
+    private Description getValidDescription() throws IllegalValueException {
+        String description = this.description;
+        if (description == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Description.class.getSimpleName()));
+        }
+        if (!Description.isValidDescription(description)) {
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(description);
+    }
+
+    private Role getValidRole() throws IllegalValueException {
+        String role = this.role;
+        if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Role.class.getSimpleName()));
+        }
+        if (!Role.isValidRole(role)) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+        }
+        return new Role(role);
+    }
+
+    private Remark getValidRemark() throws IllegalValueException {
+        String remark = this.remark;
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Remark.class.getSimpleName()));
+        }
+        return new Remark(remark);
+    }
+
+    private TaskList getValidTaskList() throws IllegalValueException {
+        ArrayList<Task> taskList = this.taskList;
+        if (taskList == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TaskList.class.getSimpleName()));
+        }
+        return new TaskList(taskList);
     }
 }
