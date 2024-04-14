@@ -723,7 +723,7 @@ testers are expected to do more *exploratory* testing.
    **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
 
 
-3. Editing while other internships are present
+3. Editing resulting in a duplicate internship
 
 
 1. Prerequisites: Have at least one other internship. Add this internship to the list using this command: `add /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999 /remark This is a remark.`. Run `list` and ensure that this new internship added does not have index 1.
@@ -747,16 +747,17 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a task to an existing internship
 
+1. Preqrequisites: Ensure that there is at least one internship.
 
-1. **Test case**: `addtask 1 /task Attend meeting`<br>
+2. **Test case**: `addtask 1 /task Attend meeting`<br>
    **Expected**: A task `Attend meeting` is added to the task list of the first internship. Details of the added task shown in the status message.
 
 
-2. **Test case**: `addtask 0 /task Attend meeting`<br>
+3. **Test case**: `addtask 0 /task Attend meeting`<br>
    **Expected**: No task is added. Error details shown in the status message. Status bar remains the same.
 
 
-3. Other incorrect addtask commands to try: `addtask`, `addtask x`, `addtask 1`,`addtask -1 /task Attend meeting`, `addtask 1 /task`, `addtask x /task Attend meeting` (where x is larger than the list size)<br>
+4. Other incorrect addtask commands to try: `addtask`, `addtask x`, `addtask 1`,`addtask -1 /task Attend meeting`, `addtask 1 /task`, `addtask x /task Attend meeting` (where x is larger than the list size)<br>
    **Expected**: Similar to previous.
 
 
@@ -766,11 +767,11 @@ testers are expected to do more *exploratory* testing.
 1. Setting the deadline of a task in an existing internship
 
 
-1. Prerequisites: Add a task to the first internship using the `addtask 1 /task Attend meeting` command.
+1. Prerequisites: Ensure that there is at least one internship. Add a task to the first internship using the `addtask 1 /task Attend meeting` command.
 
 
 2. **Test case**: `setdeadline 1 /selecttask 1 /deadline 10/10/2024`<br>
-   **Expected**: The deadline of the first task is set to `2021-10-10`. New deadline shown in the status message.
+   **Expected**: The deadline of the first task is set to `10/10/2024`. New deadline shown in the status message.
 
 
 3. **Test case**: `setdeadline 1 /selecttask 1 /deadline 11/10/2024`<br>
@@ -791,18 +792,18 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a task from an existing internship
 
 
-1. Prerequisites: Add a task to the first internship using the `addtask 1 /task Attend meeting` command.
+1. Prerequisites: Ensure that there is at least one internship. Add a task to the first internship using the `addtask 1 /task Attend meeting` command.
 
 
-2. **Test case**: `deletetask 1 1`<br>
+2. **Test case**: `deletetask 1 /selecttask 1`<br>
    **Expected**: The first task is deleted from the task list of the first internship. Details of the deleted task shown in the status message.
 
 
-3. **Test case**: `deletetask 0 1`<br>
+3. **Test case**: `deletetask 0 /selecttask 1`<br>
    **Expected**: No task is deleted. Error details shown in the status message. Status bar remains the same.
 
 
-4. Other incorrect deletetask commands to try: `deletetask`, `deletetask -1`, `deletetask x`, `deletetask 1`, `deletetask 1 x` (where x is larger than the task list size)<br>
+4. Other incorrect deletetask commands to try: `deletetask`, `deletetask -1`, `deletetask x`, `deletetask 1`, `deletetask 1 /selecttask x` (where x is larger than the task list size)<br>
    **Expected**: Similar to previous.
 
 
