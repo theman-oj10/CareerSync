@@ -377,7 +377,8 @@ Lets you add an internship entry to be tracked by CareerSync!
 * The field `CONTACT_EMAIL` accepts only the format of `<email>@<domain>.com`
 * The field `CONTACT_NUMBER` must be unsigned, and it must be at least 7 digits long
 * The field `LOCATION_ENUM` accepts only the following inputs: `unknown`, `remote`, `local`, `overseas` (case-insensitive)
-* The field `ROLE` allow the use of any text, number and/or spaces
+  * Do note that should you leave the location field empty, it will default to `unknown`
+* The field `ROLE` allow the use of any ASCII characters (excluding `!` and `?`)
 
 <div markdown="span" class="alert alert-info">
 
