@@ -163,68 +163,53 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
-### **Implementation**
-
+# **Implementation**
 This section describes some noteworthy details on how certain features are implemented.
 
 ## Optional Fields
 
-The transformation of certain fields in the Internship class to optional types is a crucial step in enhancing the flexibility and robustness of the internship application.
+Certain fields in the Internship class are made optional to offer flexibility to the users.
 This report outlines the technical details of the implementation, including the different states, usage scenarios, design considerations, alternatives, and their implications.
 
-<img src="images/OptionalFeatures.png" width="280" />
+### Implementation Details (How Is It Implemented):
 
-#### Implementation Details (How Is It Implemented):
-
-**Field Conversion:**
+**Field Conversion:** <br>
 Fields such as location and role have been converted to optional types (where default values have been set should the user not input any values for them).
 This provides flexibility in representing internship data.
 
-**Constructor Modification:**
-The constructor for the Internship class consists of 2 optional fields (role and location), ensuring compatibility with the new optional field structure.
+**Constructor Modification:** <br>
+The constructor for the Internship class consists of 2 optional fields (`role` and `location`), ensuring compatibility with the new optional field structure.
 The add command parser sets default values for the 2 aforementioned optional fields, should the user not input any values.
 
-**Equality Comparison:**
-The equals() and isSameInternship() methods have been updated to compare optional fields properly, ensuring consistency in object comparison.
+**Equality Comparison:** <br>
+The equals() and isSameInternship() methods account for optional fields differently based on the scenario:
+1. If two internships have identical /company, /poc, /desc fields and have the same /role and /loc, they will be considered as identical internships.
 
-**String Representation:**
-The toString() method has been updated to handle optional fields gracefully, providing a comprehensive view of internship details.
+**String Representation:** <br>
+The toString() method will include location and role if it exists in the string representation of an internship.
 
-**Different States:**
+### Usage Scenarios
 
-Initial State: The internship application starts with an initial state where the fields role and location are optional. 
-
-Modified State: Upon user interaction or data manipulation, the internship data transitions to a modified state where certain fields may be populated with optional values.
-
-Usage Scenarios:
-
-**Adding New Internship:**
+**Adding New Internship:** <br>
 When adding a new internship, optional fields such as location and role may remain unspecified, representing scenarios where these details are not provided.
 
-**Editing Existing Internship:**
+**Editing Existing Internship:** <br>
 Users can edit existing internship details, including optional fields, to update or modify internship information as needed.
 
-#### Design considerations: (Why Was It Implemented This Way)
-
-**Flexibility vs. Performance:**
-The decision to use optional fields introduces increased flexibility in representing internship data.
-However, this flexibility may come at the cost of slightly reduced performance due to optional value handling.
-
-**Alternative and Its Implications:**
+### Alternative and Its Implications
 
 #### Alternative Approach:
 The alternative approach was to directly transform role and location into optional fields using `Optional<>`. <br>
 
-**Implications:**
+**Implications:** <br>
 Pros: Avoids `NULL` values being passed around and caused complications when testing other features.
 This approach may also introduce maintenance challenges and potential errors if not implemented correctly.
 
-**Conclusion:**
+**Conclusion:** <br>
 The transformation of certain fields in the Internship class to optional types enhances the flexibility and usability of the internship application.
 By considering different states, usage scenarios, design considerations, and alternatives, the implementation ensures robustness and adaptability in managing internship data.
 
-**Recommendations:**
-
+**Recommendations:** <br>
 Thorough testing and validation are recommended to ensure the proper functioning of the modified Internship class in various usage scenarios.
 Documentation updates should be performed to reflect the changes made and to provide clear guidelines on utilizing optional fields in the Internship class.
 
@@ -548,7 +533,7 @@ Use case ends.
 2. User uses the command to input the internship to be edited and the modifications.
 3. System validates the modified data.
 4. System saves the updated internship information.
-5. System displays all internship details (modified and unmodified) in the message box.
+5. System displays all modified internship details in the message box.
 6. Internship details (with updates) are now visible in the main window.
 
 Use case ends.
@@ -558,7 +543,8 @@ Use case ends.
 1a. User is unable to access the main window. <br>
 1a1. System displays an error message. <br>
 3a. System recognizes that user has entered invalid values for one or more field(s). <br>
-3a1. System displays an error message indicating the validation error(s). <br>
+3a1. System displays an error message indicating that the internship already exists in the internship list. <br>
+3a2. System displays an error message indicating the internship index error. <br>
 
 Use case ends.
 
@@ -568,7 +554,8 @@ Use case ends.
 1. User accesses the main window.
 2. User uses the command to specify which internship entry is to be deleted.
 3. System removes the internship entry.
-4. System displays a confirmation message indicating successful deletion.
+4. System displays a confirmation message indicating successful deletion and containing details of the deleted internship.
+5. Internship can no longer be seen in the main window.
 
 Use case ends.
 
@@ -599,12 +586,12 @@ Use case ends.
 
 Use case ends.
 
-**Use Case: Find Internship Entries From Main Window**
+**Use Case: Find Internship Entries (withAll) From Main Window**
 
 **MSS**
 1. User accesses the main window.
 2. User uses the command to specify which internship entries to find based on the conditions stated by the user.
-3. System displays the internship entry which match the specified conditions, within the main window.
+3. System displays all internship entries which matches all of the specified conditions, within the main window.
 
 Use case ends.
 
@@ -619,12 +606,35 @@ Use case ends.
 
 Use case ends.
 
+**Use Case: Find Internship Entries (withAny) From Main Window**
+
+**MSS**
+1. User accesses the main window.
+2. User uses the command to specify which internship entries to find based on the conditions stated by the user.
+3. System displays all internship entries which matches any of the specified conditions, within the main window.
+
+Use case ends.
+
+**Extensions**
+
+1a. User is unable to access the main window. <br>
+1a1. System displays an error message. <br>
+3a. System recognizes that user has entered invalid find conditions. <br>
+3a1. System displays an error message indicating the condition error(s). <br>
+3a. No matching internship entries found. <br>
+3a1. System displays a message indicating no matching results found. <br>
+
+Use case ends.
+
+
 **Use Case: Add Internship Task From Main Window**
 
 **MSS**
 1. User accesses the main window.
 2. User uses the command to specify which internship entry to add a task to and the task details.
-3. System displays full list of internships.
+3. System validates that the task is valid.
+4. System displays the updated internship entry details in the message box.
+5. System displays full list of internships.
 
 Use case ends.
 
@@ -650,7 +660,7 @@ Use case ends.
 
 1a. User is unable to access the main window. <br>
 1a1. System displays an error message. <br>
-2a. System recognizes that user has entered an invalid task index. <br>
+2a. System recognizes that user has entered an invalid internship and/or task index. <br>
 2a1. System displays an error message indicating the index error. <br>
 
 Use case ends.
@@ -766,16 +776,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting an internship while all internships are being shown or specific internships based on find command
 
-    1. Prerequisites: List all internships using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all internships using the `list` command. Multiple internships in the list.
 
     1. Test case: `delete 1`<br>
        Expected: First internship is deleted from the list. Details of the deleted internship shown in the message box. Details of the internship are no longer visible in the Main Window.
 
     1. Test case: `delete 0`<br>
-       Expected: No internship is deleted. Error details shown in the message box. Internship remains visible in the Main Window and Detailed Internship View.
+       Expected: No internship is deleted. Error details shown in the message box. All internships remains visible in the Main Window and Detailed Internship View.
 
     1. Test case: `delete -1`<br>
-      Expected: No internship is deleted. Error details shown in the message box. Internship remains visible in the Main Window and Detailed Internship View.
+      Expected: No internship is deleted. Error details shown in the message box. All internships remains visible in the Main Window and Detailed Internship View.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
@@ -796,29 +806,37 @@ Make sure to use the `exit` command or the close button to save data while closi
 
 ### Prefix-based Command Format
 
-In the design of our command-line interface, we made the decision to use a prefix-based format for our commands, such as `/com` for company name, instead of the more conventional `com/`. <br> This decision was made based on several considerations:
+In the design of our command-line interface, we made the decision to use a prefix-based format for our commands, such as `/com` for company name, instead of the more conventional `com/`. <br>This decision was made based on several considerations:
 
 1. **Uniqueness**: The use of a leading slash makes our commands distinct and immediately recognizable. This reduces the likelihood of conflicts with other command-line applications or conventions.
-2. **Ease of Parsing**: Having a consistent prefix-based format simplifies the parsing process. The parser can easily identify the start of a parameter by looking for the `/` character.
-3. **User Experience**: While the `/com` format might be slightly unconventional, we found it to be just as intuitive, if not more so, for our users. The leading slash can be seen as an indicator that a new parameter is starting, making the commands easier to read and write.
-4. **Flexibility**: This design allows us to easily extend our command format in the future. For example, we could introduce new commands or parameters without worrying about them clashing with existing ones.
+2. **User Experience**: While the `/com` format might be slightly unconventional, we found it to be just as intuitive, if not more so, for our users. The leading slash can be seen as an indicator that a new parameter is starting, making the commands easier to read and write.
+3. **Flexibility**: This design allows us to easily extend our command format in the future. For example, we could introduce new commands or parameters without worrying about them clashing with existing ones.
 
 We acknowledge that this design choice may have a slight learning curve for users who are accustomed to other command-line interfaces. However, we believe that the benefits in terms of uniqueness, ease of parsing, user experience, and flexibility outweigh this minor inconvenience.
 
 ### Identity Fields in `isSameInternship` Method
 
 In the `Internship` class, the `isSameInternship` method is used to compare two `Internship` objects based on certain fields. 
-<br> These fields are `companyName`, `contactName`, `contactEmail`, `contactNumber`, `applicationStatus`, and `description`. 
+<br> These fields are `companyName`, `contactName`, `contactEmail`, `contactNumber`, `description`, `role` and `location`. 
 <br> The choice of these fields was based on the following considerations:
 
 1. **CompanyName**: The name of the company offering the internship is a crucial identifier. Two internships at different companies are definitely not the same.
 2. **ContactName**: The contact person for the internship could be important if the user needs to communicate with the company. Two internships with different contact persons might imply different points of contact, hence they are not the same.
 3. **ContactEmail**: Similar to `contactName`, the contact email could be a significant identifier as it might imply different points of contact.
 4. **ContactNumber**: The contact number, like the contact name and email, could be a significant identifier for the same reasons.
-5. **ApplicationStatus**: The status of the application (e.g., applied, accepted, rejected) is a crucial piece of information for the user. Two internships with different application statuses are not the same from the user's perspective.
-6. **Description**: The description of the internship could contain important details about the internship. Two internships with different descriptions are not the same.
+5. **Description**: The description of the internship could contain important details about the internship. Two internships with different descriptions are not the same.
+6. **Role**: The role of the internship could contain important details about the internship. Two internships with different roles are not the same.
+7. **Location**: The location of the internship could contain important details about the internship. Two internships with different locations are not the same.
 
 These fields are considered "compulsory" or "identity" fields, meaning they are essential to define the identity of an `Internship` object. If any of these fields differ between two `Internship` objects, then they are not considered the same internship. This design choice ensures that the `isSameInternship` method provides a meaningful comparison between two `Internship` objects.
+
+**Ignored Fields**
+1. The `remark` and `taskList` fields are not considered as they do not define the identity of the internship.
+2. The `applicationStatus` field is not considered as it enables a user to create 2 internships with the same details but different statuses, which reduces the usefulness of the `edit` command.
+
+It is important to note that these explanations view the fields in isolation. When equality checks are performed, all available fields are considered.
+
+These fields are considered "identity" fields (not all are compulsory, referring to the optional role and location fields), meaning they are essential to define the identity of an `Internship` object. If any of these fields differ between two `Internship` objects, then they are not considered the same internship. This design choice ensures that the `isSameInternship` method provides a meaningful comparison between two `Internship` objects.
 
 #### Sort Feature
 
