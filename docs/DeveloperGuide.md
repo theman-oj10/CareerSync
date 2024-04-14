@@ -544,7 +544,10 @@ testers are expected to do more *exploratory* testing.
        Expected: First internship is deleted from the list. Details of the deleted internship shown in the message box. Details of the internship are no longer visible in the Main Window.
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No internship is deleted. Error details shown in the message box. Internship remains visible in the Main Window and Detailed Internship View.
+
+    1. Test case: `delete -1`<br>
+      Expected: No internship is deleted. Error details shown in the message box. Internship remains visible in the Main Window and Detailed Internship View.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
