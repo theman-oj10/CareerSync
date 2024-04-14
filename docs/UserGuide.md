@@ -307,7 +307,7 @@ Upon reopening the app:<br>
 You now see all your internships that you have when you exited. Your data was saved!
 </div>
 
-#### Must-Know: What Makes An Internship Unique
+#### What Makes An Internship Unique
 
 <div markdown="span" class="alert alert-danger">
 ⚠️ **BEFORE YOU BEGIN!** <br>
@@ -416,10 +416,14 @@ Lets you add an internship entry to be tracked by CareerSync!
 <div markdown="span" class="alert alert-danger">
 ⚠️ **Common errors:** <br>
 
-1. If you miss out any of the mandatory fields, the command will be rejected with an error message.
-Make sure to refer to the error message displayed for the correct format to use!<br>
+1. If you miss out any of the mandatory fields, the command will be rejected with an error message. Make sure to refer to the error message displayed for the correct format to use!<br>
 2. If you input an invalid status, location or email format, the command will be rejected with an error message highlighting the valid values. <br>
+<<<<<<< Updated upstream
 3. When using the `add` command, the `/phone` parameter allows for more digits that are necessary. Do manually ensure that the length of the phone numbers you input are correct.
+=======
+3. If you encounter the **This internship already exists in the internship list** message, please refer to our [FAQ](#faq) to learn about what makes an internship unique.
+
+>>>>>>> Stashed changes
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
@@ -811,7 +815,7 @@ Only do so if you are an experienced user! <br>
 **A**: Do the following steps: <br> 1. Navigate to the folder where CareerSync.jar is stored. <br> 2. Copy your data file from data/internshipdata.json. <br> 3. Install the app in the other computer and overwrite the empty data file (data/internshipdata.json) it creates with the file that contains the data (JSON file) of your previous CareerSync home folder.
 
 **Q**: Why is my internship entry considered a duplicate?<br>
-**A**: Your new entry has the same value as an existing entry for one or more fields. For more information, please go [here](#must-know-what-makes-an-internship-unique).
+**A**: Your new entry has the same value as an existing entry for one or more fields. For more information, please go [here](#what-makes-an-internship-unique).
 
 [Go to Table of Contents](#table-of-contents)
 
