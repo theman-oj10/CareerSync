@@ -528,14 +528,16 @@ testers are expected to do more *exploratory* testing.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Planned Enhancements**
-1. **Case insensitivity for all commands and fields:** Currently, CareerSync strictly only allow lower case commands and fields. Case insensitivity will enhance user experience as CLI users can input commands faster and with fewer syntax errors.
+Note that to try out the below example commands you will need to reset the data to sample data. This can be done by deleting the `data` folder in the project directory and restarting the application.
+1. **Case insensitivity for all commands and fields:** Currently, CareerSync strictly only allow lower case commands and prefixes. Case insensitivity will enhance user experience as CLI users can input commands faster and with fewer syntax errors.
 2. **Undo Feature:** Currently, there is no confirmation message such as "Are you sure you want to delete this internship". While we understand the concern that it is easy to delete something accidentally we do not believe that a confirmation message is the solution as CareerSync is designed for efficiency seeking CLI users. Instead, we will implement an Undo feature which will allow them to undo the past few changes they made.
     <br>Command: `delete 1`
    <br>![Delete command has no confirmation message](./images/planned-enhancements/delete-command.png)<br><br>
-3. **Phone numbers can be at most 15 Digits Long:** Currently, there is no limit on the number of digits. Since, in the real world phone numbers longer than 15 digits are unlikely, this is a constraint we want to enforce.
-   <br>![Phone numbers has no length restriction](./images/planned-enhancements/unlimited-phonedigits.png)<br><br>
-4. **Limiting Deadlines to only future dates:** Adding deadlines in the past does not make sense and users will not require this. As such we want to enforce this as a constraint
-   <br>Command: `setdeadline 1 /selecttask`
+3. **Email field does not require domain name** Currently, `example@gmail` is considered a valid email and there is no requirement for a proper domain (eg: .com). This is a constraint we want to enforce to reduce users mistyping emails.
+    <br>Command: `edit 1 /email example@gmail`
+   <br>![Invalid Email formatting](./images/planned-enhancements/invalid-email-field.png)<br><br>
+4. **Limiting Deadlines to only valid future dates:** Adding deadlines in the past does not make sense and users will not require this. Additionally, adding invalid dates such as 30th February is possible. As such we want to enforce this as a constraint.
+   <br>Command: `setdeadline 1 /selecttask 1 10/10/1985`
     <br>![Deadlines can have past dates](./images/planned-enhancements/past-deadlines.png)<br><br>
 5. **Edit command will require changes to be made to existing values:** Currently, the edit function allows you to re-enter the values that are already present, without any changes. We plan to add suitable error handling messages to enforce this constraint.
    <br>Command: `edit 1 /com Facebook`
@@ -544,7 +546,7 @@ testers are expected to do more *exploratory* testing.
    <br>Command: `edit 1 /email john@example.com /n john`
     <br>![Incorrect prefix recognised as argument](./images/planned-enhancements/invalid-prefix-error.png)<br><br>
 7. **Consistent filtered lists:** Currently after calling find, if we enter another command it resets to the original list of internships. In the future we want to allow users to layer find, sort and other commands to improve our application's searching functionalities.
-   <br>Command: `find /status applied`
+   <br>Command: `find withany /status pending`
    <br>![Example find command](./images/planned-enhancements/inconsistent-find-1.png)
    <br>Command: `edit 1 /com Facebook`
    <br>![Command after find resets the list](./images/planned-enhancements/inconsistent-find-2.png)<br><br>
