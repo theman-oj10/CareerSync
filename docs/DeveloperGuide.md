@@ -485,10 +485,10 @@ Users can edit existing internship details, including optional fields, to update
 
 #### Alternative and Its Implications
 
-**Alternative Approach:** The alternative approach was to directly transform role and location into optional fields using `Optional<>`. <br>
+**Alternative Approach:** <br> The alternative approach was to directly transform role and location into optional fields using `Optional<>`. <br>
 
 **Implications:** <br>
-Cons: Avoids `NULL` values being passed around and caused complications when testing other features. This approach may also introduce maintenance challenges and potential errors if not implemented correctly.
+**Cons:** Avoids `NULL` values being passed around and caused complications when testing other features. This approach may also introduce maintenance challenges and potential errors if not implemented correctly.
 
 **Conclusion:** <br>
 The transformation of certain fields in the Internship class to optional types enhances the flexibility and usability of the internship application.
