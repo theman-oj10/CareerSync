@@ -738,8 +738,8 @@ testers are expected to do more *exploratory* testing.
 
 
 4. **Test case**: `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com`, then `edit 1 /phone 99999999`
-   **Expected**: For the first internship, the name of the company is changed to `TikTok`, status is changed to `ongoing`, description to `Software Intern`, point of contact to `John`, email to `tiktok@gmail.com`.
-   **Expected**: No internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
+   **Expected**: For first command, for the first internship, the name of the company is changed to `TikTok`, status is changed to `ongoing`, description to `Software Intern`, point of contact to `John`, email to `tiktok@gmail.com`.
+   For second command, no internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
 
 
 ### Adding a task to an existing internship
@@ -747,7 +747,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a task to an existing internship
 
-1. Preqrequisites: Ensure that there is at least one internship.
+1. Prerequisites: Ensure that there is at least one internship.
 
 2. **Test case**: `addtask 1 /task Attend meeting`<br>
    **Expected**: A task `Attend meeting` is added to the task list of the first internship. Details of the added task shown in the status message.
