@@ -459,15 +459,15 @@ Here is a step-by-step example of how the `addremark` command might be executed:
 
 ### Optional Fields Feature
 
-Certain fields in the Internship class are made optional to offer flexibility to the users.
+Certain fields in the Internship class are made optional to offer flexibility to the users. <br>
 This section outlines the technical details behind how the internship object is able to accept optional fields.
 
 **Field Conversion:** <br>
-Fields such as location and role have been converted to optional types (where default values have been set should the user not input any values for them). <br>
+Fields such as location and role have been converted to optional types (where default values have been set should the user not input any values for them).
 This provides flexibility in representing internship data.
 
 **Constructor Modification:** <br>
-The constructor for the Internship class consists of 2 optional fields (`role` and `location`), ensuring compatibility with the new optional field structure. <br>
+The constructor for the Internship class consists of 2 optional fields (`role` and `location`), ensuring compatibility with the new optional field structure.
 The add command parser sets default values for the 2 aforementioned optional fields, should the user not input any values.
 
 **Equality Comparison:** <br>
