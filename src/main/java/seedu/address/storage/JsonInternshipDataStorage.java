@@ -44,13 +44,11 @@ public class JsonInternshipDataStorage implements InternshipDataStorage {
      */
     public Optional<ReadOnlyInternshipData> readInternshipData(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
-
         Optional<JsonSerializableInternshipData> jsonInternshipData = JsonUtil.readJsonFile(
                 filePath, JsonSerializableInternshipData.class);
         if (!jsonInternshipData.isPresent()) {
             return Optional.empty();
         }
-
         try {
             return Optional.of(jsonInternshipData.get().toModelType());
         } catch (IllegalValueException ive) {
@@ -59,6 +57,9 @@ public class JsonInternshipDataStorage implements InternshipDataStorage {
         }
     }
 
+    /**
+     * {inheritDoc InternshipDataStorage#saveInternshipData(ReadOnlyInternshipData)}
+     */
     @Override
     public void saveInternshipData(ReadOnlyInternshipData internshipData) throws IOException {
         saveInternshipData(internshipData, filePath);
@@ -72,7 +73,6 @@ public class JsonInternshipDataStorage implements InternshipDataStorage {
     public void saveInternshipData(ReadOnlyInternshipData internshipData, Path filePath) throws IOException {
         requireNonNull(internshipData);
         requireNonNull(filePath);
-
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableInternshipData(internshipData), filePath);
     }

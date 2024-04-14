@@ -38,24 +38,46 @@ public class InternshipUserPrefs implements ReadOnlyInternshipUserPrefs {
         setInternshipDataFilePath(newUserPrefs.getInternshipDataFilePath());
     }
 
+    /**
+     * Returns the GuiSettings of the UserPrefs.
+     * @return GuiSettings of the UserPrefs.
+     */
     public GuiSettings getGuiSettings() {
         return guiSettings;
     }
 
+    /**
+     * Sets the GuiSettings of the UserPrefs.
+     * @param guiSettings GuiSettings to be set.
+     */
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         this.guiSettings = guiSettings;
     }
 
+    /**
+     * Returns the Path of the internship data file.
+     * @return Path of the internship data file.
+     */
     public Path getInternshipDataFilePath() {
         return internshipDataFilePath;
     }
 
+    /**
+     * Sets the Path of the internship data file.
+     * @param internshipDataFilePath Path of the internship data file to be set.
+     */
     public void setInternshipDataFilePath(Path internshipDataFilePath) {
         requireNonNull(internshipDataFilePath);
         this.internshipDataFilePath = internshipDataFilePath;
     }
 
+    /**
+     * Returns true if both UserPrefs have the same GUI settings and internship data file path.
+     * This defines a stronger notion of equality between two UserPrefs.
+     * @param other Other UserPrefs to compare with.
+     * @return True if both UserPrefs have the same GUI settings and internship data file path.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

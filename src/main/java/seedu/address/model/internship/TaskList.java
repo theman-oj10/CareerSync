@@ -3,7 +3,7 @@ package seedu.address.model.internship;
 import java.util.ArrayList;
 
 /**
- * Represents a list of tasks in the internship data.
+ * Represents the list of tasks in an Internship.
  */
 public class TaskList {
     private final ArrayList<Task> taskList;
@@ -23,9 +23,10 @@ public class TaskList {
     }
 
     /**
-     * Adds tasks from a comma-separated string into the task list. Only for testing purposes using TypicalInternships.
+     * Adds tasks from a semicolon-separated string into the task list. Only for testing purposes using
+     * TypicalInternships.
      *
-     * @param tasksString the string containing comma-separated tasks
+     * @param tasksString the string containing semicolon-separated tasks
      */
     public TaskList(String tasksString) {
         if (tasksString.equals("") || tasksString.equals(" ")) {
@@ -77,7 +78,7 @@ public class TaskList {
     }
 
     /**
-     * Returns a copy of the task list.
+     * Returns a copy of the task list as a different TaskList.
      */
     public TaskList copy() {
         ArrayList<Task> copiedTaskList = new ArrayList<>();
@@ -94,23 +95,6 @@ public class TaskList {
         for (Task task : taskList) {
             builder.append(count++).append(". ").append(task.toString()).append("\n");
         }
-        return builder.toString();
-    }
-
-    /**
-     * Converts the task list to a JSON string.
-     * @return JSON string representation of the task list
-     */
-    public String convertToJsonString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("[");
-        for (Task task : taskList) {
-            builder.append(task.convertToJsonString()).append(",");
-        }
-        if (taskList.size() > 0) {
-            builder.deleteCharAt(builder.length() - 1);
-        }
-        builder.append("]");
         return builder.toString();
     }
 

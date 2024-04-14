@@ -14,8 +14,8 @@ import seedu.address.model.internship.exceptions.InternshipNotFoundException;
 /**
  * A list of internships that enforces uniqueness between its elements and does not allow nulls.
  * An internship is considered unique by comparing using {@code Internship#isSameInternship(Internship)}.
- * As such, adding and updating of internships uses Internship#isSameInternship(Internship) for equality
- * to ensure that the internship being added or updated is unique in terms of identity in the
+ * As such, adding of internships uses Internship#isSameInternship(Internship) for equality
+ * to ensure that the internship being added is unique in terms of identity in the
  * UniqueInternshipList. However, the removal of a internship uses Internship#equals(Object),to
  * ensure that the internship with exactly the same fields will be removed.
  *

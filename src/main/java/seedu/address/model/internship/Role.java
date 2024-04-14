@@ -8,8 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Role {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Roles should not be blank!";
+    public static final String MESSAGE_CONSTRAINTS = "Roles should not be blank!";
 
     /*
      * Matches any characters that are not only whitespace
