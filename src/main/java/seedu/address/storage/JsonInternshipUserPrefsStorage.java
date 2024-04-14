@@ -37,6 +37,9 @@ public class JsonInternshipUserPrefsStorage implements InternshipUserPrefsStorag
         return JsonUtil.readJsonFile(prefsFilePath, InternshipUserPrefs.class);
     }
 
+    /**
+     * {inheritDoc InternshipUserPrefsStorage#saveUserPrefs(ReadOnlyInternshipUserPrefs)}
+     */
     @Override
     public void saveUserPrefs(ReadOnlyInternshipUserPrefs userPrefs) throws IOException {
         JsonUtil.saveJsonFile(userPrefs, filePath);

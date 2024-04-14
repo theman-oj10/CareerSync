@@ -40,8 +40,7 @@ public class UniqueInternshipListTest {
     @Test
     public void contains_internshipWithSameIdentityFieldsInList_returnsTrue() {
         uniqueInternshipList.add(ALICE_MICROSOFT);
-        Internship editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withLocation("local")
-                .withRole("Artificial Intelligence Engineer").build();
+        Internship editedAlice = new InternshipBuilder(ALICE_MICROSOFT).withApplicationStatus("rejected").build();
         assertTrue(uniqueInternshipList.contains(editedAlice));
     }
 
