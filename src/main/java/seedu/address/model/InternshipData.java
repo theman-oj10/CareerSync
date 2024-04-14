@@ -38,8 +38,6 @@ public class InternshipData implements ReadOnlyInternshipData {
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
-
     /**
      * Replaces the contents of the internship list with {@code internships}.
      * {@code internships} must not contain duplicate internships.
@@ -55,8 +53,6 @@ public class InternshipData implements ReadOnlyInternshipData {
         requireNonNull(newData);
         setInternships(newData.getInternshipList());
     }
-
-    //// internship-level operations
 
     /**
      * Returns true if a internship with the same identity as {@code internship} exists in the internship data.
@@ -93,8 +89,6 @@ public class InternshipData implements ReadOnlyInternshipData {
     public void removeInternship(Internship key) {
         internshipList.remove(key);
     }
-
-    //// util methods
 
     @Override
     public String toString() {
