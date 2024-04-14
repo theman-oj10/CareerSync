@@ -14,6 +14,10 @@ title: Developer Guide
     - [Common classes](#common-classes)
 4. [Implementation](#implementation)
     - [Sort](#sort-feature)
+    - [Edit](#edit-feature)
+    - [AddTask](#addtask-feature)
+    - [SetDeadline](#setdeadline-feature)
+    - [DeleteTask](#deletetask-feature)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Appendix: Requirements](#appendix-requirements)
 
