@@ -14,7 +14,6 @@ import seedu.address.model.InternshipData;
 import seedu.address.testutil.TypicalInternships;
 
 public class JsonSerializableInternshipDataTest {
-
     private static final Path TEST_DATA_FOLDER = Paths
             .get("src", "test", "data", "JsonSerializableInternshipDataTest");
     private static final Path TYPICAL_INTERNSHIPS_FILE = TEST_DATA_FOLDER

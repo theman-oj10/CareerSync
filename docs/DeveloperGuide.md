@@ -2,14 +2,27 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+### Table of Contents
+1. [Acknowledgements](#acknowledgements)
+2. [Setting up, getting started](#setting-up-getting-started)
+3. [Design](#design)
+    - [Architecture](#architecture)
+    - [UI Component](#ui-component)
+    - [InternshipLogic Component](#internshiplogic-component)
+    - [InternshipModel Component](#internshipmodel-component)
+    - [InternshipStorage Component](#internshipstorage-component)
+    - [Common classes](#common-classes)
+4. [Implementation](#implementation)
+    - [Sort](#sort-feature)
+5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+6. [Appendix: Requirements](#appendix-requirements)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* CareerSync's logo was generated using [LogoAI](https://www.logoai.com/logo-maker) and recreated for free using [Canva](https://www.canva.com/)
+* GitHub [CoPilot](https://github.com/features/copilot) was used to assist the writing of the code in this project.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -263,12 +276,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**:
 
-``` plaintext
 Effortlessly manage, search, and sift through your various internship applications.
 Enter details rapidly using CLI, and avoid losing track of crucial information.
 Targeted to those with numerous applications to keep track of and prefer using CLI.
 Your all-in-one solution for seamless application management.
-```
+
 
 ### User stories
 
@@ -295,7 +307,7 @@ Priorities: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not 
 
 1. User accesses the main page. 
 2. User selects the option to enter internship information. 
-3. System prompts the user to input internship details such as title, company, start/end dates, etc. 
+3. System prompts the user to input internship details such as company name, role title, description, etc. 
 4. User inputs the required internship details. 
 5. System validates the input data. 
 6. System saves the internship information. 
@@ -469,8 +481,10 @@ Priorities: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not 
 
 * **API**: Application Programming Interface. The entirety of published methods, properties and other means for software developers to access an application through software they write using this application.
 * **GUI**: Graphical User Interface.  A graphical user interface uses graphical representations of commands, status feedbacks and data of an application, and offers methods to interact with it through graphical devices, such as a mouse or tablets.
+* **Internship Details**: Information about an internship, such as the company name, contact name, email, role etc. Refer to [User Guide Field Summary](UserGuide.md#field-summary) for more details.
+* **JAR**: Java ARchive. A package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file for distribution.
+* **JSON**: JavaScript Object Notation. A lightweight data-interchange format that is human-readable.
 * **Mainstream OS**: Mainstream Operating Systems. Refers to Windows, Linux, Unix and MacOS.
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **UI**: User Interface. The point where a user and a software application meet and interact.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -488,9 +502,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+    1. Download the CareerSync.jar file and copy into an empty folder
 
     1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Alternatively run the jar file from the command line with `java -jar CareerSync.jar` Expected: Same as above.
 
 1. Saving window preferences
 
@@ -519,9 +534,22 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 ### Saving data
-
+Make sure to use the `exit` command or the close button to save data while closing the app.
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. To simulate a missing data file, delete the data file(`./data/internshipdata.json`) before launching the app. You will notice that the app automatically creates a new data file and repopulates it with sample data. To remove the sample data, enter the `clear` command.
+   2. To simulate a corrupted data file, edit the data file to contain some random text. Launch the app. The app should detect the corrupted file and automatically replace it with a new empty data file. You can then add new data to the app or reset the data to sample data by deleting the data file.
 
 1. _{ more test cases …​ }_
+
+### Sort Feature
+1. Prerequisites: Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
+2. Add another internship entry using the following command: `add /com Amazon /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 9089030 /loc remote /role Business Development Intern`
+    1. Test case: `sort /status desc`<br>
+      Expected: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
+   2. Test case: `sort /status asc` <br>
+      Expected: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
+      ![Sort by status asc](./images/manual-testing/sort-by-status.png)<br>
+   3. Test case: `sort /com asc`<br>
+      Expected: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
+      ![Sort by com asc](./images/manual-testing/status-sort-sort-by-com.png)<br>

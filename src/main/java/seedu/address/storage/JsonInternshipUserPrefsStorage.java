@@ -13,9 +13,7 @@ import seedu.address.model.ReadOnlyInternshipUserPrefs;
  * A class to access UserPrefs stored in the hard disk as a json file
  */
 public class JsonInternshipUserPrefsStorage implements InternshipUserPrefsStorage {
-
     private Path filePath;
-
     public JsonInternshipUserPrefsStorage(Path filePath) {
         this.filePath = filePath;
     }
@@ -39,6 +37,9 @@ public class JsonInternshipUserPrefsStorage implements InternshipUserPrefsStorag
         return JsonUtil.readJsonFile(prefsFilePath, InternshipUserPrefs.class);
     }
 
+    /**
+     * {inheritDoc InternshipUserPrefsStorage#saveUserPrefs(ReadOnlyInternshipUserPrefs)}
+     */
     @Override
     public void saveUserPrefs(ReadOnlyInternshipUserPrefs userPrefs) throws IOException {
         JsonUtil.saveJsonFile(userPrefs, filePath);

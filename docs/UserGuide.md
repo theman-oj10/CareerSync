@@ -163,12 +163,33 @@ For the restrictions on what is accepted for each field, kindly refer to [Fields
 10. `TASK` - The description of the task.
 11. `DEADLINE` - The deadline of the task.
 
+#### Detailed View Window
+
+When you click on an internship entry in the internship list, a separate window will be open showing
+the detailed view of the internship entry.<br>
+This view will show all the fields of the internship entry in a bigger font size for easier reading.<br>
+![Detailed view window](./images/detailedview/detailedViewWindow.png)<br>
+
+<div markdown="span" class="alert alert-info">
+ℹ️ **Tip:** This feature is not recommended for efficient use of the application, as it is not a command that can be inputted into the CLI.
+However, it serves as an aid to view the details of an internship entry in a more readable format.
+</div>
+
+[CLI](#glossary) input will be implemented in a future release.
+
 [Go to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ### Tutorial
 This section would guide you through the basic commands of <span style="color: #f66a0a;">CareerSync</span>, and how to use them.
+
+<div markdown="span" class="alert alert-danger">
+
+⚠️ **Caution**:
+If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
+as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
 
 #### Clear sample internship entries: `clear`
 
@@ -321,6 +342,13 @@ ________________________________________________________________________________
 
 Let's do a quick review of the commands!
 
+<div markdown="span" class="alert alert-danger">
+
+⚠️ **Caution**:
+If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines 
+as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
+
 #### Command Summary
 
 | Action                                         | Description                              | Format                                                                                                                                                                                                |
@@ -352,8 +380,6 @@ the displayed internship indexes.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `/com COMPANY_NAME /desc DESCRIPTION`, `/desc DESCRIPTION /com COMPANY_NAME` is also acceptable.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
-  as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
 #### Viewing help: `help`
@@ -374,7 +400,7 @@ Lets you add an internship entry to be tracked by CareerSync!
 
 * The fields `COMPANY_NAME`, `DESCRIPTION`, `CONTACT_NAME` allow the use of any text, number and/or spaces
 * The field `STATUS` accepts only the following inputs: `to_apply`, `ongoing`, `rejected`, `accepted` (case-insensitive)
-* The field `CONTACT_EMAIL` accepts only the format of `<email>@<domain>.com`
+* The field `CONTACT_EMAIL` accepts only the format of `<email>@<domain>`
 * The field `CONTACT_NUMBER` must be unsigned, and it must be at least 7 digits long
 * The field `LOCATION_ENUM` accepts only the following inputs: `unknown`, `remote`, `local`, `overseas` (case-insensitive)
   * Do note that should you leave the location field empty, it will default to `unknown`
@@ -392,7 +418,7 @@ Lets you add an internship entry to be tracked by CareerSync!
 1. If you miss out any of the mandatory fields, the command will be rejected with an error message.
 Make sure to refer to the error message displayed for the correct format to use!<br>
 2. If you input an invalid status, location or email format, the command will be rejected with an error message highlighting the valid values. <br>
-
+3. When using the `add` command, the `/phone` parameter allows for more digits that are necessary. Do manually ensure that the length of the phone numbers you input are correct.
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
@@ -455,35 +481,18 @@ You may have had a filter applied that is hiding the internship you are looking 
 
 <div style="margin-top: 20px;"></div>
 
-#### Viewing an internship entry's details
-
-When you click on an internship entry in the internship list, a separate window will be open showing
-the detailed view of the internship entry.<br>
-This view will show all the fields of the internship entry in a bigger font size for easier reading.<br>
-![Detailed view window](./images/detailedview/detailedViewWindow.png)<br>
-
-<div markdown="span" class="alert alert-info">
-ℹ️ **Tip:** This feature is not recommended for efficient use of the application, as it is not a command that can be inputted into the CLI.
-However, it serves as an aid to view the details of an internship entry in a more readable format.
-</div>
-
-[CLI](#glossary) input will be implemented in a future release.
-
-[Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
-
-<div style="margin-top: 20px;"></div>
-
 #### Editing an internship: `edit`
 
 Lets you edit an existing internship entry in CareerSync.
 
-**Format** : `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE] [/remark remark] …​`
+**Format** : `edit INDEX [/com COMPANY_NAME] [/poc CONTACT_NAME] [/email CONTACT_EMAIL] [/phone CONTACT_NUMBER] [/loc LOCATION_ENUM] [/status STATUS] [/desc DESCRIPTION] [/role ROLE] [/remark REMARK] …​`
 
 * Edits the internship at the specified `INDEX`. The index refers to the index number shown in the displayed internship list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided. 
 * Multiple fields can be edited at once.
 * Existing values will be updated to the input values.
 * Only valid field values will be accepted. For example, you cannot set the status to 'ghosted' as it is not a valid status.
+* To view the list of valid values for each field, refer to the [Field Summary](#field-summary) or [Adding an internship](#adding-an-internship-add)
 
 <div markdown="span" class="alert alert-success">
 
@@ -496,6 +505,10 @@ Lets you edit an existing internship entry in CareerSync.
 2. Successful Output after editing an entry:<br>
    ![After successfully editing](./images/edit/edit-after.png)<br>
    The email field of the first internship is successfully updated to `google@gmail.com`.
+</div>
+
+<div markdown="span" class="alert alert-info">
+ℹ️ **Tip:** The remark field can accept an empty string as an argument. To delete an existing remark, simply leave the remark field empty like so: <br>`edit INDEX /remark`.
 </div>
 
 <div markdown="span" class="alert alert-danger">
@@ -542,7 +555,7 @@ This sets the remark of the internship at index 1 to be `This internship has a b
 
 #### Finding internships by keywords: `find`
 
-You can use this to filter the visible internships in CareerSync by keywords.
+You can use this to filter what internships you see in CareerSync based on the keywords you provide.
 
 **Format:** `find MODE [/com COMPANY_NAME_KEYWORDS] [/poc CONTACT_NAME_KEYWORDS] [/loc LOCATION_KEYWORDS] [/status STATUS_KEYWORDS] [/desc DESCRIPTION_KEYWORDS] [/role ROLE_KEYWORDS] [/remark REMARK_KEYWORDS]`
 
@@ -555,6 +568,12 @@ You can use this to filter the visible internships in CareerSync by keywords.
 * Only full words will be matched e.g. `Goo` will not match `Google`
 * Internship matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hewlett Song` will return `Hewlett Packard`, `Song Fa`
+
+<div markdown="span" class="alert alert-danger">
+
+⚠️ **Caution**:
+Do note that if you apply successive find commands do not compound the filters. Only your most recent find command will be applied.
+</div>
 
 <div markdown="span" class="alert alert-success">
 
@@ -574,7 +593,10 @@ This will filter the list of internships to show you only those with both status
 </div>
 
 <div markdown="span" class="alert alert-info">
-ℹ️ **Tip:** If you want to view all internships again, simply use the [list](#listing-all-internships-list) command.
+ℹ️ **Tip:** 
+<br>
+1. If you want to view all internships again, simply use the [list](#listing-all-internships-list) command.<br>
+2. Upon executing commands, with the exception of `find`, `delete`, `sort`, `clear`, `help` and `exit`, the filter will be removed i.e. the list will be reset to show all internships.
 </div>
 
 <div markdown="span" class="alert alert-danger">
@@ -638,6 +660,7 @@ Using this function, you can add a task to an internship so that you won't forge
 
 **Format:** `addtask INDEX /task TASK`
 
+- `INDEX` is the internship index you want to add the task to.
 - `TASK` is the task you want to add to the internship.
 
 <div markdown="span" class="alert alert-success">
@@ -668,11 +691,11 @@ Refer to the error message displayed for the correct format to use!
 
 Using this function, you can set the deadline to a task under an internship so that you won't miss the deadline!
 
-**Format:** `setdeadline INDEX_INTERNSHIP /selecttask INDEX_TASK /deadline DEADLINE`
+**Format:** `setdeadline INDEX /selecttask INDEX /deadline DEADLINE`
 
-- `INDEX_INTERNSHIP` is the index of the internship with the task you want to set the deadline for.
-- `INDEX_TASK` is the index of the task that you want to set the deadline for.
-- `DEADLINE` is the deadline you want to set for the task. It must be in the format `DD/MM/YYYY`, and a valid date.
+- The two `INDEX` denote the internship index and task index respectively.
+- `DEADLINE` is the deadline you want to set for the task. It must be in the format `DD/MM/YYYY`. The day, month and year fields must be valid
+(day must be between 1 and 31 inclusive, month must be between 1 and 12 inclusive, year must be a valid 4 digit number)
 
 <div markdown="span" class="alert alert-success">
 
@@ -703,9 +726,9 @@ Before you try this command, you need an internship that has at least 1 task. Yo
 
 Lets you delete a task from an existing internship after it is complete!
 
-**Format:** `deletetask INDEX /selecttask TASK_INDEX`
+**Format:** `deletetask INDEX /selecttask INDEX`
 
-- `INDEX` and `TASK_INDEX` denote the internship index and task index respectively.
+- The two `INDEX` denote the internship index and task index respectively.
 
 <div markdown="span" class="alert alert-success">
 
@@ -734,7 +757,7 @@ This clears all your internship entries from CareerSync.
 
 <div markdown="span" class="alert alert-danger">
 
-⚠️ Caution:
+⚠️ **Caution**:
 This operation is irreversible. Once you clear all entries, you cannot undo it.
 </div>
 
@@ -769,7 +792,7 @@ Format: `exit`
 
 <div markdown="span" class="alert alert-danger">
 
-⚠️ Caution:
+⚠️ **Caution**:
 Users are **NOT** recommended to modify their data file directly, since wrong formatting will cause the app to malfunction.
 Only do so if you are an experienced user! <br>
 </div>
@@ -794,6 +817,7 @@ Only do so if you are an experienced user! <br>
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen.<br>
 **The solution** is to delete the `preferences.json` file from the folder where you installed the application. Then, run the application again.
+2. The deadline field accepts potentially invalid dates as long as the day, month and year are individually valid, including past dates.
 
 [Go to Table of Contents](#table-of-contents)
 
@@ -816,4 +840,9 @@ Only do so if you are an experienced user! <br>
 | `/task`    | Task for the Internship             | Any text, numbers, or spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `/deadline`| Deadline for the Task               | Valid format: `DD/MM/YYYY`<br>- The date must be a valid date.                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
+<div markdown="span" class="alert alert-danger">
+⚠️ **Caution**:
+When using the `add` command, the `/phone` parameter allows for more digits that are necessary. <br>
+**The solution** is to manually ensure that the length of the phone numbers you input are correct.
+</div>
 [Go to Table of Contents](#table-of-contents)

@@ -31,7 +31,7 @@ public class InternshipModelManager implements InternshipModel {
     private FilteredList<Internship> selectedInternship;
 
     /**
-     * Initializes a ModelManager with the given internshipData and userPrefs.
+     * Initializes a InternshipModelManager with the given internshipData and userPrefs.
      */
     public InternshipModelManager(ReadOnlyInternshipData internshipData, ReadOnlyInternshipUserPrefs userPrefs) {
         requireAllNonNull(internshipData, userPrefs);
@@ -48,8 +48,6 @@ public class InternshipModelManager implements InternshipModel {
     public InternshipModelManager() {
         this(new InternshipData(), new InternshipUserPrefs());
     }
-
-    //=========== UserPrefs ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyInternshipUserPrefs userPrefs) {
@@ -84,8 +82,6 @@ public class InternshipModelManager implements InternshipModel {
         userPrefs.setInternshipDataFilePath(internshipDataFilePath);
     }
 
-    //=========== InternshipData ================================================================================
-
     @Override
     public void setInternshipData(ReadOnlyInternshipData internshipData) {
         this.internshipData.resetData(internshipData);
@@ -118,8 +114,6 @@ public class InternshipModelManager implements InternshipModel {
         requireAllNonNull(target, editedInternship);
         internshipData.setInternship(target, editedInternship);
     }
-
-    //=========== Filtered Internship List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Internship} backed by the internal list of
