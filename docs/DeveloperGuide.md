@@ -749,7 +749,10 @@ Then, list all internships using the `list` command.
 
    3. **Test case**: `find withall /com`<br>
       **Expected**: Visible internships do not change. The status message shows an error message about needing at least one search keyword. 
-2. Filtering using `withany`
+2. Filtering using `withall`
+   1. **Test case**: `find withall /loc remote /status TO_APPLY`<br>
+      **Expected**: 1 internship with both location 'REMOTE' and status 'TO_APPLY' is shown. The status message shows how many internships were listed.
+3. Filtering using `withany`
     1. **Test case**: `find withany /com Amazon /status TO_APPLY`<br>
        **Expected**: 2 internships with the company name 'Amazon' or status 'TO_APPLY' are shown. The status message shows how many internships were listed.
 3. Filtering with invalid mode
