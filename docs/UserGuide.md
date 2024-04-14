@@ -65,7 +65,7 @@ As computing students, keeping track of all the internship applications we've ma
 With CareerSync, you can:
 1. **Add** internships, along with details such as company name, description, status and more!
 2. **Find** internships by keywords, making it easy to find the information you need.
-3. **Manage tasks** for your applications and keep track of their individual deadlines.
+3. **Manage tasks** for your applications and keep track of their individual deadlines. <br><br>
 And so much more!
 
 <div class="page-break"></div>
@@ -169,7 +169,7 @@ For the restrictions on what is accepted for each field, kindly refer to [Fields
 
 <div class="page-break"></div>
 
-### Tutorial
+## Tutorial
 This section would guide you through the basic commands of <span style="color: #f66a0a;">CareerSync</span>, and how to use them.
 Please go through the tutorial and follow our step-by-step instructions so that you can better understand our application! 
 Screenshots are included for your reference.
@@ -194,7 +194,7 @@ Key in the command `clear` in the CLI and press `Enter` to clear the sample inte
 
 1. Input:<br>
    `clear`<br>
-   ![Before clearing](./images/clear/clear-before.png){: .smaller-responsive-image}<br><br>
+   ![Before clearing](./images/clear/clear-before.png){: .smaller-responsive-image}<br>
 
 2. Successful Output after clearing entries:<br>
    ![After successfully clearing](./images/clear/clear-after.png){: .smaller-responsive-image}<br>
@@ -204,7 +204,6 @@ Key in the command `clear` in the CLI and press `Enter` to clear the sample inte
 <div class="page-break"></div>
 
 #### 2. Add an internship entry: `add`
-
 Next, let us try to add an internship entry. 
 
 <div markdown="span" class="alert alert-success">
@@ -220,7 +219,6 @@ Successful output after adding the entry:<br>
 </div>
 
 #### 3. Edit an internship entry: `edit`
-
 Oh no! You made a mistake in the email address of the contact person. Let's edit the email address.
 
 <div markdown="span" class="alert alert-success">
@@ -514,6 +512,11 @@ Lets you edit an existing internship entry in CareerSync.
 1. Input:<br>
    `edit 1 /email google@gmail.com`<br>
    ![Before editing](./images/edit/edit-before.png){: .responsive-image}<br><br>
+</div>
+
+<div class="page-break"></div>
+
+<div markdown="span" class="alert alert-success">
 
 2. Successful Output after editing an entry:<br>
    ![After successfully editing](./images/edit/edit-after.png){: .responsive-image}<br>
@@ -547,7 +550,7 @@ Use this to keep track of your personal notes about the internship!
 
 1. Input:<br>
    `addremark 1 /remark This internship has a behavioural interview!`<br>
-   ![Before adding a remark](./images/add-remark/addremark-before.png){: .smaller-responsive-image}<br><br>
+   ![Before adding a remark](./images/add-remark/addremark-before.png){: .smaller-responsive-image}<br>
 
 2. Successful Output after adding a remark:<br>
    ![After successfully adding a remark](./images/add-remark/addremark-after.png){: .smaller-responsive-image}<br>
@@ -586,7 +589,11 @@ You can use this to filter the visible internships in CareerSync by keywords.
    `find withall /status to_apply /loc remote`<br>
    ![Before filtering by all toapply and remote](./images/find/find-before.png){: .responsive-image}<br><br>
 This will filter the list of internships to show you only those with both status `TO_APPLY` and location `REMOTE`.<br><br>
+</div>
 
+<div class="page-break"></div>
+
+<div markdown="span" class="alert alert-success">
 2. Successful Output after filtering:<br>
    ![After successfully filtering by all toapply and remote](./images/find/find-after.png){: .responsive-image}<br><br>
 
@@ -633,7 +640,7 @@ This command allows you to sort the internships in CareerSync by the specified f
 
 1. Input:<br>
    `sort /com asc`<br>
-   ![Before filtering by all to_apply and remote](./images/sort/sort-before.png'){: .smaller-responsive-image}<br>
+   ![Before filtering by all to_apply and remote](./images/sort/sort-before.png){: .smaller-responsive-image}<br>
 This will sort the list of internships by company name in ascending order.<br><br>
 
 2. Successful Output after sorting:<br>
@@ -674,6 +681,8 @@ Using this function, you can add a task to an internship so that you won't forge
    ![After Successfully Adding Task](./images/addtask/addtask-after.png){: .responsive-image}<br><br>
 </div>
 
+<div class="page-break"></div>
+
 <div markdown="span" class="alert alert-info">
 ℹ️ **Tip:** You cannot add a task using the `add` command. You must use the `addtask` command to add a task to an internship.
 </div>
@@ -710,6 +719,8 @@ Before you try this command, you need an internship that has at least 1 task. Yo
    ![After Setting Deadline](./images/setdeadline/setdeadline-after.png){: .smaller-responsive-image}<br><br>
 </div>
 
+<div class="page-break"></div>
+
 <div markdown="span" class="alert alert-info">
 ℹ️ **Tip:** Once you set a deadline to a task, you can't remove it! You can only change the deadline using this command.
 </div>
@@ -738,10 +749,10 @@ Lets you delete a task from an existing internship after it is complete!
 
 1. Input:<br>
    `deletetask 1 /selecttask 2`<br>
-   ![Before Deleting Task](./images/deletetask/deletetask-before.png){: .responsive-image}<br><br>
+   ![Before Deleting Task](./images/deletetask/deletetask-before.png){: .smaller-responsive-image}<br><br>
 
 2. Successful Output after deleting task:<br>
-   ![After successfully deleting the task](./images/deletetask/deletetask-after.png){: .responsive-image}<br><br>
+   ![After successfully deleting the task](./images/deletetask/deletetask-after.png){: .smaller-responsive-image}<br><br>
 </div>
 
 <div markdown="span" class="alert alert-danger">
@@ -808,16 +819,13 @@ Only do so if you are an experienced user! <br>
 
 <div class="page-break"></div>
 
---------------------------------------------------------------------------------------------------------------------
-## **Miscellaneous**
+## Miscellaneous
 ### FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Do the following steps: <br> 1. Navigate to the folder where CareerSync.jar is stored. <br> 2. Copy your data file from data/internshipdata.json. <br> 3. Install the app in the other computer and overwrite the empty data file (data/internshipdata.json) it creates with the file that contains the data (JSON file) of your previous CareerSync home folder.
 
 [Go to Table of Contents](#table-of-contents)
-
---------------------------------------------------------------------------------------------------------------------
 
 ### Known issues
 
@@ -827,8 +835,6 @@ Only do so if you are an experienced user! <br>
 [Go to Table of Contents](#table-of-contents)
 
 <div class="page-break"></div>
-
---------------------------------------------------------------------------------------------------------------------
 
 
 ### Field Summary
