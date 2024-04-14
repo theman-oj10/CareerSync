@@ -171,6 +171,8 @@ For the restrictions on what is accepted for each field, kindly refer to [Fields
 
 ### Tutorial
 This section would guide you through the basic commands of <span style="color: #f66a0a;">CareerSync</span>, and how to use them.
+Please go through the tutorial and follow our step-by-step instructions so that you can better understand our application! 
+Screenshots are included for your reference.
 
 <div markdown="span" class="alert alert-danger">
 
