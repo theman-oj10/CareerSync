@@ -13,11 +13,12 @@ title: Developer Guide
     - [InternshipStorage Component](#internshipstorage-component)
     - [Common classes](#common-classes)
 4. [Implementation](#implementation)
+    - [Find](#find-feature)
     - [Sort](#sort-feature)
     - [Edit](#edit-feature)
-    - [AddTask](#addtask-feature)
-    - [SetDeadline](#setdeadline-feature)
-    - [DeleteTask](#deletetask-feature)
+    - [Add Task](#add-task-feature)
+    - [Set Deadline](#set-deadline-feature)
+    - [Delete Task](#delete-task-feature)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Appendix: Requirements](#appendix-requirements)
 
@@ -355,7 +356,7 @@ we decide to remove the `edit` command's ability to modify `TaskList` directly.
 The fields to determine if an internship is the same as another internship are `Company Name`, `Contact Name`, `Contact Phone`,
 `Contact Email`, `Role` and `Location`. `Application Status`, `Remark` and `Tasks` are excluded. Rationale is explained under the `add` command.
 
-### AddTask feature
+### Add Task feature
 The `addtask` command allows users to add tasks to the `TaskList` field of an existing internship entry. This allows users to
 keep track of the tasks they need to complete for each internship. The `TaskList` field contains an `ArrayList<Task>` field
 that stores the tasks for each internship. The `addtask` command directly adds a new `Task` object to the `TaskList` field
@@ -375,7 +376,7 @@ If the index is larger than the number of internships displayed, a CommandExcept
 6. The `InternshipAddTaskCommand` then calls `InternshipModel::setInternship` to replace the old internship with the new one with the task.<br>
 7. The `InternshipAddTaskCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.<br>
 
-### SetDeadline feature
+### Set Deadline feature
 The `setdeadline` command allows users to set a deadline for a `Task` in the `TaskList` field of an existing internship entry.
 To use this command, the user needs to specify both the internship index and the task index as displayed in the screen, in addition
 to specifying the deadline. The `setdeadline` command directly replaces the deadline of the specified `Task` in the `TaskList` field
@@ -409,7 +410,7 @@ check that it is a valid calendar date that is not in the past.<br>
     * Pros: Users will not forget to set a deadline.
     * Cons: May cause confusion for users who do not want to set a deadline.
 
-### DeleteTask feature
+### Delete Task feature
 The `deletetask` command allows users to delete a `Task` from the `TaskList` field of an existing internship entry.
 To use this command, the user needs to specify both the internship index and the task index as displayed in the screen.
 The `deletetask` command selects the specified `Task` in the `TaskList` field of the internship entry and removes it from its
