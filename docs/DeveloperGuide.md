@@ -16,6 +16,7 @@ title: Developer Guide
     - [Sort](#sort-feature)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Appendix: Requirements](#appendix-requirements)
+7  [Appendix: Design Decisions](#appendix-design-decisions)
 
 --------------------------------------------------------------------------------------------------------------------
 
