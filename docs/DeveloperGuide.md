@@ -476,7 +476,7 @@ The isSameInternship() method checks for the equality of internships.
 **String Representation:** <br>
 The toString() method will include location and role if it exists in the string representation of an internship.
 
-### Usage Scenarios:
+#### Usage Scenarios
 
 **Adding New Internship:** <br>
 When adding a new internship, optional fields such as location and role may remain unspecified, representing scenarios where these details are not provided.
@@ -484,9 +484,9 @@ When adding a new internship, optional fields such as location and role may rema
 **Editing Existing Internship:** <br>
 Users can edit existing internship details, including optional fields, to update or modify internship information as needed.
 
-### Alternative and Its Implications
+#### Alternative and Its Implications
 
-#### Alternative Approach: The alternative approach was to directly transform role and location into optional fields using `Optional<>`. <br>
+**Alternative Approach:** The alternative approach was to directly transform role and location into optional fields using `Optional<>`. <br>
 
 **Implications:** <br>
 Cons: Avoids `NULL` values being passed around and caused complications when testing other features. This approach may also introduce maintenance challenges and potential errors if not implemented correctly.
