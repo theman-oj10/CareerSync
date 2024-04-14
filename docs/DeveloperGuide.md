@@ -731,7 +731,7 @@ Make sure to use the `exit` command or the close button to save data while closi
 ## **Appendix: Planned Enhancements**
 Note that to try out the below example commands you will need to reset the data to sample data. This can be done by deleting the `data` folder in the project directory and restarting the application.
 1. **Case insensitivity for all commands and fields:** Currently, CareerSync strictly only allow lower case commands and prefixes. Case insensitivity will enhance user experience as CLI users can input commands faster and with fewer syntax errors.
-2. **Return to default chronological sort** Currently, there is no way to return to the default chronological order (sorted by time of being added) after using the sort command. This can be confusing for users who are not familiar with the application. In the future we plan to add a command to return to the default chronological sort.
+2. **Return to default chronological sort** Currently, there is no way to return to the default chronological order (sorted by time of addition) after using the sort command. This can be confusing for users who are not familiar with the application. In the future we plan to add a command to return to the default chronological sort.
 3. **Email field does not require domain name** Currently, `example@gmail` is considered a valid email and there is no requirement for a proper domain (eg: .com). This is a constraint we want to enforce to reduce users mistyping emails.
     <br>Command: `edit 1 /email example@gmail`
    <br>![Invalid Email formatting](./images/planned-enhancements/invalid-email-field.png)<br><br>
