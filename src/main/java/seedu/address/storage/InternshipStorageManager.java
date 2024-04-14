@@ -34,37 +34,60 @@ public class InternshipStorageManager implements InternshipStorage {
         return userPrefsStorage.getUserPrefsFilePath();
     }
 
+    /**
+     * Returns the file path of the data file.
+     */
     @Override
     public Optional<InternshipUserPrefs> readUserPrefs() throws DataLoadingException {
         return userPrefsStorage.readUserPrefs();
     }
 
+    /**
+     * Saves the given {@link ReadOnlyInternshipUserPrefs} to the storage.
+     * @param userPrefs cannot be null.
+     * @throws IOException if there was any problem writing to the file.
+     */
     @Override
     public void saveUserPrefs(ReadOnlyInternshipUserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Path getInternshipDataFilePath() {
         return internshipDataStorage.getInternshipDataFilePath();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<ReadOnlyInternshipData> readInternshipData() throws DataLoadingException {
         return readInternshipData(internshipDataStorage.getInternshipDataFilePath());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<ReadOnlyInternshipData> readInternshipData(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
         return internshipDataStorage.readInternshipData(filePath);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void saveInternshipData(ReadOnlyInternshipData internshipData) throws IOException {
         saveInternshipData(internshipData, internshipDataStorage.getInternshipDataFilePath());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void saveInternshipData(ReadOnlyInternshipData internshipData, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);

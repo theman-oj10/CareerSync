@@ -23,7 +23,7 @@ public class InternshipDeleteTaskCommand extends InternshipCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete a task from the internship identified "
             + "by the index number used in the displayed internship data.\n"
-            + "Parameters: INDEX (must be a positive integer) " + PREFIX_SELECT_TASK + " TASK_INDEX\n"
+            + "Parameters: INDEX (must be a positive integer) " + PREFIX_SELECT_TASK + " INDEX\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_SELECT_TASK + " 1";
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Task Deleted: %1$s";
