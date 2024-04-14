@@ -731,6 +731,9 @@ Then, list all internships using the `list` command.
       Expected: Visible internships do not change. The status message shows an error message about invalid mode specified.
    1. Test case: `find withInvalidMode /status pending`
         Expected: Visible internships do not change. The status message shows an error message about invalid mode specified.
+4. Filtering with unsupported prefix `/phone`
+    1. Test case: `find withall /phone 12345678`<br>
+       Expected: Visible internships do not change. The status message shows an error message about unsupported prefix.
 
 ### Sort Feature
 1. Prerequisites: Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
