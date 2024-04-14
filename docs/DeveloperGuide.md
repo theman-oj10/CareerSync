@@ -263,7 +263,7 @@ view of internships in CareerSync for easier access to the internships they are 
 a filter predicate to the list of internships in the `InternshipModel` to display only the internships that match the given
 keywords. Successive `find` commands will replace the existing filter predicate, and does not further filter the displayed internships.
 
-This method takes in a search mode, either 'withany' or 'withall', and the prefix-keyword pairs to search for.
+This method takes in a search mode, either `withany` or `withall`, and the prefix-keyword pairs to search for.
 The prefix here refers to the fields of the internship that the user wants to search for. 
 
 There can be multiple keywords per prefix, as well as multiple prefixes. Within each prefix, as long as any of the 
@@ -272,16 +272,16 @@ keywords match the field, the internship will be displayed.
 If the search mode is 'withall', at least one keyword in **all** prefixes must match the field for the internship to be displayed.
 If the search mode is 'withany', at least one keyword in **any** prefix must match the field for the internship to be displayed.
 
-Currently, the supported prefixes to search by are '/com', '/poc', '/loc', '/status', '/description', '/role', '/remark'.
+Currently, the supported prefixes to search by are `/com`, `/poc`, `/loc`, `/status`, `/description`, `/role`, `/remark`.
 Here is a step-by-step example of how the `find` command might be executed:
 
 1. The user inputs the `find` command, passing in the relevant arguments.<br>
 2. `InternshipDataParser` parses the command and creates a new `InternshipFindCommandParser` object.<br>
-3. The `InternshipFindCommandParser` then calls ArgumentTokenizer#tokenize to extract the search mode and the prefix-keyword pairs.<br>
+3. The `InternshipFindCommandParser` then calls `ArgumentTokenizer::tokenize` to extract the search mode and the prefix-keyword pairs.<br>
     If an unsupported prefix or invalid mode is given, or missing prefix or keyword to search by, a ParseException will be thrown.<br>
 4. The `InternshipFindCommandParser` then creates a new `InternshipContainsKeywordsPredicate` object based on the search mode and prefix-keyword pairs.<br>
 5. The `InternshipFindCommandParser` then creates a new `InternshipFindCommand` object with the `InternshipContainsKeywordsPredicate` object from above.<br>
-6. The `InternshipFindCommand`'s execute() method is called, which calls `InternshipModel::updateFilteredInternshipList` 
+6. The `InternshipFindCommand::execute` method is called, which calls `InternshipModel::updateFilteredInternshipList` 
    to update the filter predicate in the `InternshipModel` with the `InternshipContainsKeywordsPredicate` object, updating the internships displayed in the UI. <br>
 
 #### Design considerations:
