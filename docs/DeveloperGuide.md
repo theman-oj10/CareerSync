@@ -760,8 +760,8 @@ Use case ends.
 5.  System should be backward compatible with data produced by earlier versions of the system.
 6.  System is expected to be used by a single user on a machine, and does not need to support multiple users on the same machine.
 7.  System should launch within 2 seconds on any modern machine.
-
-*{More to be added}*
+8. Data should be stored in a local file in the user's machine.
+9. Data should be easily transferable between different machines.
 
 #### Glossary
 
