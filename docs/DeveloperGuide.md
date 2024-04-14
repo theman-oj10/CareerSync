@@ -19,27 +19,27 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+### **Acknowledgements**
 
 * CareerSync's logo was generated using [LogoAI](https://www.logoai.com/logo-maker) and recreated for free using [Canva](https://www.canva.com/)
 * GitHub [CoPilot](https://github.com/features/copilot) was used to assist the writing of the code in this project.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+### **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+### **Design**
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
-### Architecture
+#### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 c
@@ -79,7 +79,7 @@ For example, the `InternshipLogic` component defines its API in the `InternshipL
 
 The sections below give more details of each component.
 
-### UI component
+#### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -96,7 +96,7 @@ The `UI` component,
 * keeps a reference to the `InternshipLogic` component, because the `UI` relies on the `InternshipLogic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### InternshipLogic component
+#### InternshipLogic component
 
 **API** : [`InternshipLogic.java`](https://github.com/AY2324S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/InternshipLogic/InternshipLogic.java)
 
@@ -127,7 +127,7 @@ How the parsing works:
 * When called upon to parse a user command, the `InternshipDataParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `InternshipDataParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### InternshipModel component
+#### InternshipModel component
 **API** : [`InternshipModel.java`](https://github.com/AY2324S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/model/InternshipModel.java)
 
 <img src="images/InternshipModelClassDiagram.png" width="450" />
@@ -140,7 +140,7 @@ The `Model` component,
 * stores a `InternshipUserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyInternshipUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-### InternshipStorage component
+#### InternshipStorage component
 
 **API** : [`InternshipStorage.java`](https://github.com/AY2324S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/storage/InternshipStorage.java)
 
@@ -151,17 +151,17 @@ The `InternshipStorage` component,
 * inherits from both `InternshipDataStorage` and `InternshipUserPrefsStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `InternshipModel` component (because the `Storage` component's job is to save/retrieve objects that belong to the `InternshipModel`)
 
-### Common classes
+#### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+### **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+#### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
@@ -245,14 +245,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+#### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+### **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -262,9 +262,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+### **Appendix: Requirements**
 
-### Product scope
+#### Product scope
 
 **Target user profile**: People sourcing for internships (specifically, CS students)
 
@@ -282,7 +282,7 @@ Targeted to those with numerous applications to keep track of and prefer using C
 Your all-in-one solution for seamless application management.
 
 
-### User stories
+#### User stories
 
 Priorities: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not Useful) - `*`
 
@@ -297,7 +297,7 @@ Priorities: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not 
 
 *{More to be added}*
 
-### Use cases
+#### Use cases
 
 (For all use cases below, the **System** is `CareerSync` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -465,7 +465,7 @@ Priorities: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not 
 
 *{More to be added}*
 
-### Non-Functional Requirements
+#### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 100 internship entries without a noticeable sluggishness in performance for typical usage.
@@ -477,7 +477,7 @@ Priorities: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not 
 
 *{More to be added}*
 
-### Glossary
+#### Glossary
 
 * **API**: Application Programming Interface. The entirety of published methods, properties and other means for software developers to access an application through software they write using this application.
 * **GUI**: Graphical User Interface.  A graphical user interface uses graphical representations of commands, status feedbacks and data of an application, and offers methods to interact with it through graphical devices, such as a mouse or tablets.
@@ -489,7 +489,7 @@ Priorities: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+### **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -498,7 +498,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+#### Launch and shutdown
 
 1. Initial launch
 
@@ -515,7 +515,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+#### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
@@ -532,7 +532,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Saving data
+#### Saving data
 
 1. Dealing with missing/corrupted data files
 
