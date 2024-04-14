@@ -18,6 +18,7 @@ title: Developer Guide
     - [AddTask](#addtask-feature)
     - [SetDeadline](#setdeadline-feature)
     - [DeleteTask](#deletetask-feature)
+    - [Remark](#remark-feature)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Appendix: Requirements](#appendix-requirements)
 
@@ -249,7 +250,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-#### \[Proposed\] Data archiving
+### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
 
@@ -263,10 +264,10 @@ Here is a step-by-step example of how the `sort` command might be executed:
 
 1. User inputs the `sort /com asc` command.<br>
 2. `InternshipDataParser` parses the command and creates a new `InternshipSortCommandParser` object.<br>
-3. The `InternshipSortCommandParser` then calls ArgumentTokenizer#tokenize to extract the field and order of sorting.<br>
+3. The `InternshipSortCommandParser` then calls `ArgumentTokenizer::tokenize` to extract the field and order of sorting.<br>
    If the field or order is missing, a ParseException will be thrown.<br>
 4. The `InternshipSortCommandParser` then creates a new `InternshipSortCommand` object with the extracted details.<br>
-5. The `InternshipSortCommand`'s execute() method is called, checking if the field is valid and the order is valid.<br>
+5. The `InternshipSortCommand::execute` method is called, checking if the field is valid and the order is valid.<br>
    If the field is invalid, a CommandException will be thrown.<br>
 6. The relevant comparator is gotten using the `InternshipSortCommandParser::getComparator` method, and it is passed into the `InternshipModel::sortFilteredInternshipList` method.<br>
 7. The `InternshipModel::sortFilteredInternshipList` class sorts the list of internships based on the comparator and updates the `sortedInternshipList`. <br>
@@ -297,10 +298,10 @@ Here is a step-by-step example of how the `edit` command might be executed:
 
 1. The user inputs the `edit` command, passing in the relevant arguments.<br>
 2. `InternshipDataParser` parses the command and creates a new `InternshipEditCommandParser` object.<br>
-3. The `InternshipEditCommandParser` then calls ArgumentTokenizer#tokenize to extract the index and the fields to be edited.<br>
+3. The `InternshipEditCommandParser` then calls `ArgumentTokenizer::tokenize` to extract the index and the fields to be edited.<br>
 If there are no prefixes, no index, invalid index or duplicate prefixes, a ParseException will be thrown.<br>
 4. The `InternshipEditCommandParser` then creates a new `InternshipEditCommand` object with the extracted details.<br>
-5. The `InternshipEditCommand`'s execute() method is called, checking if the edited internship already exists with `Internship::isSameInternship` and `InternshipModel::hasInternship`.<br>
+5. The `InternshipEditCommand::execute` method is called, checking if the edited internship already exists with `Internship::isSameInternship` and `InternshipModel::hasInternship`.<br>
 A CommandException will be thrown in the event of duplicate internships.<br>
 6. The old internship object is replaced with the new internship object using `InternshipModel::setInternship` .<br>
 7. `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` is then called to update the internship displayed on the `UI`.<br>
@@ -331,11 +332,11 @@ Here is a step-by-step example of how the `addtask` command might be executed:
 
 1. The user inputs the `addtask` command.<br>
 2. The `InternshipDataParser` parses the command and creates a new `InternshipAddTaskParser` object.<br>
-3. The `InternshipAddTaskParser` then calls the ArgumentTokenizer#tokenize to extract the index and the task to be added.<br>
+3. The `InternshipAddTaskParser` then calls the `ArgumentTokenizer::tokenize` to extract the index and the task to be added.<br>
 If either the index or the task is either missing or invalid, a ParseException will be thrown.<br>
 4. The `InternshipAddTaskParser` then creates a new `InternshipAddTaskCommand` object with the extracted details.<br>
 If the index is larger than the number of internships displayed, a CommandException will be thrown.<br>
-5. The `InternshipAddTaskCommand`'s execute() method is called, creating a new `Task` object based on the details. It then adds the task to the `TaskList` field of the internship entry via `TaskList::addTask`.<br>
+5. The `InternshipAddTaskCommand::execute` method is called, creating a new `Task` object based on the details. It then adds the task to the `TaskList` field of the internship entry via `TaskList::addTask`.<br>
 6. The `InternshipAddTaskCommand` then calls `InternshipModel::setInternship` to replace the old internship with the new one with the task.<br>
 7. The `InternshipAddTaskCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.<br>
 
@@ -348,10 +349,10 @@ of the internship entry. The default deadline is `null`, and is displayed as a b
 Here is a step-by-step example of how the `setdeadline` command might be executed:
 
 1. The user inputs the `setdeadline` command.<br>
-2. The `InternshipSetDeadlineParser` then calls the `ArgumentTokenizer#tokenize` method to extract the internship index, task index and the deadline.<br>
+2. The `InternshipSetDeadlineParser` then calls the ``ArgumentTokenizer::tokenize`` method to extract the internship index, task index and the deadline.<br>
 If either the internship index, task index or the deadline is either missing or invalid, a ParseException will be thrown.<br>
 3. The `InternshipSetDeadlineParser` then creates an `InternshipSetDeadlineCommand` object with the extracted details.<br>
-4. The `InternshipSetDeadlineCommand`'s execute() method is called. The Internship is accessed via the given indexes, and the task with the corresponding task index has its deadline set via `setDeadline`.<br>
+4. The `InternshipSetDeadlineCommand::execute` method is called. The Internship is accessed via the given indexes, and the task with the corresponding task index has its deadline set via `setDeadline`.<br>
    If the internship index is larger than the number of internships displayed, a CommandException will be thrown.<br>
    If the task index is larger than the number of tasks in the `TaskList` field of the internship, a CommandException will be thrown.<br>
 5. The `InternshipSetDeadlineCommand` then calls `InternshipModel::setInternship` to trigger a UI update.<br>
@@ -385,11 +386,36 @@ Here is a step-by-step example of how the `deletetask` command might be executed
 2. The `InternshipDataParser` parses the command and creates a new `InternshipDeleteTaskCommandParser` object.
 If either the internship index or the task index is either missing or invalid, a ParseException will be thrown.
 3. The `InternshipDeleteTaskCommandParser` then creates a new `InternshipDeleteTaskCommand` object with the extracted details.
-4. The `InternshipDeleteTaskCommand`'s execute() method is called. The Internship is accessed via the given indexes, and the task with the corresponding task index is deleted.
+4. The `InternshipDeleteTaskCommand::execute` method is called. The Internship is accessed via the given indexes, and the task with the corresponding task index is deleted.
    If the internship index is larger than the number of internships displayed, a CommandException will be thrown.<br>
    If the task index is larger than the number of tasks in the `TaskList` field of the internship, a CommandException will be thrown.<br>
 5. The `InternshipDeleteTaskCommand` then calls `InternshipModel::setInternship` to trigger a UI update.<br>
 6. The `InternshipDeleteTaskCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.<br>
+
+### Remark Feature
+This feature enables users to add or modify remarks for each internship entry.
+All internships are initialised with a blank remark field. 
+The `addremark` command takes in the index of the internship and the remark to be added. A new internship object is created that contains the new remark, and the internship entry is updated with the new one.
+
+Here is a step-by-step example of how the `addremark` command might be executed:
+
+1. The user inputs the `addremark` command.
+2. The `InternshipDataParser` parses the command and creates a new `InternshipRemarkCommandParser` object.
+3. The `InternshipRemarkCommandParser` then calls `ArgumentTokenizer::tokenize` to extract the index and the remark to be added.
+   If either the internship index or the remark is missing, or duplicate prefixes are present, a ParseException will be thrown.
+4. The `InternshipRemarkCommandParser` then creates a new `InternshipRemarkCommand` object with the extracted details.
+5. The `InternshipRemarkCommand::execute` method is called. A new Internship object is created, with the remark field updated.
+6. The `InternshipRemarkCommand` then calls `InternshipModel::setInternship` to update the internship entry with the new one.
+7. The `InternshipRemarkCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.
+
+#### Design considerations
+#### Aspect: Deleting Remarks
+* **Alternative 1 (current choice):** Deleting remarks is done via addremark with a blank remark.
+    * Pros: Simpler implementation.
+    * Cons: Not as intuitive as having a `deleteremark` command
+* **Alternative 2:** Implement a `deleteremark` command.
+    * Pros: More intuitive for the user.
+    * Cons: More complex implementation and documentation needed.
 
 --------------------------------------------------------------------------------------------------------------------
 
