@@ -14,6 +14,10 @@ title: Developer Guide
     - [Common classes](#common-classes)
 4. [Implementation](#implementation)
     - [Sort](#sort-feature)
+    - [Edit](#edit-feature)
+    - [AddTask](#addtask-feature)
+    - [SetDeadline](#setdeadline-feature)
+    - [DeleteTask](#deletetask-feature)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Appendix: Requirements](#appendix-requirements)
 
@@ -250,23 +254,23 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 ### Sort feature
-
-### About this feature
 This feature allows users to sort the list of internships based on any one of the fields in ascending or descending order.
-#### Implementation
-The method takes in the field to sort by and the order of sorting as arguments. 
+The method takes in the field to sort by and the order of sorting as arguments.
 The method then uses a comparator to sort the list of internships based on the specified field and order.
 The sort feature is primarily implemented in the `InternshipModelManager` class.
 
-Here is a step-by-step example of how the tag command might be executed:
+Here is a step-by-step example of how the `sort` command might be executed:
 
-Step 1. User inputs the `sort /com asc` command.<br>
-Step 2. The command is parsed. The details can be found here.<br>
-Step 3. `InternshipDataParser`creates a `SortCommandParser` object and passes in the arguments (` /com asc`).<br>
-Step 4. The `SortCommandParser` object parses and validates the arguments using the `parse` method and creates a `SortCommand` object that now uses `FieldEnum` and `OrderEnum` instead of strings.<br>
-Step 5. The `InternshipLogicManager` receives the `SortCommand` object and calls the `Command::execute` method. This method finds the relevant comparator using `InternshipSortCommandParser::getComparator` method and feeds it into `Model::sortFilteredInternshipList` method.<br>
-Step 6. The `InternshipModelManager::sortFilteredInternshipList` class sorts the list of internships based on the comparator and updates the `sortedInternshipList`. <br>
-Step 7. Now when the `UI` component requests the list of internships via the `InternshipModelManager::getFilteredInternshipList` method, it gets the sorted list of internships.<br>
+1. User inputs the `sort /com asc` command.<br>
+2. `InternshipDataParser` parses the command and creates a new `InternshipSortCommandParser` object.<br>
+3. The `InternshipSortCommandParser` then calls ArgumentTokenizer#tokenize to extract the field and order of sorting.<br>
+   If the field or order is missing, a ParseException will be thrown.<br>
+4. The `InternshipSortCommandParser` then creates a new `InternshipSortCommand` object with the extracted details.<br>
+5. The `InternshipSortCommand`'s execute() method is called, checking if the field is valid and the order is valid.<br>
+   If the field is invalid, a CommandException will be thrown.<br>
+6. The relevant comparator is gotten using the `InternshipSortCommandParser::getComparator` method, and it is passed into the `InternshipModel::sortFilteredInternshipList` method.<br>
+7. The `InternshipModel::sortFilteredInternshipList` class sorts the list of internships based on the comparator and updates the `sortedInternshipList`. <br>
+8. Now when the `UI` component requests the list of internships via the `InternshipModel::getFilteredInternshipList` method, it gets the sorted list of internships.<br>
 
 #### Design considerations:
 * **Aspect: How the sorting is done:**
@@ -287,21 +291,20 @@ Step 7. Now when the `UI` component requests the list of internships via the `In
 ### Edit feature
 The `edit` feature allows users to modify the details of an existing internship entry. This method takes in the index of
 the internship, the fields to be edited and the value of the fields as arguments. This method then updates all the fields 
-given. All fields except for `TaskList` are modifiable. To modify `TaskList`, the commands `addTask` and `deleteTask` should be used.
+given. All fields except for `TaskList` are modifiable. To modify `TaskList`, the commands `addtask` and `deletetask` should be used.
 
 Here is a step-by-step example of how the `edit` command might be executed:
 
-Step 1. The user inputs the `edit` command.<br>
-Step 2. The `InternshipDataParser` parses the command and creates a new `InternshipEditCommandParser` object.<br>
-Step 3. The `InternshipEditCommandParser` then calls the ArgumentTokenizer#tokenize to extract the index and the fields to be edited.<br>
+1. The user inputs the `edit` command, passing in the relevant arguments.<br>
+2. `InternshipDataParser` parses the command and creates a new `InternshipEditCommandParser` object.<br>
+3. The `InternshipEditCommandParser` then calls ArgumentTokenizer#tokenize to extract the index and the fields to be edited.<br>
 If there are no prefixes, no index, invalid index or duplicate prefixes, a ParseException will be thrown.<br>
-Step 4. The `InternshipEditCommandParser` then creates a new `InternshipEditCommand` object with the extracted details.<br>
-If the index is larger than the number of internships displayed, a CommandException will be thrown.<br>
-Step 5. The `InternshipEditCommand` then checks if either none of the fields have changed using `Internship::isSameInternship`, or the resulting internship already exists using `InternshipModel::hasInternship`.<br>
-If either are true, a CommandException will be thrown.<br>
-Step 6. The old internship object is replaced with the new internship object using `InternshipModel::setInternship` .<br>
-Step 7. `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` is then called to update the internship displayed on the `UI`.<br>
-All internships will be shown on the `UI`. If a `find` command is used, all hidden internships will be shown.<br>
+4. The `InternshipEditCommandParser` then creates a new `InternshipEditCommand` object with the extracted details.<br>
+5. The `InternshipEditCommand`'s execute() method is called, checking if the edited internship already exists with `Internship::isSameInternship` and `InternshipModel::hasInternship`.<br>
+A CommandException will be thrown in the event of duplicate internships.<br>
+6. The old internship object is replaced with the new internship object using `InternshipModel::setInternship` .<br>
+7. `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` is then called to update the internship displayed on the `UI`.<br>
+All internships will be shown on the `UI`.
 
 #### Design Considerations
 In v1.2, the `edit` command initially allows users to edit all fields of an internship entry. In v1.3, with the addition of
@@ -324,7 +327,6 @@ of the internship entry.
 
 This method takes in the index of the internship, and the task to be added. It then adds the task to the internship with the index.
 
-
 Here is a step-by-step example of how the `addtask` command might be executed:
 
 1. The user inputs the `addtask` command.<br>
@@ -333,7 +335,7 @@ Here is a step-by-step example of how the `addtask` command might be executed:
 If either the index or the task is either missing or invalid, a ParseException will be thrown.<br>
 4. The `InternshipAddTaskParser` then creates a new `InternshipAddTaskCommand` object with the extracted details.<br>
 If the index is larger than the number of internships displayed, a CommandException will be thrown.<br>
-5. The `InternshipAddTaskCommand` creates a new `Task` object based on the details. It then adds the task to the `TaskList` field of the internship entry via `TaskList::addTask`.<br>
+5. The `InternshipAddTaskCommand`'s execute() method is called, creating a new `Task` object based on the details. It then adds the task to the `TaskList` field of the internship entry via `TaskList::addTask`.<br>
 6. The `InternshipAddTaskCommand` then calls `InternshipModel::setInternship` to replace the old internship with the new one with the task.<br>
 7. The `InternshipAddTaskCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.<br>
 
@@ -349,18 +351,16 @@ Here is a step-by-step example of how the `setdeadline` command might be execute
 2. The `InternshipSetDeadlineParser` then calls the `ArgumentTokenizer#tokenize` method to extract the internship index, task index and the deadline.<br>
 If either the internship index, task index or the deadline is either missing or invalid, a ParseException will be thrown.<br>
 3. The `InternshipSetDeadlineParser` then creates an `InternshipSetDeadlineCommand` object with the extracted details.<br>
-If the internship index is larger than the number of internships displayed, a CommandException will be thrown.<br>
-If the task index is larger than the number of tasks in the `TaskList` field of the internship, a CommandException will be thrown.<br>
-4. The `InternshipSetDeadlineCommand` creates a new `Task` object based on the details. It then calls `InternshipModel` to set the deadline of the task in the `TaskList` field of the internship entry via `setDeadline`.<br>
-5. The `InternshipSetDeadlineCommand` then calls `InternshipModel::setInternship` to replace the old internship with the new one with the deadline.<br>
+4. The `InternshipSetDeadlineCommand`'s execute() method is called. The Internship is accessed via the given indexes, and the task with the corresponding task index has its deadline set via `setDeadline`.<br>
+   If the internship index is larger than the number of internships displayed, a CommandException will be thrown.<br>
+   If the task index is larger than the number of tasks in the `TaskList` field of the internship, a CommandException will be thrown.<br>
+5. The `InternshipSetDeadlineCommand` then calls `InternshipModel::setInternship` to trigger a UI update.<br>
 6. The `InternshipSetDeadlineCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.<br>
 
 #### Design Considerations
 For the deadline field's default value, we can have it either be null, or a default date that should not be used by any
 regular user. We decided to have the default value be null, as we do not want to cause confusion for users who do not want
 to set a deadline.<br>
-We decide to choose `DD/MM/YYYY` as the date format for the deadline, as it is the most intuitive for users to understand.
-Other alternatives can be explored.<br>
 A proposed improvement to this feature is to have the `isValidDeadline` not just check if it is a valid Java date, but also
 check that it is a valid calendar date that is not in the past.<br>
 
@@ -377,24 +377,19 @@ check that it is a valid calendar date that is not in the past.<br>
 The `deletetask` command allows users to delete a `Task` from the `TaskList` field of an existing internship entry.
 To use this command, the user needs to specify both the internship index and the task index as displayed in the screen.
 The `deletetask` command selects the specified `Task` in the `TaskList` field of the internship entry and removes it from its
-`ArrayList<Task> TaskList` field which stores all the `Task` objects.
+`ArrayList<Task> TaskList` field which stores the `Task` objects.
 
-#### How it is implemented
-1. The `deletetask` command is parsed by the `InternshipDataParser`, which creates an `InternshipDeleteTaskParser` object.
-2. The `InternshipDeleteTaskParser` then calls the `ArgumentTokenizer#tokenize` method to extract the internship index and task index.
-3. The `InternshipDeleteTaskParser` then creates an `InternshipDeleteTaskCommand` object with the extracted details.
-4. The `InternshipDeleteTaskCommand` creates a new `Task` object based on the details. It then calls `InternshipModel` to delete the task from the `TaskList` field of the internship entry via `deleteTask`.
-5. The `InternshipDeleteTaskCommand` then calls `setInternship` to replace the old internship with the new one without the task via `setInternship`.
-6. The `InternshipDeleteTaskCommand` then calls `updateFilteredInternshipList` to update the internship displayed on the UI.
-7. The `InternshipDeleteTaskCommand` then returns a `CommandResult` object with a message containing the task deleted.
+Here is a step-by-step example of how the `deletetask` command might be executed:
 
-#### Parsing user input
 1. The user inputs the `deletetask` command.
-2. The `InternshipDataParser` parses the command and creates a new `InternshipDeleteTaskParser` object.
+2. The `InternshipDataParser` parses the command and creates a new `InternshipDeleteTaskCommandParser` object.
 If either the internship index or the task index is either missing or invalid, a ParseException will be thrown.
-3. The `InternshipDeleteTaskParser` then creates a new `InternshipDeleteTaskCommand` object with the extracted details.
-If the internship index is larger than the number of internships displayed, a CommandException will be thrown.
-If the task index is larger than the number of tasks in the `TaskList` field of the internship, a CommandException will be thrown.
+3. The `InternshipDeleteTaskCommandParser` then creates a new `InternshipDeleteTaskCommand` object with the extracted details.
+4. The `InternshipDeleteTaskCommand`'s execute() method is called. The Internship is accessed via the given indexes, and the task with the corresponding task index is deleted.
+   If the internship index is larger than the number of internships displayed, a CommandException will be thrown.<br>
+   If the task index is larger than the number of tasks in the `TaskList` field of the internship, a CommandException will be thrown.<br>
+5. The `InternshipDeleteTaskCommand` then calls `InternshipModel::setInternship` to trigger a UI update.<br>
+6. The `InternshipDeleteTaskCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
