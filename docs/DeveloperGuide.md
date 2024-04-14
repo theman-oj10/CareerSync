@@ -422,21 +422,37 @@ Enter details rapidly using CLI, and avoid losing track of crucial information.
 Targeted to those with numerous applications to keep track of and prefer using CLI.
 Your all-in-one solution for seamless application management.
 
-
 #### User stories
 
-Priorities: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not Useful) - `*`
+**Priorities**: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not Useful) - `*`
 
-| Priority | As a/an …​      | I want to …​                                     | So that I can…​                                               |
-|----------|-----------------|--------------------------------------------------|---------------------------------------------------------------|
-| `* * *`  | impatient user  | Enter internship information from the main page  | Quickly note down potential internships at a career fair      |
-| `* * *`  | savvy user      | Access all commands via a text-based input       | Add, delete, and modify entries without using my mouse        |
-| `* * *`  | beginner user   | Access sample data in the app                    | Play around with the features to get the hang of them         |
-| `* * *`  | up-to-date user | Modify internship details                        | Keep myself updated on changing details                       |
-| `* * *`  | regular user    | View all internship details                      | Easily view all details in one screen.                        |
-| `* * *`  | detailed user   | Add information to the notes section of an entry | Customise to see internships that fall under specific fields. |
+| Priority | As a/an...     | I can...                                                                                  | So that...                                                                                                                                  |
+|--------|----------------|-------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| `***`  | user           | modify internship details                                                                 | I can keep myself updated on changing details.                                                                                              |
+| `***`  | user           | enter internship information from the main page                                           | I can quickly note down potential internships at a career fair.                                                                             |
+| `**`    | new user       | access sample data in the app                                                             | I can play around with the features to get the hang of them.                                                                                |
+| `***`   | user           | view all internship details                                                               | I can easily view all details in one screen.                                                                                                |
+| `***`   | user           | update the status of an internship application                                            | I can easily see my general status of all my applications.                                                                                  |
+| `***`   | user           | add information about the internship application                                          | I can customize to see internships that fall under specific fields.                                                                         |
+| `**`    | efficient user | filter by company                                                                         | I can view all the internships from the same company and understand how a company hires.                                                    |
+| `**`    | efficient user | filter by point of contact                                                                | I can view all the internships that are associated to the same person of contact.                                                           |
+| `**`    | efficient user | filter by location                                                                        | I can view all the internships that have the same working mode or location.                                                                 |
+| `**`    | efficient user | filter by application status                                                              | I can view all the internships that are pending.                                                                                            |
+| `**`    | user           | see the tasks of my applications                                                          | I know what tasks do I have for my internship applications.                                                                                 |
+| `**`    | user           | add tasks to my internship entries                                                        | I can create tasks for my internship applications.                                                                                          |
+| `**`    | user           | set deadlines for each task                                                               | I won't miss deadlines and get tasks done on time.                                                                                          |
+| `**`    | user           | delete tasks from my internship entries                                                   | I know what tasks do I have for my internship applications.                                                                                 |
+| `**`    | efficient user | sort applications in the order of remark                                                  | I can view the applications that I have added a remark to first.                                                                            |
+| `**`    | efficient user | sort applications in order of working mode or location                                    | I can view the internships in the order of what I have working mode/location information about, i.e unkowns will be pushed down to the end. |
+| `**`    | efficient user | sort applications in order of roles                                                       | I can view the internships in the order of what I have role information about, i.e empty roles will be pushed down to the end.              |
+| `**`    | efficient user | sort applications in the order of what I need to attend to first                          | I can see the applications that need to be applied followed by those pending/ongoing followed by accepted and rejected.                     |
+| `**`    | new user       | view all the commands and their details                                                   | I can learn to use the app faster.                                                                                                          |
+| `**`    | user           | have different status with their own colours                                              | it is visually easier to identify applications with different status.                                                                       |
+| `**`   | user           | have a detailed view for an internship                                                    | I can see all the details for the internship I want to focus on.                                                                            |
+| `**`   | user           | find internships that satisfy multiple fields at once                                     | I can filter and view the internships of interest.                                                                                          |
+| `**`   | user           | find internships that contain any of the several given strings in their respective fields | I can search for specific internships which have certain keywords.                                                                          |
+| `**`   | user           | find internships that contain all of the given strings in their respective fields         | I can search for specific internships which have certain keywords.                                                                          |
 
-*{More to be added}*
 
 #### Use cases
 
