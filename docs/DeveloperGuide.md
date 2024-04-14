@@ -174,16 +174,16 @@ This report outlines the technical details of the implementation, including the 
 ### Implementation Details (How Is It Implemented):
 
 **Field Conversion:** <br>
-Fields such as location and role have been converted to optional types (where default values have been set should the user not input any values for them).
+Fields such as location and role have been converted to optional types (where default values have been set should the user not input any values for them). <br>
 This provides flexibility in representing internship data.
 
 **Constructor Modification:** <br>
-The constructor for the Internship class consists of 2 optional fields (`role` and `location`), ensuring compatibility with the new optional field structure.
+The constructor for the Internship class consists of 2 optional fields (`role` and `location`), ensuring compatibility with the new optional field structure. <br>
 The add command parser sets default values for the 2 aforementioned optional fields, should the user not input any values.
 
 **Equality Comparison:** <br>
-The equals() and isSameInternship() methods account for optional fields differently based on the scenario:
-1. If two internships have identical /company, /poc, /desc fields and have the same /role and /loc, they will be considered as identical internships.
+The isSameInternship() method checks for the equality of internships.
+
 
 **String Representation:** <br>
 The toString() method will include location and role if it exists in the string representation of an internship.
