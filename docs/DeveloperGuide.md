@@ -14,6 +14,7 @@ title: Developer Guide
     - [Common classes](#common-classes)
 4. [Implementation](#implementation)
     - [Sort](#sort-feature)
+   -  [Optional Fields](#optional-fields)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Appendix: Requirements](#appendix-requirements)
 7  [Appendix: Design Decisions](#appendix-design-decisions)
@@ -162,10 +163,12 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Implemented] Optional Fields
+## Optional Fields
 
 The transformation of certain fields in the Internship class to optional types is a crucial step in enhancing the flexibility and robustness of the internship application.
 This report outlines the technical details of the implementation, including the different states, usage scenarios, design considerations, alternatives, and their implications.
+
+<img src="images/OptionalFeatures.png" width="280" />
 
 #### Implementation Details (How Is It Implemented):
 
@@ -361,169 +364,208 @@ Priorities: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not 
 
 (For all use cases below, the **System** is `CareerSync` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Enter Internship Information From The Main Page**
+**Use Case: Enter Internship Entry From Main Window**
 
 **MSS**
-
-1. User accesses the main page. 
-2. User selects the option to enter internship information. 
-3. System prompts the user to input internship details such as company name, role title, description, etc. 
-4. User inputs the required internship details. 
-5. System validates the input data. 
-6. System saves the internship information. 
+1. User accesses the main page.
+2. User selects the option to add a new internship.
+3. System prompts the user to input internship details such as title, company, start/end dates, etc.
+4. User inputs valid internship details.
+5. System validates the input data.
+6. System saves the internship information.
 7. System displays a confirmation message indicating successful submission.
 
-    Use case ends.
+Use case ends.
 
-**Extensions**
+**Extensions** <br>
+1a. User is unable to access the main page. <br>
+1a1. System displays an error message. <br>
+5a. User inputs invalid internship details. <br>
+5a1. System displays an error message indicating the specific validation error(s). <br>
+6a. System fails to save the internship information. <br>
+6a1. System displays an error message and prompts the user to retry or cancel the submission.
 
-* 1a. User is unable to access the main page.
-    *1a1. System displays an error message.
-* 2a. User cancels entering internship information.
-  * 2a1. System cancels the entry process and returns the user to the main page.
-* 5a. User inputs invalid internship details.
-  * 5a1. System displays an error message indicating the specific validation error(s).
-* 6a. System fails to save the internship information.
-  * 6a1. System displays an error message and prompts the user to retry or cancel the submission.
+Use case ends.
 
-    Use case ends.
-
-**Use case: Access All Commands Via A Text-Based Input**
+**Use Case: Edit Internship Entry From Main Window**
 
 **MSS**
-
-1. User accesses the main page. 
-2. System displays a prompt for text-based input. 
-3. User enters a command using text-based input. 
-4. System recognizes and processes the entered command. 
-5. System executes the requested action corresponding to the entered command. 
-6. User receives feedback or output based on the executed command.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. User is unable to access the main page.
-  * 1a1. System displays an error message.
-* 3a. User enters an invalid command.
-  * 3a1. System displays an error message indicating that the command is not recognized.
-* 4a. System fails to recognize or process the entered command.
-  * 4a1. System displays an error message and prompts the user to retry or enter a different command.
-* 5a. System encounters an error while executing the requested action.
-  * 5a1. System displays an error message and prompts the user to retry or perform a different action.
-
-    Use case ends.
-
-**Use case: Access Sample Data In The App**
-
-**MSS**
-
-1. User accesses the main page. 
-2. User selects the option to access sample data. 
-3. System retrieves and displays sample internship data. 
-4. User views the sample internship data presented by the system.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. User is unable to access the main page.
-  * 1a1. System displays an error message.
-* 2a. User cancels accessing sample data.
-  * 2a1. System cancels the process and returns the user to the main page.
-* 3a. System fails to retrieve sample data.
-  * 3a1. System displays an error message and prompts the user to retry or exit.
-* 4a. User encounters issues while viewing the sample data.
-  * 4a1. System displays an error message and prompts the user to retry or exit.
-
-    Use case ends.
-
-**Use case: Modify Internship Details**
-
-**MSS**
-
-1. User accesses the main page. 
-2. User selects the option to view all internship details. 
-3. System retrieves and displays a list of all entered internship details. 
-4. User selects the internship entry to be modified. 
-5. System presents the selected internship details for editing. 
-6. User modifies the necessary internship details. 
-7. System validates the modified data.
-8. System saves the updated internship information. 
-9. System displays a confirmation message indicating successful modification.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. User is unable to access the main page.
-  * 1a1. System displays an error message.
-* 2a. User cancels viewing all internship details.
-  * 2a1. System cancels the process and returns the user to the main page.
-* 4a. User cancels selecting the internship entry to be modified.
-  * 4a1. System cancels the modification process and returns the user to the list of internship details.
-* 6a. User inputs invalid internship details.
-  * 6a1. System displays an error message indicating the specific validation error(s).
-* 7a. System fails to validate the modified data.
-  * 7a1. System displays an error message and prompts the user to correct the data.
-* 8a. System fails to save the updated internship information.
-  * 8a1. System displays an error message and prompts the user to retry or exit.
-
-    Use case ends.
-
-**Use case: View All Internship Details**
-
-**MSS**
-
-1. User accesses the main page. 
-2. User selects the option to view all internship details. 
-3. System retrieves and displays a list of all entered internship details. 
-4. User views the list of internship details presented by the system.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. User is unable to access the main page.
-  * 1a1. System displays an error message.
-* 2a. User cancels viewing all internship details.
-  * 2a1. System cancels the process and returns the user to the main page.
-* 3a. System fails to retrieve all internship details.
-  * 3a1. System displays an error message and prompts the user to retry or exit.
-
-    Use case ends.
-
-**Use case: Add Information To The Notes Section Of An Entry**
-
-**MSS**
-
-1. User accesses the main page. 
+1. User accesses the main page.
 2. User selects the option to view all internship details.
 3. System retrieves and displays a list of all entered internship details.
-4. User selects the internship entry to which notes will be added.
-5. System presents the selected internship details along with the current notes section.
-6. User enters additional information in the notes section.
-7. System saves the updated notes.
-8. System displays a confirmation message indicating successful addition of notes.
+4. User selects the internship entry to be modified.
+5. System presents the selected internship details for editing.
+6. User modifies the necessary internship details.
+7. System validates the modified data.
+8. System saves the updated internship information.
+9. System displays a confirmation message indicating successful modification.
 
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 1a. User is unable to access the main page.
-  * 1a1. System displays an error message.
-* 2a. User cancels viewing all internship details.
-  * 2a1. System cancels the process and returns the user to the main page.
-* 4a. User cancels selecting the internship entry to add notes.
-  * 4a1. System cancels the process and returns the user to the list of internship details.
-* 6a. User encounters an error while adding notes.
-  * 6a1. System displays an error message and prompts the user to retry or exit.
-* 7a. System fails to save the updated notes.
-  * 7a1. System displays an error message and prompts the user to retry or exit.
+1a. User is unable to access the main page. <br>
+1a1. System displays an error message. <br>
+4a. User cancels selecting the internship entry to be modified. <br>
+4a1. System cancels the modification process and returns the user to the list of internship details. <br>
+6a. User inputs invalid internship details. <br>
+6a1. System displays an error message indicating the specific validation error(s). <br>
+7a. System fails to validate the modified data. <br>
+7a1. System displays an error message and prompts the user to correct the data. <br>
+8a. System fails to save the updated internship information. <br>
+8a1. System displays an error message and prompts the user to retry or exit.
 
-    Use case ends.
+Use case ends.
 
-*{More to be added}*
+**Use Case: Delete Internship Entry From Main Window**
+
+**MSS**
+1. User accesses the main page.
+2. User selects the option to view all internship details.
+3. System retrieves and displays a list of all entered internship details.
+4. User selects the internship entry to be deleted.
+5. System prompts the user to confirm the deletion.
+6. User confirms the deletion action.
+7. System removes the internship entry.
+8. System displays a confirmation message indicating successful deletion.
+
+Use case ends.
+
+**Extensions**
+
+1a. User is unable to access the main page. <br>
+1a1. System displays an error message. <br>
+4a. User cancels selecting the internship entry to be deleted. <br>
+4a1. System cancels the deletion process and returns the user to the list of internship details. <br>
+6a. User cancels the deletion confirmation. <br>
+6a1. System cancels the deletion process and returns the user to the list of internship details. <br>
+
+Use case ends.
+
+**Use Case: Sort Internship Entries From Main Window**
+
+**MSS**
+1. User accesses the main page.
+2. User selects the option to view all internship details.
+3. System retrieves and displays a list of all entered internship details.
+4. User selects the sorting option for internships.
+5. System sorts the internship entries based on the selected criteria.
+6. User verifies the sorted order of internship entries.
+
+Use case ends.
+
+**Extensions**
+
+1a. User is unable to access the main page. <br>
+1a1. System displays an error message. <br>
+3a. System fails to retrieve all internship details. <br>
+3a1. System displays an error message and prompts the user to retry or exit. <br>
+
+Use case ends.
+
+**Use Case: Find Internship Entries From Main Window**
+
+**MSS**
+1. User accesses the main page.
+2. User enters a search query for a specific internship title or company.
+3. User submits the search query.
+4. System retrieves and displays internship entries matching the search query.
+
+Use case ends.
+
+**Extensions**
+
+1a. User is unable to access the main page. <br>
+1a1. System displays an error message. <br>
+4a. No matching internship entries found. <br>
+4a1. System displays a message indicating no matching results found. <br>
+
+Use case ends.
+
+**Use Case: Add Internship Task From Main Window**
+
+**MSS**
+1. User accesses the main page.
+2. User selects the internship entry to which a task will be added.
+3. User selects the option to add a task.
+4. User inputs valid task details.
+5. User submits the form.
+6. System saves the task information.
+7. System displays a confirmation message indicating successful addition of the task.
+
+Use case ends.
+
+**Extensions**
+
+1a. User is unable to access the main page. <br>
+1a1. System displays an error message. <br>
+5a. User inputs invalid task details. <br>
+5a1. System displays an error message indicating the specific validation error(s). <br>
+6a. System fails to save the task information. <br>
+6a1. System displays an error message and prompts the user to retry or cancel the submission. <br>
+
+Use case ends.
+
+**Use Case: Delete Internship Task From Main Window**
+
+**MSS**
+1. User accesses the main page.
+2. User selects the internship entry containing the task to be deleted.
+3. User selects the option to delete a task.
+4. User confirms the deletion action.
+5. System removes the task from the internship entry.
+6. System displays a confirmation message indicating successful deletion of the task.
+
+Use case ends.
+
+**Extensions**
+
+1a. User is unable to access the main page. <br>
+1a1. System displays an error message. <br>
+4a. User cancels the task deletion confirmation. <br>
+4a1. System cancels the deletion process and returns the user to the internship details page. <br>
+
+Use case ends.
+
+**Use Case: Set Deadline For Internship Task From Main Window**
+
+**MSS**
+1. User accesses the main page.
+2. User selects the internship entry containing the task for which a deadline will be set.
+3. User selects the option to set a deadline for the task.
+4. User inputs a valid deadline date.
+5. User submits the form.
+6. System saves the deadline information for the task.
+7. System displays a confirmation message indicating successful setting of the deadline.
+
+Use case ends.
+
+**Extensions**
+
+1a. User is unable to access the main page. <br>
+1a1. System displays an error message. <br>
+4a. User inputs an invalid deadline date. <br>
+4a1. System displays an error message indicating an invalid deadline date. <br>
+6a. System fails to save the deadline information. <br>
+6a1. System displays an error message and prompts the user to retry or cancel the submission. <br>
+
+Use case ends.
+
+**Use Case: Open Detailed Internship View From Main Window**
+
+**MSS**
+1. User accesses the main page.
+2. User selects the internship entry for which the detailed view will be opened.
+3. System displays a detailed view of the selected internship entry.
+
+Use case ends.
+
+**Extensions**
+
+1a. User is unable to access the main page. <br>
+1a1. System displays an error message.
+
+Use case ends.
 
 ### Non-Functional Requirements
 
