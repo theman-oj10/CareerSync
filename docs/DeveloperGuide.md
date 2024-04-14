@@ -21,6 +21,7 @@ title: Developer Guide
     - [Add Task](#add-task-feature)
     - [Set Deadline](#set-deadline-feature)
     - [Delete Task](#delete-task-feature)
+    - [Remark](#remark-feature)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Appendix: Requirements](#appendix-requirements)
 
@@ -252,7 +253,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-#### \[Proposed\] Data archiving
+### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
 
@@ -302,10 +303,10 @@ Here is a step-by-step example of how the `sort` command might be executed:
 
 1. User inputs the `sort /com asc` command.<br>
 2. `InternshipDataParser` parses the command and creates a new `InternshipSortCommandParser` object.<br>
-3. The `InternshipSortCommandParser` then calls ArgumentTokenizer#tokenize to extract the field and order of sorting.<br>
+3. The `InternshipSortCommandParser` then calls `ArgumentTokenizer::tokenize` to extract the field and order of sorting.<br>
    If the field or order is missing, a ParseException will be thrown.<br>
 4. The `InternshipSortCommandParser` then creates a new `InternshipSortCommand` object with the extracted details.<br>
-5. The `InternshipSortCommand`'s execute() method is called, checking if the field is valid and the order is valid.<br>
+5. The `InternshipSortCommand::execute` method is called, checking if the field is valid and the order is valid.<br>
    If the field is invalid, a CommandException will be thrown.<br>
 6. The relevant comparator is gotten using the `InternshipSortCommandParser::getComparator` method, and it is passed into the `InternshipModel::sortFilteredInternshipList` method.<br>
 7. The `InternshipModel::sortFilteredInternshipList` class sorts the list of internships based on the comparator and updates the `sortedInternshipList`. <br>
@@ -336,10 +337,10 @@ Here is a step-by-step example of how the `edit` command might be executed:
 
 1. The user inputs the `edit` command, passing in the relevant arguments.<br>
 2. `InternshipDataParser` parses the command and creates a new `InternshipEditCommandParser` object.<br>
-3. The `InternshipEditCommandParser` then calls ArgumentTokenizer#tokenize to extract the index and the fields to be edited.<br>
+3. The `InternshipEditCommandParser` then calls `ArgumentTokenizer::tokenize` to extract the index and the fields to be edited.<br>
 If there are no prefixes, no index, invalid index or duplicate prefixes, a ParseException will be thrown.<br>
 4. The `InternshipEditCommandParser` then creates a new `InternshipEditCommand` object with the extracted details.<br>
-5. The `InternshipEditCommand`'s execute() method is called, checking if the edited internship already exists with `Internship::isSameInternship` and `InternshipModel::hasInternship`.<br>
+5. The `InternshipEditCommand::execute` method is called, checking if the edited internship already exists with `Internship::isSameInternship` and `InternshipModel::hasInternship`.<br>
 A CommandException will be thrown in the event of duplicate internships.<br>
 6. The old internship object is replaced with the new internship object using `InternshipModel::setInternship` .<br>
 7. `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` is then called to update the internship displayed on the `UI`.<br>
@@ -370,11 +371,11 @@ Here is a step-by-step example of how the `addtask` command might be executed:
 
 1. The user inputs the `addtask` command.<br>
 2. The `InternshipDataParser` parses the command and creates a new `InternshipAddTaskParser` object.<br>
-3. The `InternshipAddTaskParser` then calls the ArgumentTokenizer#tokenize to extract the index and the task to be added.<br>
+3. The `InternshipAddTaskParser` then calls the `ArgumentTokenizer::tokenize` to extract the index and the task to be added.<br>
 If either the index or the task is either missing or invalid, a ParseException will be thrown.<br>
 4. The `InternshipAddTaskParser` then creates a new `InternshipAddTaskCommand` object with the extracted details.<br>
 If the index is larger than the number of internships displayed, a CommandException will be thrown.<br>
-5. The `InternshipAddTaskCommand`'s execute() method is called, creating a new `Task` object based on the details. It then adds the task to the `TaskList` field of the internship entry via `TaskList::addTask`.<br>
+5. The `InternshipAddTaskCommand::execute` method is called, creating a new `Task` object based on the details. It then adds the task to the `TaskList` field of the internship entry via `TaskList::addTask`.<br>
 6. The `InternshipAddTaskCommand` then calls `InternshipModel::setInternship` to replace the old internship with the new one with the task.<br>
 7. The `InternshipAddTaskCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.<br>
 
@@ -387,10 +388,10 @@ of the internship entry. The default deadline is `null`, and is displayed as a b
 Here is a step-by-step example of how the `setdeadline` command might be executed:
 
 1. The user inputs the `setdeadline` command.<br>
-2. The `InternshipSetDeadlineParser` then calls the `ArgumentTokenizer#tokenize` method to extract the internship index, task index and the deadline.<br>
+2. The `InternshipSetDeadlineParser` then calls the ``ArgumentTokenizer::tokenize`` method to extract the internship index, task index and the deadline.<br>
 If either the internship index, task index or the deadline is either missing or invalid, a ParseException will be thrown.<br>
 3. The `InternshipSetDeadlineParser` then creates an `InternshipSetDeadlineCommand` object with the extracted details.<br>
-4. The `InternshipSetDeadlineCommand`'s execute() method is called. The Internship is accessed via the given indexes, and the task with the corresponding task index has its deadline set via `setDeadline`.<br>
+4. The `InternshipSetDeadlineCommand::execute` method is called. The Internship is accessed via the given indexes, and the task with the corresponding task index has its deadline set via `setDeadline`.<br>
    If the internship index is larger than the number of internships displayed, a CommandException will be thrown.<br>
    If the task index is larger than the number of tasks in the `TaskList` field of the internship, a CommandException will be thrown.<br>
 5. The `InternshipSetDeadlineCommand` then calls `InternshipModel::setInternship` to trigger a UI update.<br>
@@ -424,11 +425,36 @@ Here is a step-by-step example of how the `deletetask` command might be executed
 2. The `InternshipDataParser` parses the command and creates a new `InternshipDeleteTaskCommandParser` object.
 If either the internship index or the task index is either missing or invalid, a ParseException will be thrown.
 3. The `InternshipDeleteTaskCommandParser` then creates a new `InternshipDeleteTaskCommand` object with the extracted details.
-4. The `InternshipDeleteTaskCommand`'s execute() method is called. The Internship is accessed via the given indexes, and the task with the corresponding task index is deleted.
+4. The `InternshipDeleteTaskCommand::execute` method is called. The Internship is accessed via the given indexes, and the task with the corresponding task index is deleted.
    If the internship index is larger than the number of internships displayed, a CommandException will be thrown.<br>
    If the task index is larger than the number of tasks in the `TaskList` field of the internship, a CommandException will be thrown.<br>
 5. The `InternshipDeleteTaskCommand` then calls `InternshipModel::setInternship` to trigger a UI update.<br>
 6. The `InternshipDeleteTaskCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.<br>
+
+### Remark Feature
+This feature enables users to add or modify remarks for each internship entry.
+All internships are initialised with a blank remark field. 
+The `addremark` command takes in the index of the internship and the remark to be added. A new internship object is created that contains the new remark, and the internship entry is updated with the new one.
+
+Here is a step-by-step example of how the `addremark` command might be executed:
+
+1. The user inputs the `addremark` command.
+2. The `InternshipDataParser` parses the command and creates a new `InternshipRemarkCommandParser` object.
+3. The `InternshipRemarkCommandParser` then calls `ArgumentTokenizer::tokenize` to extract the index and the remark to be added.
+   If either the internship index or the remark is missing, or duplicate prefixes are present, a ParseException will be thrown.
+4. The `InternshipRemarkCommandParser` then creates a new `InternshipRemarkCommand` object with the extracted details.
+5. The `InternshipRemarkCommand::execute` method is called. A new Internship object is created, with the remark field updated.
+6. The `InternshipRemarkCommand` then calls `InternshipModel::setInternship` to update the internship entry with the new one.
+7. The `InternshipRemarkCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.
+
+#### Design considerations
+#### Aspect: Deleting Remarks
+* **Alternative 1 (current choice):** Deleting remarks is done via addremark with a blank remark.
+    * Pros: Simpler implementation.
+    * Cons: Not as intuitive as having a `deleteremark` command
+* **Alternative 2:** Implement a `deleteremark` command.
+    * Pros: More intuitive for the user.
+    * Cons: More complex implementation and documentation needed.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -461,21 +487,37 @@ Enter details rapidly using CLI, and avoid losing track of crucial information.
 Targeted to those with numerous applications to keep track of and prefer using CLI.
 Your all-in-one solution for seamless application management.
 
-
 #### User stories
 
-Priorities: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not Useful) - `*`
+**Priorities**: High (Must-Have) - `* * *`, Medium (Nice-To-Have) - `* *`, Low (Not Useful) - `*`
 
-| Priority | As a/an …​      | I want to …​                                     | So that I can…​                                               |
-|----------|-----------------|--------------------------------------------------|---------------------------------------------------------------|
-| `* * *`  | impatient user  | Enter internship information from the main page  | Quickly note down potential internships at a career fair      |
-| `* * *`  | savvy user      | Access all commands via a text-based input       | Add, delete, and modify entries without using my mouse        |
-| `* * *`  | beginner user   | Access sample data in the app                    | Play around with the features to get the hang of them         |
-| `* * *`  | up-to-date user | Modify internship details                        | Keep myself updated on changing details                       |
-| `* * *`  | regular user    | View all internship details                      | Easily view all details in one screen.                        |
-| `* * *`  | detailed user   | Add information to the notes section of an entry | Customise to see internships that fall under specific fields. |
+| Priority | As a/an...     | I can...                                                                                  | So that...                                                                                                                                  |
+|--------|----------------|-------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| `***`  | user           | modify internship details                                                                 | I can keep myself updated on changing details.                                                                                              |
+| `***`  | user           | enter internship information from the main page                                           | I can quickly note down potential internships at a career fair.                                                                             |
+| `**`    | new user       | access sample data in the app                                                             | I can play around with the features to get the hang of them.                                                                                |
+| `***`   | user           | view all internship details                                                               | I can easily view all details in one screen.                                                                                                |
+| `***`   | user           | update the status of an internship application                                            | I can easily see my general status of all my applications.                                                                                  |
+| `***`   | user           | add information about the internship application                                          | I can customize to see internships that fall under specific fields.                                                                         |
+| `**`    | efficient user | filter by company                                                                         | I can view all the internships from the same company and understand how a company hires.                                                    |
+| `**`    | efficient user | filter by point of contact                                                                | I can view all the internships that are associated to the same person of contact.                                                           |
+| `**`    | efficient user | filter by location                                                                        | I can view all the internships that have the same working mode or location.                                                                 |
+| `**`    | efficient user | filter by application status                                                              | I can view all the internships that are pending.                                                                                            |
+| `**`    | user           | see the tasks of my applications                                                          | I know what tasks do I have for my internship applications.                                                                                 |
+| `**`    | user           | add tasks to my internship entries                                                        | I can create tasks for my internship applications.                                                                                          |
+| `**`    | user           | set deadlines for each task                                                               | I won't miss deadlines and get tasks done on time.                                                                                          |
+| `**`    | user           | delete tasks from my internship entries                                                   | I know what tasks do I have for my internship applications.                                                                                 |
+| `**`    | efficient user | sort applications in the order of remark                                                  | I can view the applications that I have added a remark to first.                                                                            |
+| `**`    | efficient user | sort applications in order of working mode or location                                    | I can view the internships in the order of what I have working mode/location information about, i.e unkowns will be pushed down to the end. |
+| `**`    | efficient user | sort applications in order of roles                                                       | I can view the internships in the order of what I have role information about, i.e empty roles will be pushed down to the end.              |
+| `**`    | efficient user | sort applications in the order of what I need to attend to first                          | I can see the applications that need to be applied followed by those pending/ongoing followed by accepted and rejected.                     |
+| `**`    | new user       | view all the commands and their details                                                   | I can learn to use the app faster.                                                                                                          |
+| `**`    | user           | have different status with their own colours                                              | it is visually easier to identify applications with different status.                                                                       |
+| `**`   | user           | have a detailed view for an internship                                                    | I can see all the details for the internship I want to focus on.                                                                            |
+| `**`   | user           | find internships that satisfy multiple fields at once                                     | I can filter and view the internships of interest.                                                                                          |
+| `**`   | user           | find internships that contain any of the several given strings in their respective fields | I can search for specific internships which have certain keywords.                                                                          |
+| `**`   | user           | find internships that contain all of the given strings in their respective fields         | I can search for specific internships which have certain keywords.                                                                          |
 
-*{More to be added}*
 
 #### Use cases
 
@@ -739,13 +781,44 @@ Make sure to use the `exit` command or the close button to save data while closi
 2. Add another internship entry using the following command: `add /com Amazon /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 9089030 /loc remote /role Business Development Intern`
 
     1. Test case: `sort /status desc`<br>
-      Expected: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
-   
-   2. Test case: `sort /status asc` <br>
-      Expected: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
-      ![Sort by status asc](./images/manual-testing/sort-by-status.png)<br>
-   
-   3. Test case: `sort /com asc`<br>
-      Expected: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
-      ![Sort by com asc](./images/manual-testing/status-sort-sort-by-com.png)<br>
-   
+       Expected: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
+
+    2. Test case: `sort /status asc` <br>
+       Expected: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
+       ![Sort by status asc](./images/manual-testing/sort-by-status.png)<br>
+
+    3. Test case: `sort /com asc`<br>
+       Expected: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
+       ![Sort by com asc](./images/manual-testing/status-sort-sort-by-com.png)<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+Note that to try out the below example commands you will need to reset the data to sample data. This can be done by deleting the `data` folder in the project directory and restarting the application.
+1. **Case insensitivity for all commands and fields:** Currently, CareerSync strictly only allow lower case commands and prefixes. Case insensitivity will enhance user experience as CLI users can input commands faster and with fewer syntax errors.
+2. **Return to default chronological sort** Currently, there is no way to return to the default chronological order (sorted by time of addition) after using the sort command. This can be confusing for users who are not familiar with the application. In the future we plan to add a command to return to the default chronological sort.
+3. **Email field does not require domain name** Currently, `example@gmail` is considered a valid email and there is no requirement for a proper domain (eg: .com). This is a constraint we want to enforce to reduce users mistyping emails.
+    <br>Command: `edit 1 /email example@gmail`
+   <br>![Invalid Email formatting](./images/planned-enhancements/invalid-email-field.png)<br><br>
+4. **Limiting Deadlines to only valid future dates:** Adding deadlines in the past does not make sense and users will not require this. Additionally, adding invalid dates such as 30th February is possible. As such we want to enforce this as a constraint.
+   <br>Command: `setdeadline 1 /selecttask 1 10/10/1985`
+    <br>![Deadlines can have past dates](./images/planned-enhancements/past-deadlines.png)<br><br>
+5. **Edit command will require changes to be made to existing values:** Currently, the edit function allows you to re-enter the values that are already present, without any changes. We plan to add suitable error handling messages to enforce this constraint.
+   <br>Command: `edit 1 /com Facebook`
+    <br>![No changes made when editing value](./images/planned-enhancements/edit-no-changes-made.png)<br><br>
+6. **Editing Multiple fields:** Currently, when the subsequent prefix is incorrect the whole command is recognised as the argument to the first field, leading to errors such as the following. In the future, there will be additional checks to detect this as an invalid prefix error.
+   <br>Command: `edit 1 /email john@example.com /n john`
+    <br>![Incorrect prefix recognised as argument](./images/planned-enhancements/invalid-prefix-error.png)<br><br>
+7. **Consistent filtered lists:** Currently after calling find, if we enter another command it resets to the original list of internships. In the future we want to allow users to layer find, sort and other commands to improve our application's searching functionalities.
+   <br>Command: `find withany /status pending`
+   <br>![Example find command](./images/planned-enhancements/inconsistent-find-1.png)
+   <br>Command: `edit 1 /com Facebook`
+   <br>![Command after find resets the list](./images/planned-enhancements/inconsistent-find-2.png)<br><br>
+8. **Additional Checks in the Find Feature:** We will add constraints to the arguments for the find function where we will only allow valid values. We will add suitable error handling to handle these situations.
+   <br>Command: `find withany /status invalid_status`
+   <br>![Find allows invalid status](./images/planned-enhancements/find-invalid-status-error-message.png)<br><br>
+9. **Allowing more characters in names:** Characters such as - and / are prohibited in the name field. We recognise that these can be part of names and as such hope to add this to the list of allowed characters.<br><br>
+10. **Detecting space characters between argument's prefix and value:** For example, the command`edit 1 /company`runs successfully and updates the first internship's company field to the value`pany`. This may cause issues when the user misremembers the prefix for an argument. In the future we will implement checks that will check for a space between a prefix and its value.
+    <br>Command: `edit 1 /company`
+    <br>![Space between prefix and value](./images/planned-enhancements/space-in-edit-command.png)<br><br>
+
