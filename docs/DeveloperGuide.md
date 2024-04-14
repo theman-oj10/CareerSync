@@ -347,18 +347,16 @@ Here is a step-by-step example of how the `setdeadline` command might be execute
 2. The `InternshipSetDeadlineParser` then calls the `ArgumentTokenizer#tokenize` method to extract the internship index, task index and the deadline.<br>
 If either the internship index, task index or the deadline is either missing or invalid, a ParseException will be thrown.<br>
 3. The `InternshipSetDeadlineParser` then creates an `InternshipSetDeadlineCommand` object with the extracted details.<br>
-4. The `InternshipSetDeadlineCommand`'s execute() method is called. The Internship object, and its task to be modified, is gotten via the indexes. It then calls `InternshipModel` to set the deadline of the task in the `TaskList` field of the internship entry via `setDeadline`.<br>
+4. The `InternshipSetDeadlineCommand`'s execute() method is called. The Internship is accessed via the given indexes, and the task with the corresponding task index has its deadline set via `setDeadline`.<br>
    If the internship index is larger than the number of internships displayed, a CommandException will be thrown.<br>
    If the task index is larger than the number of tasks in the `TaskList` field of the internship, a CommandException will be thrown.<br>
-5. The `InternshipSetDeadlineCommand` then calls `InternshipModel::setInternship` to replace the internship with the new one with the deadline, to trigger a UI update.<br>
+5. The `InternshipSetDeadlineCommand` then calls `InternshipModel::setInternship` to trigger a UI update.<br>
 6. The `InternshipSetDeadlineCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.<br>
 
 #### Design Considerations
 For the deadline field's default value, we can have it either be null, or a default date that should not be used by any
 regular user. We decided to have the default value be null, as we do not want to cause confusion for users who do not want
 to set a deadline.<br>
-We decide to choose `DD/MM/YYYY` as the date format for the deadline, as it is the most intuitive for users to understand.
-Other alternatives can be explored.<br>
 A proposed improvement to this feature is to have the `isValidDeadline` not just check if it is a valid Java date, but also
 check that it is a valid calendar date that is not in the past.<br>
 
@@ -383,10 +381,10 @@ Here is a step-by-step example of how the `deletetask` command might be executed
 2. The `InternshipDataParser` parses the command and creates a new `InternshipDeleteTaskCommandParser` object.
 If either the internship index or the task index is either missing or invalid, a ParseException will be thrown.
 3. The `InternshipDeleteTaskCommandParser` then creates a new `InternshipDeleteTaskCommand` object with the extracted details.
-4. The `InternshipDeleteTaskCommand`'s execute() method is called. A copy of the Internship object is created after accessing it via the given indexes, and its task is deleted.
+4. The `InternshipDeleteTaskCommand`'s execute() method is called. The Internship is accessed via the given indexes, and the task with the corresponding task index is deleted.
    If the internship index is larger than the number of internships displayed, a CommandException will be thrown.<br>
    If the task index is larger than the number of tasks in the `TaskList` field of the internship, a CommandException will be thrown.<br>
-5. The `InternshipDeleteTaskCommand` then calls `InternshipModel::setInternship` to replace the internship with the new one with the deleted task, to trigger a UI update.<br>
+5. The `InternshipDeleteTaskCommand` then calls `InternshipModel::setInternship` to trigger a UI update.<br>
 6. The `InternshipDeleteTaskCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.<br>
 
 --------------------------------------------------------------------------------------------------------------------
