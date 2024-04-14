@@ -36,8 +36,7 @@ pageNav: 3
     - [Known issues](#known-issues)
     - [Field Summary](#field-summary)
 
---------------------------------------------------------------------------------------------------------------------
-
+<div class="page-break"></div>
 
 ### **Introduction**
 Welcome to <span style="color: #f66a0a;">CareerSync</span>'s User Guide! <br>
@@ -69,7 +68,7 @@ With CareerSync, you can:
 3. **Manage tasks** for your applications and keep track of their individual deadlines.
 And so much more!
 
---------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ### **Essential Terms & Symbols**
 
@@ -105,7 +104,8 @@ Red blocks contain warnings to note when using <span style="color: #f66a0a;">Car
 
 [Go to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
+
 ### **Quick Start**
 #### Installation
 1. Ensure that you have [Java 11 or above](https://www.java.com/en/download/) installed on your computer if you are using Windows.
@@ -122,23 +122,25 @@ Red blocks contain warnings to note when using <span style="color: #f66a0a;">Car
        - Double-click on `CareerSync.jar` to start up our application!
 5. The **Graphical User Interace** similar to the image below should pop up on your screen.
 
-![Ui](images/Ui.png)
+![Ui](images/Ui.png){: .responsive-image}
 
 For more information on the interface, please refer to the [Navigating CareerSync](#navigating-careersync) section.
 
 [Go to Table of Contents](#table-of-contents)
 
+<div class="page-break"></div>
+
 ### Navigating CareerSync
 
 When you first start <span style="color: #f66a0a;">CareerSync</span>, you will see this window. This is the main window of <span style="color: #f66a0a;">CareerSync</span>, where you can view all your internship applications.
 
-![Ui](images/Ui.png)
+![Ui](images/Ui.png){: .responsive-image}
 
 #### Areas
 The main window of <span style="color: #f66a0a;">CareerSync</span> is divided into four main areas: the **Tab Area**, the **CLI**, the **Message Box** and the **Internship List Display**.
 
 
-![Areas Annotation](images/introduction/AreasAnnotation.png)
+![Areas Annotation](images/introduction/AreasAnnotation.png){: .smaller-responsive-image}
 
 1. **Tab Area**: The Tab Area contains File and Help, which allows you to navigate its respective functions.
 2. **CLI**: The Command Line Interface (CLI) is where you can input commands to interact with <span style="color: #f66a0a;">CareerSync</span>.
@@ -149,7 +151,7 @@ The main window of <span style="color: #f66a0a;">CareerSync</span> is divided in
 The names of the fields for each internship application is as stated below. When you edit these fields, you will see the changes reflected in the display.
 For the restrictions on what is accepted for each field, kindly refer to [Fields Summary](#fields-summary).
 
-![Fields Annotation](images/introduction/FieldsAnnotation.png)
+![Fields Annotation](images/introduction/FieldsAnnotation.png){: .smaller-responsive-image}
 
 1. `INDEX` - The index of the internship application in the filtered list.
 2. `COMPANY_NAME` - The name of the company you are applying to.
@@ -165,7 +167,7 @@ For the restrictions on what is accepted for each field, kindly refer to [Fields
 
 [Go to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
+<div class="page-break"></div>
 
 ### Tutorial
 This section would guide you through the basic commands of <span style="color: #f66a0a;">CareerSync</span>, and how to use them.
@@ -177,7 +179,7 @@ If you are using a PDF version of this document, be careful when copying and pas
 as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-#### Clear sample internship entries: `clear`
+#### 1. Clear sample internship entries: `clear`
 
 To begin using <span style="color: #f66a0a;">CareerSync</span>, you should clear the sample internship entries that are present when you first start the 
 application.
@@ -190,14 +192,16 @@ Key in the command `clear` in the CLI and press `Enter` to clear the sample inte
 
 1. Input:<br>
    `clear`<br>
-   ![Before clearing](./images/clear/clear-before.png)<br><br>
+   ![Before clearing](./images/clear/clear-before.png){: .smaller-responsive-image}<br><br>
 
 2. Successful Output after clearing entries:<br>
-   ![After successfully clearing](./images/clear/clear-after.png)<br>
+   ![After successfully clearing](./images/clear/clear-after.png){: .smaller-responsive-image}<br>
    There are no more internships in the list.
 </div>
 
-#### Add an internship entry: `add`
+<div class="page-break"></div>
+
+#### 2. Add an internship entry: `add`
 
 Next, let us try to add an internship entry. 
 
@@ -209,11 +213,11 @@ Key in the following command in the CLI: `add /com Tiktok /desc create new recom
 /phone 90890301 /loc remote /role Software Intern`<br>
 
 Successful output after adding the entry:<br>
-   ![After successfully adding](./images/tutorial/add.png)<br>
+   ![After successfully adding](./images/tutorial/add.png){: .smaller-responsive-image}<br>
    You can now see your new internship with the details you entered in the **Internship List Display!**
 </div>
 
-#### Edit an internship entry: `edit`
+#### 3. Edit an internship entry: `edit`
 
 Oh no! You made a mistake in the email address of the contact person. Let's edit the email address.
 
@@ -223,21 +227,25 @@ Oh no! You made a mistake in the email address of the contact person. Let's edit
 Key in the following command in the CLI: `edit 1 /email janeyeo@gmail.com`<br>
 
 Successful output after editing the entry:<br>
-![After successfully editing](./images/tutorial/edit.png)<br>
+![After successfully editing](./images/tutorial/edit.png){: .smaller-responsive-image}<br>
 Your internship now has the updated email that you keyed in.
 </div>
 
-#### Find internship entries: `find`
+<div class="page-break"></div>
+
+#### 4. Find internship entries: `find`
 
 Before you continue, add a few more internship entries using these commands:
 1. `add /com Google /desc create new search engine /status to_apply /poc john tan /email johntan@gmail.com /phone 98765432 /loc local /role Software Intern`
 2. `add /com Facebook /desc create new social media platform /status to_apply /poc jane tan /email facebookhr@gmail.com /phone 87654321 /loc remote /role Software Intern`
 
 Successful output after adding the entries:<br>
-![After successfully adding more](./images/tutorial/addmore.png)<br>
+![After successfully adding more](./images/tutorial/addmore.png){: .responsive-image}<br>
 
 Let's say you want to find all internships that you want to apply for, that give you a software intern role.
 `find` is the command you need!
+
+<div class="page-break"></div>
 
 <div markdown="span" class="alert alert-success">
 
@@ -246,11 +254,13 @@ Let's say you want to find all internships that you want to apply for, that give
 Key in the following command in the CLI: `find withall /status to_apply /role Software Intern`<br>
 
 Successful output after finding all entries that satisfy the conditions:<br>
-![After successfully finding](./images/tutorial/find.png)<br>
+![After successfully finding](./images/tutorial/find.png){: .responsive-image}<br>
 Your **Internship List Display** now only has all the internships satisfying both conditions.
 </div>
 
-#### Delete an internship entry: `delete`
+<div class="page-break"></div>
+
+#### 5. Delete an internship entry: `delete`
 You decide that to no longer pursue the internship at Facebook. Let's delete that entry.
 
 <div markdown="span" class="alert alert-success">
@@ -260,11 +270,11 @@ You decide that to no longer pursue the internship at Facebook. Let's delete tha
 Key in the following command in the CLI: `delete 2`<br>
 
 Successful output after deleting the entry:<br>
-![After successfully deleting](./images/tutorial/delete.png)<br>
+![After successfully deleting](./images/tutorial/delete.png){: .smaller-responsive-image}<br>
 The Facebook internship entry has been removed, and is no longer present in your database.
 </div>
 
-#### List all internships: `list`
+#### 6. List all internships: `list`
 You used find to filter the internships. How do you see all the internships again?
 
 <div markdown="span" class="alert alert-success">
@@ -274,12 +284,13 @@ You used find to filter the internships. How do you see all the internships agai
 Key in the following command in the CLI: `list`<br>
 
 Successful output after listing:<br>
-![After successfully listing](./images/tutorial/list.png)<br>
+![After successfully listing](./images/tutorial/list.png){: .smaller-responsive-image}<br>
 You now see all your internships. Your Tiktok internship, previously hidden, is now back in view.
 </div>
 
+<div class="page-break"></div>
 
-#### Exit the program: `exit`
+#### 7. Exit the program: `exit`
 You decide that you are done for the day. How do you exit the application and save the file?
 
 <div markdown="span" class="alert alert-success">
@@ -289,7 +300,7 @@ You decide that you are done for the day. How do you exit the application and sa
 Key in the following command in the CLI: `exit`<br>
 
 Upon reopening the app:<br>
-![After successfully reopening](./images/tutorial/reopen.png)<br>
+![After successfully reopening](./images/tutorial/reopen.png){: .responsive-image}<br>
 You now see all your internships that you have when you exited. Your data was saved!
 </div>
 
@@ -322,8 +333,8 @@ Only **simple and common use cases** are covered in this tutorial. Please refer 
 you fully understand each command and their usage.
 
 [Go to Table of Contents](#table-of-contents)
+<div class="page-break"></div>
 
-____________________________________________________________________________________________________________________
 ### **Commands**
 
 Let's do a quick review of the commands!
@@ -368,6 +379,7 @@ the displayed internship indexes.
 
 </div>
 
+<div class="page-break"></div>
 #### Viewing help: `help`
 
 If you ever get lost or need a refresher on the commands, you can always use the `help` command to view the help message.<br>
@@ -376,8 +388,6 @@ This directs you to the User Guide (this page!), where you can find all the info
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
-<div style="margin-top: 20px;"></div>
 
 #### Adding an internship: `add`
 Lets you add an internship entry to be tracked by CareerSync!
@@ -407,7 +417,7 @@ Make sure to refer to the error message displayed for the correct format to use!
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
-<div style="margin-top: 20px;"></div>
+<div class="page-break"></div>
 
 #### Deleting an internship: `delete`
 Lets you delete an internship entry from CareerSync.
@@ -429,7 +439,7 @@ Format: `delete INDEX`
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
-<div style="margin-top: 20px;"></div>
+<div class="page-break"></div>
 
 #### Listing all internships: `list`
 
@@ -447,12 +457,12 @@ If you want to see all internships again, simply type `list` and press enter.
 
 1. Input:<br>
    `list`<br>
-   ![Before listing all internships](./images/list/list-before.png)<br>
+   ![Before listing all internships](./images/list/list-before.png){: .smaller-responsive-image}<br>
 In this example, the current view shows only internships with location 'REMOTE'.
 <br><br>
 
 2. Successful Output after executing list: <br>
-   ![After successfully listing all internships](./images/list/list-after.png)<br>
+   ![After successfully listing all internships](./images/list/list-after.png){: .smaller-responsive-image}<br>
 Any present filter will be removed, and all internships will be displayed in the list.
 </div>
 
@@ -463,14 +473,14 @@ You may have had a filter applied that is hiding the internship you are looking 
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
-<div style="margin-top: 20px;"></div>
+<div class="page-break"></div>
 
 #### Viewing an internship entry's details
 
 When you click on an internship entry in the internship list, a separate window will be open showing
 the detailed view of the internship entry.<br>
 This view will show all the fields of the internship entry in a bigger font size for easier reading.<br>
-![Detailed view window](./images/detailedview/detailedViewWindow.png)<br>
+![Detailed view window](./images/detailedview/detailedViewWindow.png){: .responsive-image}<br>
 
 <div markdown="span" class="alert alert-info">
 ℹ️ **Tip:** This feature is not recommended for efficient use of the application, as it is not a command that can be inputted into the CLI.
@@ -481,7 +491,7 @@ However, it serves as an aid to view the details of an internship entry in a mor
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
-<div style="margin-top: 20px;"></div>
+<div class="page-break"></div>
 
 #### Editing an internship: `edit`
 
@@ -501,10 +511,10 @@ Lets you edit an existing internship entry in CareerSync.
 
 1. Input:<br>
    `edit 1 /email google@gmail.com`<br>
-   ![Before editing](./images/edit/edit-before.png)<br><br>
+   ![Before editing](./images/edit/edit-before.png){: .responsive-image}<br><br>
 
 2. Successful Output after editing an entry:<br>
-   ![After successfully editing](./images/edit/edit-after.png)<br>
+   ![After successfully editing](./images/edit/edit-after.png){: .responsive-image}<br>
    The email field of the first internship is successfully updated to `google@gmail.com`.
 </div>
 
@@ -515,7 +525,7 @@ Lets you edit an existing internship entry in CareerSync.
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
-<div style="margin-top: 20px;"></div>
+<div class="page-break"></div>
 
 #### Adding a remark: `addremark`
 
@@ -535,10 +545,10 @@ Use this to keep track of your personal notes about the internship!
 
 1. Input:<br>
    `addremark 1 /remark This internship has a behavioural interview!`<br>
-   ![Before adding a remark](./images/add-remark/addremark-before.png)<br><br>
+   ![Before adding a remark](./images/add-remark/addremark-before.png){: .smaller-responsive-image}<br><br>
 
 2. Successful Output after adding a remark:<br>
-   ![After successfully adding a remark](./images/add-remark/addremark-after.png)<br>
+   ![After successfully adding a remark](./images/add-remark/addremark-after.png){: .smaller-responsive-image}<br>
 This sets the remark of the internship at index 1 to be `This internship has a behavioural interview!`.
 </div>
 <div markdown="span" class="alert alert-danger">
@@ -548,7 +558,7 @@ This sets the remark of the internship at index 1 to be `This internship has a b
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
-<div style="margin-top: 20px;"></div>
+<div class="page-break"></div>
 
 #### Finding internships by keywords: `find`
 
@@ -572,11 +582,11 @@ You can use this to filter the visible internships in CareerSync by keywords.
 
 1. Input:<br>
    `find withall /status to_apply /loc remote`<br>
-   ![Before filtering by all toapply and remote](./images/find/find-before.png)<br><br>
+   ![Before filtering by all toapply and remote](./images/find/find-before.png){: .responsive-image}<br><br>
 This will filter the list of internships to show you only those with both status `TO_APPLY` and location `REMOTE`.<br><br>
 
 2. Successful Output after filtering:<br>
-   ![After successfully filtering by all toapply and remote](./images/find/find-after.png)<br><br>
+   ![After successfully filtering by all toapply and remote](./images/find/find-after.png){: .responsive-image}<br><br>
 
 3. Other examples:<br>
    i.`find withany /com Google /loc local` shows you internships with either company name (case-insensitive) `Google` or location `LOCAL`<br>
@@ -601,7 +611,7 @@ Searching for these fields will result in an error message, highlighting the uns
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
-<div style="margin-top: 20px;"></div>
+<div class="page-break"></div>
 
 #### Sorting internships by fields: `sort`
 This command allows you to sort the internships in CareerSync by the specified field in ascending or descending order.
@@ -621,11 +631,11 @@ This command allows you to sort the internships in CareerSync by the specified f
 
 1. Input:<br>
    `sort /com asc`<br>
-   ![Before filtering by all to_apply and remote](./images/sort/sort-before.png)<br>
+   ![Before filtering by all to_apply and remote](./images/sort/sort-before.png'){: .smaller-responsive-image}<br>
 This will sort the list of internships by company name in ascending order.<br><br>
 
 2. Successful Output after sorting:<br>
-   ![After successfully filtering by all to_apply and remote](./images/sort/sort-after.png)<br><br>
+   ![After successfully filtering by all to_apply and remote](./images/sort/sort-after.png){: .responsive-image}<br><br>
 
 3. Other examples:<br>
    i.`sort /status asc` sorts your internships in the following order: `TO_APPLY` -> `ONGOING` -> `PENDING` -> `ACCEPTED` -> `REJECTED`<br>
@@ -640,7 +650,7 @@ This will sort the list of internships by company name in ascending order.<br><b
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
-<div style="margin-top: 20px;"></div>
+<div class="page-break"></div>
 
 #### Add a Task to an Internship: `addtask`
 
@@ -656,10 +666,10 @@ Using this function, you can add a task to an internship so that you won't forge
 
 1. Input:<br>
    `addtask 1 /task Edit Resume`<br>
-   ![Before Adding Task](./images/addtask/addtask-before.png)<br><br>
+   ![Before Adding Task](./images/addtask/addtask-before.png){: .responsive-image}<br><br>
 
 2. Successful Output after deleting task:<br>
-   ![After Successfully Adding Task](./images/addtask/addtask-after.png)<br><br>
+   ![After Successfully Adding Task](./images/addtask/addtask-after.png){: .responsive-image}<br><br>
 </div>
 
 <div markdown="span" class="alert alert-info">
@@ -673,6 +683,8 @@ Refer to the error message displayed for the correct format to use!
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
+
+<div class="page-break"></div>
 
 #### Set Deadline to a Task: `setdeadline`
 
@@ -690,10 +702,10 @@ Using this function, you can set the deadline to a task under an internship so t
 Before you try this command, you need an internship that has at least 1 task. You can add it by using the [addtask](#add-a-task-to-an-internship-addtask) command. <br>
 1. Input:<br>
    `setdeadline 1 /selecttask 1 /deadline 24/04/2024`<br>
-   ![Before Setting Deadline](./images/setdeadline/setdeadline-before.png)<br><br>
+   ![Before Setting Deadline](./images/setdeadline/setdeadline-before.png){: .smaller-responsive-image}<br><br>
 
 2. Successful Output after adding deadline:<br>
-   ![After Setting Deadline](./images/setdeadline/setdeadline-after.png)<br><br>
+   ![After Setting Deadline](./images/setdeadline/setdeadline-after.png){: .smaller-responsive-image}<br><br>
 </div>
 
 <div markdown="span" class="alert alert-info">
@@ -708,6 +720,7 @@ Before you try this command, you need an internship that has at least 1 task. Yo
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
+<div class="page-break"></div>
 
 #### Deleting Tasks from an Internship: `deletetask`
 
@@ -723,10 +736,10 @@ Lets you delete a task from an existing internship after it is complete!
 
 1. Input:<br>
    `deletetask 1 /selecttask 2`<br>
-   ![Before Deleting Task](./images/deletetask/deletetask-before.png)<br><br>
+   ![Before Deleting Task](./images/deletetask/deletetask-before.png){: .responsive-image}<br><br>
 
 2. Successful Output after deleting task:<br>
-   ![After successfully deleting the task](./images/deletetask/deletetask-after.png)<br><br>
+   ![After successfully deleting the task](./images/deletetask/deletetask-after.png){: .responsive-image}<br><br>
 </div>
 
 <div markdown="span" class="alert alert-danger">
@@ -736,7 +749,7 @@ Lets you delete a task from an existing internship after it is complete!
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
-<div style="margin-top: 20px;"></div>
+<div class="page-break"></div>
 
 #### Clearing all internships: `clear`
 
@@ -756,14 +769,16 @@ This operation is irreversible. Once you clear all entries, you cannot undo it.
 
 1. Input:<br>
    `clear`<br>
-   ![Before clearing](./images/clear/clear-before.png)<br><br>
+   ![Before clearing](./images/clear/clear-before.png){: .smaller-responsive-image}<br><br>
 
 2. Successful Output after clearing entries:<br>
-   ![After successfully clearing](./images/clear/clear-after.png)<br>
+   ![After successfully clearing](./images/clear/clear-after.png){: .smaller-responsive-image}<br>
 There are no more internships in the list.
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
+
+<div class="page-break"></div>
 
 #### Exiting the program: `exit`
 
@@ -789,6 +804,8 @@ Only do so if you are an experienced user! <br>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
 
+<div class="page-break"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 ## **Miscellaneous**
 ### FAQ
@@ -806,6 +823,8 @@ Only do so if you are an experienced user! <br>
 **The solution** is to delete the `preferences.json` file from the folder where you installed the application. Then, run the application again.
 
 [Go to Table of Contents](#table-of-contents)
+
+<div class="page-break"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
