@@ -245,6 +245,29 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Remark Feature
+This feature enables users to add or modify remarks for each internship entry.
+
+#### Implementation
+All internships are initialised with a blank remark field. Users can add or modify remarks for each internship entry using the `addremark` command.
+
+Here is a step-by-step example of what happens in the execution of<br>
+`addremark 1 /remark Has a behavioural interview`:
+
+Step 1. The input is parsed by `InternshipDataParser`, then passed into `InternshipRemarkCommandParser` as arguments.<br>
+Step 2. Input validation is performed in the `parse()` method, making sure that it has the correct format and parameters.<br>
+Step 3. The `InternshipRemarkCommand` object is created with the parsed arguments, and the `execute()` method is called, passing in an `InternshipModel` object.<br>
+Step 4. The `InternshipModel` object updates the remark field of the internship entry at index 1 with the new remark.<br>
+
+#### Design considerations:
+Aspect: Deleting remarks:
+* **Alternative 1 (current choice):** Deleting remarks is done via addremark with a blank remark.
+    * Pros: Simpler implementation.
+    * Cons: Not as intuitive as having a `deleteremark` command
+* **Alternative 2:** Implement a `deleteremark` command.
+    * Pros: More intuitive for the user.
+    * Cons: More complex implementation and documentation needed.
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
