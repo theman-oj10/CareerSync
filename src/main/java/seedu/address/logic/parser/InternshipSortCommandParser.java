@@ -133,8 +133,8 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, SUPPORTED_PREFIXES);
         argMultimap.verifyNoDuplicatePrefixesFor(SUPPORTED_PREFIXES);
 
-        if (!anyPrefixesPresent(argMultimap, SUPPORTED_PREFIXES)) {
-            logger.warning("Internship sort command has no valid prefixes");
+        if (!validateOrder(argMultimap, SUPPORTED_PREFIXES)) {
+            logger.warning("Internship sort command has no valid prefixes or invalid order");
             throw new ParseException(InternshipSortCommand.MESSAGE_INVALID_FIELD);
         }
         if (splitArgs.length != 2) {
@@ -181,19 +181,17 @@ public class InternshipSortCommandParser implements InternshipParser<InternshipS
     }
 
     /**
-     * Returns true if any of the prefixes are present in the {@code ArgumentMultimap}.
+     * Returns true if the given {@code ArgumentMultimap} contains a valid order.
      * @param argumentMultimap map of prefixes and their search keywords
      * @param prefixes prefixes to check for
-     * @return true if any of the prefixes are present in the {@code ArgumentMultimap}
+     * @return true if the given {@code ArgumentMultimap} contains a valid order
      */
-    private static boolean anyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes)
+    private static boolean validateOrder(ArgumentMultimap argumentMultimap, Prefix... prefixes)
             throws ParseException {
         for (Prefix prefix : prefixes) {
             Optional<String> value = argumentMultimap.getValue(prefix);
-            if (value.isPresent()) {
-                if (OrderEnum.isValidOrder(value.get())) {
-                    return true;
-                }
+            if (value.isPresent() && OrderEnum.isValidOrder(value.get())) {
+                return true;
             }
         }
         return false;
