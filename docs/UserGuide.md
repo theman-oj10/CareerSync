@@ -819,7 +819,7 @@ Only do so if you are an experienced user! <br>
 
 <div class="page-break"></div>
 
-## Miscellaneous
+## **Miscellaneous**
 ### FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
