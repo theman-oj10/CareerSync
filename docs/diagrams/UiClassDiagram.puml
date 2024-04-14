@@ -40,7 +40,7 @@ MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 MainWindow --> "0..1" DetailedViewWindow
 DetailedViewWindow *-down-> "1" DetailedInternshipListPanel
-DetailedInternshipListPanel *-down-> "1" DetailedInternshipCard
+DetailedInternshipListPanel *-down-> "0..1" DetailedInternshipCard
 
 InternshipListPanel -down-> "*" InternshipCard
 
@@ -60,6 +60,7 @@ InternshipCard ..> InternshipModel
 DetailedInternshipCard ..> InternshipModel
 UiManager -right-> InternshipLogic
 MainWindow -left-> InternshipLogic
+DetailedViewWindow --> InternshipLogic
 
 InternshipListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
