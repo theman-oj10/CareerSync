@@ -96,15 +96,17 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `InternshipListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+Additionally, the `MainWindow` contains an initially hidden `HelpWindow` and `DetailedInternshipWindow`. These are windows 
+that can be accessed by the user to view the help guide and detailed information of an internship respectively.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S2-CS2103T-W11-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `InternshipLogic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
+* listens for changes to `InternshipModel` data so that the UI can be updated with the modified data.
 * keeps a reference to the `InternshipLogic` component, because the `UI` relies on the `InternshipLogic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Internship` component, as it displays `Internship` object residing in the `InternshipModel`.
 
 #### InternshipLogic component
 
@@ -1087,5 +1089,28 @@ Note that to try out the below example commands you will need to reset the data 
 10. **Detecting space characters between argument's prefix and value:** For example, the command`edit 1 /company`runs successfully and updates the first internship's company field to the value`pany`. This may cause issues when the user misremembers the prefix for an argument. In the future we will implement checks that will check for a space between a prefix and its value.
     <br>Command: `edit 1 /company`
     <br>![Space between prefix and value](./images/planned-enhancements/space-in-edit-command.png)<br><br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+#### Project Overview
+Our project is a brownfield project aimed at enhancing the functionality of a contact management application AB3 (Address Book 3). Instead of managing persons, CareerSync manages Internships and as such we had to update the fields each internship stores. Additionally, the key enhancements included implementing a detailed view page, tasks, remarks, and finding and sorting features. These improvements aimed to provide our target users with an efficient and intuitive experience while managing their internships.
+#### Difficulty Level and Challenges Faced
+The first challenge faced was refactoring the code to suit our new requirements. Since we were changing all the data we had to explore the implementation on a very fundamental level and gain a deep understanding of the codebase. Since most of us have not worked on such a large project we found this quite challenging.
+Secondly while implementing Optional fields, we initially made use of Optional<>, which created many issues when testing other features due to the use and passing of NULL values. Eventually, our team came together to brainstorm solutions and decided to have default values set instead of accepting NULL values (for optional fields). This way, our team could resolve the issues we were experiencing while still retaining the optional feature capabilities.
+Implementing the clickable detailed view page was another challenge as we had to create a new page and our team generally found difficulty in dealing with the UI. Implementing headless testing for UI components so that code coverage can be satisfied for GitHub CI/CD was a challenge. It required a whole new library dependency and framework (TestFX) for testing UI components which was not easily referenced from the existing codebase. If an internship was selected via the detailed view, and it was simultaneously edited in the the main window, the internship would disappear from the detailed view window. After prolonged debugging, the problem was isolated to the commands that edit the 'state' of the Internship. The issue was resolved by fixing the equality checks used by the detailed view page.
+#### Effort Required
+As a team, we have put a lot of effort into this project. Firstly through the process of examining and understanding the codebase and coming up with useful features that could improve user experience. We had to streamline our ideas and come up with a feasible plan to manage the workload.
+Following this planning out user requirements, user stories, and use cases was something new to us and we spent a fair bit of time on this. As for the actual implementation, while we are not new to programming, a brownfield collaborative project is unfamiliar territory. In the first few weeks, we made countless errors when it came to setting up build tools and adhering to the general workflow.
+Finally, the documentation required was extensive and required careful examination. This is something we had to sit down and go through together as a team multiple times.
+#### Achievements
+Despite the challenges encountered, the team achieved several milestones that significantly strengthened the application`s functionality and user experience. Some of these key achievements include:
+Successful integration of optional field capabilities for an internship entry, offering users more flexibility in adding and editing internship entries.
+Redesigning command formats to cater to our target users and improve user experience.
+Implementation of find and sorting functionalities, encouraging and enabling users to use the application to navigate and manage their internship entries efficiently.
+Introduction of a remark feature, ensuring that the application facilitates the inclusion of additional information.
+Introduction of a task feature, allowing users to add tasks relating to an internship entry and add suitable deadlines.
+#### Effort Saved Through Reuse:
+While we did not have a lot of code reuse or use of external dependencies, we used the TestFx (an extension of JavaFx) library to implement headless testing to write automated test cases for our UI components. This was done to ensure that we don’t sacrifice on code coverage of our tests.
 
 
