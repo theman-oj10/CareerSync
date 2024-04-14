@@ -2,22 +2,22 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+box InternshipModel MODEL_COLOR_T1
+participant ":InternshipModel" as InternshipModel MODEL_COLOR
 participant ":VersionedInternshipData" as VersionedInternshipData MODEL_COLOR
 end box
 
-[-> Model : undoInternshipData()
-activate Model
+[-> InternshipModel : undoInternshipData()
+activate InternshipModel
 
-Model -> VersionedInternshipData : undo()
+InternshipModel -> VersionedInternshipData : undo()
 activate VersionedInternshipData
 
 VersionedInternshipData -> VersionedInternshipData :resetData(ReadOnlyInternshipData)
-VersionedInternshipData --> Model :
+VersionedInternshipData --> InternshipModel :
 deactivate VersionedInternshipData
 
-[<-- Model
-deactivate Model
+[<-- InternshipModel
+deactivate InternshipModel
 
 @enduml

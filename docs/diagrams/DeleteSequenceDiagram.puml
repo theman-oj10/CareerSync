@@ -2,7 +2,7 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
-box Logic LOGIC_COLOR_T1
+box InternshipLogic LOGIC_COLOR_T1
 participant ":InternshipLogicManager" as InternshipLogicManager LOGIC_COLOR
 participant ":InternshipDataParser" as InternshipDataParser LOGIC_COLOR
 participant ":InternshipDeleteCommandParser" as InternshipDeleteCommandParser LOGIC_COLOR
@@ -10,8 +10,8 @@ participant "d:InternshipDeleteCommand" as InternshipDeleteCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-box Model MODEL_COLOR_T1
-participant "m:Model" as Model MODEL_COLOR
+box InternshipModel MODEL_COLOR_T1
+participant "m:InternshipModel" as InternshipModel MODEL_COLOR
 end box
 
 [-> InternshipLogicManager : execute("delete 1")
@@ -49,11 +49,11 @@ deactivate InternshipDataParser
 InternshipLogicManager -> InternshipDeleteCommand : execute(m)
 activate InternshipDeleteCommand
 
-InternshipDeleteCommand -> Model : deletePerson(1)
-activate Model
+InternshipDeleteCommand -> InternshipModel : deletePerson(1)
+activate InternshipModel
 
-Model --> InternshipDeleteCommand
-deactivate Model
+InternshipModel --> InternshipDeleteCommand
+deactivate InternshipModel
 
 create CommandResult
 InternshipDeleteCommand -> CommandResult

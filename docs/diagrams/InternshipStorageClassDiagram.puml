@@ -6,7 +6,7 @@ skinparam classBackgroundColor STORAGE_COLOR
 
 package InternshipStorage as StoragePackage {
 
-package "UserPrefs Storage" #F4F6F6{
+package "InternshipUserPrefs Storage" #F4F6F6{
 Class "<<interface>>\nInternshipUserPrefsStorage" as InternshipUserPrefsStorage
 Class JsonInternshipUserPrefsStorage
 }
