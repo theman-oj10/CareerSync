@@ -42,7 +42,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 #### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
-c
+
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
@@ -505,16 +505,23 @@ testers are expected to do more *exploratory* testing.
     1. Download the CareerSync.jar file and copy into an empty folder
 
     1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   
    2. Alternatively run the jar file from the command line with `java -jar CareerSync.jar` Expected: Same as above.
 
 1. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Exiting the app
+
+    1. Click the close button on the window.<br>
+       Expected: The app closes.
+
+   2. Use the `exit` command.<br>
+       Expected: The app closes.
 
 #### Deleting a person
 
@@ -534,22 +541,31 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 #### Saving data
+
 Make sure to use the `exit` command or the close button to save data while closing the app.
+
 1. Dealing with missing/corrupted data files
 
     1. To simulate a missing data file, delete the data file(`./data/internshipdata.json`) before launching the app. You will notice that the app automatically creates a new data file and repopulates it with sample data. To remove the sample data, enter the `clear` command.
+   
    2. To simulate a corrupted data file, edit the data file to contain some random text. Launch the app. The app should detect the corrupted file and automatically replace it with a new empty data file. You can then add new data to the app or reset the data to sample data by deleting the data file.
 
 1. _{ more test cases …​ }_
 
-### Sort Feature
-1. Prerequisites: Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
+#### Sort Feature
+
+1. Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
+
 2. Add another internship entry using the following command: `add /com Amazon /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 9089030 /loc remote /role Business Development Intern`
+
     1. Test case: `sort /status desc`<br>
       Expected: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
+   
    2. Test case: `sort /status asc` <br>
       Expected: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
       ![Sort by status asc](./images/manual-testing/sort-by-status.png)<br>
+   
    3. Test case: `sort /com asc`<br>
       Expected: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
       ![Sort by com asc](./images/manual-testing/status-sort-sort-by-com.png)<br>
+   
