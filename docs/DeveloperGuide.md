@@ -501,20 +501,131 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Editing an internship
+1. Editing a single field of an internship
 
-1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. Test case: `edit 1 /com Facebook`<br>
+   Expected: The name of the first internship is changed to `Facebook`. Details of the edited internship shown in the status message.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+2. Repeat for all other fields of an internship other than `TaskList`.
+   Expected: Similar to previous.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+
+3. Test case: `edit 0 n/editedName`<br>
+   Expected: No internship is edited. Error details shown in the status message. Status bar remains the same.
+
+
+4. Test case: `edit 1 /email invalidemail`<br>
+   Expected: No internship is edited. Error details shown in the status message. Status bar remains the same.
+
+
+5. Other incorrect edit commands to try: `edit`, `edit x`, `edit 1`, `edit 1 /com`, `edit x /com Facebook` where x is larger than the list size<br>
+   Expected: Similar to previous.
+
+
+2. Editing multiple fields of an internship
+
+
+1. Test case: `edit 1 /com Facebook /email google@gmail.com`<br>
+   Expected: The name of the company of the first internship is changed to `Facebook` and the email is changed to `google@gmail.com`. Details of the edited internship shown in the status message.
+
+
+2. Repeat for different combinations of fields.
+   Expected: Similar to previous.
+
+
+3. Test case: `edit 1 /com /com`<br>
+   Expected: No internship is edited. Error details shown in the status message. Status bar remains the same.
+
+
+4. Test case: `edit 1 /com Facebook /email`<br>
+   Expected: No internship is edited. Error details shown in the status message. Status bar remains the same.
+
+
+3. Editing while other internships are present
+
+
+1. Prerequisites: Have at least one other internship. Add this internship to the list using this command: `add /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999 /remark This is a remark.`. Run `list` and ensure that this new internship added does not have index 1.
+
+
+2. Test case:  `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999 /remark This is a remark.`
+   Expected: No internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
+
+
+3. Test case:  `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999`
+   Expected: No internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
+
+
+4. Test case: `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com`, then `edit 1 /phone 99999999`
+   Expected: For the first internship, the name of the company is changed to `TikTok`, status is changed to `ongoing`, description to `Software Intern`, point of contact to `John`, email to `tiktok@gmail.com`.
+   Expected: No internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
+
+
+### Adding a task to an existing internship
+
+
+1. Adding a task to an existing internship
+
+
+1. Test case: `addtask 1 /task Attend meeting`<br>
+   Expected: A task `Attend meeting` is added to the task list of the first internship. Details of the added task shown in the status message.
+
+
+2. Test case: `addtask 0 /task Attend meeting`<br>
+   Expected: No task is added. Error details shown in the status message. Status bar remains the same.
+
+
+3. Other incorrect addtask commands to try: `addtask`, `addtask x`, `addtask 1`, `addtask 1 /task`, `addtask x /task Attend meeting` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
+
+
+### Setting the deadline of a task in an existing internship
+
+
+1. Setting the deadline of a task in an existing internship
+
+
+1. Prerequisites: Add a task to the first internship using the `addtask 1 /task Attend meeting` command.
+
+
+2. Test case: `setdeadline 1 /selecttask 1 /deadline 10/10/2024`<br>
+   Expected: The deadline of the first task is set to `2021-10-10`. New deadline shown in the status message.
+
+
+3. Test case: `setdeadline 1 /selecttask 1 /deadline 11/10/2024`<br>
+   Expected: The deadline of the first task is set to `11/10/2024`. New deadline shown in the status message.
+
+
+4. Test case: `setdeadline 0 /selecttask 1 /deadline 10/10/2024`<br>
+   Expected: No task is edited. Error details shown in the status message. Status bar remains the same.
+
+
+5. Other incorrect `setdeadline` commands to try: `setdeadline`, `setdeadline 1`, `setdeadline 1 1`, `setdeadline 1 /selecttask 1 /deadline 10-10-2024`, `setdeadline 1 /selecttask 1 10/10/2024`, `setdeadline 1 /selecttask 1 /deadline`, `setdeadline x /selecttask 1 /deadline 10/10/2024` (where x is larger than the internship list size), `setdeadline 1 /selecttask x /deadline 10/10/2024` (where x is larger than the task list size)<br>
+   Expected: Similar to previous.
+
+
+### Deleting a task from an internship
+
+
+1. Deleting a task from an existing internship
+
+
+1. Prerequisites: Add a task to the first internship using the `addtask 1 /task Attend meeting` command.
+
+
+2. Test case: `deletetask 1 1`<br>
+   Expected: The first task is deleted from the task list of the first internship. Details of the deleted task shown in the status message.
+
+
+3. Test case: `deletetask 0 1`<br>
+   Expected: No task is deleted. Error details shown in the status message. Status bar remains the same.
+
+
+4. Other incorrect deletetask commands to try: `deletetask`, `deletetask x`, `deletetask 1`, `deletetask 1 x` (where x is larger than the task list size)<br>
+   Expected: Similar to previous.
+
 
 1. _{ more test cases …​ }_
 
