@@ -17,7 +17,7 @@ title: Developer Guide
     - [[Proposed] Data archiving](#proposed-data-archiving)
     - [Find](#find-feature)
     - [Sort](#sort-feature)
-   -  [Optional Fields](#optional-fields)
+   -  [Optional Fields Feature](#optional-fields-feature)
     - [Edit](#edit-feature)
     - [Add Task](#add-task-feature)
     - [Set Deadline](#set-deadline-feature)
