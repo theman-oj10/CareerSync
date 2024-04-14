@@ -13,11 +13,15 @@ title: Developer Guide
     - [InternshipStorage Component](#internshipstorage-component)
     - [Common classes](#common-classes)
 4. [Implementation](#implementation)
+    - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
+    - [[Proposed] Data archiving](#proposed-data-archiving)
+    - [Find](#find-feature)
     - [Sort](#sort-feature)
     - [Edit](#edit-feature)
-    - [AddTask](#addtask-feature)
-    - [SetDeadline](#setdeadline-feature)
-    - [DeleteTask](#deletetask-feature)
+    - [Add Task](#add-task-feature)
+    - [Set Deadline](#set-deadline-feature)
+    - [Delete Task](#delete-task-feature)
+    - [Remark](#remark-feature)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Appendix: Requirements](#appendix-requirements)
 
@@ -249,9 +253,45 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-#### \[Proposed\] Data archiving
+### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
+
+### Find feature 
+The `find` feature allows users to search for internships based on the given keywords. This allows users to filter the
+view of internships in CareerSync for easier access to the internships they are interested in. The `find` command applies
+a filter predicate to the list of internships in the `InternshipModel` to display only the internships that match the given
+keywords. Successive `find` commands will replace the existing filter predicate, and does not further filter the displayed internships.
+
+This method takes in a search mode, either `withany` or `withall`, and the prefix-keyword pairs to search for.
+The prefix here refers to the fields of the internship that the user wants to search for. 
+
+There can be multiple keywords per prefix, as well as multiple prefixes. Within each prefix, as long as any of the 
+keywords match the field, the internship will be displayed. 
+
+If the search mode is 'withall', at least one keyword in **all** prefixes must match the field for the internship to be displayed.
+If the search mode is 'withany', at least one keyword in **any** prefix must match the field for the internship to be displayed.
+
+Currently, the supported prefixes to search by are `/com`, `/poc`, `/loc`, `/status`, `/description`, `/role`, `/remark`.
+Here is a step-by-step example of how the `find` command might be executed:
+
+1. The user inputs the `find` command, passing in the relevant arguments.<br>
+2. `InternshipDataParser` parses the command and creates a new `InternshipFindCommandParser` object.<br>
+3. The `InternshipFindCommandParser` then calls `ArgumentTokenizer::tokenize` to extract the search mode and the prefix-keyword pairs.<br>
+    If an unsupported prefix or invalid mode is given, or missing prefix or keyword to search by, a ParseException will be thrown.<br>
+4. The `InternshipFindCommandParser` then creates a new `InternshipContainsKeywordsPredicate` object based on the search mode and prefix-keyword pairs.<br>
+5. The `InternshipFindCommandParser` then creates a new `InternshipFindCommand` object with the `InternshipContainsKeywordsPredicate` object from above.<br>
+6. The `InternshipFindCommand::execute` method is called, which calls `InternshipModel::updateFilteredInternshipList` 
+   to update the filter predicate in the `InternshipModel` with the `InternshipContainsKeywordsPredicate` object, updating the internships displayed in the UI. <br>
+
+#### Design considerations:
+* **Aspect: How the filter is implemented:**
+    * **Alternative 1 (current choice):** Uses a single `InternshipContainsKeywordsPredicate` object to filter the list of internships.
+        * Pros: All keywords are stored in a single object, making it easier to manage.
+        * Cons: More complex to implement.
+    * **Alternative 2:** Use separate `XYZContainsKeywordsPredicate` objects for each prefix.
+        * Pros: More modular code.
+        * Cons: Harder to test and maintain, due to the number of classes needed.
 
 ### Sort feature
 This feature allows users to sort the list of internships based on any one of the fields in ascending or descending order.
@@ -263,10 +303,10 @@ Here is a step-by-step example of how the `sort` command might be executed:
 
 1. User inputs the `sort /com asc` command.<br>
 2. `InternshipDataParser` parses the command and creates a new `InternshipSortCommandParser` object.<br>
-3. The `InternshipSortCommandParser` then calls ArgumentTokenizer#tokenize to extract the field and order of sorting.<br>
+3. The `InternshipSortCommandParser` then calls `ArgumentTokenizer::tokenize` to extract the field and order of sorting.<br>
    If the field or order is missing, a ParseException will be thrown.<br>
 4. The `InternshipSortCommandParser` then creates a new `InternshipSortCommand` object with the extracted details.<br>
-5. The `InternshipSortCommand`'s execute() method is called, checking if the field is valid and the order is valid.<br>
+5. The `InternshipSortCommand::execute` method is called, checking if the field is valid and the order is valid.<br>
    If the field is invalid, a CommandException will be thrown.<br>
 6. The relevant comparator is gotten using the `InternshipSortCommandParser::getComparator` method, and it is passed into the `InternshipModel::sortFilteredInternshipList` method.<br>
 7. The `InternshipModel::sortFilteredInternshipList` class sorts the list of internships based on the comparator and updates the `sortedInternshipList`. <br>
@@ -297,10 +337,10 @@ Here is a step-by-step example of how the `edit` command might be executed:
 
 1. The user inputs the `edit` command, passing in the relevant arguments.<br>
 2. `InternshipDataParser` parses the command and creates a new `InternshipEditCommandParser` object.<br>
-3. The `InternshipEditCommandParser` then calls ArgumentTokenizer#tokenize to extract the index and the fields to be edited.<br>
+3. The `InternshipEditCommandParser` then calls `ArgumentTokenizer::tokenize` to extract the index and the fields to be edited.<br>
 If there are no prefixes, no index, invalid index or duplicate prefixes, a ParseException will be thrown.<br>
 4. The `InternshipEditCommandParser` then creates a new `InternshipEditCommand` object with the extracted details.<br>
-5. The `InternshipEditCommand`'s execute() method is called, checking if the edited internship already exists with `Internship::isSameInternship` and `InternshipModel::hasInternship`.<br>
+5. The `InternshipEditCommand::execute` method is called, checking if the edited internship already exists with `Internship::isSameInternship` and `InternshipModel::hasInternship`.<br>
 A CommandException will be thrown in the event of duplicate internships.<br>
 6. The old internship object is replaced with the new internship object using `InternshipModel::setInternship` .<br>
 7. `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` is then called to update the internship displayed on the `UI`.<br>
@@ -319,7 +359,7 @@ we decide to remove the `edit` command's ability to modify `TaskList` directly.
 The fields to determine if an internship is the same as another internship are `Company Name`, `Contact Name`, `Contact Phone`,
 `Contact Email`, `Role` and `Location`. `Application Status`, `Remark` and `Tasks` are excluded. Rationale is explained under the `add` command.
 
-### AddTask feature
+### Add Task feature
 The `addtask` command allows users to add tasks to the `TaskList` field of an existing internship entry. This allows users to
 keep track of the tasks they need to complete for each internship. The `TaskList` field contains an `ArrayList<Task>` field
 that stores the tasks for each internship. The `addtask` command directly adds a new `Task` object to the `TaskList` field
@@ -331,15 +371,15 @@ Here is a step-by-step example of how the `addtask` command might be executed:
 
 1. The user inputs the `addtask` command.<br>
 2. The `InternshipDataParser` parses the command and creates a new `InternshipAddTaskParser` object.<br>
-3. The `InternshipAddTaskParser` then calls the ArgumentTokenizer#tokenize to extract the index and the task to be added.<br>
+3. The `InternshipAddTaskParser` then calls the `ArgumentTokenizer::tokenize` to extract the index and the task to be added.<br>
 If either the index or the task is either missing or invalid, a ParseException will be thrown.<br>
 4. The `InternshipAddTaskParser` then creates a new `InternshipAddTaskCommand` object with the extracted details.<br>
 If the index is larger than the number of internships displayed, a CommandException will be thrown.<br>
-5. The `InternshipAddTaskCommand`'s execute() method is called, creating a new `Task` object based on the details. It then adds the task to the `TaskList` field of the internship entry via `TaskList::addTask`.<br>
+5. The `InternshipAddTaskCommand::execute` method is called, creating a new `Task` object based on the details. It then adds the task to the `TaskList` field of the internship entry via `TaskList::addTask`.<br>
 6. The `InternshipAddTaskCommand` then calls `InternshipModel::setInternship` to replace the old internship with the new one with the task.<br>
 7. The `InternshipAddTaskCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.<br>
 
-### SetDeadline feature
+### Set Deadline feature
 The `setdeadline` command allows users to set a deadline for a `Task` in the `TaskList` field of an existing internship entry.
 To use this command, the user needs to specify both the internship index and the task index as displayed in the screen, in addition
 to specifying the deadline. The `setdeadline` command directly replaces the deadline of the specified `Task` in the `TaskList` field
@@ -348,10 +388,10 @@ of the internship entry. The default deadline is `null`, and is displayed as a b
 Here is a step-by-step example of how the `setdeadline` command might be executed:
 
 1. The user inputs the `setdeadline` command.<br>
-2. The `InternshipSetDeadlineParser` then calls the `ArgumentTokenizer#tokenize` method to extract the internship index, task index and the deadline.<br>
+2. The `InternshipSetDeadlineParser` then calls the ``ArgumentTokenizer::tokenize`` method to extract the internship index, task index and the deadline.<br>
 If either the internship index, task index or the deadline is either missing or invalid, a ParseException will be thrown.<br>
 3. The `InternshipSetDeadlineParser` then creates an `InternshipSetDeadlineCommand` object with the extracted details.<br>
-4. The `InternshipSetDeadlineCommand`'s execute() method is called. The Internship is accessed via the given indexes, and the task with the corresponding task index has its deadline set via `setDeadline`.<br>
+4. The `InternshipSetDeadlineCommand::execute` method is called. The Internship is accessed via the given indexes, and the task with the corresponding task index has its deadline set via `setDeadline`.<br>
    If the internship index is larger than the number of internships displayed, a CommandException will be thrown.<br>
    If the task index is larger than the number of tasks in the `TaskList` field of the internship, a CommandException will be thrown.<br>
 5. The `InternshipSetDeadlineCommand` then calls `InternshipModel::setInternship` to trigger a UI update.<br>
@@ -373,7 +413,7 @@ check that it is a valid calendar date that is not in the past.<br>
     * Pros: Users will not forget to set a deadline.
     * Cons: May cause confusion for users who do not want to set a deadline.
 
-### DeleteTask feature
+### Delete Task feature
 The `deletetask` command allows users to delete a `Task` from the `TaskList` field of an existing internship entry.
 To use this command, the user needs to specify both the internship index and the task index as displayed in the screen.
 The `deletetask` command selects the specified `Task` in the `TaskList` field of the internship entry and removes it from its
@@ -385,11 +425,36 @@ Here is a step-by-step example of how the `deletetask` command might be executed
 2. The `InternshipDataParser` parses the command and creates a new `InternshipDeleteTaskCommandParser` object.
 If either the internship index or the task index is either missing or invalid, a ParseException will be thrown.
 3. The `InternshipDeleteTaskCommandParser` then creates a new `InternshipDeleteTaskCommand` object with the extracted details.
-4. The `InternshipDeleteTaskCommand`'s execute() method is called. The Internship is accessed via the given indexes, and the task with the corresponding task index is deleted.
+4. The `InternshipDeleteTaskCommand::execute` method is called. The Internship is accessed via the given indexes, and the task with the corresponding task index is deleted.
    If the internship index is larger than the number of internships displayed, a CommandException will be thrown.<br>
    If the task index is larger than the number of tasks in the `TaskList` field of the internship, a CommandException will be thrown.<br>
 5. The `InternshipDeleteTaskCommand` then calls `InternshipModel::setInternship` to trigger a UI update.<br>
 6. The `InternshipDeleteTaskCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.<br>
+
+### Remark Feature
+This feature enables users to add or modify remarks for each internship entry.
+All internships are initialised with a blank remark field. 
+The `addremark` command takes in the index of the internship and the remark to be added. A new internship object is created that contains the new remark, and the internship entry is updated with the new one.
+
+Here is a step-by-step example of how the `addremark` command might be executed:
+
+1. The user inputs the `addremark` command.
+2. The `InternshipDataParser` parses the command and creates a new `InternshipRemarkCommandParser` object.
+3. The `InternshipRemarkCommandParser` then calls `ArgumentTokenizer::tokenize` to extract the index and the remark to be added.
+   If either the internship index or the remark is missing, or duplicate prefixes are present, a ParseException will be thrown.
+4. The `InternshipRemarkCommandParser` then creates a new `InternshipRemarkCommand` object with the extracted details.
+5. The `InternshipRemarkCommand::execute` method is called. A new Internship object is created, with the remark field updated.
+6. The `InternshipRemarkCommand` then calls `InternshipModel::setInternship` to update the internship entry with the new one.
+7. The `InternshipRemarkCommand` then calls `InternshipModel::updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)` to update the internship displayed on the UI.
+
+#### Design considerations
+#### Aspect: Deleting Remarks
+* **Alternative 1 (current choice):** Deleting remarks is done via addremark with a blank remark.
+    * Pros: Simpler implementation.
+    * Cons: Not as intuitive as having a `deleteremark` command
+* **Alternative 2:** Implement a `deleteremark` command.
+    * Pros: More intuitive for the user.
+    * Cons: More complex implementation and documentation needed.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -817,21 +882,49 @@ Make sure to use the `exit` command or the close button to save data while closi
    
    2. To simulate a corrupted data file, edit the data file to contain some random text. Launch the app. The app should detect the corrupted file and automatically replace it with a new empty data file. You can then add new data to the app or reset the data to sample data by deleting the data file.
 
-#### Sort Feature
+### Finding internships
+For all the following test cases:
 
-1. Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
+Prerequisites: Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
+Then, list all internships using the `list` command.
+1. Filtering by company name
+   1. **Test case**: `find withall /com Amazon`<br>
+       **Expected**: 1 internship with the name 'Amazon' is shown. The status message shows how many internships were listed.
+
+   2. **Test case**: `find withall /com TikTok`<br>
+      **Expected**: No internships are shown. The status message shows how many internships were listed.
+
+   3. **Test case**: `find withall /com`<br>
+      **Expected**: Visible internships do not change. The status message shows an error message about needing at least one search keyword. 
+2. Filtering using `withall`
+   1. **Test case**: `find withall /loc remote /status TO_APPLY`<br>
+      **Expected**: 1 internship with both location 'REMOTE' and status 'TO_APPLY' is shown. The status message shows how many internships were listed.
+3. Filtering using `withany`
+    1. **Test case**: `find withany /com Amazon /status TO_APPLY`<br>
+       **Expected**: 2 internships with the company name 'Amazon' or status 'TO_APPLY' are shown. The status message shows how many internships were listed.
+4. Filtering with invalid mode
+   1. **Test case**: `find /com Amazon`<br>
+      **Expected**: Visible internships do not change. The status message shows an error message about invalid mode specified.
+   2. **Test case**: `find withInvalidMode /status pending`
+      **Expected**: Visible internships do not change. The status message shows an error message about invalid mode specified.
+5. Filtering with unsupported prefix `/phone`
+    1. **Test case**: `find withall /phone 12345678`<br>
+       **Expected**: Visible internships do not change. The status message shows an error message about unsupported prefix.
+
+### Sort Feature
+1. Prerequisites: Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
 
 2. Add another internship entry using the following command: `add /com Amazon /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 9089030 /loc remote /role Business Development Intern`
 
-    1. Test case: `sort /status desc`<br>
-       Expected: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
+    1. **Test case**: `sort /status desc`<br>
+       **Expected**: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
 
-    2. Test case: `sort /status asc` <br>
-       Expected: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
+    2. **Test case**: `sort /status asc` <br>
+       **Expected**: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
        ![Sort by status asc](./images/manual-testing/sort-by-status.png)<br>
 
-    3. Test case: `sort /com asc`<br>
-       Expected: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
+    3. **Test case**: `sort /com asc`<br>
+       **Expected**: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
        ![Sort by com asc](./images/manual-testing/status-sort-sort-by-com.png)<br>
 
 --------------------------------------------------------------------------------------------------------------------
