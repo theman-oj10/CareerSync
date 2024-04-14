@@ -1,0 +1,24 @@
+@startuml
+
+actor User
+participant "Command Parser" as CommandParser
+participant "Sorting Command Parser" as SortCommandParser
+participant "Internship Logic Manager" as InternshipLogicManager
+participant "Internship Model Manager" as InternshipModelManager
+participant "UI" as UI
+
+User -> CommandParser : "sort /com asc"
+CommandParser -> SortCommandParser : new SortCommandParser(arguments)
+SortCommandParser -> SortCommandParser : parse(arguments)
+SortCommandParser -> InternshipLogicManager : new SortCommand(FieldEnum, OrderEnum)
+
+InternshipLogicManager -> InternshipLogicManager : getComparator(FieldEnum, OrderEnum)
+InternshipLogicManager -> InternshipModelManager : sortFilteredInternshipList(Comparator)
+InternshipModelManager -> InternshipModelManager : sortFilteredInternshipList(Comparator)
+InternshipModelManager -> InternshipLogicManager : sorted internship list
+
+InternshipLogicManager -> UI : getFilteredInternshipList()
+UI -> InternshipModelManager : getFilteredInternshipList()
+InternshipModelManager -> UI : sorted internship list
+
+@enduml
