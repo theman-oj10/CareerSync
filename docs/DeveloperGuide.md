@@ -837,5 +837,5 @@ These fields are considered "compulsory" or "identity" fields, meaning they are 
    3. Test case: `sort /com asc`<br>
       Expected: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
       ![Sort by com asc](./images/manual-testing/status-sort-sort-by-com.png)<br>
-   
-  
+
+
