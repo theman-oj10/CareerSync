@@ -559,3 +559,33 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Design Decisions**
+
+### Prefix-based Command Format
+
+In the design of our command-line interface, we made the decision to use a prefix-based format for our commands, such as `/com` for company name, instead of the more conventional `com/`. <br> This decision was made based on several considerations:
+
+1. **Uniqueness**: The use of a leading slash makes our commands distinct and immediately recognizable. This reduces the likelihood of conflicts with other command-line applications or conventions.
+2. **Ease of Parsing**: Having a consistent prefix-based format simplifies the parsing process. The parser can easily identify the start of a parameter by looking for the `/` character.
+3. **User Experience**: While the `/com` format might be slightly unconventional, we found it to be just as intuitive, if not more so, for our users. The leading slash can be seen as an indicator that a new parameter is starting, making the commands easier to read and write.
+4. **Flexibility**: This design allows us to easily extend our command format in the future. For example, we could introduce new commands or parameters without worrying about them clashing with existing ones.
+
+We acknowledge that this design choice may have a slight learning curve for users who are accustomed to other command-line interfaces. However, we believe that the benefits in terms of uniqueness, ease of parsing, user experience, and flexibility outweigh this minor inconvenience.
+
+### Identity Fields in `isSameInternship` Method
+
+In the `Internship` class, the `isSameInternship` method is used to compare two `Internship` objects based on certain fields. 
+<br> These fields are `companyName`, `contactName`, `contactEmail`, `contactNumber`, `applicationStatus`, and `description`. 
+<br> The choice of these fields was based on the following considerations:
+
+1. **CompanyName**: The name of the company offering the internship is a crucial identifier. Two internships at different companies are definitely not the same.
+2. **ContactName**: The contact person for the internship could be important if the user needs to communicate with the company. Two internships with different contact persons might imply different points of contact, hence they are not the same.
+3. **ContactEmail**: Similar to `contactName`, the contact email could be a significant identifier as it might imply different points of contact.
+4. **ContactNumber**: The contact number, like the contact name and email, could be a significant identifier for the same reasons.
+5. **ApplicationStatus**: The status of the application (e.g., applied, accepted, rejected) is a crucial piece of information for the user. Two internships with different application statuses are not the same from the user's perspective.
+6. **Description**: The description of the internship could contain important details about the internship. Two internships with different descriptions are not the same.
+
+These fields are considered "compulsory" or "identity" fields, meaning they are essential to define the identity of an `Internship` object. If any of these fields differ between two `Internship` objects, then they are not considered the same internship. This design choice ensures that the `isSameInternship` method provides a meaningful comparison between two `Internship` objects.
