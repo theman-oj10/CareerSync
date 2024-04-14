@@ -13,6 +13,8 @@ title: Developer Guide
     - [InternshipStorage Component](#internshipstorage-component)
     - [Common classes](#common-classes)
 4. [Implementation](#implementation)
+    - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
+    - [[Proposed] Data archiving](#proposed-data-archiving)
     - [Find](#find-feature)
     - [Sort](#sort-feature)
     - [Edit](#edit-feature)
