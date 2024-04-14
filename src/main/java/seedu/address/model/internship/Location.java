@@ -7,12 +7,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents an Internship's location in the internship data.
  */
 public class Location {
-    public static final String MESSAGE_CONSTRAINTS = "Locations have to be either local, overseas, or remote";
+    public static final String MESSAGE_CONSTRAINTS = "Locations have to be either unknown, local, overseas, or remote.";
 
     public static final String VALIDATION_REGEX = "(?i)local|remote|overseas|unknown";
 
     /**
-     * Enum of locations
+     * Enum of locations. Location can be local, overseas, remote, or unknown.
      */
     public enum LocationEnum {
         LOCAL,

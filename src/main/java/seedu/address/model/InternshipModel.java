@@ -9,7 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.internship.Internship;
 
 /**
- * The API of the Model component.
+ * The API of the InternshipModel component.
  */
 public interface InternshipModel {
     /** {@code Predicate} that always evaluate to true */
@@ -41,12 +41,12 @@ public interface InternshipModel {
     Path getInternshipDataFilePath();
 
     /**
-     * Sets the user prefs internshipData file path.
+     * Sets the user prefs internship data file path.
      */
     void setInternshipDataFilePath(Path internshipDataFilePath);
 
     /**
-     * Replaces internship data with the data in {@code internshipData}.
+     * Replaces current internship data with the internship data in {@code internshipData}.
      */
     void setInternshipData(ReadOnlyInternshipData internshipData);
 
@@ -73,8 +73,6 @@ public interface InternshipModel {
     /**
      * Replaces the given internship {@code target} with {@code editedInternship}.
      * {@code target} must exist in the internship data.
-     * The internship identity of {@code editedInternship} must not be the same as another existing internship in the
-     * internship list.
      */
     void setInternship(Internship target, Internship editedInternship);
 
