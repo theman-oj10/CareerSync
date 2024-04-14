@@ -253,6 +253,42 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Find feature 
+The `find` feature allows users to search for internships based on the given keywords. This allows users to filter the
+view of internships in CareerSync for easier access to the internships they are interested in. The `find` command applies
+a filter predicate to the list of internships in the `InternshipModel` to display only the internships that match the given
+keywords. Successive `find` commands will replace the existing filter predicate, and does not further filter the displayed internships.
+
+This method takes in a search mode, either 'withany' or 'withall', and the prefix-keyword pairs to search for.
+The prefix here refers to the fields of the internship that the user wants to search for. 
+
+There can be multiple keywords per prefix, as well as multiple prefixes. Within each prefix, as long as any of the 
+keywords match the field, the internship will be displayed. 
+
+If the search mode is 'withall', at least one keyword in **all** prefixes must match the field for the internship to be displayed.
+If the search mode is 'withany', at least one keyword in **any** prefix must match the field for the internship to be displayed.
+
+Currently, the supported prefixes to search by are '/com', 'poc', 'loc', 'status', 'description', 'role', 'remark'.
+Here is a step-by-step example of how the `find` command might be executed:
+
+1. The user inputs the `find` command, passing in the relevant arguments.<br>
+2. `InternshipDataParser` parses the command and creates a new `InternshipFindCommandParser` object.<br>
+3. The `InternshipFindCommandParser` then calls ArgumentTokenizer#tokenize to extract the search mode and the prefix-keyword pairs.<br>
+    If an unsupported prefix or invalid mode is given, or missing prefix or keyword to search by, a ParseException will be thrown.<br>
+4. The `InternshipFindCommandParser` then creates a new `InternshipContainsKeywordsPredicate` object based on the search mode and prefix-keyword pairs.<br>
+5. The `InternshipFindCommandParser` then creates a new `InternshipFindCommand` object with the `InternshipContainsKeywordsPredicate` object from above.<br>
+5. The `InternshipFindCommand`'s execute() method is called, which calls `InternshipModel::updateFilteredInternshipList` 
+   to update the filter predicate in the `InternshipModel` with the `InternshipContainsKeywordsPredicate` object, updating the internships displayed in the UI. <br>
+
+#### Design considerations:
+* **Aspect: How the filter is implemented:**
+    * **Alternative 1 (current choice):** Uses a single `InternshipContainsKeywordsPredicate` object to filter the list of internships.
+        * Pros: All keywords are stored in a single object, making it easier to manage.
+        * Cons: More complex to implement.
+    * **Alternative 2:** Use separate `XYZContainsKeywordsPredicate` objects for each prefix.
+        * Pros: More modular code.
+        * Cons: Harder to test and maintain, due to the number of classes needed.
+
 ### Sort feature
 This feature allows users to sort the list of internships based on any one of the fields in ascending or descending order.
 The method takes in the field to sort by and the order of sorting as arguments.
