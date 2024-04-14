@@ -491,11 +491,11 @@ Users can edit existing internship details, including optional fields, to update
 Cons: Avoids `NULL` values being passed around and caused complications when testing other features. This approach may also introduce maintenance challenges and potential errors if not implemented correctly.
 
 **Conclusion:** <br>
-The transformation of certain fields in the Internship class to optional types enhances the flexibility and usability of the internship application. <br>
+The transformation of certain fields in the Internship class to optional types enhances the flexibility and usability of the internship application.
 By considering different states, usage scenarios, design considerations, and alternatives, the implementation ensures robustness and adaptability in managing internship data.
 
 **Recommendations:** <br>
-Thorough testing and validation are recommended to ensure the proper functioning of the modified Internship class in various usage scenarios. <br>
+Thorough testing and validation are recommended to ensure the proper functioning of the modified Internship class in various usage scenarios.
 Documentation updates should be performed to reflect the changes made and to provide clear guidelines on utilizing optional fields in the Internship class.
 
 --------------------------------------------------------------------------------------------------------------------
