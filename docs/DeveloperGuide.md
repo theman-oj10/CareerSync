@@ -263,7 +263,7 @@ view of internships in CareerSync for easier access to the internships they are 
 a filter predicate to the list of internships in the `InternshipModel` to display only the internships that match the given
 keywords. Successive `find` commands will replace the existing filter predicate, and does not further filter the displayed internships.
 
-This method takes in a search mode, either 'withany' or 'withall', and the prefix-keyword pairs to search for.
+This method takes in a search mode, either `withany` or `withall`, and the prefix-keyword pairs to search for.
 The prefix here refers to the fields of the internship that the user wants to search for. 
 
 There can be multiple keywords per prefix, as well as multiple prefixes. Within each prefix, as long as any of the 
@@ -272,7 +272,7 @@ keywords match the field, the internship will be displayed.
 If the search mode is 'withall', at least one keyword in **all** prefixes must match the field for the internship to be displayed.
 If the search mode is 'withany', at least one keyword in **any** prefix must match the field for the internship to be displayed.
 
-Currently, the supported prefixes to search by are '/com', '/poc', '/loc', '/status', '/description', '/role', '/remark'.
+Currently, the supported prefixes to search by are `/com`, `/poc`, `/loc`, `/status`, `/description`, `/role`, `/remark`.
 Here is a step-by-step example of how the `find` command might be executed:
 
 1. The user inputs the `find` command, passing in the relevant arguments.<br>
