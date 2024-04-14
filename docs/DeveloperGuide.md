@@ -255,13 +255,13 @@ the details of an internship entry without having to delete and re-add the entry
 modifiable. To modify `TaskList`, the commands `addTask` and `deleteTask` should be used.
 
 #### How it is implemented
-1. The `edit` command is parsed by the `InternshipEditCommandParser`, which creates an `InternshipEditCommand` object. 
-2. The `InternshipEditCommand` object is then executed by the `InternshipLogicManager`, which creates a new internship object
-with the updated details in the `InternshipModel`. 
-3. The `InternshipModel` then replaces the old internship object with the new one via `setInternship`. 
-4. The `InternshipModel` then notifies the `InternshipStorage` to save the updated data.
-5. The list is then refreshed with the updated internship through `InternshipModel` using `updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)`.
-This will cause all internships to display in the list - if the list is previously filtered using `find`, the filter will be removed.
+1. The `edit` command is parsed by the `InternshipDataParser`, which creates an `InternshipEditCommandParser` object. 
+2. The `InternshipEditCommandParser` then calls the `ArgumentTokenizer#tokenize` method to extract the index and the fields to be edited.
+3. The `InternshipEditCommandParser` then creates an `InternshipEditCommand` object with the extracted details.
+4. The `InternshipEditCommand` creates a new `Internship` object based on the details. It then checks whether the resulting new internship is either the same internship as the old one or already exists in the current list, using `isSameInternship` and `hasInternship`.
+5. If neither holds true, the `InternshipEditCommand` then calls `InternshipModel` to replace the old internship with the new one via `setInternship`.
+6. The `InternshipEditCommand` then calls `updateFilteredInternshipList` to update the internship displayed on the UI.
+7. The `InternshipEditCommand` then returns a `CommandResult` object with a message containing the fields of the new internship.
 
 #### Parsing user input
 1. The user inputs the `edit` command.
@@ -270,8 +270,8 @@ This will cause all internships to display in the list - if the list is previous
 If there are no prefixes, no index, invalid index or duplicate prefixes, a ParseException will be thrown.
 4. The `InternshipEditCommandParser` then creates a new `InternshipEditCommand` object with the extracted details.
    If the index is larger than the number of internships displayed, a CommandException will be thrown.
-5. The `InternshipEditCommand` then checks if the resulting new internship exists in the current list, using `hasInternship`. 
-If it does, an error message will be thrown.
+5. The `InternshipEditCommand` then checks if either the fields have changed, or the resulting internship already exists.
+If either are true, a CommandException will be thrown.
 6. The `InternshipEditCommand` is then executed by the `InternshipLogicManager`.
 
 #### Design Considerations
@@ -284,11 +284,23 @@ The `TaskList` field is not editable using the `edit` command, making it the onl
 tasks is facilitated using `addtask`, `deletetask` and `setdeadline` commands. As editing `TaskList` directly is not intuitive,
 we decide to remove the `edit` command's ability to modify `TaskList` directly.
 
+The fields to determine if an internship is the same as another internship are `Company Name`, `Contact Name`, `Contact Phone`,
+`Contact Email`, `Role` and `Location`. `Application Status`, `Remark` and `Tasks` are excluded. Rationale is explained under the `add` command.
+
 ### AddTask feature
 The `addtask` command allows users to add tasks to the `TaskList` field of an existing internship entry. This allows users to
 keep track of the tasks they need to complete for each internship. The `TaskList` field contains an `ArrayList<Task>` field 
 that stores the tasks for each internship. The `addtask` command directly adds a new `Task` object to the `TaskList` field
 of the internship entry.
+
+#### How it is implemented
+1. The `addtask` command is parsed by the `InternshipDataParser`, which creates an `InternshipAddTaskParser` object.
+2. The `InternshipAddTaskParser` then calls the `ArgumentTokenizer#tokenize` method to extract the index and the task to be added.
+3. The `InternshipAddTaskParser` then creates an `InternshipAddTaskCommand` object with the extracted details.
+4. The `InternshipAddTaskCommand` creates a new `Task` object based on the details. It then calls `InternshipModel` to add the task to the `TaskList` field of the internship entry via `addTask`.
+5. The `InternshipAddTaskCommand` then calls `setInternship` to replace the old internship with the new one with the task via `setInternship`.
+6. The `InternshipAddTaskCommand` then calls `updateFilteredInternshipList` to update the internship displayed on the UI.
+7. The `InternshipAddTaskCommand` then returns a `CommandResult` object with a message containing the task added.
 
 #### Parsing user input
 1. The user inputs the `edit` command.
@@ -303,6 +315,15 @@ The `setdeadline` command allows users to set a deadline for a `Task` in the `Ta
 To use this command, the user needs to specify both the internship index and the task index as displayed in the screen, in addition
 to specifying the deadline. The `setdeadline` command directly replaces the deadline of the specified `Task` in the `TaskList` field
 of the internship entry. The default deadline is `null`, and is displayed as a blank space in the UI.
+
+#### How it is implemented
+1. The `setdeadline` command is parsed by the `InternshipDataParser`, which creates an `InternshipSetDeadlineParser` object.
+2. The `InternshipSetDeadlineParser` then calls the `ArgumentTokenizer#tokenize` method to extract the internship index, task index and the deadline.
+3. The `InternshipSetDeadlineParser` then creates an `InternshipSetDeadlineCommand` object with the extracted details.
+4. The `InternshipSetDeadlineCommand` creates a new `Task` object based on the details. It then calls `InternshipModel` to set the deadline of the task in the `TaskList` field of the internship entry via `setDeadline`.
+5. The `InternshipSetDeadlineCommand` then calls `setInternship` to replace the old internship with the new one with the deadline via `setInternship`.
+6. The `InternshipSetDeadlineCommand` then calls `updateFilteredInternshipList` to update the internship displayed on the UI.
+7. The `InternshipSetDeadlineCommand` then returns a `CommandResult` object with a message containing the deadline set.
 
 #### Parsing user input
 1. The user inputs the `setdeadline` command.
@@ -336,6 +357,15 @@ The `deletetask` command allows users to delete a `Task` from the `TaskList` fie
 To use this command, the user needs to specify both the internship index and the task index as displayed in the screen.
 The `deletetask` command selects the specified `Task` in the `TaskList` field of the internship entry and removes it from its
 `ArrayList<Task> TaskList` field which stores all the `Task` objects.
+
+#### How it is implemented
+1. The `deletetask` command is parsed by the `InternshipDataParser`, which creates an `InternshipDeleteTaskParser` object.
+2. The `InternshipDeleteTaskParser` then calls the `ArgumentTokenizer#tokenize` method to extract the internship index and task index.
+3. The `InternshipDeleteTaskParser` then creates an `InternshipDeleteTaskCommand` object with the extracted details.
+4. The `InternshipDeleteTaskCommand` creates a new `Task` object based on the details. It then calls `InternshipModel` to delete the task from the `TaskList` field of the internship entry via `deleteTask`.
+5. The `InternshipDeleteTaskCommand` then calls `setInternship` to replace the old internship with the new one without the task via `setInternship`.
+6. The `InternshipDeleteTaskCommand` then calls `updateFilteredInternshipList` to update the internship displayed on the UI.
+7. The `InternshipDeleteTaskCommand` then returns a `CommandResult` object with a message containing the task deleted.
 
 #### Parsing user input
 1. The user inputs the `deletetask` command.
