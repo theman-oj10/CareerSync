@@ -249,7 +249,101 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Edit feature
+The `edit` feature allows users to modify the details of an existing internship entry. This allows the user to update 
+the details of an internship entry without having to delete and re-add the entry. All fields except for `TaskList` are
+modifiable. To modify `TaskList`, the commands `addTask` and `deleteTask` should be used.
 
+#### How it is implemented
+1. The `edit` command is parsed by the `InternshipEditCommandParser`, which creates an `InternshipEditCommand` object. 
+2. The `InternshipEditCommand` object is then executed by the `InternshipLogicManager`, which creates a new internship object
+with the updated details in the `InternshipModel`. 
+3. The `InternshipModel` then replaces the old internship object with the new one via `setInternship`. 
+4. The `InternshipModel` then notifies the `InternshipStorage` to save the updated data.
+5. The list is then refreshed with the updated internship through `InternshipModel` using `updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS)`.
+This will cause all internships to display in the list - if the list is previously filtered using `find`, the filter will be removed.
+
+#### Parsing user input
+1. The user inputs the `edit` command.
+2. The `InternshipDataParser` parses the command and creates a new `InternshipEditCommandParser` object.
+3. The `InternshipEditCommandParser` then calls the ArgumentTokenizer#tokenize to extract the index and the fields to be edited.
+If there are no prefixes, no index, invalid index or duplicate prefixes, a ParseException will be thrown.
+4. The `InternshipEditCommandParser` then creates a new `InternshipEditCommand` object with the extracted details.
+   If the index is larger than the number of internships displayed, a CommandException will be thrown.
+5. The `InternshipEditCommand` then checks if the resulting new internship exists in the current list, using `hasInternship`. 
+If it does, an error message will be thrown.
+6. The `InternshipEditCommand` is then executed by the `InternshipLogicManager`.
+
+#### Design Considerations
+In v1.2, the `edit` command initially allows users to edit all fields of an internship entry. In v1.3, with the addition of
+`Remark` and `TaskList`, we decide to have an additional command called `addremark` so that users can add remarks directly
+without using the `edit` command, with consideration that this field may be changed rather frequently. We preserved the ability
+to edit `Remark` using the `edit` command as it is more intuitive for the users.
+
+The `TaskList` field is not editable using the `edit` command, making it the only uneditable field using `edit`. The modification of 
+tasks is facilitated using `addtask`, `deletetask` and `setdeadline` commands. As editing `TaskList` directly is not intuitive,
+we decide to remove the `edit` command's ability to modify `TaskList` directly.
+
+### AddTask feature
+The `addtask` command allows users to add tasks to the `TaskList` field of an existing internship entry. This allows users to
+keep track of the tasks they need to complete for each internship. The `TaskList` field contains an `ArrayList<Task>` field 
+that stores the tasks for each internship. The `addtask` command directly adds a new `Task` object to the `TaskList` field
+of the internship entry.
+
+#### Parsing user input
+1. The user inputs the `edit` command.
+2. The `InternshipDataParser` parses the command and creates a new `InternshipAddTaskParser` object.
+3. The `InternshipAddTaskParser` then calls the ArgumentTokenizer#tokenize to extract the index and the task to be added.
+If either the index or the task is either missing or invalid, a ParseException will be thrown.
+4. The `InternshipAddTaskParser` then creates a new `InternshipAddTaskCommand` object with the extracted details.
+If the index is larger than the number of internships displayed, a CommandException will be thrown.
+
+### SetDeadline feature
+The `setdeadline` command allows users to set a deadline for a `Task` in the `TaskList` field of an existing internship entry.
+To use this command, the user needs to specify both the internship index and the task index as displayed in the screen, in addition
+to specifying the deadline. The `setdeadline` command directly replaces the deadline of the specified `Task` in the `TaskList` field
+of the internship entry. The default deadline is `null`, and is displayed as a blank space in the UI.
+
+#### Parsing user input
+1. The user inputs the `setdeadline` command.
+2. The `InternshipDataParser` parses the command and creates a new `InternshipSetDeadlineParser` object.
+3. The `InternshipSetDeadlineParser` then calls the ArgumentTokenizer#tokenize to extract the internship index, task index and the deadline.
+If either the internship index, task index or the deadline is either missing or invalid, a ParseException will be thrown.
+4. The `InternshipSetDeadlineParser` then creates a new `InternshipSetDeadlineCommand` object with the extracted details.
+If the internship index is larger than the number of internships displayed, a CommandException will be thrown.
+If the task index is larger than the number of tasks in the `TaskList` field of the internship, a CommandException will be thrown.
+
+#### Design Considerations
+For the deadline field's default value, we can have it either be null, or a default date that should not be used by any
+regular user. We decided to have the default value be null, as we do not want to cause confusion for users who do not want
+to set a deadline.
+We decide to choose `DD/MM/YYYY` as the date format for the deadline, as it is the most intuitive for users to understand.
+Other alternatives can be explored.
+A proposed improvement to this feature is to have the `isValidDeadline` not just check if it is a valid Java date, but also
+check that it is a valid calendar date that is not in the past.
+
+#### Aspect: Default value of deadline saved
+* **Alternative 1 (current choice):** Default value of deadline is null.
+    * Pros: More intuitive for users.
+    * Cons: May cause NullException issues when used for `equals` comparison.
+    * Solution: Have a `isDeadlineSet` boolean field in `Task` to check if the deadline is set.
+* **Alternative 2:** Default value of deadline is a default date.
+    * Pros: Users will not forget to set a deadline.
+    * Cons: May cause confusion for users who do not want to set a deadline.
+
+### DeleteTask feature
+The `deletetask` command allows users to delete a `Task` from the `TaskList` field of an existing internship entry.
+To use this command, the user needs to specify both the internship index and the task index as displayed in the screen.
+The `deletetask` command selects the specified `Task` in the `TaskList` field of the internship entry and removes it from its
+`ArrayList<Task> TaskList` field which stores all the `Task` objects.
+
+#### Parsing user input
+1. The user inputs the `deletetask` command.
+2. The `InternshipDataParser` parses the command and creates a new `InternshipDeleteTaskParser` object.
+If either the internship index or the task index is either missing or invalid, a ParseException will be thrown.
+3. The `InternshipDeleteTaskParser` then creates a new `InternshipDeleteTaskCommand` object with the extracted details.
+If the internship index is larger than the number of internships displayed, a CommandException will be thrown.
+If the task index is larger than the number of tasks in the `TaskList` field of the internship, a CommandException will be thrown.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
