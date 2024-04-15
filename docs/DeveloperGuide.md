@@ -482,7 +482,7 @@ When adding a new internship, optional fields such as location and role may rema
 **Editing Existing Internship:** <br>
 Users can edit existing internship details, including optional fields, to update or modify internship information as needed.
 
-#### Alternative Approach and Cons
+#### Design Considerations
 
 **Alternative Approach:** <br> The alternative approach was to directly transform role and location into optional fields using `Optional<>`. <br>
 
@@ -552,200 +552,183 @@ Your all-in-one solution for seamless application management.
 
 
 #### Use cases
+For all use cases below (unless specified otherwise): <br>
+**System**: `CareerSync` <br>
+**Actor**: `User` <br>
+**Precondition 1**: CareerSync is in working order <br>
+**Precondition 2**: There is at least one internship entry
+<br> * Not applicable to adding internship - you can have 0 entries at the start of this use case.
 
-(For all use cases below, the **System** is `CareerSync` and the **Actor** is the `user`, unless specified otherwise)
+**Use Case: Add Internship Entry From Main Window**
 
-**Use Case: Enter Internship Entry From Main Window**
-
-**MSS**
-1. User accesses the main window.
-2. User inputs the command, specifying internship details.
-3. System validates the input data.
-4. System saves the internship information.
-5. System displays the added internship details in the message box.
-6. Internship details are now visible in the main window.
-
-Use case ends.
-
-**Extensions** <br>
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-3a. System recognizes that user has entered invalid internship details. <br>
-3a1. System displays an error message indicating the validation error(s). <br>
+**MSS:**
+1. User inputs command in the CLI, specifying the internship details to be added.
+2. System displays success message, along with added internship details in the message box.
+3. Internship details are now visible in the main window.
 
 Use case ends.
+
+**Extensions:** <br>
+* 1a. System recognizes that user has entered invalid internship details. <br>
+  * 1a1. System displays an error message indicating the validation error(s). <br>
+  * 1a2. User enters new data. <br>
+    Steps 1a1-1a2 are repeated until the data entered are correct. <br>
+    Use case resumes from step 2.
 
 **Use Case: Edit Internship Entry From Main Window**
 
-**MSS**
-1. User accesses the main window.
-2. User uses the command to input the internship to be edited and the modifications.
-3. System validates the modified data.
-4. System saves the updated internship information.
-5. System displays all modified internship details in the message box.
-6. Internship details (with updates) are now visible in the main window.
+**MSS:**
+1. User inputs command in the CLI, specifying the index of the internship to be edited and the parameters.
+2. System displays success message, along with edited internship's details in the message box.
+3. Updated Internship details are now visible in the main window.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-3a. System recognizes that user has entered invalid values for one or more field(s). <br>
-3a1. System displays an error message indicating that the internship already exists in the internship list. <br>
-3a2. System displays an error message indicating the internship index error. <br>
-
-Use case ends.
+* 1a. System recognizes that user has entered invalid arguments.<br>
+  * 1a1. System displays an error message<br>
+  * 1a2. User enters new data. <br>
+    Steps 1a1-1a2 are repeated until the data entered are correct. <br>
+    Use case resumes from step 2.
 
 **Use Case: Delete Internship Entry From Main Window**
 
-**MSS**
-1. User accesses the main window.
-2. User uses the command to specify which internship entry is to be deleted.
-3. System removes the internship entry.
-4. System displays a confirmation message indicating successful deletion and containing details of the deleted internship.
-5. Internship can no longer be seen in the main window.
+**MSS:**
+1. User inputs command in the CLI, specifying the index of the internship to be deleted.
+2. System displays success message, along with deleted internship's details in the message box.
+3. Updated Internship list is now visible in the main window, and deleted internship is no longer visible.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-2a. System recognizes that user has entered invalid internship index. <br>
-2a1. System displays an error message indicating the index error. <br>
-
-Use case ends.
+* 1a. System recognizes that user has entered an invalid internship index. <br>
+  * 1a1. System displays an error message indicating the index error. <br>
+  * 1a2. User enters new index. <br>
+    Steps 1a1-1a2 are repeated until the index entered is correct. <br>
+    Use case resumes from step 2.
 
 **Use Case: Sort Internship Entries From Main Window**
 
-**MSS**
-1. User accesses the main window.
-2. User uses the command to specify how the visible internships should be sorted.
-3. System displays the internship entries in the specified order, within the main window.
+**MSS:**
+1. User inputs command in the CLI, specifying parameters for sort command.
+2. System displays success message, along with number of internships listed in the message box.
+3. Internship list is now visible in the main window, with internship entries in the sorted order.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-2a. System recognizes that user has entered invalid sort conditions. <br>
-2a1. System displays an error message indicating the error(s). <br>
-
-Use case ends.
+* 1a. System recognizes that user has entered invalid sort parameters. <br>
+  * 1a1. System displays an error message indicating the error(s).<br>
+  * 1a2. User enters new data. <br>
+    Steps 1a1-1a2 are repeated until the data entered are correct. <br>
+    Use case resumes from step 2.
 
 **Use Case: Find Internship Entries (withAll) From Main Window**
 
-**MSS**
-1. User accesses the main window.
-2. User uses the command to specify which internship entries to find based on the conditions stated by the user.
-3. System displays all internship entries which matches all of the specified conditions, within the main window.
+**MSS:**
+1. User inputs command in the CLI, specifying parameters for find command.
+2. System displays success message, along with the number of matching internships entries found in the message box.
+3. System displays all internship entries which matches all specified conditions, within the main window.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-3a. System recognizes that user has entered invalid find conditions. <br>
-3a1. System displays an error message indicating the condition error(s). <br>
-3a. No matching internship entries found. <br>
-3a1. System displays a message indicating no matching results found. <br>
-
-Use case ends.
+* 1a. System recognizes that user has entered invalid find conditions. <br>
+  * 1a1. System displays an error message indicating the condition error(s). <br>
+  * 1a2. User enters new data. <br>
+    Steps 1a1-1a2 are repeated until the data entered are correct. <br>
+    Use case resumes from step 2.
+* 2a. No matching internship entries found. <br>
+  * 2a1. System displays a message indicating no matching results found and no internships will be listed in the main window. <br>
+    Use case ends.
 
 **Use Case: Find Internship Entries (withAny) From Main Window**
 
-**MSS**
-1. User accesses the main window.
-2. User uses the command to specify which internship entries to find based on the conditions stated by the user.
+**MSS:**
+1. User inputs command in the CLI, to specify which internship entries to find, based on the conditions stated by the user.
+2. System displays success message, along with the number of matching internships entries found in the message box.
 3. System displays all internship entries which matches any of the specified conditions, within the main window.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-3a. System recognizes that user has entered invalid find conditions. <br>
-3a1. System displays an error message indicating the condition error(s). <br>
-3a. No matching internship entries found. <br>
-3a1. System displays a message indicating no matching results found. <br>
-
-Use case ends.
-
+* 1a. System recognizes that user has entered invalid find conditions. <br>
+    * 1a1. System displays an error message indicating the condition error(s). <br>
+    * 1a2. User enters new data. <br>
+      Steps 1a1-1a2 are repeated until the data entered are correct. <br>
+      Use case resumes from step 2.
+* 2a. No matching internship entries found. <br>
+    * 2a1. System displays a message indicating no matching results found and no internships will be listed in the main window. <br>
+      Use case ends.
 
 **Use Case: Add Internship Task From Main Window**
 
-**MSS**
-1. User accesses the main window.
-2. User uses the command to specify which internship entry to add a task to and the task details.
-3. System validates that the task is valid.
-4. System displays the updated internship entry details in the message box.
-5. System displays full list of internships.
+**MSS:**
+1. User inputs command in the CLI, to specify which internship entries to find, based on the conditions stated by the user.
+2. System displays success message, along with the details of the task added, found in the message box.
+3. System displays full list of internships.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-2a. System recognizes that user has entered invalid task details. <br>
-2a1. System displays an error message indicating the task detail error(s). <br>
-
-Use case ends.
+* 1a. System recognizes that user has entered invalid task details. <br>
+    * 1a1. System displays an error message indicating the validation error(s). <br>
+    * 1a2. User enters new data. <br>
+      Steps 1a1-1a2 are repeated until the data entered are correct. <br>
+      Use case resumes from step 2.
 
 **Use Case: Delete Internship Task From Main Window**
 
-**MSS**
-1. User accesses the main window. 
-2. User uses the command to specify which internship task to delete. 
+**MSS:**
+1. User inputs command in the CLI, to specify the internship entry and the task to delete from it.
+2. System displays success message, along with the details of the deleted task in the message box.
 3. System displays full list of internships.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-2a. System recognizes that user has entered an invalid internship and/or task index. <br>
-2a1. System displays an error message indicating the index error. <br>
-
-Use case ends.
+* 1a. System recognizes that user has entered invalid task index. <br>
+    * 1a1. System displays an error message indicating the index error. <br>
+    * 1a2. User enters new index. <br>
+      Steps 1a1-1a2 are repeated until the index entered is correct. <br>
+      Use case resumes from step 2.
 
 **Use Case: Set Deadline For Internship Task From Main Window**
 
-**MSS**
-1. User accesses the main window.
-2. User uses the command to specify which internship task to set a deadline for. 
+**MSS:**
+1. User inputs command in the CLI, to specify the internship entry and the task to add the deadline to.
+2. System displays success message, along with the deadline added in the message box.
 3. System displays full list of internships.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-3a. System recognizes that user has entered an invalid deadline. <br>
-3a1. System displays an error message indicating the invalid deadline error. <br>
-
-Use case ends.
+* 1a. System recognizes that user has entered invalid deadline. <br>
+    * 1a1. System displays an error message indicating the validation error. <br>
+    * 1a2. User enters new deadline. <br>
+      Steps 1a1-1a2 are repeated until the data entered is correct. <br>
+      Use case resumes from step 2.
 
 **Use Case: Open Detailed Internship View From Main Window**
 
-**MSS**
-1. User accesses the main window.
-2. User selects the internship entry for which the detailed view will be opened.
-3. System displays a detailed view of the selected internship entry.
+**MSS:**
+1. User selects the internship entry for which the detailed view will be opened.
+2. System displays a detailed view of the selected internship entry.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-
-Use case ends.
+* 1a. User is unable to access the detailed internship view. <br>
+  Use case ends.
 
 #### Non-Functional Requirements
 
@@ -1030,32 +1013,27 @@ Note that to try out the below example commands you will need to reset the data 
 10. **Detecting space characters between argument's prefix and value:** For example, the command`edit 1 /company`runs successfully and updates the first internship's company field to the value`pany`. This may cause issues when the user misremembers the prefix for an argument. In the future we will implement checks that will check for a space between a prefix and its value.
     <br>Command: `edit 1 /company`
     <br>![Space between prefix and value](./images/planned-enhancements/space-in-edit-command.png)<br><br>
-
+<div class='page-break'></div>
 --------------------------------------------------------------------------------------------------------------------
-
 ## **Appendix: Effort**
 #### Project Overview
-Our project is a brownfield project aimed at enhancing the functionality of a contact management application AB3 (Address Book 3). CareerSync manages the persons of contact affiliated with internships and the relevant internship data. As such we had to refactor our code to include this additional information. Additionally, the key enhancements included implementing a detailed view page, tasks, remarks, and finding and sorting features. These improvements aimed to provide our target users with an efficient and intuitive experience while managing their internships.<br>
+CareerSync manages the persons of contact affiliated with internships and the relevant information. We had to refactor our code to include this additional information. We enhanced the existing AB3 codebase to create an efficient and intuitive experience for managing internships.<br>
 
 #### Difficulty Level and Challenges Faced
-* The first challenge faced was refactoring the code to suit our new requirements. Since we were changing all the data we had to explore the implementation on a very fundamental level and gain a deep understanding of the codebase. Since most of us have not worked on such a large project we found this quite challenging.
-* While implementing Optional fields, we initially made use of Optional<>, which created many issues when testing other features due to the use and passing of NULL values. Eventually, our team came together to brainstorm solutions and decided to have default values set instead of accepting NULL values (for optional fields). This way, our team could resolve the issues we were experiencing while still retaining the optional feature capabilities.
-* Implementing the clickable detailed view page was another challenge as we had to create a new page and our team generally found difficulty in dealing with the UI. Implementing headless testing for UI components so that code coverage can be satisfied for GitHub CI/CD was a challenge. It required a whole new library dependency and framework (TestFX) for testing UI components which was not easily referenced from the existing codebase. If an internship was selected via the detailed view, and it was simultaneously edited in the the main window, the internship would disappear from the detailed view window. After prolonged debugging, the problem was isolated to the commands that edit the 'state' of the Internship. The issue was resolved by fixing the equality checks used by the detailed view page.
+Notable challenges faced include:
+* Implemented Optional fields initially using Optional<>, leading to issues with NULL values. Transitioning to default values resolved the issue while preserving optional feature capabilities
+* Implementing headless testing for UI components so that code coverage can be satisfied for GitHub CI/CD was a challenge. It required a whole new library dependency and framework (TestFX) for testing UI components.
 
 #### Effort Required
-As a team, we have put a lot of effort into this project. Firstly through the process of examining and understanding the codebase and coming up with useful features that could improve user experience. We had to streamline our ideas and come up with a feasible plan to manage the workload.<br><br>
-Following this planning out user requirements, user stories, and use cases was something new to us, and we spent a fair bit of time on this. As for the actual implementation, while we are not new to programming, a brownfield collaborative project is unfamiliar territory. In the first few weeks, we made countless errors when it came to setting up build tools and adhering to the general workflow.<br><br>
-Finally, the documentation required was extensive and required careful examination. This is something we had to sit down and go through together as a team multiple times.<br>
-
+Initially, we analyzed the codebase and identified features to enhance user experience. We then navigated through new territory, defining user requirements, stories, and use cases, though we faced numerous errors during tool setup and workflow adherence. Lastly, extensive documentation demanded thorough, repeated review sessions as a team.
 #### Achievements
-Despite the challenges encountered, the team achieved several milestones that significantly strengthened the application`s functionality and user experience. Some of these key achievements include:<br>
-* Successful integration of optional field capabilities for an internship entry, offering users more flexibility in adding and editing internship entries.
+Despite the challenges encountered, the team achieved several milestones such as:<br>
 * Redesigning command formats to cater to our target users and improve user experience.
-* Implementation of find and sorting functionalities, encouraging and enabling users to use the application to navigate and manage their internship entries efficiently.
+* Implementation of find and sorting functionalities, enabling users to manage their internship entries efficiently.
 * Introduction of a remark feature, ensuring that the application facilitates the inclusion of additional information.
 * Introduction of a task feature, allowing users to add tasks relating to an internship entry and add suitable deadlines.<br>
 
 #### Effort Saved Through Reuse:
-While we did not have a lot of code reuse or use of external dependencies, we used the TestFx (an extension of JavaFx) library to implement headless testing to write automated test cases for our UI components. This was done to ensure that we don’t sacrifice on code coverage of our tests for the new Ui components, to ensure they work perfectly well.
+While we did not have any code reuse or use of external dependencies, we used the TestFx (an extension of JavaFx) library to implement headless testing.
 
 
