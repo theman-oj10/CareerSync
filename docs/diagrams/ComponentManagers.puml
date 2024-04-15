@@ -4,28 +4,28 @@ skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
-package Logic as LogicPackage {
-Class "<<interface>>\nInternshipLogic" as Logic
+package InternshipLogic as InternshipLogicPackage {
+Class "<<interface>>\nInternshipLogic" as InternshipLogic
 Class InternshipLogicManager
 }
 
-package Model as ModelPackage {
-Class "<<interface>>\nInternshipModel" as Model
+package InternshipModel as InternshipModelPackage {
+Class "<<interface>>\nInternshipModel" as InternshipModel
 Class InternshipModelManager
 }
 
-package Storage as StoragePackage {
-Class "<<interface>>\nStorage" as Storage
-Class StorageManager
+package InternshipStorage as InternshipStoragePackage {
+Class "<<interface>>\nInternshipStorage" as InternshipStorage
+Class InternshipStorageManager
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Logic
+HiddenOutside ..> InternshipLogic
 
-InternshipLogicManager .up.|> Logic
-InternshipModelManager .up.|> Model
-StorageManager .up.|> Storage
+InternshipLogicManager .up.|> InternshipLogic
+InternshipModelManager .up.|> InternshipModel
+InternshipStorageManager .up.|> InternshipStorage
 
-InternshipLogicManager --> Model
-InternshipLogicManager --> Storage
+InternshipLogicManager --> InternshipModel
+InternshipLogicManager --> InternshipStorage
 @enduml

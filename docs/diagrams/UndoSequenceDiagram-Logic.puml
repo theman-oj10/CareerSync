@@ -2,45 +2,45 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
-box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+box InternshipLogic LOGIC_COLOR_T1
+participant ":InternshipLogicManager" as InternshipLogicManager LOGIC_COLOR
+participant ":InternshipDataParser" as InternshipDataParser LOGIC_COLOR
 participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
 end box
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+box InternshipModel MODEL_COLOR_T1
+participant ":InternshipModel" as InternshipModel MODEL_COLOR
 end box
-[-> LogicManager : execute(undo)
-activate LogicManager
+[-> InternshipLogicManager : execute(undo)
+activate InternshipLogicManager
 
-LogicManager -> AddressBookParser : parseCommand(undo)
-activate AddressBookParser
+InternshipLogicManager -> InternshipDataParser : parseCommand(undo)
+activate InternshipDataParser
 
 create UndoCommand
-AddressBookParser -> UndoCommand
+InternshipDataParser -> UndoCommand
 activate UndoCommand
 
-UndoCommand --> AddressBookParser
+UndoCommand --> InternshipDataParser
 deactivate UndoCommand
 
-AddressBookParser --> LogicManager : u
-deactivate AddressBookParser
+InternshipDataParser --> InternshipLogicManager : u
+deactivate InternshipDataParser
 
-LogicManager -> UndoCommand : execute()
+InternshipLogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : undoAddressBook()
-activate Model
+UndoCommand -> InternshipModel : undoInternshipData()
+activate InternshipModel
 
-Model --> UndoCommand
-deactivate Model
+InternshipModel --> UndoCommand
+deactivate InternshipModel
 
-UndoCommand --> LogicManager : result
+UndoCommand --> InternshipLogicManager : result
 deactivate UndoCommand
-UndoCommand -[hidden]-> LogicManager : result
+UndoCommand -[hidden]-> InternshipLogicManager : result
 destroy UndoCommand
 
-[<--LogicManager
-deactivate LogicManager
+[<--InternshipLogicManager
+deactivate InternshipLogicManager
 @enduml
