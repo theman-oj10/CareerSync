@@ -775,6 +775,7 @@ Use case ends.
 * **JSON**: JavaScript Object Notation. A lightweight data-interchange format that is human-readable.
 * **Mainstream OS**: Mainstream Operating Systems. Refers to Windows, Linux, Unix and MacOS.
 * **UI**: User Interface. The point where a user and a software application meet and interact.
+* **CLI**: Command-Line Interface. Allows users to interact with a computer program or operating system by typing text-based commands into a terminal or console.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -787,188 +788,178 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-#### Launch and shutdown
+### Launch and shutdown
 
 1. Initial launch
 
     1. Download the CareerSync.jar file and copy into an empty folder
-
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-   
-   2. Alternatively run the jar file from the command line with `java -jar CareerSync.jar` Expected: Same as above.
-
-1. Saving window preferences
+    2. Double-click the jar file 
+       **Expected**: Shows the GUI with a set of sample internships. The window size may not be optimum.
+    3. Alternatively run the jar file from the command line with `java -jar CareerSync.jar` 
+       **Expected**: Same as above.
+<br><br>
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
+    2. Re-launch the app by double-clicking the jar file.<br>
+       **Expected**: The most recent window size and location is retained.
+<br><br>
 3. Exiting the app
 
     1. Click the close button on the window.<br>
-       Expected: The app closes.
-       
+       **Expected**: The app closes. 
     2. Use the `exit` command.<br>
-       Expected: The app closes.
+       **Expected**: The app closes.
 
 ### Adding an internship
 
 1. Adding an internship 
 
     1. Prerequisites: Ensure that internship list is empty and that there are no existing entries similar to the successful internship entries used here
-
-    1. Test case: `add /com Tiktok /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 90890301 /loc remote /role Software Intern`<br>
-       Expected: Internship is added to the list in the Main Window. Details of the internship are shown in the Message Box, Main Window and Detailed Internship View.
-
-    1. Test case: `add /com Facebook /desc create new recommendation engine /status ongoing /poc sally tan /email hr@facebook.com /phone 90890375`<br>
-       Expected: Internship is added to the list in the Main Window. Details of the internship are shown in the Message Box, Main Window and Detailed Internship View.
-
-    1. Test case: `add /com Google /desc create new recommendation forum /status accepted /poc jane tan /email hr@google.com`<br>
-       Expected: Internship is not added to the list in the Main Window. Details of the internship are not shown in the Message Box, Main Window and Detailed Internship View. <br>
-       Reason: The internship entry is missing some compulsory fields (in this case, the phone number of the contact)
+    1. **Test case**: `add /com Tiktok /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 90890301 /loc remote /role Software Intern`<br>
+       **Expected**: Internship is added to the list in the Main Window. Details of the internship are shown in the Message Box, Main Window and Detailed Internship View.
+    1. **Test case**: `add /com Facebook /desc create new recommendation engine /status ongoing /poc sally tan /email hr@facebook.com /phone 90890375`<br>
+       **Expected**: Internship is added to the list in the Main Window. Details of the internship are shown in the Message Box, Main Window and Detailed Internship View.
+    1. **Test case**: `add /com Google /desc create new recommendation forum /status accepted /poc jane tan /email hr@google.com`<br>
+       **Expected**: Internship is not added to the list in the Main Window. Details of the internship are not shown in the Message Box, Main Window and Detailed Internship View. <br>
+       **Reason**: The internship entry is missing some compulsory fields (in this case, the phone number of the contact)
 
 ### Deleting an internship
 
 1. Deleting an internship while all internships are being shown or specific internships based on find command
 
     1. Prerequisites: List all internships using the `list` command. Multiple internships in the list.
-
-    1. Test case: `delete 1`<br>
-       Expected: First internship is deleted from the list. Details of the deleted internship shown in the message box. Details of the internship are no longer visible in the Main Window.
-
-    1. Test case: `delete 0`<br>
-       Expected: No internship is deleted. Error details shown in the message box. All internships remains visible in the Main Window and Detailed Internship View.
-
-    1. Test case: `delete -1`<br>
-      Expected: No internship is deleted. Error details shown in the message box. All internships remains visible in the Main Window and Detailed Internship View.
+    1. **Test case**: `delete 1`<br>
+       **Expected**: First internship is deleted from the list. Details of the deleted internship shown in the message box. Details of the internship are no longer visible in the Main Window.
+    1. **Test case**: `delete 0`<br>
+       **Expected**: No internship is deleted. Error details shown in the message box. All internships remains visible in the Main Window and Detailed Internship View.
+    1. **Test case**: `delete -1`<br>
+       **Expected**: No internship is deleted. Error details shown in the message box. All internships remains visible in the Main Window and Detailed Internship View.
 
 ### Editing an internship
 
 1. Editing a single field of an internship
 
-1. **Test case**: `edit 1 /com Facebook`<br>
-   **Expected**: The name of the first internship is changed to `Facebook`. Details of the edited internship shown in the status message.
-
-
-2. Repeat for all other fields of an internship other than `TaskList`.
-   **Expected**: Similar to previous.
-
-
-3. **Test case**: `edit 0 /com editedName`<br>
-   **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
-
-
-4. **Test case**: `edit 1 /email invalidemail`<br>
-   **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
-
-
-5. Other incorrect edit commands to try: `edit`, `edit x`, `edit 1`,`edit -1`,`edit 1 /com`, `edit x /com Facebook` where x is larger than the list size<br>
-   **Expected**: Similar to previous.
-
-
+   1. **Test case**: `edit 1 /com Facebook`<br>
+      **Expected**: The name of the first internship is changed to `Facebook`. Details of the edited internship shown in the status message.
+   2. Repeat for all other fields of an internship other than `TaskList`.
+      **Expected**: Similar to previous.
+   3. **Test case**: `edit 0 /com editedName`<br>
+      **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
+   4. **Test case**: `edit 1 /email invalidemail`<br>
+      **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
+   5. Other incorrect edit commands to try: `edit`, `edit x`, `edit 1`,`edit -1`,`edit 1 /com`, `edit x /com Facebook` where x is larger than the list size<br>
+      **Expected**: Similar to previous.
+      <br><br>
 2. Editing multiple fields of an internship
 
-
-1. **Test case**: `edit 1 /com Facebook /email google@gmail.com`<br>
-   **Expected**: The name of the company of the first internship is changed to `Facebook` and the email is changed to `google@gmail.com`. Details of the edited internship shown in the status message.
-
-
-2. Repeat for different combinations of fields.
-   **Expected**: Similar to previous.
-
-
-3. **Test case**: `edit 1 /com /com`<br>
-   **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
-
-
-4. **Test case**: `edit 1 /com Facebook /email`<br>
-   **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
-
-
+   1. **Test case**: `edit 1 /com Facebook /email google@gmail.com`<br>
+      **Expected**: The name of the company of the first internship is changed to `Facebook` and the email is changed to `google@gmail.com`. Details of the edited internship shown in the status message.
+   2. Repeat for different combinations of fields.
+      **Expected**: Similar to previous.
+   3. **Test case**: `edit 1 /com /com`<br>
+      **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
+   4. **Test case**: `edit 1 /com Facebook /email`<br>
+      **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same. <br>
+      <br><br>
 3. Editing resulting in a duplicate internship
 
-
-1. Prerequisites: Have at least one other internship. Add this internship to the list using this command: `add /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999 /remark This is a remark.`. Run `list` and ensure that this new internship added does not have index 1.
-
-
-2. **Test case**:  `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999 /remark This is a remark.`
-   **Expected**: No internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
-
-
-3. **Test case**:  `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999`
-   **Expected**: No internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
-
-
-4. **Test case**: `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com`, then `edit 1 /phone 99999999`
-   **Expected**: For first command, for the first internship, the name of the company is changed to `TikTok`, status is changed to `ongoing`, description to `Software Intern`, point of contact to `John`, email to `tiktok@gmail.com`.
-   For second command, no internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
-
+   1. Prerequisites: Have at least one other internship. Add this internship to the list using this command: `add /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999 /remark This is a remark.`. Run `list` and ensure that this new internship added does not have index 1.
+   2. **Test case**:  `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999 /remark This is a remark.`
+      **Expected**: No internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
+   3. **Test case**:  `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999`
+      **Expected**: No internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
+   4. **Test case**: `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com`, then `edit 1 /phone 99999999`
+      **Expected**: For first command, for the first internship, the name of the company is changed to `TikTok`, status is changed to `ongoing`, description to `Software Intern`, point of contact to `John`, email to `tiktok@gmail.com`.
+      For second command, no internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
 
 ### Adding a task to an existing internship
 
-
 1. Adding a task to an existing internship
 
-1. Prerequisites: Ensure that there is at least one internship.
-
-2. **Test case**: `addtask 1 /task Attend meeting`<br>
-   **Expected**: A task `Attend meeting` is added to the task list of the first internship. Details of the added task shown in the status message.
-
-
-3. **Test case**: `addtask 0 /task Attend meeting`<br>
-   **Expected**: No task is added. Error details shown in the status message. Status bar remains the same.
-
-
-4. Other incorrect addtask commands to try: `addtask`, `addtask x`, `addtask 1`,`addtask -1 /task Attend meeting`, `addtask 1 /task`, `addtask x /task Attend meeting` (where x is larger than the list size)<br>
-   **Expected**: Similar to previous.
-
+   1. Prerequisites: Ensure that there is at least one internship.
+   2. **Test case**: `addtask 1 /task Attend meeting`<br>
+      **Expected**: A task `Attend meeting` is added to the task list of the first internship. Details of the added task shown in the status message.
+   3. **Test case**: `addtask 0 /task Attend meeting`<br>
+      **Expected**: No task is added. Error details shown in the status message. Status bar remains the same.
+   4. Other incorrect addtask commands to try: `addtask`, `addtask x`, `addtask 1`,`addtask -1 /task Attend meeting`, `addtask 1 /task`, `addtask x /task Attend meeting` (where x is larger than the list size)<br>
+      **Expected**: Similar to previous.
 
 ### Setting the deadline of a task in an existing internship
 
-
 1. Setting the deadline of a task in an existing internship
 
-
-1. Prerequisites: Ensure that there is at least one internship. Add a task to the first internship using the `addtask 1 /task Attend meeting` command.
-
-
-2. **Test case**: `setdeadline 1 /selecttask 1 /deadline 10/10/2024`<br>
-   **Expected**: The deadline of the first task is set to `10/10/2024`. New deadline shown in the status message.
-
-
-3. **Test case**: `setdeadline 1 /selecttask 1 /deadline 11/10/2024`<br>
-   **Expected**: The deadline of the first task is set to `11/10/2024`. New deadline shown in the status message.
-
-
-4. **Test case**: `setdeadline 0 /selecttask 1 /deadline 10/10/2024`<br>
-   **Expected**: No task is edited. Error details shown in the status message. Status bar remains the same.
-
-
-5. Other incorrect `setdeadline` commands to try: `setdeadline`, `setdeadline 1`,`setdeadline -1 /selecttask 1 /deadline 10/10/2024`,`setdeadline 1 1`, `setdeadline 1 /selecttask 1 /deadline 10-10-2024`, `setdeadline 1 /selecttask 1 10/10/2024`, `setdeadline 1 /selecttask 1 /deadline`, `setdeadline x /selecttask 1 /deadline 10/10/2024` (where x is larger than the internship list size), `setdeadline 1 /selecttask x /deadline 10/10/2024` (where x is larger than the task list size)<br>
-   **Expected**: Similar to previous.
-
+   1. Prerequisites: Ensure that there is at least one internship. Add a task to the first internship using the `addtask 1 /task Attend meeting` command.
+   2. **Test case**: `setdeadline 1 /selecttask 1 /deadline 10/10/2024`<br>
+      **Expected**: The deadline of the first task is set to `10/10/2024`. New deadline shown in the status message.
+   3. **Test case**: `setdeadline 1 /selecttask 1 /deadline 11/10/2024`<br>
+      **Expected**: The deadline of the first task is set to `11/10/2024`. New deadline shown in the status message.
+   4. **Test case**: `setdeadline 0 /selecttask 1 /deadline 10/10/2024`<br>
+      **Expected**: No task is edited. Error details shown in the status message. Status bar remains the same.
+   5. Other incorrect `setdeadline` commands to try: `setdeadline`, `setdeadline 1`,`setdeadline -1 /selecttask 1 /deadline 10/10/2024`,`setdeadline 1 1`, `setdeadline 1 /selecttask 1 /deadline 10-10-2024`, `setdeadline 1 /selecttask 1 10/10/2024`, `setdeadline 1 /selecttask 1 /deadline`, `setdeadline x /selecttask 1 /deadline 10/10/2024` (where x is larger than the internship list size), `setdeadline 1 /selecttask x /deadline 10/10/2024` (where x is larger than the task list size)<br>
+      **Expected**: Similar to previous.
 
 ### Deleting a task from an internship
 
-
 1. Deleting a task from an existing internship
 
+   1. Prerequisites: Ensure that there is at least one internship. Add a task to the first internship using the `addtask 1 /task Attend meeting` command.
+   2. **Test case**: `deletetask 1 /selecttask 1`<br>
+      **Expected**: The first task is deleted from the task list of the first internship. Details of the deleted task shown in the status message.
+   3. **Test case**: `deletetask 0 /selecttask 1`<br>
+      **Expected**: No task is deleted. Error details shown in the status message. Status bar remains the same.
+   4. Other incorrect deletetask commands to try: `deletetask`, `deletetask -1`, `deletetask x`, `deletetask 1`, `deletetask 1 /selecttask x` (where x is larger than the task list size)<br>
+      **Expected**: Similar to previous.
 
-1. Prerequisites: Ensure that there is at least one internship. Add a task to the first internship using the `addtask 1 /task Attend meeting` command.
+### Finding internships
+For all the following test cases:
 
+Prerequisites: Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
+Then, list all internships using the `list` command.
+1. Filtering by company name
 
-2. **Test case**: `deletetask 1 /selecttask 1`<br>
-   **Expected**: The first task is deleted from the task list of the first internship. Details of the deleted task shown in the status message.
+    1. **Test case**: `find withall /com Amazon`<br>
+       **Expected**: 1 internship with the name 'Amazon' is shown. The status message shows how many internships were listed.
+    2. **Test case**: `find withall /com TikTok`<br>
+       **Expected**: No internships are shown. The status message shows how many internships were listed.
+    3. **Test case**: `find withall /com`<br>
+       **Expected**: Visible internships do not change. The status message shows an error message about needing at least one search keyword.
+       <br><br>
+2. Filtering using `withall`
 
+    1. **Test case**: `find withall /loc remote /status TO_APPLY`<br>
+       **Expected**: 1 internship with both location 'REMOTE' and status 'TO_APPLY' is shown. The status message shows how many internships were listed.
+       <br><br>
+3. Filtering using `withany`
 
-3. **Test case**: `deletetask 0 /selecttask 1`<br>
-   **Expected**: No task is deleted. Error details shown in the status message. Status bar remains the same.
+    1. **Test case**: `find withany /com Amazon /status TO_APPLY`<br>
+       **Expected**: 2 internships with the company name 'Amazon' or status 'TO_APPLY' are shown. The status message shows how many internships were listed.
+       <br><br>
+4. Filtering with invalid mode
 
+    1. **Test case**: `find /com Amazon`<br>
+       **Expected**: Visible internships do not change. The status message shows an error message about invalid mode specified.
+    2. **Test case**: `find withInvalidMode /status pending`
+       **Expected**: Visible internships do not change. The status message shows an error message about invalid mode specified.
+       <br><br>
+5. Filtering with unsupported prefix `/phone`
 
-4. Other incorrect deletetask commands to try: `deletetask`, `deletetask -1`, `deletetask x`, `deletetask 1`, `deletetask 1 /selecttask x` (where x is larger than the task list size)<br>
-   **Expected**: Similar to previous.
+    1. **Test case**: `find withall /phone 12345678`<br>
+       **Expected**: Visible internships do not change. The status message shows an error message about unsupported prefix.
 
+### Sort Feature
+1. Prerequisites: Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
+   <br><br>
+2. Add another internship entry using the following command: `add /com Amazon /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 9089030 /loc remote /role Business Development Intern`
+
+    1. Test case: `sort /status desc`<br>
+       Expected: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
+    2. Test case: `sort /status asc` <br>
+       Expected: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
+       ![Sort by status asc](./images/manual-testing/sort-by-status.png)<br>
+    3. Test case: `sort /com asc`<br>
+       Expected: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
+       ![Sort by com asc](./images/manual-testing/status-sort-sort-by-com.png)<br>
 
 #### Saving data
 
@@ -977,8 +968,7 @@ Make sure to use the `exit` command or the close button to save data while closi
 1. Dealing with missing/corrupted data files
 
     1. To simulate a missing data file, delete the data file(`./data/internshipdata.json`) before launching the app. You will notice that the app automatically creates a new data file and repopulates it with sample data. To remove the sample data, enter the `clear` command.
-   
-   2. To simulate a corrupted data file, edit the data file to contain some random text. Launch the app. The app should detect the corrupted file and automatically replace it with a new empty data file. You can then add new data to the app or reset the data to sample data by deleting the data file.
+    2. To simulate a corrupted data file, edit the data file to contain some random text. Launch the app. The app should detect the corrupted file and automatically replace it with a new empty data file. You can then add new data to the app or reset the data to sample data by deleting the data file.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1017,51 +1007,6 @@ These fields are considered "compulsory" or "identity" fields, meaning they are 
 It is important to note that these explanations view the fields in isolation. When equality checks are performed, all available fields are considered.
 
 These fields are considered "identity" fields (not all are compulsory, referring to the optional role and location fields), meaning they are essential to define the identity of an `Internship` object. If any of these fields differ between two `Internship` objects, then they are not considered the same internship. This design choice ensures that the `isSameInternship` method provides a meaningful comparison between two `Internship` objects.
-
-### Finding internships
-For all the following test cases:
-
-Prerequisites: Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
-Then, list all internships using the `list` command.
-1. Filtering by company name
-   1. **Test case**: `find withall /com Amazon`<br>
-       **Expected**: 1 internship with the name 'Amazon' is shown. The status message shows how many internships were listed.
-
-   2. **Test case**: `find withall /com TikTok`<br>
-      **Expected**: No internships are shown. The status message shows how many internships were listed.
-
-   3. **Test case**: `find withall /com`<br>
-      **Expected**: Visible internships do not change. The status message shows an error message about needing at least one search keyword. 
-2. Filtering using `withall`
-   1. **Test case**: `find withall /loc remote /status TO_APPLY`<br>
-      **Expected**: 1 internship with both location 'REMOTE' and status 'TO_APPLY' is shown. The status message shows how many internships were listed.
-3. Filtering using `withany`
-    1. **Test case**: `find withany /com Amazon /status TO_APPLY`<br>
-       **Expected**: 2 internships with the company name 'Amazon' or status 'TO_APPLY' are shown. The status message shows how many internships were listed.
-4. Filtering with invalid mode
-   1. **Test case**: `find /com Amazon`<br>
-      **Expected**: Visible internships do not change. The status message shows an error message about invalid mode specified.
-   2. **Test case**: `find withInvalidMode /status pending`
-      **Expected**: Visible internships do not change. The status message shows an error message about invalid mode specified.
-5. Filtering with unsupported prefix `/phone`
-    1. **Test case**: `find withall /phone 12345678`<br>
-       **Expected**: Visible internships do not change. The status message shows an error message about unsupported prefix.
-
-### Sort Feature
-1. Prerequisites: Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
-
-2. Add another internship entry using the following command: `add /com Amazon /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 9089030 /loc remote /role Business Development Intern`
-
-    1. Test case: `sort /status desc`<br>
-      Expected: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
-   
-    2. Test case: `sort /status asc` <br>
-      Expected: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
-      ![Sort by status asc](./images/manual-testing/sort-by-status.png)<br>
-   
-    3. Test case: `sort /com asc`<br>
-      Expected: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
-      ![Sort by com asc](./images/manual-testing/status-sort-sort-by-com.png)<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
