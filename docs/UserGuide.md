@@ -149,7 +149,7 @@ The main window of <span style="color: #f66a0a;">CareerSync</span> is divided in
 
 #### Internship Fields
 The names of the fields for each internship application is as stated below. When you edit these fields, you will see the changes reflected in the display.
-For the restrictions on what is accepted for each field, kindly refer to [Fields Summary](#fields-summary).
+For the restrictions on what is accepted for each field, kindly refer to [Fields Summary](#field-summary).
 
 ![Fields Annotation](images/introduction/FieldsAnnotation.png){: .smaller-responsive-image}
 
