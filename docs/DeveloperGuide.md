@@ -486,7 +486,7 @@ When adding a new internship, optional fields such as location and role may rema
 **Editing Existing Internship:** <br>
 Users can edit existing internship details, including optional fields, to update or modify internship information as needed.
 
-#### Alternative Approach and Cons
+#### Design Considerations
 
 **Alternative Approach:** <br> The alternative approach was to directly transform role and location into optional fields using `Optional<>`. <br>
 
@@ -556,12 +556,15 @@ Your all-in-one solution for seamless application management.
 
 
 #### Use cases
-
-(For all use cases below, the **System** is `CareerSync` and the **Actor** is the `user`, unless specified otherwise)
+For all use cases below (unless specified otherwise): <br>
+**System**: `CareerSync` <br>
+**Actor**: `User` <br>
+**Preconditions**: `CareerSync is in working order` and `There is at least one internship entry` 
+<br> * Not applicable to adding internship, tasks and deadlines - you can have 0 entries for these use cases.
 
 **Use Case: Enter Internship Entry From Main Window**
 
-**MSS**
+**MSS:**
 1. User accesses the main window.
 2. User inputs the command, specifying internship details.
 3. System validates the input data.
@@ -571,17 +574,17 @@ Your all-in-one solution for seamless application management.
 
 Use case ends.
 
-**Extensions** <br>
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-3a. System recognizes that user has entered invalid internship details. <br>
-3a1. System displays an error message indicating the validation error(s). <br>
-
-Use case ends.
+**Extensions:** <br>
+* 1a. User is unable to access the main window. <br>
+  * 1a1. System displays an error message. <br>
+    Use case ends. 
+* 3a. System recognizes that user has entered invalid internship details. <br>
+  * 3a1. System displays an error message indicating the validation error(s). <br>
+    Use case resumes from Step 2.
 
 **Use Case: Edit Internship Entry From Main Window**
 
-**MSS**
+**MSS:**
 1. User accesses the main window.
 2. User uses the command to input the internship to be edited and the modifications.
 3. System validates the modified data.
@@ -591,19 +594,20 @@ Use case ends.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-3a. System recognizes that user has entered invalid values for one or more field(s). <br>
-3a1. System displays an error message indicating that the internship already exists in the internship list. <br>
-3a2. System displays an error message indicating the internship index error. <br>
-
-Use case ends.
+* 1a. User is unable to access the main window. <br>
+  * 1a1. System displays an error message. <br>
+    Use case ends.
+* 3a. System recognizes that user has entered invalid values for one or more field(s). <br>
+  * 3a1. System displays an error message indicating that the internship already exists in the internship list. <br>
+    Use case resumes from Step 2.
+  * 3a2. System displays an error message indicating the internship index error. <br>
+    Use case resumes from Step 2.
 
 **Use Case: Delete Internship Entry From Main Window**
 
-**MSS**
+**MSS:**
 1. User accesses the main window.
 2. User uses the command to specify which internship entry is to be deleted.
 3. System removes the internship entry.
@@ -612,77 +616,78 @@ Use case ends.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-2a. System recognizes that user has entered invalid internship index. <br>
-2a1. System displays an error message indicating the index error. <br>
-
-Use case ends.
+* 1a. User is unable to access the main window. <br>
+  * 1a1. System displays an error message. <br>
+    Use case ends.
+* 2a. System recognizes that user has entered invalid internship index. <br>
+  * 2a1. System displays an error message indicating the index error. <br>
+    Use case resumes from Step 2.
 
 **Use Case: Sort Internship Entries From Main Window**
 
-**MSS**
+**MSS:**
 1. User accesses the main window.
 2. User uses the command to specify how the visible internships should be sorted.
 3. System displays the internship entries in the specified order, within the main window.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-2a. System recognizes that user has entered invalid sort conditions. <br>
-2a1. System displays an error message indicating the error(s). <br>
-
-Use case ends.
+* 1a. User is unable to access the main window. <br>
+  * 1a1. System displays an error message. <br>
+    Use case ends.
+* 2a. System recognizes that user has entered invalid sort conditions. <br>
+  * 2a1. System displays an error message indicating the error(s). <br>
+    Use case resumes from Step 2.
 
 **Use Case: Find Internship Entries (withAll) From Main Window**
 
-**MSS**
+**MSS:**
 1. User accesses the main window.
 2. User uses the command to specify which internship entries to find based on the conditions stated by the user.
 3. System displays all internship entries which matches all of the specified conditions, within the main window.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-3a. System recognizes that user has entered invalid find conditions. <br>
-3a1. System displays an error message indicating the condition error(s). <br>
-3a. No matching internship entries found. <br>
-3a1. System displays a message indicating no matching results found. <br>
-
-Use case ends.
+* 1a. User is unable to access the main window. <br>
+  * 1a1. System displays an error message. <br>
+    Use case ends.
+* 2a. System recognizes that user has entered invalid find conditions. <br>
+  * 2a1. System displays an error message indicating the condition error(s). <br>
+    Use case resumes from Step 2.
+* 3a. No matching internship entries found. <br>
+  * 3a1. System displays a message indicating no matching results found. <br>
+    Use case ends.
 
 **Use Case: Find Internship Entries (withAny) From Main Window**
 
-**MSS**
+**MSS:**
 1. User accesses the main window.
 2. User uses the command to specify which internship entries to find based on the conditions stated by the user.
 3. System displays all internship entries which matches any of the specified conditions, within the main window.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-3a. System recognizes that user has entered invalid find conditions. <br>
-3a1. System displays an error message indicating the condition error(s). <br>
-3a. No matching internship entries found. <br>
-3a1. System displays a message indicating no matching results found. <br>
-
-Use case ends.
-
+* 1a. User is unable to access the main window. <br>
+  * 1a1. System displays an error message. <br>
+    Use case ends.
+* 2a. System recognizes that user has entered invalid find conditions. <br>
+  * 2a1. System displays an error message indicating the condition error(s). <br>
+    Use case resumes from Step 2.
+* 3a. No matching internship entries found. <br>
+  * 3a1. System displays a message indicating no matching results found. <br>
+    Use case ends.
 
 **Use Case: Add Internship Task From Main Window**
 
-**MSS**
+**MSS:**
 1. User accesses the main window.
 2. User uses the command to specify which internship entry to add a task to and the task details.
 3. System validates that the task is valid.
@@ -691,65 +696,64 @@ Use case ends.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-2a. System recognizes that user has entered invalid task details. <br>
-2a1. System displays an error message indicating the task detail error(s). <br>
-
-Use case ends.
+* 1a. User is unable to access the main window. <br>
+  * 1a1. System displays an error message. <br>
+    Use case ends.
+* 2a. System recognizes that user has entered invalid task details. <br>
+  * 2a1. System displays an error message indicating the task detail error(s). <br>
+    Use case resumes from Step 2.
 
 **Use Case: Delete Internship Task From Main Window**
 
-**MSS**
+**MSS:**
 1. User accesses the main window. 
 2. User uses the command to specify which internship task to delete. 
 3. System displays full list of internships.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-2a. System recognizes that user has entered an invalid internship and/or task index. <br>
-2a1. System displays an error message indicating the index error. <br>
-
-Use case ends.
+* 1a. User is unable to access the main window. <br>
+  * 1a1. System displays an error message. <br>
+    Use case ends.
+* 2a. System recognizes that user has entered an invalid internship and/or task index. <br>
+  * 2a1. System displays an error message indicating the index error. <br>
+    Use case resumes from Step 2.
 
 **Use Case: Set Deadline For Internship Task From Main Window**
 
-**MSS**
+**MSS:**
 1. User accesses the main window.
 2. User uses the command to specify which internship task to set a deadline for. 
 3. System displays full list of internships.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-1a1. System displays an error message. <br>
-3a. System recognizes that user has entered an invalid deadline. <br>
-3a1. System displays an error message indicating the invalid deadline error. <br>
-
-Use case ends.
+* 1a. User is unable to access the main window. <br>
+  * 1a1. System displays an error message. <br>
+    Use case ends.
+* 3a. System recognizes that user has entered an invalid deadline. <br>
+  * 3a1. System displays an error message indicating the invalid deadline error. <br>
+    Use case resumes from Step 2.
 
 **Use Case: Open Detailed Internship View From Main Window**
 
-**MSS**
+**MSS:**
 1. User accesses the main window.
 2. User selects the internship entry for which the detailed view will be opened.
 3. System displays a detailed view of the selected internship entry.
 
 Use case ends.
 
-**Extensions**
+**Extensions:**
 
-1a. User is unable to access the main window. <br>
-
-Use case ends.
+* 1a. User is unable to access the main window. <br>
+  Use case ends.
 
 #### Non-Functional Requirements
 
