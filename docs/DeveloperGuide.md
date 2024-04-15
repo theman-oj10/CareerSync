@@ -69,7 +69,7 @@ The bulk of the app's work is done by the following four components:
 * [**`UI`**](#ui-component): The UI of the App.
 * [**`InternshipLogic`**](#internshiplogic-component): The command executor.
 * [**`InternshipModel`**](#internshipmodel-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`InternshipStorage`**](#internshipstorage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
@@ -82,7 +82,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `Internship{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `InternshipLogic` component defines its API in the `InternshipLogic.java` interface and implements its functionality using the `InternshipLogicManager.java` class which follows the `InternshipLogic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -107,7 +107,7 @@ The `UI` component,
 * executes user commands using the `InternshipLogic` component.
 * listens for changes to `InternshipModel` data so that the UI can be updated with the modified data.
 * keeps a reference to the `InternshipLogic` component, because the `UI` relies on the `InternshipLogic` to execute commands.
-* depends on some classes in the `Internship` component, as it displays `Internship` object residing in the `InternshipModel`.
+* depends on some classes in the `InternshipModel` component, as it displays `Internship` object residing in the `InternshipModel`.
 
 #### InternshipLogic component
 
@@ -121,15 +121,15 @@ The sequence diagram below illustrates the interactions within the `InternshipLo
 
 ![Interactions Inside the InternshipLogic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `InternshipDeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
 How the `InternshipLogic` component works:
 
 1. When `InternshipLogic` is called upon to execute a command, it is passed to an `InternshipDataParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `InternshipLogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
+1. This results in a `InternshipCommand` object (more precisely, an object of one of its subclasses e.g., `InternshipDeleteCommand`) which is executed by the `InternshipLogicManager`.
+1. The command can communicate with the `InternshipModel` when it is executed (e.g. to delete an internship).<br>
+   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `InternshipModel`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `InternshipLogic`.
 
 Here are the other classes in `InternshipLogic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -137,8 +137,8 @@ Here are the other classes in `InternshipLogic` (omitted from the class diagram 
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `InternshipDataParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `InternshipDataParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `InternshipDataParser` class creates an `InternshipXYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `InternshipAddCommandParser`) which uses the other classes shown above to parse the user command and create a `InternshipXYZCommand` object (e.g., `InternshipAddCommand`) which the `InternshipDataParser` returns back as a `InternshipCommand` object.
+* All `InternshipXYZCommandParser` classes (e.g., `InternshipAddCommandParser`, `InternshipDeleteCommandParser`, ...) inherit from the `InternshipParser` interface so that they can be treated similarly where possible e.g, during testing.
 
 #### InternshipModel component
 **API** : [`InternshipModel.java`](https://github.com/AY2324S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/model/InternshipModel.java)
@@ -146,7 +146,7 @@ How the parsing works:
 <img src="images/InternshipModelClassDiagram.png" width="450" />
 
 
-The `Model` component,
+The `InternshipModel` component,
 
 * stores the internship data i.e., all `Internship` objects (which are contained in a `UniqueInternshipList` object).
 * stores the currently 'selected' `Internship` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Internship>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
@@ -162,15 +162,16 @@ The `Model` component,
 The `InternshipStorage` component,
 * can save both internship data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `InternshipDataStorage` and `InternshipUserPrefsStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `InternshipModel` component (because the `Storage` component's job is to save/retrieve objects that belong to the `InternshipModel`)
+* depends on some classes in the `InternshipModel` component (because the `InternshipStorage` component's job is to save/retrieve objects that belong to the `InternshipModel`)
 
 #### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-# **Implementation**
+### **Implementation**
+
 This section describes some noteworthy details on how certain features are implemented.
 
 #### \[Proposed\] Undo/redo feature
@@ -179,11 +180,11 @@ This section describes some noteworthy details on how certain features are imple
 
 The proposed undo/redo mechanism is facilitated by `VersionedInternshipData`. It extends `InternshipData` with an undo/redo history, stored internally as an `internshipDataStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedInternshipData#commit()` — Saves the current address book state in its history.
-* `VersionedInternshipData#undo()` — Restores the previous address book state from its history.
-* `VersionedInternshipData#redo()` — Restores a previously undone address book state from its history.
+* `VersionedInternshipData::commit` — Saves the current internship data state in its history.
+* `VersionedInternshipData::undo` — Restores the previous internship data state from its history.
+* `VersionedInternshipData::redo` — Restores a previously undone internship data state from its history.
 
-These operations are exposed in the `InternshipModel` interface as `InternshipModel#commitInternshipData()`, `InternshipModel#undoInternshipData()` and `InternshipModel#redoInternshipData()` respectively.
+These operations are exposed in the `InternshipModel` interface as `InternshipModel::commitInternshipData`, `InternshipModel::undoInternshipData` and `InternshipModel::redoInternshipData` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
@@ -191,50 +192,52 @@ Step 1. The user launches the application for the first time. The `VersionedInte
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the internship data. The `delete` command calls `InternshipModel#commitInternshipData()`, causing the modified state of the internship data after the `delete 5` command executes to be saved in the `internshipDataStateList`, and the `currentStatePointer` is shifted to the newly inserted internship data state.
+Step 2. The user executes `delete 5` command to delete the 5th internship in the internship data. The `delete` command calls `InternshipModel::commitInternshipData`, causing the modified state of the internship data after the `delete 5` command executes to be saved in the `internshipDataStateList`, and the `currentStatePointer` is shifted to the newly inserted internship data state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new internship. The `add` command also calls `InternshipModel#commitInternshipData()`, causing another modified internship data state to be saved into the `internshipDataStateList`.
+Step 3. The user executes `add /com Facebook …​` to add a new internship. The `add` command also calls `InternshipModel::commitInternshipData`, causing another modified internship data state to be saved into the `internshipDataStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `InternshipModel#commitInternshipData()`, so the address book state will not be saved into the `internshipDataStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `InternshipModel::commitInternshipData`, so the internship data state will not be saved into the `internshipDataStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the internship was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `InternshipModel#undoInternshipData()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous internship data state, and restores the internship data to that state.
+Step 4. The user now decides that adding the internship was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `InternshipModel::undoInternshipData`, which will shift the `currentStatePointer` once to the left, pointing it to the previous internship data state, and restores the internship data to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial InternshipData state, then there are no previous InternshipData states to restore. The `undo` command uses `InternshipModel#canUndoInternshipData()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial InternshipData state, then there are no previous InternshipData states to restore. The `undo` command uses `InternshipModel::canUndoInternshipData` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
 
 The following sequence diagram shows how an undo operation goes through the `InternshipLogic` component:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-InternshipLogic.png)
+![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `InternshipUndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+Similarly, how an undo operation goes through the `InternshipModel` component is shown below:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
-The `redo` command does the opposite — it calls `InternshipModel#redoInternshipData()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the internship data to that state.
+The `redo` command does the opposite — it calls `InternshipModel::redoInternshipData`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the internship data to that state.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `internshipDataStateList.size() - 1`, pointing to the latest internship data state, then there are no undone InternshipData states to restore. The `redo` command uses `InternshipModel#canRedoInternshipData()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the internship data, such as `list`, will usually not call `InternshipModel#commitInternshipData()`, `InternshipModel#undoInternshipData()` or `InternshipModel#redoInternshipData()`. Thus, the `internshipDataStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the internship data, such as `list`, will usually not call `InternshipModel::commitInternshipData`, `InternshipModel::undoInternshipData` or `InternshipModel::redoInternshipData`. Thus, the `internshipDataStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `InternshipModel#commitInternshipData()`. Since the `currentStatePointer` is not pointing at the end of the `internshipDataStateList`, all internship data states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `InternshipModel::commitInternshipData`. Since the `currentStatePointer` is not pointing at the end of the `internshipDataStateList`, all internship data states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add /com Facebook …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -252,7 +255,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Pros: Will use less memory (e.g. for `delete`, just save the internship being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -776,6 +779,7 @@ Use case ends.
 * **JSON**: JavaScript Object Notation. A lightweight data-interchange format that is human-readable.
 * **Mainstream OS**: Mainstream Operating Systems. Refers to Windows, Linux, Unix and MacOS.
 * **UI**: User Interface. The point where a user and a software application meet and interact.
+* **CLI**: Command-Line Interface. Allows users to interact with a computer program or operating system by typing text-based commands into a terminal or console.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -788,188 +792,178 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-#### Launch and shutdown
+### Launch and shutdown
 
 1. Initial launch
 
     1. Download the CareerSync.jar file and copy into an empty folder
-
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-   
-   2. Alternatively run the jar file from the command line with `java -jar CareerSync.jar` Expected: Same as above.
-
-1. Saving window preferences
+    2. Double-click the jar file 
+       **Expected**: Shows the GUI with a set of sample internships. The window size may not be optimum.
+    3. Alternatively run the jar file from the command line with `java -jar CareerSync.jar` 
+       **Expected**: Same as above.
+<br><br>
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
+    2. Re-launch the app by double-clicking the jar file.<br>
+       **Expected**: The most recent window size and location is retained.
+<br><br>
 3. Exiting the app
 
     1. Click the close button on the window.<br>
-       Expected: The app closes.
-       
+       **Expected**: The app closes. 
     2. Use the `exit` command.<br>
-       Expected: The app closes.
+       **Expected**: The app closes.
 
 ### Adding an internship
 
 1. Adding an internship 
 
     1. Prerequisites: Ensure that internship list is empty and that there are no existing entries similar to the successful internship entries used here
-
-    1. Test case: `add /com Tiktok /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 90890301 /loc remote /role Software Intern`<br>
-       Expected: Internship is added to the list in the Main Window. Details of the internship are shown in the Message Box, Main Window and Detailed Internship View.
-
-    1. Test case: `add /com Facebook /desc create new recommendation engine /status ongoing /poc sally tan /email hr@facebook.com /phone 90890375`<br>
-       Expected: Internship is added to the list in the Main Window. Details of the internship are shown in the Message Box, Main Window and Detailed Internship View.
-
-    1. Test case: `add /com Google /desc create new recommendation forum /status accepted /poc jane tan /email hr@google.com`<br>
-       Expected: Internship is not added to the list in the Main Window. Details of the internship are not shown in the Message Box, Main Window and Detailed Internship View. <br>
-       Reason: The internship entry is missing some compulsory fields (in this case, the phone number of the contact)
+    1. **Test case**: `add /com Tiktok /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 90890301 /loc remote /role Software Intern`<br>
+       **Expected**: Internship is added to the list in the Main Window. Details of the internship are shown in the Message Box, Main Window and Detailed Internship View.
+    1. **Test case**: `add /com Facebook /desc create new recommendation engine /status ongoing /poc sally tan /email hr@facebook.com /phone 90890375`<br>
+       **Expected**: Internship is added to the list in the Main Window. Details of the internship are shown in the Message Box, Main Window and Detailed Internship View.
+    1. **Test case**: `add /com Google /desc create new recommendation forum /status accepted /poc jane tan /email hr@google.com`<br>
+       **Expected**: Internship is not added to the list in the Main Window. Details of the internship are not shown in the Message Box, Main Window and Detailed Internship View. <br>
+       **Reason**: The internship entry is missing some compulsory fields (in this case, the phone number of the contact)
 
 ### Deleting an internship
 
 1. Deleting an internship while all internships are being shown or specific internships based on find command
 
     1. Prerequisites: List all internships using the `list` command. Multiple internships in the list.
-
-    1. Test case: `delete 1`<br>
-       Expected: First internship is deleted from the list. Details of the deleted internship shown in the message box. Details of the internship are no longer visible in the Main Window.
-
-    1. Test case: `delete 0`<br>
-       Expected: No internship is deleted. Error details shown in the message box. All internships remains visible in the Main Window and Detailed Internship View.
-
-    1. Test case: `delete -1`<br>
-      Expected: No internship is deleted. Error details shown in the message box. All internships remains visible in the Main Window and Detailed Internship View.
+    1. **Test case**: `delete 1`<br>
+       **Expected**: First internship is deleted from the list. Details of the deleted internship shown in the message box. Details of the internship are no longer visible in the Main Window.
+    1. **Test case**: `delete 0`<br>
+       **Expected**: No internship is deleted. Error details shown in the message box. All internships remains visible in the Main Window and Detailed Internship View.
+    1. **Test case**: `delete -1`<br>
+       **Expected**: No internship is deleted. Error details shown in the message box. All internships remains visible in the Main Window and Detailed Internship View.
 
 ### Editing an internship
 
 1. Editing a single field of an internship
 
-1. **Test case**: `edit 1 /com Facebook`<br>
-   **Expected**: The name of the first internship is changed to `Facebook`. Details of the edited internship shown in the status message.
-
-
-2. Repeat for all other fields of an internship other than `TaskList`.
-   **Expected**: Similar to previous.
-
-
-3. **Test case**: `edit 0 /com editedName`<br>
-   **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
-
-
-4. **Test case**: `edit 1 /email invalidemail`<br>
-   **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
-
-
-5. Other incorrect edit commands to try: `edit`, `edit x`, `edit 1`,`edit -1`,`edit 1 /com`, `edit x /com Facebook` where x is larger than the list size<br>
-   **Expected**: Similar to previous.
-
-
+   1. **Test case**: `edit 1 /com Facebook`<br>
+      **Expected**: The name of the first internship is changed to `Facebook`. Details of the edited internship shown in the status message.
+   2. Repeat for all other fields of an internship other than `TaskList`.
+      **Expected**: Similar to previous.
+   3. **Test case**: `edit 0 /com editedName`<br>
+      **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
+   4. **Test case**: `edit 1 /email invalidemail`<br>
+      **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
+   5. Other incorrect edit commands to try: `edit`, `edit x`, `edit 1`,`edit -1`,`edit 1 /com`, `edit x /com Facebook` where x is larger than the list size<br>
+      **Expected**: Similar to previous.
+      <br><br>
 2. Editing multiple fields of an internship
 
-
-1. **Test case**: `edit 1 /com Facebook /email google@gmail.com`<br>
-   **Expected**: The name of the company of the first internship is changed to `Facebook` and the email is changed to `google@gmail.com`. Details of the edited internship shown in the status message.
-
-
-2. Repeat for different combinations of fields.
-   **Expected**: Similar to previous.
-
-
-3. **Test case**: `edit 1 /com /com`<br>
-   **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
-
-
-4. **Test case**: `edit 1 /com Facebook /email`<br>
-   **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
-
-
+   1. **Test case**: `edit 1 /com Facebook /email google@gmail.com`<br>
+      **Expected**: The name of the company of the first internship is changed to `Facebook` and the email is changed to `google@gmail.com`. Details of the edited internship shown in the status message.
+   2. Repeat for different combinations of fields.
+      **Expected**: Similar to previous.
+   3. **Test case**: `edit 1 /com /com`<br>
+      **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
+   4. **Test case**: `edit 1 /com Facebook /email`<br>
+      **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same. <br>
+      <br><br>
 3. Editing resulting in a duplicate internship
 
-
-1. Prerequisites: Have at least one other internship. Add this internship to the list using this command: `add /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999 /remark This is a remark.`. Run `list` and ensure that this new internship added does not have index 1.
-
-
-2. **Test case**:  `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999 /remark This is a remark.`
-   **Expected**: No internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
-
-
-3. **Test case**:  `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999`
-   **Expected**: No internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
-
-
-4. **Test case**: `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com`, then `edit 1 /phone 99999999`
-   **Expected**: For first command, for the first internship, the name of the company is changed to `TikTok`, status is changed to `ongoing`, description to `Software Intern`, point of contact to `John`, email to `tiktok@gmail.com`.
-   For second command, no internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
-
+   1. Prerequisites: Have at least one other internship. Add this internship to the list using this command: `add /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999 /remark This is a remark.`. Run `list` and ensure that this new internship added does not have index 1.
+   2. **Test case**:  `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999 /remark This is a remark.`
+      **Expected**: No internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
+   3. **Test case**:  `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999`
+      **Expected**: No internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
+   4. **Test case**: `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com`, then `edit 1 /phone 99999999`
+      **Expected**: For first command, for the first internship, the name of the company is changed to `TikTok`, status is changed to `ongoing`, description to `Software Intern`, point of contact to `John`, email to `tiktok@gmail.com`.
+      For second command, no internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
 
 ### Adding a task to an existing internship
 
-
 1. Adding a task to an existing internship
 
-1. Prerequisites: Ensure that there is at least one internship.
-
-2. **Test case**: `addtask 1 /task Attend meeting`<br>
-   **Expected**: A task `Attend meeting` is added to the task list of the first internship. Details of the added task shown in the status message.
-
-
-3. **Test case**: `addtask 0 /task Attend meeting`<br>
-   **Expected**: No task is added. Error details shown in the status message. Status bar remains the same.
-
-
-4. Other incorrect addtask commands to try: `addtask`, `addtask x`, `addtask 1`,`addtask -1 /task Attend meeting`, `addtask 1 /task`, `addtask x /task Attend meeting` (where x is larger than the list size)<br>
-   **Expected**: Similar to previous.
-
+   1. Prerequisites: Ensure that there is at least one internship.
+   2. **Test case**: `addtask 1 /task Attend meeting`<br>
+      **Expected**: A task `Attend meeting` is added to the task list of the first internship. Details of the added task shown in the status message.
+   3. **Test case**: `addtask 0 /task Attend meeting`<br>
+      **Expected**: No task is added. Error details shown in the status message. Status bar remains the same.
+   4. Other incorrect addtask commands to try: `addtask`, `addtask x`, `addtask 1`,`addtask -1 /task Attend meeting`, `addtask 1 /task`, `addtask x /task Attend meeting` (where x is larger than the list size)<br>
+      **Expected**: Similar to previous.
 
 ### Setting the deadline of a task in an existing internship
 
-
 1. Setting the deadline of a task in an existing internship
 
-
-1. Prerequisites: Ensure that there is at least one internship. Add a task to the first internship using the `addtask 1 /task Attend meeting` command.
-
-
-2. **Test case**: `setdeadline 1 /selecttask 1 /deadline 10/10/2024`<br>
-   **Expected**: The deadline of the first task is set to `10/10/2024`. New deadline shown in the status message.
-
-
-3. **Test case**: `setdeadline 1 /selecttask 1 /deadline 11/10/2024`<br>
-   **Expected**: The deadline of the first task is set to `11/10/2024`. New deadline shown in the status message.
-
-
-4. **Test case**: `setdeadline 0 /selecttask 1 /deadline 10/10/2024`<br>
-   **Expected**: No task is edited. Error details shown in the status message. Status bar remains the same.
-
-
-5. Other incorrect `setdeadline` commands to try: `setdeadline`, `setdeadline 1`,`setdeadline -1 /selecttask 1 /deadline 10/10/2024`,`setdeadline 1 1`, `setdeadline 1 /selecttask 1 /deadline 10-10-2024`, `setdeadline 1 /selecttask 1 10/10/2024`, `setdeadline 1 /selecttask 1 /deadline`, `setdeadline x /selecttask 1 /deadline 10/10/2024` (where x is larger than the internship list size), `setdeadline 1 /selecttask x /deadline 10/10/2024` (where x is larger than the task list size)<br>
-   **Expected**: Similar to previous.
-
+   1. Prerequisites: Ensure that there is at least one internship. Add a task to the first internship using the `addtask 1 /task Attend meeting` command.
+   2. **Test case**: `setdeadline 1 /selecttask 1 /deadline 10/10/2024`<br>
+      **Expected**: The deadline of the first task is set to `10/10/2024`. New deadline shown in the status message.
+   3. **Test case**: `setdeadline 1 /selecttask 1 /deadline 11/10/2024`<br>
+      **Expected**: The deadline of the first task is set to `11/10/2024`. New deadline shown in the status message.
+   4. **Test case**: `setdeadline 0 /selecttask 1 /deadline 10/10/2024`<br>
+      **Expected**: No task is edited. Error details shown in the status message. Status bar remains the same.
+   5. Other incorrect `setdeadline` commands to try: `setdeadline`, `setdeadline 1`,`setdeadline -1 /selecttask 1 /deadline 10/10/2024`,`setdeadline 1 1`, `setdeadline 1 /selecttask 1 /deadline 10-10-2024`, `setdeadline 1 /selecttask 1 10/10/2024`, `setdeadline 1 /selecttask 1 /deadline`, `setdeadline x /selecttask 1 /deadline 10/10/2024` (where x is larger than the internship list size), `setdeadline 1 /selecttask x /deadline 10/10/2024` (where x is larger than the task list size)<br>
+      **Expected**: Similar to previous.
 
 ### Deleting a task from an internship
 
-
 1. Deleting a task from an existing internship
 
+   1. Prerequisites: Ensure that there is at least one internship. Add a task to the first internship using the `addtask 1 /task Attend meeting` command.
+   2. **Test case**: `deletetask 1 /selecttask 1`<br>
+      **Expected**: The first task is deleted from the task list of the first internship. Details of the deleted task shown in the status message.
+   3. **Test case**: `deletetask 0 /selecttask 1`<br>
+      **Expected**: No task is deleted. Error details shown in the status message. Status bar remains the same.
+   4. Other incorrect deletetask commands to try: `deletetask`, `deletetask -1`, `deletetask x`, `deletetask 1`, `deletetask 1 /selecttask x` (where x is larger than the task list size)<br>
+      **Expected**: Similar to previous.
 
-1. Prerequisites: Ensure that there is at least one internship. Add a task to the first internship using the `addtask 1 /task Attend meeting` command.
+### Finding internships
+For all the following test cases:
 
+Prerequisites: Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
+Then, list all internships using the `list` command.
+1. Filtering by company name
 
-2. **Test case**: `deletetask 1 /selecttask 1`<br>
-   **Expected**: The first task is deleted from the task list of the first internship. Details of the deleted task shown in the status message.
+    1. **Test case**: `find withall /com Amazon`<br>
+       **Expected**: 1 internship with the name 'Amazon' is shown. The status message shows how many internships were listed.
+    2. **Test case**: `find withall /com TikTok`<br>
+       **Expected**: No internships are shown. The status message shows how many internships were listed.
+    3. **Test case**: `find withall /com`<br>
+       **Expected**: Visible internships do not change. The status message shows an error message about needing at least one search keyword.
+       <br><br>
+2. Filtering using `withall`
 
+    1. **Test case**: `find withall /loc remote /status TO_APPLY`<br>
+       **Expected**: 1 internship with both location 'REMOTE' and status 'TO_APPLY' is shown. The status message shows how many internships were listed.
+       <br><br>
+3. Filtering using `withany`
 
-3. **Test case**: `deletetask 0 /selecttask 1`<br>
-   **Expected**: No task is deleted. Error details shown in the status message. Status bar remains the same.
+    1. **Test case**: `find withany /com Amazon /status TO_APPLY`<br>
+       **Expected**: 2 internships with the company name 'Amazon' or status 'TO_APPLY' are shown. The status message shows how many internships were listed.
+       <br><br>
+4. Filtering with invalid mode
 
+    1. **Test case**: `find /com Amazon`<br>
+       **Expected**: Visible internships do not change. The status message shows an error message about invalid mode specified.
+    2. **Test case**: `find withInvalidMode /status pending`
+       **Expected**: Visible internships do not change. The status message shows an error message about invalid mode specified.
+       <br><br>
+5. Filtering with unsupported prefix `/phone`
 
-4. Other incorrect deletetask commands to try: `deletetask`, `deletetask -1`, `deletetask x`, `deletetask 1`, `deletetask 1 /selecttask x` (where x is larger than the task list size)<br>
-   **Expected**: Similar to previous.
+    1. **Test case**: `find withall /phone 12345678`<br>
+       **Expected**: Visible internships do not change. The status message shows an error message about unsupported prefix.
 
+### Sort Feature
+1. Prerequisites: Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
+   <br><br>
+2. Add another internship entry using the following command: `add /com Amazon /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 9089030 /loc remote /role Business Development Intern`
+
+    1. Test case: `sort /status desc`<br>
+       Expected: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
+    2. Test case: `sort /status asc` <br>
+       Expected: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
+       ![Sort by status asc](./images/manual-testing/sort-by-status.png)<br>
+    3. Test case: `sort /com asc`<br>
+       Expected: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
+       ![Sort by com asc](./images/manual-testing/status-sort-sort-by-com.png)<br>
 
 #### Saving data
 
@@ -978,8 +972,7 @@ Make sure to use the `exit` command or the close button to save data while closi
 1. Dealing with missing/corrupted data files
 
     1. To simulate a missing data file, delete the data file(`./data/internshipdata.json`) before launching the app. You will notice that the app automatically creates a new data file and repopulates it with sample data. To remove the sample data, enter the `clear` command.
-   
-   2. To simulate a corrupted data file, edit the data file to contain some random text. Launch the app. The app should detect the corrupted file and automatically replace it with a new empty data file. You can then add new data to the app or reset the data to sample data by deleting the data file.
+    2. To simulate a corrupted data file, edit the data file to contain some random text. Launch the app. The app should detect the corrupted file and automatically replace it with a new empty data file. You can then add new data to the app or reset the data to sample data by deleting the data file.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1019,51 +1012,6 @@ It is important to note that these explanations view the fields in isolation. Wh
 
 These fields are considered "identity" fields (not all are compulsory, referring to the optional role and location fields), meaning they are essential to define the identity of an `Internship` object. If any of these fields differ between two `Internship` objects, then they are not considered the same internship. This design choice ensures that the `isSameInternship` method provides a meaningful comparison between two `Internship` objects.
 
-### Finding internships
-For all the following test cases:
-
-Prerequisites: Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
-Then, list all internships using the `list` command.
-1. Filtering by company name
-   1. **Test case**: `find withall /com Amazon`<br>
-       **Expected**: 1 internship with the name 'Amazon' is shown. The status message shows how many internships were listed.
-
-   2. **Test case**: `find withall /com TikTok`<br>
-      **Expected**: No internships are shown. The status message shows how many internships were listed.
-
-   3. **Test case**: `find withall /com`<br>
-      **Expected**: Visible internships do not change. The status message shows an error message about needing at least one search keyword. 
-2. Filtering using `withall`
-   1. **Test case**: `find withall /loc remote /status TO_APPLY`<br>
-      **Expected**: 1 internship with both location 'REMOTE' and status 'TO_APPLY' is shown. The status message shows how many internships were listed.
-3. Filtering using `withany`
-    1. **Test case**: `find withany /com Amazon /status TO_APPLY`<br>
-       **Expected**: 2 internships with the company name 'Amazon' or status 'TO_APPLY' are shown. The status message shows how many internships were listed.
-4. Filtering with invalid mode
-   1. **Test case**: `find /com Amazon`<br>
-      **Expected**: Visible internships do not change. The status message shows an error message about invalid mode specified.
-   2. **Test case**: `find withInvalidMode /status pending`
-      **Expected**: Visible internships do not change. The status message shows an error message about invalid mode specified.
-5. Filtering with unsupported prefix `/phone`
-    1. **Test case**: `find withall /phone 12345678`<br>
-       **Expected**: Visible internships do not change. The status message shows an error message about unsupported prefix.
-
-### Sort Feature
-1. Prerequisites: Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
-
-2. Add another internship entry using the following command: `add /com Amazon /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 9089030 /loc remote /role Business Development Intern`
-
-    1. Test case: `sort /status desc`<br>
-      Expected: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
-   
-    2. Test case: `sort /status asc` <br>
-      Expected: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
-      ![Sort by status asc](./images/manual-testing/sort-by-status.png)<br>
-   
-    3. Test case: `sort /com asc`<br>
-      Expected: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
-      ![Sort by com asc](./images/manual-testing/status-sort-sort-by-com.png)<br>
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
@@ -1094,32 +1042,27 @@ Note that to try out the below example commands you will need to reset the data 
 10. **Detecting space characters between argument's prefix and value:** For example, the command`edit 1 /company`runs successfully and updates the first internship's company field to the value`pany`. This may cause issues when the user misremembers the prefix for an argument. In the future we will implement checks that will check for a space between a prefix and its value.
     <br>Command: `edit 1 /company`
     <br>![Space between prefix and value](./images/planned-enhancements/space-in-edit-command.png)<br><br>
-
+<div class='page-break'></div>
 --------------------------------------------------------------------------------------------------------------------
-
 ## **Appendix: Effort**
 #### Project Overview
-Our project is a brownfield project aimed at enhancing the functionality of a contact management application AB3 (Address Book 3). CareerSync manages the persons of contact affiliated with internships and the relevant internship data. As such we had to refactor our code to include this additional information. Additionally, the key enhancements included implementing a detailed view page, tasks, remarks, and finding and sorting features. These improvements aimed to provide our target users with an efficient and intuitive experience while managing their internships.<br>
+CareerSync manages the persons of contact affiliated with internships and the relevant information. We had to refactor our code to include this additional information. We enhanced the existing AB3 codebase to create an efficient and intuitive experience for managing internships.<br>
 
 #### Difficulty Level and Challenges Faced
-* The first challenge faced was refactoring the code to suit our new requirements. Since we were changing all the data we had to explore the implementation on a very fundamental level and gain a deep understanding of the codebase. Since most of us have not worked on such a large project we found this quite challenging.
-* While implementing Optional fields, we initially made use of Optional<>, which created many issues when testing other features due to the use and passing of NULL values. Eventually, our team came together to brainstorm solutions and decided to have default values set instead of accepting NULL values (for optional fields). This way, our team could resolve the issues we were experiencing while still retaining the optional feature capabilities.
-* Implementing the clickable detailed view page was another challenge as we had to create a new page and our team generally found difficulty in dealing with the UI. Implementing headless testing for UI components so that code coverage can be satisfied for GitHub CI/CD was a challenge. It required a whole new library dependency and framework (TestFX) for testing UI components which was not easily referenced from the existing codebase. If an internship was selected via the detailed view, and it was simultaneously edited in the the main window, the internship would disappear from the detailed view window. After prolonged debugging, the problem was isolated to the commands that edit the 'state' of the Internship. The issue was resolved by fixing the equality checks used by the detailed view page.
+Notable challenges faced include:
+* Implemented Optional fields initially using Optional<>, leading to issues with NULL values. Transitioning to default values resolved the issue while preserving optional feature capabilities
+* Implementing headless testing for UI components so that code coverage can be satisfied for GitHub CI/CD was a challenge. It required a whole new library dependency and framework (TestFX) for testing UI components.
 
 #### Effort Required
-As a team, we have put a lot of effort into this project. Firstly through the process of examining and understanding the codebase and coming up with useful features that could improve user experience. We had to streamline our ideas and come up with a feasible plan to manage the workload.<br><br>
-Following this planning out user requirements, user stories, and use cases was something new to us, and we spent a fair bit of time on this. As for the actual implementation, while we are not new to programming, a brownfield collaborative project is unfamiliar territory. In the first few weeks, we made countless errors when it came to setting up build tools and adhering to the general workflow.<br><br>
-Finally, the documentation required was extensive and required careful examination. This is something we had to sit down and go through together as a team multiple times.<br>
-
+Initially, we analyzed the codebase and identified features to enhance user experience. We then navigated through new territory, defining user requirements, stories, and use cases, though we faced numerous errors during tool setup and workflow adherence. Lastly, extensive documentation demanded thorough, repeated review sessions as a team.
 #### Achievements
-Despite the challenges encountered, the team achieved several milestones that significantly strengthened the application`s functionality and user experience. Some of these key achievements include:<br>
-* Successful integration of optional field capabilities for an internship entry, offering users more flexibility in adding and editing internship entries.
+Despite the challenges encountered, the team achieved several milestones such as:<br>
 * Redesigning command formats to cater to our target users and improve user experience.
-* Implementation of find and sorting functionalities, encouraging and enabling users to use the application to navigate and manage their internship entries efficiently.
+* Implementation of find and sorting functionalities, enabling users to manage their internship entries efficiently.
 * Introduction of a remark feature, ensuring that the application facilitates the inclusion of additional information.
 * Introduction of a task feature, allowing users to add tasks relating to an internship entry and add suitable deadlines.<br>
 
 #### Effort Saved Through Reuse:
-While we did not have a lot of code reuse or use of external dependencies, we used the TestFx (an extension of JavaFx) library to implement headless testing to write automated test cases for our UI components. This was done to ensure that we don’t sacrifice on code coverage of our tests for the new Ui components, to ensure they work perfectly well.
+While we did not have any code reuse or use of external dependencies, we used the TestFx (an extension of JavaFx) library to implement headless testing.
 
 

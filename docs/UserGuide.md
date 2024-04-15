@@ -77,13 +77,13 @@ you understand the contents of this User Guide.
 
 #### Glossary
 
-| Term      | Meaning                                                                                                                 |
-|-----------|-------------------------------------------------------------------------------------------------------------------------|
-| CLI       | [Command Line Interface](https://en.wikipedia.org/wiki/Command-line_interface)                                          |
-| GUI       | [Graphical User Interface](https://en.wikipedia.org/wiki/Graphical_user_interface)                                      |
-| JSON      | [JavaScript Object Notation](https://www.json.org/json-en.html)                                                         |
+| Term      | Meaning                                                                                                               |
+|-----------|-----------------------------------------------------------------------------------------------------------------------|
+| CLI       | [Command Line Interface](https://en.wikipedia.org/wiki/Command-line_interface)                                        |
+| GUI       | [Graphical User Interface](https://en.wikipedia.org/wiki/Graphical_user_interface)                                    |
+| JSON      | [JavaScript Object Notation](https://www.json.org/json-en.html)                                                       |
 | JAR       | [Java Archive: A file format to store and distribute Java Applications](https://en.wikipedia.org/wiki/JAR_(file_format)) |
-| File Path | [The location of a file in the computer's file system](https://www.w3schools.com/html/html_filepaths.asp)               |
+| File Path | [The location of a file in the computer's file system](https://www.w3schools.com/html/html_filepaths.asp)             |
 
 
 #### Legend
@@ -149,9 +149,9 @@ The main window of <span style="color: #f66a0a;">CareerSync</span> is divided in
 
 #### Internship Fields
 The names of the fields for each internship application is as stated below. When you edit these fields, you will see the changes reflected in the display.
-For the restrictions on what is accepted for each field, kindly refer to [Fields Summary](#fields-summary).
+For the restrictions on what is accepted for each field, kindly refer to [Fields Summary](#field-summary).
 
-![Fields Annotation](images/introduction/FieldsAnnotation.png){: .smaller-responsive-image}
+![Fields Annotation](images/introduction/Fields.png){: .smaller-responsive-image}
 
 1. `INDEX` - The index of the internship application in the filtered list.
 2. `COMPANY_NAME` - The name of the company you are applying to.
