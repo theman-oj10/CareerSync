@@ -123,7 +123,7 @@ How the `InternshipLogic` component works:
 
 1. When `InternshipLogic` is called upon to execute a command, it is passed to an `InternshipDataParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `InternshipCommand` object (more precisely, an object of one of its subclasses e.g., `InternshipDeleteCommand`) which is executed by the `InternshipLogicManager`.
-1. The command can communicate with the `InternshipModel` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `InternshipModel` when it is executed (e.g. to delete an internship).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `InternshipModel`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `InternshipLogic`.
 
@@ -250,7 +250,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the internshipdata being deleted).
+    * Pros: Will use less memory (e.g. for `delete`, just save the internship being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
