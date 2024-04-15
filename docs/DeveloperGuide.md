@@ -14,7 +14,6 @@ title: Developer Guide
     - [Common classes](#common-classes)
 4. [Implementation](#implementation)
     - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
-    - [[Proposed] Data archiving](#proposed-data-archiving)
     - [Find](#find-feature)
     - [Sort](#sort-feature)
    -  [Optional Fields Feature](#optional-fields-feature)
@@ -174,7 +173,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-#### \[Proposed\] Undo/redo feature
+### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
@@ -258,13 +257,7 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the internship being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-### Find feature 
+### Find feature
 The `find` feature allows users to search for internships based on the given keywords. This allows users to filter the
 view of internships in CareerSync for easier access to the internships they are interested in. The `find` command applies
 a filter predicate to the list of internships in the `InternshipModel` to display only the internships that match the given
@@ -569,8 +562,8 @@ For all use cases below (unless specified otherwise): <br>
 **Use Case: Add Internship Entry From Main Window**
 
 **MSS:**
-1. User inputs command in the CLI, specifying the internship details to be added.
-2. System displays success message, along with added internship details in the message box.
+1. User inputs details of internship to be added.
+2. System displays success message with added internship details in the message box.
 3. Internship details are now visible in the main window.
 
 Use case ends.
@@ -585,9 +578,9 @@ Use case ends.
 **Use Case: Edit Internship Entry From Main Window**
 
 **MSS:**
-1. User inputs command in the CLI, specifying the index of the internship to be edited and the parameters.
-2. System displays success message, along with edited internship's details in the message box.
-3. Updated Internship details are now visible in the main window.
+1. User inputs internship to be edited and modification details.
+2. System displays success message and details of edited internship in the message box.
+3. Updated internship details are visible in the main window.
 
 Use case ends.
 
@@ -602,9 +595,10 @@ Use case ends.
 **Use Case: Delete Internship Entry From Main Window**
 
 **MSS:**
-1. User inputs command in the CLI, specifying the index of the internship to be deleted.
-2. System displays success message, along with deleted internship's details in the message box.
-3. Updated Internship list is now visible in the main window, and deleted internship is no longer visible.
+1. User inputs the internship to be deleted.
+2. System displays success message and deleted internship's details in the message box.
+3. Updated Internship list is now visible in the main window.
+4. Deleted internship is no longer visible.
 
 Use case ends.
 
@@ -619,8 +613,8 @@ Use case ends.
 **Use Case: Sort Internship Entries From Main Window**
 
 **MSS:**
-1. User inputs command in the CLI, specifying parameters for sort command.
-2. System displays success message, along with number of internships listed in the message box.
+1. User specifies how to sort.
+2. System displays success message and number of internships listed in the message box.
 3. Internship list is now visible in the main window, with internship entries in the sorted order.
 
 Use case ends.
@@ -636,9 +630,9 @@ Use case ends.
 **Use Case: Find Internship Entries (withAll) From Main Window**
 
 **MSS:**
-1. User inputs command in the CLI, specifying parameters for find command.
-2. System displays success message, along with the number of matching internships entries found in the message box.
-3. System displays all internship entries which matches all specified conditions, within the main window.
+1. User specifies conditions to find internships.
+2. System displays success message and number of matching internships entries found in the message box.
+3. System displays all internship entries which matches all specified conditions within the main window.
 
 Use case ends.
 
@@ -656,9 +650,9 @@ Use case ends.
 **Use Case: Find Internship Entries (withAny) From Main Window**
 
 **MSS:**
-1. User inputs command in the CLI, to specify which internship entries to find, based on the conditions stated by the user.
-2. System displays success message, along with the number of matching internships entries found in the message box.
-3. System displays all internship entries which matches any of the specified conditions, within the main window.
+1. User specifies conditions to find internships.
+2. System displays success message and the number of matching internships entries found in the message box.
+3. System displays all internship entries which matches any of the specified conditions within the main window.
 
 Use case ends.
 
@@ -676,8 +670,8 @@ Use case ends.
 **Use Case: Add Internship Task From Main Window**
 
 **MSS:**
-1. User inputs command in the CLI, to specify which internship entries to find, based on the conditions stated by the user.
-2. System displays success message, along with the details of the task added, found in the message box.
+1. User inputs task and the internship to add task to.
+2. System displays success message and the added task in the message box.
 3. System displays full list of internships.
 
 Use case ends.
@@ -693,8 +687,8 @@ Use case ends.
 **Use Case: Delete Internship Task From Main Window**
 
 **MSS:**
-1. User inputs command in the CLI, to specify the internship entry and the task to delete from it.
-2. System displays success message, along with the details of the deleted task in the message box.
+1. User inputs the task to be deleted.
+2. System displays success message and the deleted task in the message box.
 3. System displays full list of internships.
 
 Use case ends.
@@ -710,8 +704,8 @@ Use case ends.
 **Use Case: Set Deadline For Internship Task From Main Window**
 
 **MSS:**
-1. User inputs command in the CLI, to specify the internship entry and the task to add the deadline to.
-2. System displays success message, along with the deadline added in the message box.
+1. User inputs the task and the deadline.
+2. System displays success message and the added deadline in the message box.
 3. System displays full list of internships.
 
 Use case ends.
@@ -731,11 +725,6 @@ Use case ends.
 2. System displays a detailed view of the selected internship entry.
 
 Use case ends.
-
-**Extensions:**
-
-* 1a. User is unable to access the detailed internship view. <br>
-  Use case ends.
 
 #### Non-Functional Requirements
 
@@ -935,13 +924,13 @@ Then, list all internships using the `list` command.
    <br><br>
 2. Add another internship entry using the following command: `add /com Amazon /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 9089030 /loc remote /role Business Development Intern`
 
-    1. Test case: `sort /status desc`<br>
-       Expected: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
-    2. Test case: `sort /status asc` <br>
-       Expected: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
+    1. **Test case**: `sort /status desc`<br>
+       **Expected**: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
+    2. **Test case**: `sort /status asc` <br>
+       **Expected**: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
        ![Sort by status asc](./images/manual-testing/sort-by-status.png)<br>
-    3. Test case: `sort /com asc`<br>
-       Expected: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
+    3. **Test case**: `sort /com asc`<br>
+       **Expected**: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
        ![Sort by com asc](./images/manual-testing/status-sort-sort-by-com.png)<br>
 
 #### Saving data
@@ -970,7 +959,7 @@ We acknowledge that this design choice may have a slight learning curve for user
 #### Identity Fields in `isSameInternship` Method
 
 In the `Internship` class, the `isSameInternship` method is used to compare two `Internship` objects based on certain fields. 
-<br> These fields are `companyName`, `contactName`, `contactEmail`, `contactNumber`, `description`, `role` and `location`. 
+<br> These fields are `companyName`, `contactName`, `contactEmail`, `contactNumber`, `description` and `applicationStatus`. 
 <br> The choice of these fields was based on the following considerations:
 
 1. **CompanyName**: The name of the company offering the internship is a crucial identifier. Two internships at different companies are definitely not the same.
@@ -978,14 +967,13 @@ In the `Internship` class, the `isSameInternship` method is used to compare two 
 3. **ContactEmail**: Similar to `contactName`, the contact email could be a significant identifier as it might imply different points of contact.
 4. **ContactNumber**: The contact number, like the contact name and email, could be a significant identifier for the same reasons.
 5. **Description**: The description of the internship could contain important details about the internship. Two internships with different descriptions are not the same.
-6. **Role**: The role of the internship could contain important details about the internship. Two internships with different roles are not the same.
-7. **Location**: The location of the internship could contain important details about the internship. Two internships with different locations are not the same.
-
+6. **ApplicationStatus**: A user may apply for the same internship multiple times, and wants to keep track of their previous internship applications. Thus, the application status is an important identifier.
 These fields are considered "compulsory" or "identity" fields, meaning they are essential to define the identity of an `Internship` object. If any of these fields differ between two `Internship` objects, then they are not considered the same internship. This design choice ensures that the `isSameInternship` method provides a meaningful comparison between two `Internship` objects.
 
 **Ignored Fields**
 1. The `remark` and `taskList` fields are not considered as they do not define the identity of the internship.
-2. The `applicationStatus` field is not considered as it enables a user to create 2 internships with the same details but different statuses, which reduces the usefulness of the `edit` command.
+2. The `role` field is not considered as one company could have multiple roles available for internships. This allows a user to create multiple internships with the same details but different roles.
+3. The `location` field is not considered as one company could have multiple locations for internships. This allows a user to create multiple internships with the same details but different locations.
 
 It is important to note that these explanations view the fields in isolation. When equality checks are performed, all available fields are considered.
 
