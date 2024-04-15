@@ -1,14 +1,10 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionModel;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.internship.Internship;
 
 /**
@@ -16,11 +12,8 @@ import seedu.address.model.internship.Internship;
  */
 public class DetailedInternshipListPanel extends UiPart<Region> {
     private static final String FXML = "InternshipListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(DetailedInternshipListPanel.class);
-
     @FXML
     private ListView<Internship> internshipListView;
-    private final SelectionModel<Internship> selectionModel = internshipListView.getSelectionModel();
 
     /**
      * Creates a {@code DetailedInternshipListPanel} with the given {@code ObservableList}.

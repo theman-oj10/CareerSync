@@ -17,6 +17,7 @@ title: Developer Guide
     - [[Proposed] Data archiving](#proposed-data-archiving)
     - [Find](#find-feature)
     - [Sort](#sort-feature)
+   -  [Optional Fields Feature](#optional-fields-feature)
     - [Edit](#edit-feature)
     - [Add Task](#add-task-feature)
     - [Set Deadline](#set-deadline-feature)
@@ -24,6 +25,8 @@ title: Developer Guide
     - [Remark](#remark-feature)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Appendix: Requirements](#appendix-requirements)
+7. [Appendix: Design Decisions](#appendix-design-decisions)
+8. [Appendix: Effort](#appendix-effort)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -94,6 +97,8 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `InternshipListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+Additionally, the `MainWindow` contains an initially hidden `HelpWindow` and `DetailedInternshipWindow`. These are windows 
+that can be accessed by the user to view the help guide and detailed information of an internship respectively.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S2-CS2103T-W11-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S2-CS2103T-W11-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -265,7 +270,7 @@ view of internships in CareerSync for easier access to the internships they are 
 a filter predicate to the list of internships in the `InternshipModel` to display only the internships that match the given
 keywords. Successive `find` commands will replace the existing filter predicate, and does not further filter the displayed internships.
 
-This method takes in a search mode, either 'withany' or 'withall', and the prefix-keyword pairs to search for.
+This method takes in a search mode, either `withany` or `withall`, and the prefix-keyword pairs to search for.
 The prefix here refers to the fields of the internship that the user wants to search for. 
 
 There can be multiple keywords per prefix, as well as multiple prefixes. Within each prefix, as long as any of the 
@@ -274,16 +279,16 @@ keywords match the field, the internship will be displayed.
 If the search mode is 'withall', at least one keyword in **all** prefixes must match the field for the internship to be displayed.
 If the search mode is 'withany', at least one keyword in **any** prefix must match the field for the internship to be displayed.
 
-Currently, the supported prefixes to search by are '/com', '/poc', '/loc', '/status', '/description', '/role', '/remark'.
+Currently, the supported prefixes to search by are `/com`, `/poc`, `/loc`, `/status`, `/description`, `/role`, `/remark`.
 Here is a step-by-step example of how the `find` command might be executed:
 
 1. The user inputs the `find` command, passing in the relevant arguments.<br>
 2. `InternshipDataParser` parses the command and creates a new `InternshipFindCommandParser` object.<br>
-3. The `InternshipFindCommandParser` then calls ArgumentTokenizer#tokenize to extract the search mode and the prefix-keyword pairs.<br>
+3. The `InternshipFindCommandParser` then calls `ArgumentTokenizer::tokenize` to extract the search mode and the prefix-keyword pairs.<br>
     If an unsupported prefix or invalid mode is given, or missing prefix or keyword to search by, a ParseException will be thrown.<br>
 4. The `InternshipFindCommandParser` then creates a new `InternshipContainsKeywordsPredicate` object based on the search mode and prefix-keyword pairs.<br>
 5. The `InternshipFindCommandParser` then creates a new `InternshipFindCommand` object with the `InternshipContainsKeywordsPredicate` object from above.<br>
-6. The `InternshipFindCommand`'s execute() method is called, which calls `InternshipModel::updateFilteredInternshipList` 
+6. The `InternshipFindCommand::execute` method is called, which calls `InternshipModel::updateFilteredInternshipList` 
    to update the filter predicate in the `InternshipModel` with the `InternshipContainsKeywordsPredicate` object, updating the internships displayed in the UI. <br>
 
 #### Design considerations:
@@ -458,6 +463,38 @@ Here is a step-by-step example of how the `addremark` command might be executed:
     * Pros: More intuitive for the user.
     * Cons: More complex implementation and documentation needed.
 
+### Optional Fields Feature
+
+Certain fields in the Internship class are made optional to offer flexibility to the users. This section outlines the technical details behind how the internship object is able to accept optional fields.
+
+**Field Conversion:** <br>
+Fields such as location and role have been converted to optional types (where default values have been set should the user not input any values for them).
+This provides flexibility in representing internship data.
+
+**Constructor Modification:** <br>
+The constructor for the Internship class consists of 2 optional fields (`role` and `location`), ensuring compatibility with the new optional field structure.
+The add command parser sets default values for the 2 aforementioned optional fields, should the user not input any values.
+
+**Equality Comparison:** <br>
+The isSameInternship() method checks for the equality of internships.
+
+**String Representation:** <br>
+The toString() method will include location and role if it exists in the string representation of an internship.
+
+#### Usage Scenarios
+
+**Adding New Internship:** <br>
+When adding a new internship, optional fields such as location and role may remain unspecified, representing scenarios where these details are not provided.
+
+**Editing Existing Internship:** <br>
+Users can edit existing internship details, including optional fields, to update or modify internship information as needed.
+
+#### Alternative Approach and Cons
+
+**Alternative Approach:** <br> The alternative approach was to directly transform role and location into optional fields using `Optional<>`. <br>
+
+**Cons:** <br> Avoids `NULL` values being passed around and caused complications when testing other features. This approach may also introduce maintenance challenges and potential errors if not implemented correctly.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### **Documentation, logging, testing, configuration, dev-ops**
@@ -525,169 +562,197 @@ Your all-in-one solution for seamless application management.
 
 (For all use cases below, the **System** is `CareerSync` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Enter Internship Information From The Main Page**
+**Use Case: Enter Internship Entry From Main Window**
 
 **MSS**
+1. User accesses the main window.
+2. User inputs the command, specifying internship details.
+3. System validates the input data.
+4. System saves the internship information.
+5. System displays the added internship details in the message box.
+6. Internship details are now visible in the main window.
 
-1. User accesses the main page. 
-2. User selects the option to enter internship information. 
-3. System prompts the user to input internship details such as company name, role title, description, etc. 
-4. User inputs the required internship details. 
-5. System validates the input data. 
-6. System saves the internship information. 
-7. System displays a confirmation message indicating successful submission.
+Use case ends.
 
-    Use case ends.
+**Extensions** <br>
+1a. User is unable to access the main window. <br>
+1a1. System displays an error message. <br>
+3a. System recognizes that user has entered invalid internship details. <br>
+3a1. System displays an error message indicating the validation error(s). <br>
+
+Use case ends.
+
+**Use Case: Edit Internship Entry From Main Window**
+
+**MSS**
+1. User accesses the main window.
+2. User uses the command to input the internship to be edited and the modifications.
+3. System validates the modified data.
+4. System saves the updated internship information.
+5. System displays all modified internship details in the message box.
+6. Internship details (with updates) are now visible in the main window.
+
+Use case ends.
 
 **Extensions**
 
-* 1a. User is unable to access the main page.
-    *1a1. System displays an error message.
-* 2a. User cancels entering internship information.
-  * 2a1. System cancels the entry process and returns the user to the main page.
-* 5a. User inputs invalid internship details.
-  * 5a1. System displays an error message indicating the specific validation error(s).
-* 6a. System fails to save the internship information.
-  * 6a1. System displays an error message and prompts the user to retry or cancel the submission.
+1a. User is unable to access the main window. <br>
+1a1. System displays an error message. <br>
+3a. System recognizes that user has entered invalid values for one or more field(s). <br>
+3a1. System displays an error message indicating that the internship already exists in the internship list. <br>
+3a2. System displays an error message indicating the internship index error. <br>
 
-    Use case ends.
+Use case ends.
 
-**Use case: Access All Commands Via A Text-Based Input**
+**Use Case: Delete Internship Entry From Main Window**
 
 **MSS**
+1. User accesses the main window.
+2. User uses the command to specify which internship entry is to be deleted.
+3. System removes the internship entry.
+4. System displays a confirmation message indicating successful deletion and containing details of the deleted internship.
+5. Internship can no longer be seen in the main window.
 
-1. User accesses the main page. 
-2. System displays a prompt for text-based input. 
-3. User enters a command using text-based input. 
-4. System recognizes and processes the entered command. 
-5. System executes the requested action corresponding to the entered command. 
-6. User receives feedback or output based on the executed command.
-
-    Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 1a. User is unable to access the main page.
-  * 1a1. System displays an error message.
-* 3a. User enters an invalid command.
-  * 3a1. System displays an error message indicating that the command is not recognized.
-* 4a. System fails to recognize or process the entered command.
-  * 4a1. System displays an error message and prompts the user to retry or enter a different command.
-* 5a. System encounters an error while executing the requested action.
-  * 5a1. System displays an error message and prompts the user to retry or perform a different action.
+1a. User is unable to access the main window. <br>
+1a1. System displays an error message. <br>
+2a. System recognizes that user has entered invalid internship index. <br>
+2a1. System displays an error message indicating the index error. <br>
 
-    Use case ends.
+Use case ends.
 
-**Use case: Access Sample Data In The App**
+**Use Case: Sort Internship Entries From Main Window**
 
 **MSS**
+1. User accesses the main window.
+2. User uses the command to specify how the visible internships should be sorted.
+3. System displays the internship entries in the specified order, within the main window.
 
-1. User accesses the main page. 
-2. User selects the option to access sample data. 
-3. System retrieves and displays sample internship data. 
-4. User views the sample internship data presented by the system.
-
-    Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 1a. User is unable to access the main page.
-  * 1a1. System displays an error message.
-* 2a. User cancels accessing sample data.
-  * 2a1. System cancels the process and returns the user to the main page.
-* 3a. System fails to retrieve sample data.
-  * 3a1. System displays an error message and prompts the user to retry or exit.
-* 4a. User encounters issues while viewing the sample data.
-  * 4a1. System displays an error message and prompts the user to retry or exit.
+1a. User is unable to access the main window. <br>
+1a1. System displays an error message. <br>
+2a. System recognizes that user has entered invalid sort conditions. <br>
+2a1. System displays an error message indicating the error(s). <br>
 
-    Use case ends.
+Use case ends.
 
-**Use case: Modify Internship Details**
+**Use Case: Find Internship Entries (withAll) From Main Window**
 
 **MSS**
+1. User accesses the main window.
+2. User uses the command to specify which internship entries to find based on the conditions stated by the user.
+3. System displays all internship entries which matches all of the specified conditions, within the main window.
 
-1. User accesses the main page. 
-2. User selects the option to view all internship details. 
-3. System retrieves and displays a list of all entered internship details. 
-4. User selects the internship entry to be modified. 
-5. System presents the selected internship details for editing. 
-6. User modifies the necessary internship details. 
-7. System validates the modified data.
-8. System saves the updated internship information. 
-9. System displays a confirmation message indicating successful modification.
-
-    Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 1a. User is unable to access the main page.
-  * 1a1. System displays an error message.
-* 2a. User cancels viewing all internship details.
-  * 2a1. System cancels the process and returns the user to the main page.
-* 4a. User cancels selecting the internship entry to be modified.
-  * 4a1. System cancels the modification process and returns the user to the list of internship details.
-* 6a. User inputs invalid internship details.
-  * 6a1. System displays an error message indicating the specific validation error(s).
-* 7a. System fails to validate the modified data.
-  * 7a1. System displays an error message and prompts the user to correct the data.
-* 8a. System fails to save the updated internship information.
-  * 8a1. System displays an error message and prompts the user to retry or exit.
+1a. User is unable to access the main window. <br>
+1a1. System displays an error message. <br>
+3a. System recognizes that user has entered invalid find conditions. <br>
+3a1. System displays an error message indicating the condition error(s). <br>
+3a. No matching internship entries found. <br>
+3a1. System displays a message indicating no matching results found. <br>
 
-    Use case ends.
+Use case ends.
 
-**Use case: View All Internship Details**
+**Use Case: Find Internship Entries (withAny) From Main Window**
 
 **MSS**
+1. User accesses the main window.
+2. User uses the command to specify which internship entries to find based on the conditions stated by the user.
+3. System displays all internship entries which matches any of the specified conditions, within the main window.
 
-1. User accesses the main page. 
-2. User selects the option to view all internship details. 
-3. System retrieves and displays a list of all entered internship details. 
-4. User views the list of internship details presented by the system.
-
-    Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 1a. User is unable to access the main page.
-  * 1a1. System displays an error message.
-* 2a. User cancels viewing all internship details.
-  * 2a1. System cancels the process and returns the user to the main page.
-* 3a. System fails to retrieve all internship details.
-  * 3a1. System displays an error message and prompts the user to retry or exit.
+1a. User is unable to access the main window. <br>
+1a1. System displays an error message. <br>
+3a. System recognizes that user has entered invalid find conditions. <br>
+3a1. System displays an error message indicating the condition error(s). <br>
+3a. No matching internship entries found. <br>
+3a1. System displays a message indicating no matching results found. <br>
 
-    Use case ends.
+Use case ends.
 
-**Use case: Add Information To The Notes Section Of An Entry**
+
+**Use Case: Add Internship Task From Main Window**
 
 **MSS**
+1. User accesses the main window.
+2. User uses the command to specify which internship entry to add a task to and the task details.
+3. System validates that the task is valid.
+4. System displays the updated internship entry details in the message box.
+5. System displays full list of internships.
 
-1. User accesses the main page. 
-2. User selects the option to view all internship details.
-3. System retrieves and displays a list of all entered internship details.
-4. User selects the internship entry to which notes will be added.
-5. System presents the selected internship details along with the current notes section.
-6. User enters additional information in the notes section.
-7. System saves the updated notes.
-8. System displays a confirmation message indicating successful addition of notes.
-
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
-* 1a. User is unable to access the main page.
-  * 1a1. System displays an error message.
-* 2a. User cancels viewing all internship details.
-  * 2a1. System cancels the process and returns the user to the main page.
-* 4a. User cancels selecting the internship entry to add notes.
-  * 4a1. System cancels the process and returns the user to the list of internship details.
-* 6a. User encounters an error while adding notes.
-  * 6a1. System displays an error message and prompts the user to retry or exit.
-* 7a. System fails to save the updated notes.
-  * 7a1. System displays an error message and prompts the user to retry or exit.
+1a. User is unable to access the main window. <br>
+1a1. System displays an error message. <br>
+2a. System recognizes that user has entered invalid task details. <br>
+2a1. System displays an error message indicating the task detail error(s). <br>
 
-    Use case ends.
+Use case ends.
 
-*{More to be added}*
+**Use Case: Delete Internship Task From Main Window**
+
+**MSS**
+1. User accesses the main window. 
+2. User uses the command to specify which internship task to delete. 
+3. System displays full list of internships.
+
+Use case ends.
+
+**Extensions**
+
+1a. User is unable to access the main window. <br>
+1a1. System displays an error message. <br>
+2a. System recognizes that user has entered an invalid internship and/or task index. <br>
+2a1. System displays an error message indicating the index error. <br>
+
+Use case ends.
+
+**Use Case: Set Deadline For Internship Task From Main Window**
+
+**MSS**
+1. User accesses the main window.
+2. User uses the command to specify which internship task to set a deadline for. 
+3. System displays full list of internships.
+
+Use case ends.
+
+**Extensions**
+
+1a. User is unable to access the main window. <br>
+1a1. System displays an error message. <br>
+3a. System recognizes that user has entered an invalid deadline. <br>
+3a1. System displays an error message indicating the invalid deadline error. <br>
+
+Use case ends.
+
+**Use Case: Open Detailed Internship View From Main Window**
+
+**MSS**
+1. User accesses the main window.
+2. User selects the internship entry for which the detailed view will be opened.
+3. System displays a detailed view of the selected internship entry.
+
+Use case ends.
+
+**Extensions**
+
+1a. User is unable to access the main window. <br>
+
+Use case ends.
 
 #### Non-Functional Requirements
 
@@ -698,8 +763,8 @@ Your all-in-one solution for seamless application management.
 5.  System should be backward compatible with data produced by earlier versions of the system.
 6.  System is expected to be used by a single user on a machine, and does not need to support multiple users on the same machine.
 7.  System should launch within 2 seconds on any modern machine.
-
-*{More to be added}*
+8. Data should be stored in a local file in the user's machine.
+9. Data should be easily transferable between different machines.
 
 #### Glossary
 
@@ -743,26 +808,167 @@ testers are expected to do more *exploratory* testing.
 
     1. Click the close button on the window.<br>
        Expected: The app closes.
-
-   2. Use the `exit` command.<br>
+       
+    2. Use the `exit` command.<br>
        Expected: The app closes.
 
-#### Deleting a person
+### Adding an internship
 
-1. Deleting a person while all persons are being shown
+1. Adding an internship 
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: Ensure that internship list is empty and that there are no existing entries similar to the successful internship entries used here
+
+    1. Test case: `add /com Tiktok /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 90890301 /loc remote /role Software Intern`<br>
+       Expected: Internship is added to the list in the Main Window. Details of the internship are shown in the Message Box, Main Window and Detailed Internship View.
+
+    1. Test case: `add /com Facebook /desc create new recommendation engine /status ongoing /poc sally tan /email hr@facebook.com /phone 90890375`<br>
+       Expected: Internship is added to the list in the Main Window. Details of the internship are shown in the Message Box, Main Window and Detailed Internship View.
+
+    1. Test case: `add /com Google /desc create new recommendation forum /status accepted /poc jane tan /email hr@google.com`<br>
+       Expected: Internship is not added to the list in the Main Window. Details of the internship are not shown in the Message Box, Main Window and Detailed Internship View. <br>
+       Reason: The internship entry is missing some compulsory fields (in this case, the phone number of the contact)
+
+### Deleting an internship
+
+1. Deleting an internship while all internships are being shown or specific internships based on find command
+
+    1. Prerequisites: List all internships using the `list` command. Multiple internships in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First internship is deleted from the list. Details of the deleted internship shown in the message box. Details of the internship are no longer visible in the Main Window.
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No internship is deleted. Error details shown in the message box. All internships remains visible in the Main Window and Detailed Internship View.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+    1. Test case: `delete -1`<br>
+      Expected: No internship is deleted. Error details shown in the message box. All internships remains visible in the Main Window and Detailed Internship View.
 
-1. _{ more test cases …​ }_
+### Editing an internship
+
+1. Editing a single field of an internship
+
+1. **Test case**: `edit 1 /com Facebook`<br>
+   **Expected**: The name of the first internship is changed to `Facebook`. Details of the edited internship shown in the status message.
+
+
+2. Repeat for all other fields of an internship other than `TaskList`.
+   **Expected**: Similar to previous.
+
+
+3. **Test case**: `edit 0 /com editedName`<br>
+   **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
+
+
+4. **Test case**: `edit 1 /email invalidemail`<br>
+   **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
+
+
+5. Other incorrect edit commands to try: `edit`, `edit x`, `edit 1`,`edit -1`,`edit 1 /com`, `edit x /com Facebook` where x is larger than the list size<br>
+   **Expected**: Similar to previous.
+
+
+2. Editing multiple fields of an internship
+
+
+1. **Test case**: `edit 1 /com Facebook /email google@gmail.com`<br>
+   **Expected**: The name of the company of the first internship is changed to `Facebook` and the email is changed to `google@gmail.com`. Details of the edited internship shown in the status message.
+
+
+2. Repeat for different combinations of fields.
+   **Expected**: Similar to previous.
+
+
+3. **Test case**: `edit 1 /com /com`<br>
+   **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
+
+
+4. **Test case**: `edit 1 /com Facebook /email`<br>
+   **Expected**: No internship is edited. Error details shown in the status message. Status bar remains the same.
+
+
+3. Editing resulting in a duplicate internship
+
+
+1. Prerequisites: Have at least one other internship. Add this internship to the list using this command: `add /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999 /remark This is a remark.`. Run `list` and ensure that this new internship added does not have index 1.
+
+
+2. **Test case**:  `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999 /remark This is a remark.`
+   **Expected**: No internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
+
+
+3. **Test case**:  `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com /phone 99999999`
+   **Expected**: No internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
+
+
+4. **Test case**: `edit 1 /com TikTok /status ongoing /desc Software Intern /poc John /email tiktok@gmail.com`, then `edit 1 /phone 99999999`
+   **Expected**: For first command, for the first internship, the name of the company is changed to `TikTok`, status is changed to `ongoing`, description to `Software Intern`, point of contact to `John`, email to `tiktok@gmail.com`.
+   For second command, no internship is edited due to duplicate internship. Error details shown in the status message. Status bar remains the same.
+
+
+### Adding a task to an existing internship
+
+
+1. Adding a task to an existing internship
+
+1. Prerequisites: Ensure that there is at least one internship.
+
+2. **Test case**: `addtask 1 /task Attend meeting`<br>
+   **Expected**: A task `Attend meeting` is added to the task list of the first internship. Details of the added task shown in the status message.
+
+
+3. **Test case**: `addtask 0 /task Attend meeting`<br>
+   **Expected**: No task is added. Error details shown in the status message. Status bar remains the same.
+
+
+4. Other incorrect addtask commands to try: `addtask`, `addtask x`, `addtask 1`,`addtask -1 /task Attend meeting`, `addtask 1 /task`, `addtask x /task Attend meeting` (where x is larger than the list size)<br>
+   **Expected**: Similar to previous.
+
+
+### Setting the deadline of a task in an existing internship
+
+
+1. Setting the deadline of a task in an existing internship
+
+
+1. Prerequisites: Ensure that there is at least one internship. Add a task to the first internship using the `addtask 1 /task Attend meeting` command.
+
+
+2. **Test case**: `setdeadline 1 /selecttask 1 /deadline 10/10/2024`<br>
+   **Expected**: The deadline of the first task is set to `10/10/2024`. New deadline shown in the status message.
+
+
+3. **Test case**: `setdeadline 1 /selecttask 1 /deadline 11/10/2024`<br>
+   **Expected**: The deadline of the first task is set to `11/10/2024`. New deadline shown in the status message.
+
+
+4. **Test case**: `setdeadline 0 /selecttask 1 /deadline 10/10/2024`<br>
+   **Expected**: No task is edited. Error details shown in the status message. Status bar remains the same.
+
+
+5. Other incorrect `setdeadline` commands to try: `setdeadline`, `setdeadline 1`,`setdeadline -1 /selecttask 1 /deadline 10/10/2024`,`setdeadline 1 1`, `setdeadline 1 /selecttask 1 /deadline 10-10-2024`, `setdeadline 1 /selecttask 1 10/10/2024`, `setdeadline 1 /selecttask 1 /deadline`, `setdeadline x /selecttask 1 /deadline 10/10/2024` (where x is larger than the internship list size), `setdeadline 1 /selecttask x /deadline 10/10/2024` (where x is larger than the task list size)<br>
+   **Expected**: Similar to previous.
+
+
+### Deleting a task from an internship
+
+
+1. Deleting a task from an existing internship
+
+
+1. Prerequisites: Ensure that there is at least one internship. Add a task to the first internship using the `addtask 1 /task Attend meeting` command.
+
+
+2. **Test case**: `deletetask 1 /selecttask 1`<br>
+   **Expected**: The first task is deleted from the task list of the first internship. Details of the deleted task shown in the status message.
+
+
+3. **Test case**: `deletetask 0 /selecttask 1`<br>
+   **Expected**: No task is deleted. Error details shown in the status message. Status bar remains the same.
+
+
+4. Other incorrect deletetask commands to try: `deletetask`, `deletetask -1`, `deletetask x`, `deletetask 1`, `deletetask 1 /selecttask x` (where x is larger than the task list size)<br>
+   **Expected**: Similar to previous.
+
 
 #### Saving data
 
@@ -774,7 +980,43 @@ Make sure to use the `exit` command or the close button to save data while closi
    
    2. To simulate a corrupted data file, edit the data file to contain some random text. Launch the app. The app should detect the corrupted file and automatically replace it with a new empty data file. You can then add new data to the app or reset the data to sample data by deleting the data file.
 
-1. _{ more test cases …​ }_
+--------------------------------------------------------------------------------------------------------------------
+
+### **Appendix: Design Decisions**
+
+#### Prefix-based Command Format
+
+In the design of our command-line interface, we made the decision to use a prefix-based format for our commands, such as `/com` for company name, instead of the more conventional `com/`. <br>This decision was made based on several considerations:
+
+1. **Uniqueness**: The use of a leading slash makes our commands distinct and immediately recognizable. This reduces the likelihood of conflicts with other command-line applications or conventions.
+2. **User Experience**: While the `/com` format might be slightly unconventional, we found it to be just as intuitive, if not more so, for our users. The leading slash can be seen as an indicator that a new parameter is starting, making the commands easier to read and write.
+3. **Flexibility**: This design allows us to easily extend our command format in the future. For example, we could introduce new commands or parameters without worrying about them clashing with existing ones.
+
+We acknowledge that this design choice may have a slight learning curve for users who are accustomed to other command-line interfaces. However, we believe that the benefits in terms of uniqueness, ease of parsing, user experience, and flexibility outweigh this minor inconvenience.
+
+#### Identity Fields in `isSameInternship` Method
+
+In the `Internship` class, the `isSameInternship` method is used to compare two `Internship` objects based on certain fields. 
+<br> These fields are `companyName`, `contactName`, `contactEmail`, `contactNumber`, `description`, `role` and `location`. 
+<br> The choice of these fields was based on the following considerations:
+
+1. **CompanyName**: The name of the company offering the internship is a crucial identifier. Two internships at different companies are definitely not the same.
+2. **ContactName**: The contact person for the internship could be important if the user needs to communicate with the company. Two internships with different contact persons might imply different points of contact, hence they are not the same.
+3. **ContactEmail**: Similar to `contactName`, the contact email could be a significant identifier as it might imply different points of contact.
+4. **ContactNumber**: The contact number, like the contact name and email, could be a significant identifier for the same reasons.
+5. **Description**: The description of the internship could contain important details about the internship. Two internships with different descriptions are not the same.
+6. **Role**: The role of the internship could contain important details about the internship. Two internships with different roles are not the same.
+7. **Location**: The location of the internship could contain important details about the internship. Two internships with different locations are not the same.
+
+These fields are considered "compulsory" or "identity" fields, meaning they are essential to define the identity of an `Internship` object. If any of these fields differ between two `Internship` objects, then they are not considered the same internship. This design choice ensures that the `isSameInternship` method provides a meaningful comparison between two `Internship` objects.
+
+**Ignored Fields**
+1. The `remark` and `taskList` fields are not considered as they do not define the identity of the internship.
+2. The `applicationStatus` field is not considered as it enables a user to create 2 internships with the same details but different statuses, which reduces the usefulness of the `edit` command.
+
+It is important to note that these explanations view the fields in isolation. When equality checks are performed, all available fields are considered.
+
+These fields are considered "identity" fields (not all are compulsory, referring to the optional role and location fields), meaning they are essential to define the identity of an `Internship` object. If any of these fields differ between two `Internship` objects, then they are not considered the same internship. This design choice ensures that the `isSameInternship` method provides a meaningful comparison between two `Internship` objects.
 
 ### Finding internships
 For all the following test cases:
@@ -807,18 +1049,19 @@ Then, list all internships using the `list` command.
 
 ### Sort Feature
 1. Prerequisites: Delete the data file (`./data/internshipdata.json`) before launching the app to populate the app with sample data.
+
 2. Add another internship entry using the following command: `add /com Amazon /desc create new recommendation engine /status ongoing /poc jane yeo /email hr@tiktok.com /phone 9089030 /loc remote /role Business Development Intern`
 
-    1. **Test case**: `sort /status desc`<br>
-       **Expected**: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
-
-    2. **Test case**: `sort /status asc` <br>
-       **Expected**: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
-       ![Sort by status asc](./images/manual-testing/sort-by-status.png)<br>
-
-    3. **Test case**: `sort /com asc`<br>
-       **Expected**: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
-       ![Sort by com asc](./images/manual-testing/status-sort-sort-by-com.png)<br>
+    1. Test case: `sort /status desc`<br>
+      Expected: The list of internships is sorted in the order: `Rejected -> Accepted -> Pending -> Ongoing -> To Apply`. The status message shows how many internships were sorted successfully.
+   
+    2. Test case: `sort /status asc` <br>
+      Expected: The list of internships is sorted in the order: `To Apply -> Ongoing -> Pending -> Accepted -> Rejected`. The status message shows how many internships were sorted successfully.
+      ![Sort by status asc](./images/manual-testing/sort-by-status.png)<br>
+   
+    3. Test case: `sort /com asc`<br>
+      Expected: The list of internships is sorted in alphabetical order of the company name. The status message shows how many internships were sorted successfully. Note that this test case allows you to see how the sort is layered on top of each other. The two Amazon internships are de-conflicted based on the previous sort command. This is why the ongoing internship is listed first.
+      ![Sort by com asc](./images/manual-testing/status-sort-sort-by-com.png)<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -850,4 +1093,32 @@ Note that to try out the below example commands you will need to reset the data 
 10. **Detecting space characters between argument's prefix and value:** For example, the command`edit 1 /company`runs successfully and updates the first internship's company field to the value`pany`. This may cause issues when the user misremembers the prefix for an argument. In the future we will implement checks that will check for a space between a prefix and its value.
     <br>Command: `edit 1 /company`
     <br>![Space between prefix and value](./images/planned-enhancements/space-in-edit-command.png)<br><br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+#### Project Overview
+Our project is a brownfield project aimed at enhancing the functionality of a contact management application AB3 (Address Book 3). CareerSync manages the persons of contact affiliated with internships and the relevant internship data. As such we had to refactor our code to include this additional information. Additionally, the key enhancements included implementing a detailed view page, tasks, remarks, and finding and sorting features. These improvements aimed to provide our target users with an efficient and intuitive experience while managing their internships.<br>
+
+#### Difficulty Level and Challenges Faced
+* The first challenge faced was refactoring the code to suit our new requirements. Since we were changing all the data we had to explore the implementation on a very fundamental level and gain a deep understanding of the codebase. Since most of us have not worked on such a large project we found this quite challenging.
+* While implementing Optional fields, we initially made use of Optional<>, which created many issues when testing other features due to the use and passing of NULL values. Eventually, our team came together to brainstorm solutions and decided to have default values set instead of accepting NULL values (for optional fields). This way, our team could resolve the issues we were experiencing while still retaining the optional feature capabilities.
+* Implementing the clickable detailed view page was another challenge as we had to create a new page and our team generally found difficulty in dealing with the UI. Implementing headless testing for UI components so that code coverage can be satisfied for GitHub CI/CD was a challenge. It required a whole new library dependency and framework (TestFX) for testing UI components which was not easily referenced from the existing codebase. If an internship was selected via the detailed view, and it was simultaneously edited in the the main window, the internship would disappear from the detailed view window. After prolonged debugging, the problem was isolated to the commands that edit the 'state' of the Internship. The issue was resolved by fixing the equality checks used by the detailed view page.
+
+#### Effort Required
+As a team, we have put a lot of effort into this project. Firstly through the process of examining and understanding the codebase and coming up with useful features that could improve user experience. We had to streamline our ideas and come up with a feasible plan to manage the workload.<br><br>
+Following this planning out user requirements, user stories, and use cases was something new to us, and we spent a fair bit of time on this. As for the actual implementation, while we are not new to programming, a brownfield collaborative project is unfamiliar territory. In the first few weeks, we made countless errors when it came to setting up build tools and adhering to the general workflow.<br><br>
+Finally, the documentation required was extensive and required careful examination. This is something we had to sit down and go through together as a team multiple times.<br>
+
+#### Achievements
+Despite the challenges encountered, the team achieved several milestones that significantly strengthened the application`s functionality and user experience. Some of these key achievements include:<br>
+* Successful integration of optional field capabilities for an internship entry, offering users more flexibility in adding and editing internship entries.
+* Redesigning command formats to cater to our target users and improve user experience.
+* Implementation of find and sorting functionalities, encouraging and enabling users to use the application to navigate and manage their internship entries efficiently.
+* Introduction of a remark feature, ensuring that the application facilitates the inclusion of additional information.
+* Introduction of a task feature, allowing users to add tasks relating to an internship entry and add suitable deadlines.<br>
+
+#### Effort Saved Through Reuse:
+While we did not have a lot of code reuse or use of external dependencies, we used the TestFx (an extension of JavaFx) library to implement headless testing to write automated test cases for our UI components. This was done to ensure that we don’t sacrifice on code coverage of our tests for the new Ui components, to ensure they work perfectly well.
+
 

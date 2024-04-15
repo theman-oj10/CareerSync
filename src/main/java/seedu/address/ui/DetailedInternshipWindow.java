@@ -5,8 +5,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.InternshipLogic;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -19,10 +17,7 @@ public class DetailedInternshipWindow extends UiPart<Stage> {
     private InternshipLogic logic;
     private DetailedInternshipListPanel selectedInternshipListPanel;
 
-
     // Independent Ui parts residing in this Ui container
-
-    private ResultDisplay resultDisplay;
     @FXML
     private StackPane selectedInternshipListPanelPlaceholder;
     @FXML
@@ -64,7 +59,6 @@ public class DetailedInternshipWindow extends UiPart<Stage> {
         }
     }
 
-
     /**
      * Returns true if the help window is currently being shown.
      */
@@ -85,17 +79,6 @@ public class DetailedInternshipWindow extends UiPart<Stage> {
 
     void show() {
         getRoot().show();
-    }
-
-    /**
-     * Executes the command and returns the result.
-     *
-     * @see seedu.address.logic.InternshipLogic#execute(String)
-     */
-    private CommandResult executeCommand(String commandText) throws CommandException {
-        String notImplementedMessage = "Commands are not implemented yet in detailed internship window";
-        resultDisplay.setFeedbackToUser(notImplementedMessage);
-        throw new CommandException(notImplementedMessage);
     }
 
     /**
