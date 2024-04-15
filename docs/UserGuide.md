@@ -430,7 +430,7 @@ Lets you add an internship entry to be tracked by CareerSync!
 
 1. If you miss out any of the mandatory fields, the command will be rejected with an error message. Make sure to refer to the error message displayed for the correct format to use! <br>
 2. If you input an invalid status, location or email format, the command will be rejected with an error message highlighting the valid values. <br>
-3. When using the `add` command, the `/phone` parameter allows for more digits that are necessary. Do manually ensure that the length of the phone numbers you input are correct. <br>
+3. When using the `add` command, the `/phone` parameter does not have a maximum limit for number of digits. Do manually ensure that the length of the phone number you input is correct. <br>
 4. If you encounter the `This internship already exists in the internship list` message, please go [here](#what-makes-an-internship-unique) to learn about what makes an internship unique.
 </div>
 
@@ -501,7 +501,7 @@ You may have had a filter applied that is hiding the internship you are looking 
 #### Viewing an internship entry's details
 
 When you click on an internship entry in the internship list, a separate window will be open showing
-the detailed view of the internship entry.<br>
+the detailed view of the internship entry.
 This view will show all the fields of the internship entry in a bigger font size for easier reading.<br>
 ![Detailed view window](./images/detailedview/detailedViewWindow.png){: .responsive-image}<br>
 
@@ -557,6 +557,7 @@ Lets you edit an existing internship entry in CareerSync.
 ⚠️ **Common errors:** <br>
 1. Make sure not to miss out the mandatory `INDEX` field. If you do, CareerSync won't know which internship to edit! <br>
 2. If you encounter the `This internship already exists in the internship list` message, please go [here](#what-makes-an-internship-unique) to learn about what makes an internship unique.
+3. When using the `edit` command, the `/phone` parameter does not have a maximum limit for number of digits. Do manually ensure that the length of the phone number you input is correct. <br>
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
@@ -766,6 +767,8 @@ Before you try this command, you need an internship that has at least 1 task. Yo
 
 2. Successful Output after adding deadline:<br>
    ![After Setting Deadline](./images/setdeadline/setdeadline-after.png){: .responsive-image}<br><br>
+</div>
+<div markdown="span" class="alert alert-info">
 ℹ️ **Tip:** Once you set a deadline to a task, you can't remove it! You can only change the deadline using this command.
 </div>
 
@@ -802,8 +805,7 @@ Lets you delete a task from an existing internship after it is complete!
 <div class="page-break"></div>
 
 <div markdown="span" class="alert alert-danger">
-⚠️ **Common errors:** <br>
-1. Don't forget that you need to include both the internship index and the task index!
+⚠️ **Common error:** Don't forget that you need to include both the internship index and the task index!
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
@@ -832,6 +834,11 @@ This operation is irreversible. Once you clear all entries, you cannot undo it.
 2. Successful Output after clearing entries:<br>
    ![After successfully clearing](./images/clear/clear-after.png){: .smaller-responsive-image}<br>
 There are no more internships in the list.
+</div>
+
+<div markdown="span" class="alert alert-info">
+
+ℹ️ **Tip:** If you would like to reset to default data, please refer to this [FAQ](#FAQ).
 </div>
 
 [Go to Field Summary](#field-summary) | [Go to Command Summary](#command-summary) | [Go to Table of Contents](#table-of-contents)
@@ -874,11 +881,11 @@ Format: `help`
 ## **Miscellaneous**
 ### FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Do the following steps: <br> 1. Navigate to the folder where CareerSync.jar is stored. <br> 2. Copy your data file from data/internshipdata.json. <br> 3. Install the app in the other computer and overwrite the empty data file (data/internshipdata.json) it creates with the file that contains the data (JSON file) of your previous CareerSync home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Do the following steps: <br> 1. Navigate to the folder where CareerSync.jar is stored. <br> 2. Copy your data file from `data/internshipdata.json`. <br> 3. Install the app in the other computer and overwrite the empty data file (`data/internshipdata.json`) it creates with the file that contains the data (JSON file) of your previous CareerSync home folder.
 
-**Q**: How to reset the data to the default data?<br>
-**A**: Do the following steps: <br> 1. Navigate to the folder where CareerSync.jar is stored. <br> 2. Delete the data file from data/internshipdata.json. <br> 3. Restart the app.
+**Q**: How do I reset the data to the default?<br>
+**A**: Do the following steps: <br> 1. Navigate to the folder where CareerSync.jar is stored. <br> 2. Delete the data file from `data/internshipdata.json`. <br> 3. Restart the app.
 
 [Go to Table of Contents](#table-of-contents)
 
@@ -912,7 +919,7 @@ Format: `help`
 
 <div markdown="span" class="alert alert-danger">
 ⚠️ **Caution**:
-When using the `add` command, the `/phone` parameter allows for more digits that are necessary. <br>
+When using the `add` or `edit` command, the `/phone` parameter does not have a maximum limit for the number of digits. <br>
 **The solution** is to manually ensure that the length of the phone numbers you input are correct.
 </div>
 [Go to Table of Contents](#table-of-contents)
