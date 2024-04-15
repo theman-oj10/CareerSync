@@ -829,10 +829,10 @@ This operation is irreversible. Once you clear all entries, you cannot undo it.
 
 1. Input:<br>
    `clear`<br>
-   ![Before clearing](./images/clear/clear-before.png){: .smaller-responsive-image}<br><br>
+   ![Before clearing](./images/clear/clear-before.png){: .wide-responsive-image}<br><br>
 
 2. Successful Output after clearing entries:<br>
-   ![After successfully clearing](./images/clear/clear-after.png){: .smaller-responsive-image}<br>
+   ![After successfully clearing](./images/clear/clear-after.png){: .wide-responsive-image}<br>
 There are no more internships in the list.
 </div>
 
